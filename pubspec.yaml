@@ -35,6 +35,7 @@ dependencies:
     path: candlesticks
   flutter_riverpod: ^2.3.6
   http: ^1.0.0
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +48,7 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/icons/bottom_nav_icon/
 
   fonts:
     - family: Satoshi
