@@ -49,7 +49,7 @@ class _TradeDetailsViewState extends State<TradeDetailsView> {
         child: ListView(
           children: [
             const Gap(8),
-            const CoinPairHeader(),
+            CoinPairHeader(),
             const Gap(12),
             TradingActivityHeader(index: _tabIndex, onTabChanged: _setTabIndex),
             _ActivityView(activeIndex: _tabIndex),

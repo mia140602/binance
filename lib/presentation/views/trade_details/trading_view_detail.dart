@@ -19,6 +19,8 @@ class TradeViewDetails extends StatefulWidget {
 }
 
 class _TradeViewDetailsState extends State<TradeViewDetails> {
+  final ScrollController _controller = ScrollController();
+  bool _showCurrentPrice = false;
   int _tabIndex = 0;
 
   void _setTabIndex(int value) {
@@ -32,8 +34,23 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
   @override
   void initState() {
     super.initState();
+    _controller.addListener(_scrollListener);
     Future.microtask(() =>
         ProviderScope.containerOf(context).read(orderBookViewModelProvider));
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_scrollListener);
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    setState(() {
+      _showCurrentPrice =
+          _controller.offset > 0; // Hiển thị khi cuộn trang xuống
+    });
   }
 
   @override
@@ -42,11 +59,30 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
 
     return Scaffold(
       backgroundColor: palette.cardColor,
+      appBar: AppBar(
+        backgroundColor: palette.cardColor,
+        elevation: 0,
+        titleSpacing: 0,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CoinPairHeader(
+              showCurrentPrice: _showCurrentPrice,
+            ),
+          ],
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(20),
+          child: TradingActivityHeader(
+              index: _tabIndex, onTabChanged: _setTabIndex),
+        ),
+      ),
       body: SizedBox.expand(
         child: ListView(
+          controller: _controller,
           children: [
-            const CoinPairHeader(),
-            TradingActivityHeader(index: _tabIndex, onTabChanged: _setTabIndex),
+            // const CoinPairHeader(),
+            // TradingActivityHeader(index: _tabIndex, onTabChanged: _setTabIndex),
             _ActivityView(activeIndex: _tabIndex),
             const Gap(4),
             const UserTradingActivitySection(),

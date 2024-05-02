@@ -8,23 +8,40 @@ import 'package:binance_clone/presentation/views/trade_details/trade_details_vie
 import 'package:binance_clone/presentation/widgets/custom_icon.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/presentation/widgets/reactive_builder.dart';
+import 'package:intl/intl.dart';
 
 class CoinPairHeader extends StatelessWidget {
-  const CoinPairHeader({super.key});
+  CoinPairHeader({super.key, this.showCurrentPrice = false});
+  bool showCurrentPrice;
 
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
+    final NumberFormat formatter = NumberFormat("#,##0.00", "en_US");
+    double previousPrice = 0.0;
     return Consumer(builder: (context, ref, _) {
       return ReactiveBuilder(
           value: ref.read(tradeDetailsViewModelProvider).tradeData,
           builder: (tradeData) {
+            final double currentPrice =
+                double.tryParse(tradeData.currentPrice) ?? 0.0;
+
+            final formattedPrice = formatter.format(currentPrice);
+
+            Color textColor = Colors.black;
+            if (currentPrice > previousPrice) {
+              textColor = Colors.green;
+            } else if (currentPrice < previousPrice) {
+              textColor = Colors.red;
+            }
+
+            previousPrice = currentPrice;
             return Container(
               padding: const EdgeInsets.only(
-                top: 5,
+                top: 10,
                 left: 16,
                 right: 16,
-                bottom: 5,
+                bottom: 0,
               ),
               color: palette.cardColor,
               child: Column(
@@ -59,13 +76,6 @@ class CoinPairHeader extends StatelessWidget {
                               ],
                               onChanged: (_) {},
                             ),
-                            const Gap(24),
-                            // CustomText(
-                            //   text: "\$${tradeData.currentPrice}",
-                            //   fontSize: 18,
-                            //   fontWeight: FontWeight.w500,
-                            //   color: palette.candleStickGainColor,
-                            // ),
                           ],
                         ),
                       ),
