@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 class ThemeModeSelector {
   ThemeModeSelector._();
 
-  static final ValueNotifier<ThemeMode> _mode = ValueNotifier(ThemeMode.dark);
+  static final ValueNotifier<ThemeMode> _mode = ValueNotifier(ThemeMode.light);
 
   static ValueNotifier<ThemeMode> get mode => _mode;
 

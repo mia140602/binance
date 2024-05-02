@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomIcon extends StatelessWidget {
+  final String? label;
   final String iconPath;
   final double? width;
   final double? height;
@@ -10,6 +11,7 @@ class CustomIcon extends StatelessWidget {
   const CustomIcon({
     super.key,
     required this.iconPath,
+    this.label,
     this.width,
     this.height,
     this.onPressed,
@@ -21,11 +23,26 @@ class CustomIcon extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: onPressed,
-      child: Image.asset(
-        iconPath,
-        height: height,
-        width: width,
-        color: color,
+      child: Row(
+        children: [
+          label != null
+              ? Text(
+                  label ?? "",
+                  style: TextStyle(
+                      fontSize: 11,
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w500),
+                )
+              : SizedBox(),
+          Container(
+            child: Image.asset(
+              iconPath,
+              height: height,
+              width: width,
+              color: color,
+            ),
+          ),
+        ],
       ),
     );
   }

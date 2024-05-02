@@ -37,13 +37,13 @@ class TradeData {
   }
 
   factory TradeData.fromJson(Map<String, dynamic> json) {
-    final lastPriceValue = double.tryParse(json["c"]) ?? 0;
-    final currentPriceValue = double.tryParse(json["o"]) ?? 0;
+    final lastPriceValue = double.tryParse(json["o"]) ?? 0;
+    final currentPriceValue = double.tryParse(json["c"]) ?? 0;
     final highPriceValue = double.tryParse(json["h"]) ?? 0;
     final lowPriceValue = double.tryParse(json["l"]) ?? 0;
 
     final percentageChangeIn24HValue =
-        (currentPriceValue - lastPriceValue) / lastPriceValue;
+        100 * (currentPriceValue - lastPriceValue) / lastPriceValue;
     final highPercentageChangeIn24HValue =
         (highPriceValue - lastPriceValue) / lastPriceValue;
     final lowPercentageChangeIn24HValue =
@@ -52,7 +52,7 @@ class TradeData {
     return TradeData(
       symbol: json["symbol"] ?? "NA",
       priceChangeIn24H: currentPriceValue - lastPriceValue,
-      currentPrice: ParserUtil.clampDigits(json["o"] ?? "-"),
+      currentPrice: ParserUtil.clampDigits(json["c"] ?? "-"),
       highPrice: ParserUtil.clampDigits(json["h"] ?? "-"),
       lowPrice: ParserUtil.clampDigits(json["l"] ?? "-"),
       percentageChangeIn24H: percentageChangeIn24HValue,

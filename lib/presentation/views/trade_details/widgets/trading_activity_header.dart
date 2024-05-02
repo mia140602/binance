@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
 
@@ -36,14 +35,9 @@ class _TradingActivitySectionState extends State<TradingActivityHeader> {
       color: palette.cardColor,
       child: Column(
         children: [
-          const Gap(8),
           CustomTabBar(
             index: _index,
-            tabs: const [
-              "Charts",
-              "Orderbook",
-              "Recent trades",
-            ],
+            tabs: const ["Giá", "Thông tin", "Dữ liệu giao dịch", "Square"],
             onChanged: (value) {
               _setIndex(value);
               widget.onTabChanged.call(value);

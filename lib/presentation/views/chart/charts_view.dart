@@ -1,3 +1,4 @@
+import 'package:binance_clone/presentation/views/trade_details/widgets/price_top_details.dart';
 import 'package:candlesticks/candlesticks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +23,7 @@ class ChartsView extends StatelessWidget {
       child: Column(
         children: [
           const Gap(24),
+          PriceTopDetails(),
           const SizedBox(
             height: 22,
             child: TradeDurationListView(),

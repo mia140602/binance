@@ -5,6 +5,8 @@ import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:binance_clone/presentation/theme/theme_mode_selector.dart';
 import 'package:binance_clone/presentation/views/trade_details/trade_details_view.dart';
 
+import 'presentation/views/trade_details/trading_view_detail.dart';
+
 class SissyphusApp extends StatelessWidget {
   const SissyphusApp({super.key});
 
@@ -47,7 +49,7 @@ class SissyphusApp extends StatelessWidget {
               ),
               fontFamily: "Satoshi",
             ),
-            home: const TradeDetailsView(),
+            home: const TradeViewDetails(),
           );
         });
   }

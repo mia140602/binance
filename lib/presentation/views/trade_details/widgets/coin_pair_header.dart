@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -20,83 +21,115 @@ class CoinPairHeader extends StatelessWidget {
           builder: (tradeData) {
             return Container(
               padding: const EdgeInsets.only(
-                top: 24,
+                top: 5,
                 left: 16,
                 right: 16,
-                bottom: 16,
+                bottom: 5,
               ),
               color: palette.cardColor,
               child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const _CoinPairIcons(),
-                      const Gap(8),
-                      DropdownButton(
-                        dropdownColor: palette.cardColor,
-                        underline: const SizedBox(),
-                        icon: CustomIcon(
-                          iconPath: AppAssets.dropDown,
-                          width: 10,
-                          height: 9,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        items: [
-                          DropdownMenuItem(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: CustomText(
-                                text: tradeData.symbol,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                      Container(
+                        child: Row(
+                          children: [
+                            Icon(Icons.arrow_back),
+                            const Gap(8),
+                            DropdownButton(
+                              dropdownColor: palette.cardColor,
+                              underline: const SizedBox(),
+                              icon: Icon(
+                                Icons.arrow_drop_down_rounded,
+                                color: Colors.black,
+                                size: 24,
                               ),
+                              items: [
+                                DropdownMenuItem(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 6),
+                                    child: CustomText(
+                                      text: tradeData.symbol,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              onChanged: (_) {},
                             ),
-                          ),
-                        ],
-                        onChanged: (_) {},
+                            const Gap(24),
+                            // CustomText(
+                            //   text: "\$${tradeData.currentPrice}",
+                            //   fontSize: 18,
+                            //   fontWeight: FontWeight.w500,
+                            //   color: palette.candleStickGainColor,
+                            // ),
+                          ],
+                        ),
                       ),
-                      const Gap(24),
-                      CustomText(
-                        text: "\$${tradeData.currentPrice}",
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: palette.candleStickGainColor,
-                      ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.star_rate_rounded,
+                              size: 22,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.5),
+                            ),
+                            Gap(12),
+                            Icon(
+                              Icons.share,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            Gap(12),
+                            Icon(
+                              Icons.window_sharp,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                  const Gap(20),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 42,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        _ItemColumn(
-                          icon: AppAssets.clock,
-                          label: "24h change",
-                          description:
-                              "${tradeData.priceChangeIn24H.toStringAsFixed(2)} ${tradeData.isPriceChangeIn24HNeg ? '' : '+'} ${tradeData.percentageChangeIn24H.toStringAsFixed(3)}%",
-                          color: tradeData.isPriceChangeIn24HNeg
-                              ? palette.candleStickLossColor
-                              : palette.candleStickGainColor,
-                        ),
-                        const _Divider(),
-                        _ItemColumn(
-                          icon: AppAssets.arrowUp,
-                          label: "24h high",
-                          description: tradeData.highPrice,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        const _Divider(),
-                        _ItemColumn(
-                          icon: AppAssets.arrowDown,
-                          label: "24h low",
-                          description: tradeData.lowPrice,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ],
-                    ),
-                  ),
+                  // const Gap(20),
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 50,
+                  //   child: ListView(
+                  //     scrollDirection: Axis.horizontal,
+                  //     children: [
+                  //       _ItemColumn(
+                  //         icon: AppAssets.clock,
+                  //         label: "24h change",
+                  //         description:
+                  //             "${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%",
+                  //         color: tradeData.isPriceChangeIn24HNeg
+                  //             ? palette.candleStickLossColor
+                  //             : palette.candleStickGainColor,
+                  //       ),
+                  //       const _Divider(),
+                  //       _ItemColumn(
+                  //         icon: AppAssets.arrowUp,
+                  //         label: "24h high",
+                  //         description: tradeData.highPrice,
+                  //         color: Theme.of(context).colorScheme.primary,
+                  //       ),
+                  //       const _Divider(),
+                  //       _ItemColumn(
+                  //         icon: AppAssets.arrowDown,
+                  //         label: "24h low",
+                  //         description: tradeData.lowPrice,
+                  //         color: Theme.of(context).colorScheme.primary,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             );

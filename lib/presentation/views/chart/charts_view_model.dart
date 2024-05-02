@@ -25,12 +25,10 @@ class ChartsViewModel {
   String get currentKlineInterval => _currentInterval;
 
   final List<String> _intervals = const [
+    "15M",
     "1H",
-    "2H",
     "4H",
     "1D",
-    "1W",
-    "1M",
   ];
   List<String> get intervals => _intervals;
 
