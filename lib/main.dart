@@ -7,3 +7,5 @@ void main() {
   LoggerConfig.disableLogs();
   runApp(const ProviderScope(child: SissyphusApp()));
 }
+
+
