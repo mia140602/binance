@@ -88,10 +88,21 @@ class MarketView extends ConsumerWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomText(
-                            text: '${tradeData.symbol}',
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              CustomText(
+                                text: '${tradeData.baseAsset}',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              CustomText(
+                                text: '/${tradeData.quoteAsset}',
+                                fontSize: 12,
+                                color: palette.filterLineColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
                           ),
                           Gap(5),
                           CustomText(
