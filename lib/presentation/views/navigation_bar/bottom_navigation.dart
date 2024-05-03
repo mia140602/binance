@@ -20,8 +20,8 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
     const HomeScreen(),
     const MarketView(),
     Center(child: const Text('Trades')),
-    const FuturesScreen(),
-    const WalletScreen()
+    FuturesScreen(),
+    WalletScreen()
   ];
 
   @override
@@ -105,7 +105,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               children: [
                 IconButton(
                   icon: Image.asset(
-                      'assets/icons/bottom_nav_icon/web-feature-service.png',
+                      'assets/icons/bottom_nav_icon/future.png',
                       height: 19.h,
                       color: _currentIndex == 3
                           ? Colors.black
