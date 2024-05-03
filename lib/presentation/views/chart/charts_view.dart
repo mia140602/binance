@@ -13,7 +13,8 @@ import 'package:binance_clone/presentation/widgets/reactive_builder.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 
 class ChartsView extends StatelessWidget {
-  const ChartsView({super.key});
+  ChartsView({super.key, required this.symbol});
+  String symbol;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,9 @@ class ChartsView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          const Gap(24),
-          PriceTopDetails(),
+          PriceTopDetails(
+            symbol: symbol,
+          ),
           const SizedBox(
             height: 22,
             child: TradeDurationListView(),

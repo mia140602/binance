@@ -8,34 +8,21 @@ import 'package:binance_clone/presentation/views/trade_details/trade_details_vie
 import 'package:binance_clone/presentation/widgets/custom_icon.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/presentation/widgets/reactive_builder.dart';
-import 'package:intl/intl.dart';
 
 class CoinPairHeader extends StatelessWidget {
-  CoinPairHeader({super.key, this.showCurrentPrice = false});
+  CoinPairHeader(
+      {super.key, this.showCurrentPrice = false, required this.symbol});
   bool showCurrentPrice;
+  String symbol;
 
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
-    final NumberFormat formatter = NumberFormat("#,##0.00", "en_US");
-    double previousPrice = 0.0;
+
     return Consumer(builder: (context, ref, _) {
       return ReactiveBuilder(
-          value: ref.read(tradeDetailsViewModelProvider).tradeData,
+          value: ref.read(tradeDetailsViewModelProvider(symbol)).tradeData,
           builder: (tradeData) {
-            final double currentPrice =
-                double.tryParse(tradeData.currentPrice) ?? 0.0;
-
-            final formattedPrice = formatter.format(currentPrice);
-
-            Color textColor = Colors.black;
-            if (currentPrice > previousPrice) {
-              textColor = Colors.green;
-            } else if (currentPrice < previousPrice) {
-              textColor = Colors.red;
-            }
-
-            previousPrice = currentPrice;
             return Container(
               padding: const EdgeInsets.only(
                 top: 10,
@@ -52,8 +39,6 @@ class CoinPairHeader extends StatelessWidget {
                       Container(
                         child: Row(
                           children: [
-                            Icon(Icons.arrow_back),
-                            const Gap(8),
                             DropdownButton(
                               dropdownColor: palette.cardColor,
                               underline: const SizedBox(),
@@ -67,7 +52,7 @@ class CoinPairHeader extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 6),
                                     child: CustomText(
-                                      text: tradeData.symbol,
+                                      text: symbol,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                     ),

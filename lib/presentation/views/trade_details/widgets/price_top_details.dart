@@ -9,7 +9,8 @@ import '../../../widgets/reactive_builder.dart';
 import '../trade_details_view_model.dart';
 
 class PriceTopDetails extends StatelessWidget {
-  const PriceTopDetails({Key? key});
+  PriceTopDetails({Key? key, required this.symbol});
+  String symbol;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class PriceTopDetails extends StatelessWidget {
 
     return Consumer(builder: (context, ref, _) {
       return ReactiveBuilder(
-          value: ref.read(tradeDetailsViewModelProvider).tradeData,
+          value: ref.read(tradeDetailsViewModelProvider(symbol)).tradeData,
           builder: (tradeData) {
             final List<String> symbols = tradeData.symbol.split('/');
             String assetSymbol = symbols.isNotEmpty ? symbols[0] : '';

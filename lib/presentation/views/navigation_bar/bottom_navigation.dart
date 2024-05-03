@@ -18,8 +18,8 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const MarketsScreen(),
-    TradeViewDetails(),
+    const MarketView(),
+    Center(child: const Text('Trades')),
     const FuturesScreen(),
     const WalletScreen()
   ];

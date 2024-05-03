@@ -4,24 +4,26 @@ import 'package:binance_clone/data/services/socket_service.dart';
 import 'package:binance_clone/models/trade_data.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 
-final tradeDetailsViewModelProvider = Provider<TradeDetailsViewModel>(
-  (ref) => TradeDetailsViewModel(),
+final tradeDetailsViewModelProvider =
+    Provider.family<TradeDetailsViewModel, String>(
+  (ref, pair) => TradeDetailsViewModel(pair),
 );
 
 class TradeDetailsViewModel {
-  TradeDetailsViewModel() {
-    _init();
-  }
-
   late final _socketService = SocketService();
   static const String _symbol = AppStrings.symbol;
-  final String _pair = AppStrings.pair;
+  late final String _pair;
+  TradeDetailsViewModel(String pair) {
+    _pair = pair.toLowerCase();
+    _init();
+  }
 
   void _init() {
     _socketService.attachListener(_onData);
     _socketService.subscribe([
       "$_pair@miniTicker",
     ]);
+    print("check:$_pair@miniTicker ");
   }
 
   final ValueNotifier<TradeData> _tradeData =

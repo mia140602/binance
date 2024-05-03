@@ -55,7 +55,7 @@ class TradeData {
         (lowPriceValue - lastPriceValue) / lastPriceValue;
 
     return TradeData(
-      symbol: json["symbol"] ?? "NA",
+      symbol: json["s"] ?? "NA",
       priceChangeIn24H: currentPriceValue - lastPriceValue,
       currentPrice: ParserUtil.clampDigits(json["c"] ?? "-"),
       highPrice: ParserUtil.clampDigits(json["h"] ?? "-"),

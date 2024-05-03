@@ -9,10 +9,10 @@ import 'package:binance_clone/presentation/views/orderbook/order_book_view_model
 import 'package:binance_clone/presentation/views/trade_details/recent_trades_view.dart';
 import 'package:binance_clone/presentation/views/trade_details/widgets/coin_pair_header.dart';
 import 'package:binance_clone/presentation/views/trade_details/widgets/trading_activity_header.dart';
-import 'package:binance_clone/presentation/views/trade_details/widgets/user_trading_activity_section.dart';
 
 class TradeViewDetails extends StatefulWidget {
-  const TradeViewDetails({super.key});
+  TradeViewDetails({super.key, required this.symbol});
+  String symbol;
 
   @override
   State<TradeViewDetails> createState() => _TradeViewDetailsState();
@@ -35,8 +35,8 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
   void initState() {
     super.initState();
     _controller.addListener(_scrollListener);
-    Future.microtask(() =>
-        ProviderScope.containerOf(context).read(orderBookViewModelProvider));
+    // Future.microtask(() =>
+    //     ProviderScope.containerOf(context).read(orderBookViewModelProvider));
   }
 
   @override
@@ -68,6 +68,7 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
           children: [
             CoinPairHeader(
               showCurrentPrice: _showCurrentPrice,
+              symbol: widget.symbol,
             ),
           ],
         ),
@@ -83,9 +84,12 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
           children: [
             // const CoinPairHeader(),
             // TradingActivityHeader(index: _tabIndex, onTabChanged: _setTabIndex),
-            _ActivityView(activeIndex: _tabIndex),
+            _ActivityView(
+              activeIndex: _tabIndex,
+              symbol: widget.symbol,
+            ),
             const Gap(4),
-            const UserTradingActivitySection(),
+            // const UserTradingActivitySection(),
           ],
         ),
       ),
@@ -95,15 +99,17 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
 
 class _ActivityView extends StatelessWidget {
   final int activeIndex;
-  const _ActivityView({
-    super.key,
-    required this.activeIndex,
-  });
+  final String symbol;
+  const _ActivityView(
+      {super.key, required this.activeIndex, required this.symbol});
 
   @override
   Widget build(BuildContext context) {
     Widget? child;
-    if (activeIndex == 0) child = const ChartsView();
+    if (activeIndex == 0)
+      child = ChartsView(
+        symbol: symbol,
+      );
     if (activeIndex == 1) child = const OrderBookView();
     if (activeIndex == 2) child = const RecentTradesView();
     if (child == null) return const SizedBox();
