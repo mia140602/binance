@@ -1,3 +1,6 @@
+import 'package:binance_clone/presentation/app_assets.dart';
+import 'package:binance_clone/utils/app_strings.dart';
+import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:binance_clone/presentation/views/futures/futures_screen.dart';
 import 'package:binance_clone/presentation/views/home/home_screen.dart';
@@ -19,9 +22,9 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const MarketsScreen(),
-    TradeDetailsView(),
+    const TradeDetailsView(),
     const FuturesScreen(),
-    const WalletScreen()
+    WalletScreen()
   ];
 
   @override
@@ -30,7 +33,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
       backgroundColor: Colors.white,
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         surfaceTintColor: Colors.white,
         elevation: 4,
         shape: const CircularNotchedRectangle(),
@@ -41,61 +44,61 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  constraints: BoxConstraints(),
-                  icon: Icon(Icons.home_filled, color: _currentIndex == 0 ? Colors.black : Color(0XFF929ba5), size: 19.h),
+                  constraints: const BoxConstraints(),
+                  icon: Icon(Icons.home_filled, color: _currentIndex == 0 ? AppStyle.select : AppStyle.unselect, size: 19.h),
                   onPressed: () {
                     _navigateToScreen(0);
                   },
                 ),
-                Text("Home", style: TextStyle(fontSize:11.sp,height:-0.5, fontWeight: FontWeight.w500),)
+                Text(AppStrings.home, style: AppStyle.navText())
               ],
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset('assets/icons/bottom_nav_icon/bar-chart.png', height: 17.h, color: _currentIndex == 1 ? Colors.black : Color(0XFFa2A8AF)),
+                  icon: Image.asset(NavAssets.marketIcons, height: 17.h, color: _currentIndex == 1 ? AppStyle.select : AppStyle.unselect),
                   onPressed: () {
                     _navigateToScreen(1);
                   },
                 ),
-                Text("Markets", style: TextStyle(fontSize:11.sp,height:-0.5,fontWeight: FontWeight.w500))
+                Text(AppStrings.markets, style: AppStyle.navText())
               ],
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset('assets/icons/bottom_nav_icon/exchange.png', height: 17.h, color: _currentIndex == 2 ? Colors.black : Color(0XFFa2A8AF)),
+                  icon: Image.asset(NavAssets.tradesIcons, height: 17.h, color: _currentIndex == 2 ? AppStyle.select : AppStyle.unselect),
                   onPressed: () {
                     _navigateToScreen(2);
                   },
                 ),
-                Text("Trades",style: TextStyle(fontSize:11.sp,height:-0.5,fontWeight: FontWeight.w500))
+                Text(AppStrings.trades,style: AppStyle.navText())
               ],
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset('assets/icons/bottom_nav_icon/web-feature-service.png', height: 19.h, color: _currentIndex == 3 ? Colors.black : Color(0XFFa2A8AF)),
+                  icon: Image.asset(NavAssets.futuresIcons, height: 19.h, color: _currentIndex == 3 ?  AppStyle.select : AppStyle.unselect),
                   onPressed: () {
                     _navigateToScreen(3);
                   },
                 ),
-                Text("Futures",style: TextStyle(fontSize:11.sp,height:-0.5,fontWeight: FontWeight.w500))
+                Text(AppStrings.fututes,style: AppStyle.navText())
               ],
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset('assets/icons/bottom_nav_icon/money-bag.png', height: 18.h, color: _currentIndex == 4 ? Colors.black : Color(0XFFa2A8AF)),
+                  icon: Image.asset(NavAssets.wallets, height: 18.h, color: _currentIndex == 4 ?  AppStyle.select : AppStyle.unselect),
                   onPressed: () {
                     _navigateToScreen(4);
                   },
                 ),
-                Text("Wallets",style: TextStyle(fontSize:11.sp,height:-0.5,fontWeight: FontWeight.w500))
+                Text(AppStrings.wallets,style: AppStyle.navText())
               ],
             ),
 
