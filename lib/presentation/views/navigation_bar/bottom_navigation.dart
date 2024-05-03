@@ -23,7 +23,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
     const HomeScreen(),
     const MarketsScreen(),
     const TradeDetailsView(),
-    const FuturesScreen(),
+    FuturesScreen(),
     WalletScreen()
   ];
 

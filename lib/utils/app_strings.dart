@@ -14,4 +14,27 @@ class AppStrings {
   static const String earn = "Earn";
   static const String margin = "Margin";
   static const String megadrop = "Megadrop";
+  static const String total_balance = "Total Balance";
+  static const String noassets = "Your account has no assets.";
+  static const String hot = "Hot";
+  static const String p2p_trading = "P2P Trading";
+  static const String deposit = "Deposit Crypto";
+  static const String depositVnd = "Deposit VND";
+  static const String buyWith = "Buy with VND";
+  static const String account = "Account";
+  static const String crossMarign = "Cross Margin";
+  static const String isolatedMargin = "Isolated Margin";
+  static const String copyTrading = "Copy Trading";
+  static const String useFutures = "USD-M Futures";
+  static const String coinFutures = "OIN-m Futures";
+  static const String tradingBots = "Trading Bots";
+  static const String options = "Options";
+  static const String thirdAccount = "Thrid-party Account";
+  static const String active = "Active";
+  static const String Cryptocurrency = "Cryptocurrency";
+  static const String fdusd = "FDUSE";
+  static const String meme = "MEME";
+  static const String fisrtDigital = "First Digital USD";
+  static const String avergeCost = "Average costs";
+
 }

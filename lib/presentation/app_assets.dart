@@ -35,3 +35,28 @@ class NavAssets {
   static String futuresIcons =  _getAssetPath("future");
   static String wallets =  _getAssetPath("money-bag");
 }
+
+class WalletAssets {
+  static String _getAssetPath(String asset) {
+    return "assets/icons/wallet_icon/$asset.png";
+  }
+  static String p2p = _getAssetPath("p2p");
+  static String buywith =  _getAssetPath("buywith");
+  static String deposit =  _getAssetPath("deposit");
+  static String lineChart =  _getAssetPath("line-chart");
+  static String setting =  _getAssetPath("setting");
+  static String edit =  _getAssetPath("edit");
+  static String memecoin =  _getAssetPath("shiba");
+  static String fdusd =  _getAssetPath("dollar");
+}
+
+class FuturesAssets {
+  static String _getAssetPath(String asset) {
+    return "assets/icons/futures_icon/$asset.png";
+  }
+  static String stock = _getAssetPath("stock");
+  static String caculate =  _getAssetPath("caculate");
+  static String rhombus =  _getAssetPath("rhombus");
+  static String grid =  _getAssetPath("grid");
+  static String graphic =  _getAssetPath("graphic");
+}
