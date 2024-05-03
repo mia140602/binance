@@ -34,6 +34,8 @@ class LightPalette implements Palette {
   @override
   Color get candleStickLossColor => const Color(0xffFF6838);
   @override
+  Color get mainGreenColor => const Color(0xff30B883);
+  @override
   Color get cardColor => const Color(0xffFFFFFF);
   @override
   Color get filterLineColor => const Color(0xff737A91);

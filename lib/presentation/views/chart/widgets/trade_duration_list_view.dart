@@ -48,9 +48,9 @@ class _TradeDurationListViewState extends State<TradeDurationListView> {
         scrollDirection: Axis.horizontal,
         children: [
           CustomText(
-            text: "Time",
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
+            text: "Thời gian",
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
             color: Theme.of(context).colorScheme.secondary,
           ),
           const Gap(2),
@@ -60,33 +60,33 @@ class _TradeDurationListViewState extends State<TradeDurationListView> {
               selected: label == _selectedLabel,
               onPressed: _setSelectedLabel,
             ),
-          const Gap(8),
-          CustomIcon(
-            iconPath: AppAssets.dropDown,
-            width: 10,
-            height: 9,
-            color: Theme.of(context).colorScheme.secondary,
+          const Gap(2),
+          Row(
+            children: [
+              Text(
+                "Xem thêm",
+                style: TextStyle(
+                    fontSize: 11,
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.w500),
+              ),
+              Container(
+                child: Icon(
+                  Icons.arrow_drop_down_rounded,
+                  color: Theme.of(context).colorScheme.secondary,
+                  size: 24,
+                ),
+              ),
+            ],
           ),
-          const Gap(8),
-          VerticalDivider(
-            color: Theme.of(context).colorScheme.secondary,
-            width: 10,
-          ),
-          CustomIcon(
-            iconPath: AppAssets.candleChart,
-            width: 20,
-            height: 20,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-          VerticalDivider(
-            color: Theme.of(context).colorScheme.secondary,
-            width: 10,
-          ),
+          const Gap(2),
           const Gap(4),
-          const CustomChip(
-            label: "Fx Indicators",
-            disableWidth: true,
-          ),
+          CustomText(
+            text: "Độ sâu",
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Theme.of(context).colorScheme.secondary,
+          )
         ],
       );
     });

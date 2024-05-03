@@ -31,18 +31,14 @@ class CustomChip extends StatelessWidget {
         onPressed?.call(label);
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 4),
+        margin: const EdgeInsets.symmetric(horizontal: 0),
         padding: padding,
         width: width ?? (disableWidth ? null : 40),
         height: 28,
-        decoration: BoxDecoration(
-          color: selected ? palette.selectedTimeChipColor : null,
-          borderRadius: selected ? BorderRadius.circular(100) : null,
-        ),
         child: Center(
           child: CustomText(
-            text: label,
-            fontSize: 14,
+            text: label.toLowerCase(),
+            fontSize: 12,
             fontWeight: fontWeight,
             color: selected
                 ? Theme.of(context).colorScheme.primary

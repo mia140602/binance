@@ -17,6 +17,17 @@ class SocketService {
   int _retryCount = 0;
   static const _maxRetries = 5;
 
+  Function(Map<String, dynamic>)? _listener;
+  Function(List<Map<String, dynamic>>)? _listListener;
+
+  void attachListener(Function(Map<String, dynamic>) listener) {
+    _listener = listener;
+  }
+
+  void attachListListener(Function(List<Map<String, dynamic>>) listener) {
+    _listListener = listener;
+  }
+
   void _init() async {
     String key =
         base64.encode(List<int>.generate(8, (_) => _random.nextInt(256)));
@@ -53,19 +64,19 @@ class SocketService {
       try {
         final json = jsonDecode(data);
         if (json["data"] != null) {
+          if (json["data"] is List) {
+            _listListener?.call((json["data"] as List)
+                .map((e) => e as Map<String, dynamic>)
+                .toList());
+          } else {
+            _listener?.call(json["data"]);
+          }
           _logger.log("GOT DATA: ${json["data"]}");
-          _listener?.call(json["data"]);
         }
       } catch (e) {
-        _logger.log(e);
+        _logger.log("Error processing data: $e");
       }
     });
-  }
-
-  Function(Map<String, dynamic>)? _listener;
-
-  void attachListener(Function(Map<String, dynamic>) listener) {
-    _listener = listener;
   }
 
   Timer? _timer;

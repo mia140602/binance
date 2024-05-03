@@ -1,10 +1,8 @@
 import 'package:binance_clone/presentation/views/navigation_bar/bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:binance_clone/presentation/theme/dark_palette.dart';
 import 'package:binance_clone/presentation/theme/light_palette.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
-import 'package:binance_clone/presentation/theme/theme_mode_selector.dart';
-import 'package:binance_clone/presentation/views/trade_details/trade_details_view.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SissyphusApp extends StatelessWidget {

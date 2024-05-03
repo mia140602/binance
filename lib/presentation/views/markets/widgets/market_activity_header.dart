@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
 
-class TradingActivityHeader extends StatefulWidget {
+class MarketActivityHeader extends StatefulWidget {
   final int index;
-  const TradingActivityHeader({
+  const MarketActivityHeader({
     super.key,
-    required this.onTabChanged,
+    // required this.onTabChanged,
     this.index = 0,
   });
 
-  final Function(int) onTabChanged;
+  // final Function(int) onTabChanged;
 
   @override
-  State<TradingActivityHeader> createState() => _TradingActivitySectionState();
+  State<MarketActivityHeader> createState() => _MarketActivitySectionState();
 }
 
-class _TradingActivitySectionState extends State<TradingActivityHeader> {
+class _MarketActivitySectionState extends State<MarketActivityHeader> {
   late int _index = widget.index;
 
   void _setIndex(int value) {
@@ -37,10 +37,16 @@ class _TradingActivitySectionState extends State<TradingActivityHeader> {
         children: [
           CustomTabBar(
             index: _index,
-            tabs: const ["Giá", "Thông tin", "Dữ liệu giao dịch", "Square"],
+            tabs: const [
+              "Danh sách yêu thích",
+              "Thị trường",
+              "Khám phá",
+              "Square",
+              "Dữ liệu"
+            ],
             onChanged: (value) {
               _setIndex(value);
-              widget.onTabChanged.call(value);
+              // widget.onTabChanged.call(value);
             },
           ),
         ],
