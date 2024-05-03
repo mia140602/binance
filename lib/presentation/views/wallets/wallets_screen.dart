@@ -39,8 +39,8 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
                     )
                   ),
                   width: MediaQuery.of(context).size.width*0.3,
-                    height: MediaQuery.of(context).size.height*0.04,
-                child: TextButton(onPressed: (){}, child: Text("Exchange",style: TextStyle(fontSize: 10.sp),))),
+                    height: MediaQuery.of(context).size.height*0.05,
+                child: TextButton(onPressed: (){}, child: Text("Exchange",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 14.sp),))),
                 Container(
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
@@ -53,8 +53,8 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
                         )
                     ),
                     width: MediaQuery.of(context).size.width*0.3,
-                    height: MediaQuery.of(context).size.height*0.04,
-                    child: TextButton(onPressed: (){}, child: Text("Web3",style: TextStyle(fontSize: 10.sp),))),
+                    height: MediaQuery.of(context).size.height*0.05,
+                    child: TextButton(onPressed: (){}, child: Text("Web3",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold,color: Colors.grey),))),
               ],
             ),
             TabBar(

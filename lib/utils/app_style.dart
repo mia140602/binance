@@ -40,15 +40,15 @@ class AppStyle {
     return TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.w500,
-        fontSize: 13.sp,
+        fontSize: 15.sp,
         fontFamily: 'Satoshi'
     );
   }
   static TextStyle bolddText(){
     return TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.w700,
-        fontSize: 13.sp,
+        color: black,
+        fontWeight: FontWeight.w500,
+        fontSize: 16.sp,
         fontFamily: 'Satoshi'
     );
   }
@@ -102,6 +102,14 @@ class AppStyle {
     return TextStyle(
         color: Colors.grey,
         fontSize: 10.sp,
+        fontFamily: 'Satoshi'
+    );
+  }
+  static TextStyle minimumlBoldGrayText(){
+    return TextStyle(
+        color: Colors.grey,
+        fontSize: 10.sp,
+        fontWeight: FontWeight.bold,
         fontFamily: 'Satoshi'
     );
   }

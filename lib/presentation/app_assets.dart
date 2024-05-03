@@ -48,6 +48,8 @@ class WalletAssets {
   static String edit =  _getAssetPath("edit");
   static String memecoin =  _getAssetPath("shiba");
   static String fdusd =  _getAssetPath("dollar");
+  static String salary =  _getAssetPath("salary");
+  static String book =  _getAssetPath("book");
 }
 
 class FuturesAssets {
@@ -59,4 +61,5 @@ class FuturesAssets {
   static String rhombus =  _getAssetPath("rhombus");
   static String grid =  _getAssetPath("grid");
   static String graphic =  _getAssetPath("graphic");
+
 }
