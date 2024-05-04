@@ -51,6 +51,9 @@ class DarkPalette implements Palette {
   Color get mainGreenColor => const Color(0xff2cbb83);
   @override
   Color get textFieldBorderColor => const Color(0xff373B3F);
+
+  @override
+  Color get mainYellowColor => const Color(0xfff0b90b);
   @override
   String get logo => AppAssets.darkLogo;
 

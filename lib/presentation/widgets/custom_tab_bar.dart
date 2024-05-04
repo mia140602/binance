@@ -52,8 +52,8 @@ class CustomTabBar extends StatelessWidget {
                         fontSize: fontSize ?? 15,
                         fontWeight: fontWeight ?? FontWeight.w700,
                         color: isSelected
-                            ? palette.selectedTabTextColor
-                            : palette.unselectedTabTextColor,
+                            ? palette.appBarTitleColor
+                            : palette.filterLineColor,
                       ),
                     ),
                     SizedBox(height: 6),

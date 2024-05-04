@@ -10,10 +10,13 @@ import 'package:binance_clone/models/trade_data.dart';
 import 'package:binance_clone/presentation/views/markets/market_view_model.dart';
 
 import '../../theme/palette.dart';
+import '../../widgets/custom_tab_bar.dart';
 import '../trade_details/trade_details_view_model.dart';
 
 class USDScreen extends ConsumerStatefulWidget {
-  const USDScreen({super.key});
+  final Function(int)? onTabChanged; // Optional callback
+
+  const USDScreen({super.key, this.onTabChanged});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _USDScreenState();
@@ -23,6 +26,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String currentSymbol = "BTCUSDT";
+  TextEditingController _priceController = TextEditingController();
 
   @override
   void initState() {
@@ -36,6 +40,33 @@ class _USDScreenState extends ConsumerState<USDScreen>
     final tradeDetailsViewModel =
         ref.watch(tradeDetailsViewModelProvider(currentSymbol));
     final palette = Theme.of(context).extension<Palette>()!;
+
+    int _index = 0;
+    // @override
+    // void initState() {
+    //   super.initState();
+    //   _tabController = TabController(
+    //       length: 4,
+    //       vsync:
+    //           this); // Số lượng tabs phải khớp với số lượng trong CustomTabBar
+    //   // _tabController.addListener(_handleTabSelection);
+    // }
+
+    void _setIndex(int newIndex) {
+      setState(() {
+        _index = newIndex;
+      });
+    }
+
+    @override
+    void initState() {
+      super.initState();
+      // _tabController = TabController(length: 3, vsync: this);
+
+      // Thiết lập giá trị ban đầu cho _priceController
+      _priceController = TextEditingController(text: '1234');
+      print("Giá trị ban đầu: ${_priceController.text}");
+    }
 
     return Scaffold(
       backgroundColor: palette.cardColor,
@@ -213,359 +244,19 @@ class _USDScreenState extends ConsumerState<USDScreen>
                   )
                 ],
               ),
-              OrderBookView(),
-              SizedBox(
-                height: 10.h,
-              ),
+              // OrderBookView(),
+
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 2.w),
-                    width: MediaQuery.of(context).size.width * 0.38,
-                    height: 520,
-                    //color: Colors.red,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Price",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "(USDC)",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "59122.0",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59121.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59821.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Price",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "(USDC)",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "59122.0",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59121.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59821.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Text(
-                          "59208.3",
-                          style: AppStyle.bigGreenText(),
-                        ),
-                        Text(
-                          "59208.3",
-                          style: AppStyle.smallGrayText(),
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Price",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "(USDC)",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "59122.0",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59121.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59821.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Price",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "(USDC)",
-                                  style: AppStyle.minimumlGrayText(),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "59122.0",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59121.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59120.9",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59821.5",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "59125.4",
-                                  style: AppStyle.smallRedyText(),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5.w, vertical: 1.h),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(5.r),
-                              ),
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "0.1",
-                                    style: AppStyle.smallGrayText(),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 16.h,
-                                    color: Colors.grey,
-                                  )
-                                ],
-                              ),
-                            ),
-                            Image.asset(
-                              FuturesAssets.grid,
-                              height: 12.h,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.02,
-                  ),
+                      // padding: EdgeInsets.symmetric(horizontal: 2.w),
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      // height: 520,
+                      //color: Colors.red,
+                      child: OrderBookView()),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.54,
+                    width: MediaQuery.of(context).size.width * 0.52,
                     height: 520,
                     //color: Colors.blue,
                     child: Column(
@@ -602,7 +293,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.w, vertical: 1.h),
                           decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
+                              color: palette.selectedTabChipColor,
                               borderRadius: BorderRadius.circular(5.r)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -612,9 +303,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 size: 12.h,
                                 color: Colors.grey,
                               ),
-                              Text(
-                                "Limit",
-                                style: AppStyle.regularText(),
+                              CustomText(
+                                text: "Limit",
+                                color: palette.appBarTitleColor,
                               ),
                               Icon(
                                 Icons.arrow_drop_down,
@@ -631,11 +322,11 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
+                                color: palette.selectedTabChipColor,
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: 5.h, horizontal: 7.w),
+                                  horizontal: 2, vertical: 2),
                               child: Row(
                                 children: [
                                   Text(
@@ -647,15 +338,29 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     width: 10.w,
                                   ),
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Price (USDC)",
-                                        style: AppStyle.minimumlGrayText(),
+                                      CustomText(
+                                        text: "Giá (USDC)",
+                                        color: palette.appBarTitleColor
+                                            .withOpacity(0.5),
+                                        fontSize: 10.sp,
                                       ),
-                                      Text(
-                                        "59330.1",
-                                        style: AppStyle.boldText(),
-                                      ),
+                                      Container(
+                                        height: 20.h,
+                                        width: 80.w,
+                                        child: TextField(
+                                          controller: _priceController,
+                                          textAlign: TextAlign.center,
+                                          keyboardType: TextInputType.number,
+                                          cursorColor: palette.mainYellowColor,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: palette.appBarTitleColor,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                   SizedBox(
@@ -674,16 +379,18 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(5.r),
+                                color: palette.selectedTabChipColor,
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: 13.h, horizontal: 18.w),
-                              child: Text(
-                                "BBO",
-                                style: AppStyle.boldText(),
+                                  vertical: 9.h, horizontal: 16.w),
+                              child: CustomText(
+                                text: "BBO",
+                                color: palette.appBarTitleColor,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13.sp,
                               ),
-                            ),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -691,7 +398,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
+                            color: palette.selectedTabChipColor,
                             borderRadius: BorderRadius.circular(5.r),
                           ),
                           padding: EdgeInsets.symmetric(
@@ -989,6 +696,15 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     )
                   ],
                 ),
+              ),
+
+              CustomTabBar(
+                index: _index,
+                tabs: const [
+                  "Lệnh mở",
+                  "Vị thế",
+                  "Lưới hợp đồng tương lai",
+                ],
               ),
               SizedBox(
                 height: 50,

@@ -16,17 +16,17 @@ class TransactionCountDropDown<T> extends StatefulWidget {
 
   @override
   State<TransactionCountDropDown<T>> createState() =>
-      _TransactionCountDropDownState<T>();
+      TransactionCountDropDownState<T>();
 }
 
-class _TransactionCountDropDownState<T>
+class TransactionCountDropDownState<T>
     extends State<TransactionCountDropDown<T>> {
-  T? _selected;
+  T? Countselected;
 
   @override
   void initState() {
     super.initState();
-    if (widget.counts.isNotEmpty) _selected = widget.counts.first;
+    if (widget.counts.isNotEmpty) Countselected = widget.counts.first;
   }
 
   @override
@@ -41,16 +41,13 @@ class _TransactionCountDropDownState<T>
       child: DropdownButton<T>(
         dropdownColor: Theme.of(context).extension<Palette>()!.cardColor,
         underline: const SizedBox(),
-        icon: Padding(
-          padding: const EdgeInsets.only(left: 8, right: 4),
-          child: CustomIcon(
-            iconPath: AppAssets.dropDown,
-            width: 8,
-            height: 9,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
+        icon: CustomIcon(
+          iconPath: AppAssets.dropDown,
+          width: 8,
+          height: 9,
+          color: Theme.of(context).colorScheme.secondary,
         ),
-        value: _selected,
+        value: Countselected,
         items: [
           for (final item in widget.counts)
             DropdownMenuItem(
@@ -69,7 +66,7 @@ class _TransactionCountDropDownState<T>
           }
 
           setState(() {
-            _selected = value;
+            Countselected = value;
           });
         },
       ),
