@@ -1,0 +1,838 @@
+import 'package:binance_clone/presentation/app_assets.dart';
+import 'package:binance_clone/utils/app_style.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../utils/app_strings.dart';
+
+class MarginScreen extends StatefulWidget {
+  const MarginScreen({super.key});
+
+  @override
+  State<MarginScreen> createState() => _MarginScreenState();
+}
+
+class _MarginScreenState extends State<MarginScreen> {
+  bool isSelectedCross = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.03, vertical: 10.h),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(height: 40.h,),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isSelectedCross = true;
+                        });
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: isSelectedCross
+                              ? Colors.grey.shade200
+                              : Colors.white,
+                        ),
+                        child: Text("Cross",
+                            style: isSelectedCross
+                                ? AppStyle.smallText()
+                                : AppStyle.smallGrayText()),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 8.w,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isSelectedCross = false;
+                        });
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: isSelectedCross
+                              ? Colors.white
+                              : Colors.grey.shade200,
+                        ),
+                        child: Text(
+                          "Isolated",
+                          style: isSelectedCross
+                              ? AppStyle.smallGrayText()
+                              : AppStyle.smallText(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    isSelectedCross? Text(
+                      "5x",
+                      style: AppStyle.orangeSmallText(),
+                    ):Text(
+                      "Đang hoạt động 0/15",
+                      style: AppStyle.orangeSmallText(),
+                    ) ,
+                    SizedBox(
+                      width: 15.w,
+                    ),
+                    isSelectedCross ? Image.asset(
+                      WalletAssets.swap,
+                      height: 13.h,
+                    ): SizedBox(),
+                    SizedBox(
+                      width: 15.w,
+                    ),
+                    Image.asset(
+                      WalletAssets.snow,
+                      height: 13.h,
+                    ),
+                    SizedBox(
+                      width: 15.w,
+                    ),
+                    Icon(
+                      Icons.format_align_justify,
+                      size: 14.h,
+                    ),
+                    SizedBox(
+                      width: 15.w,
+                    ),
+                    Icon(
+                      Icons.history,
+                      size: 15.h,
+                    )
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Row(
+              children: [
+                Text(
+                  AppStrings.total_balance,
+                  style: TextStyle(fontSize: 14.sp),
+                ),
+                SizedBox(
+                  width: 5.w,
+                ),
+                Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.grey,
+                  size: 15.h,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(3.r)),
+                  child: Row(
+                    children: [
+                      Text(
+                        "USD",
+                        style: AppStyle.minimumlBoldGrayText(),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        size: 14.h,
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "\$ 625,7274922",
+                  style: AppStyle.bigboldText(),
+                ),
+                SizedBox(
+                  width: 8.h,
+                ),
+                Text(
+                  "USD",
+                  style: AppStyle.smallText(),
+                ),
+                Icon(
+                  Icons.arrow_drop_down,
+                  size: 14.h,
+                  color: Colors.grey,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
+              children: [
+                Text("PNL của hôm nay +\$0.00(0.00%)", style: AppStyle.regularText(),),
+                Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey.shade500,)
+              ],
+            ),
+            SizedBox(height: 20.h,),
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Tổng nợ (USD)",style: AppStyle.smallGrayText(),),
+                    Text("\$0.0000000",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(width: 80.w,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Tổng tài sản (USD)",style: AppStyle.smallGrayText(),),
+                    Text(" \$0.0000000",style: AppStyle.smallText(),)
+                  ],
+                )
+              ],
+            ),
+            isSelectedCross? Column(
+              children: [
+                SizedBox(height: 20.h,),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: Colors.yellow[600]),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Vay",
+                          style:
+                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.03,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: Colors.grey[300]),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Trả nợ",
+                          style:
+                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.03,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: Colors.grey[300]),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Chuyển",
+                          style:
+                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 3.w),
+                  width: double.infinity,
+                  height: 45.h,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(7.r)
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 10.w,),
+                      Image.asset(WalletAssets.bnb, height: 16.h,),
+                      SizedBox(width: 10.w,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Chuyển đổi số dư nhỏ",
+                            style: AppStyle.smallText(),
+                          ),
+                          Text(
+                            "sang BNB",
+                            style: AppStyle.smallText(),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 20.w,),
+                      Container(width: 1.w,height: 15.h,color: Colors.grey,),
+                      SizedBox(width: 20.w,),
+                      Image.asset(WalletAssets.no, height: 17.h,),
+                      SizedBox(width: 10.w,),
+                      Column(
+                        crossAxisAlignment:CrossAxisAlignment.start,
+                        children: [
+                          Text("Chuyển đổi", style: AppStyle.smallText(),),
+                          Text("nợ", style: AppStyle.smallText(),)
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text("Cross", style: AppStyle.boldText(),),
+                        SizedBox(width: 10.w,),
+                        Container(width: 1.w,height: 14.h,color: Colors.grey,),
+                        SizedBox(width: 10.w,),
+                        Icon(
+                          Icons.lock_clock,
+                          size: 14.h,
+                          color: Colors.green,
+                        ),
+                        SizedBox(width: 10.w,),
+                        Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
+                      ],
+                    ),
+                    Icon(
+                      Icons.format_align_justify,
+                      size: 14.h,
+                    ),
+                  ],
+                ),
+                SizedBox(height:20.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(CoinAssets.bitcoin, height: 14.h,),
+                        SizedBox(width: 10.w,),
+                        Text("1000SATS", style: AppStyle.boldText(),),
+                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
+                      ],
+                    ),
+                    Text("0.00",style: AppStyle.boldText(),)
+                  ],
+                ),
+                SizedBox(height:10.h),
+                Row(
+                  children: [
+                    Text("Có sẵn",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Tài sản",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  children: [
+                    Text("Đã vay",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Lãi suất",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
+                SizedBox(height: 20.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(CoinAssets.bitcoin, height: 14.h,),
+                        SizedBox(width: 10.w,),
+                        Text("1INCH", style: AppStyle.boldText(),),
+                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
+                      ],
+                    ),
+                    Text("0.00",style: AppStyle.boldText(),)
+                  ],
+                ),
+                SizedBox(height:10.h),
+                Row(
+                  children: [
+                    Text("Có sẵn",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Tài sản",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  children: [
+                    Text("Đã vay",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Lãi suất",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
+                SizedBox(height: 15.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(CoinAssets.bitcoin, height: 14.h,),
+                        SizedBox(width: 10.w,),
+                        Text("1000SATS", style: AppStyle.boldText(),),
+                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
+                      ],
+                    ),
+                    Text("0.00",style: AppStyle.boldText(),)
+                  ],
+                ),
+                SizedBox(height:10.h),
+                Row(
+                  children: [
+                    Text("Có sẵn",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Tài sản",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  children: [
+                    Text("Đã vay",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Lãi suất",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
+                SizedBox(height: 15.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(CoinAssets.bitcoin, height: 14.h,),
+                        SizedBox(width: 10.w,),
+                        Text("1000SATS", style: AppStyle.boldText(),),
+                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
+                      ],
+                    ),
+                    Text("0.00",style: AppStyle.boldText(),)
+                  ],
+                ),
+                SizedBox(height:10.h),
+                Row(
+                  children: [
+                    Text("Có sẵn",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Tài sản",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  children: [
+                    Text("Đã vay",style: AppStyle.smallGrayText(),),
+                    SizedBox(width: 130.w,),
+                    Text("Lãi suất",style: AppStyle.smallGrayText(),)
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("0.00",style: AppStyle.smallText(),),
+                    SizedBox(width: 145.w,),
+                    Text("0.00",style: AppStyle.smallText(),)
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
+                SizedBox(height: 15.h,),
+              ],
+            ): Column(
+              children: [
+                SizedBox(height: 20.h,),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: Colors.yellow[600]),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Vay",
+                          style:
+                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.03,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: Colors.grey[300]),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Trả nợ",
+                          style:
+                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.03,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: Colors.grey[300]),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Chuyển",
+                          style:
+                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Isolated", style: AppStyle.boldText(),),
+                    Icon(Icons.format_align_justify,size: 14.h,)
+                  ],
+                ),
+                SizedBox(height: 15.h,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text("1000SATS / USDT",style: AppStyle.boldText(),),
+                        SizedBox(width: 8.w,),
+                        Text("5x", style: AppStyle.smallGrayText(),),
+                        SizedBox(width: 1.w,),
+                        Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey,),
+                      ],
+                    ),
+                    Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Số dư 1000SATS",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("1000SATS đã vay",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("1000SATS tài sản",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Số dư BTC",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("BTC đã vay",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("BTC tài sản         ",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Container(
+                  width: double.infinity,
+                  height: 1.h,
+                  color: Colors.grey.shade300,
+                ),
+                SizedBox(height: 20.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Isolated", style: AppStyle.boldText(),),
+                    Icon(Icons.format_align_justify,size: 14.h,)
+                  ],
+                ),
+                SizedBox(height: 15.h,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text("1INCH / BTC",style: AppStyle.boldText(),),
+                        SizedBox(width: 8.w,),
+                        Text("5x", style: AppStyle.smallGrayText(),),
+                        SizedBox(width: 1.w,),
+                        Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey,),
+                      ],
+                    ),
+                    Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Số dư 1INCH",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("1INCH đã vay",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("1INCH tài sản      ",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Số dư BTC",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("BTC đã vay",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("BTC tài sản         ",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 20.h,),
+                Container(
+                  width: double.infinity,
+                  height: 1.h,
+                  color: Colors.grey.shade300,
+                ),
+                SizedBox(height: 20.h,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text("AAVE / BTC",style: AppStyle.boldText(),),
+                        SizedBox(width: 8.w,),
+                        Text("5x", style: AppStyle.smallGrayText(),),
+                        SizedBox(width: 1.w,),
+                        Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey,),
+                      ],
+                    ),
+                    Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Số dư AAVE",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("AAVE đã vay",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("AAVE tài sản       ",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Số dư BTC",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("BTC đã vay",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("BTC tài sản         ",style: AppStyle.smallGrayText(),),
+                        Text("0.00",style: AppStyle.smallText(),)
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 50.h,),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

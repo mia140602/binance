@@ -14,7 +14,7 @@ class AppStyle {
 
   static const Color borderColor = Color(0xff252B39);
   static const Color primaryButtonColor = Color(0xffFCD434);
-  static const Color secondaryButtonColor = Color(0xff333B48);
+  static const Color backgroundColor = Color(0xff333B48);
   static const black = Color(0xFF000000);
   static const orange = Color(0xFFE58E32);
   static const yellow = Color(0xFFEEE9D6);
@@ -30,7 +30,8 @@ class AppStyle {
     );
   }
   static TextStyle boldgreyText(){
-    return const TextStyle(
+    return TextStyle(
+      fontSize: 15.sp,
         color:Colors.grey,
         fontWeight: FontWeight.w600,
         fontFamily: 'Satoshi'
@@ -41,6 +42,14 @@ class AppStyle {
         color: Colors.black,
         fontWeight: FontWeight.w500,
         fontSize: 15.sp,
+        fontFamily: 'Satoshi'
+    );
+  }
+  static TextStyle smallboldText(){
+    return TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+        fontSize: 13.sp,
         fontFamily: 'Satoshi'
     );
   }
@@ -60,6 +69,14 @@ class AppStyle {
         fontFamily: 'Satoshi'
     );
   }
+  static TextStyle bigText(){
+    return TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+        fontSize: 16.sp,
+        fontFamily: 'Satoshi'
+    );
+  }
   static TextStyle regularText(){
     return TextStyle(
         color: Colors.black,
@@ -68,6 +85,7 @@ class AppStyle {
         fontFamily: 'Satoshi'
     );
   }
+
   static TextStyle regularGrayText(){
     return TextStyle(
         color: Colors.grey,
@@ -77,7 +95,7 @@ class AppStyle {
   }
   static TextStyle regularBoldText(){
     return TextStyle(
-        color: Colors.black,
+        color: Colors.grey[500],
         fontWeight: FontWeight.w500,
         fontSize: 15.sp,
         fontFamily: 'Satoshi'
@@ -94,7 +112,7 @@ class AppStyle {
   static TextStyle smallGrayText(){
     return TextStyle(
         color: Colors.grey,
-        fontSize: 12.sp,
+        fontSize: 13.sp,
         fontFamily: 'Satoshi'
     );
   }
@@ -109,6 +127,14 @@ class AppStyle {
     return TextStyle(
         color: Colors.grey,
         fontSize: 10.sp,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Satoshi'
+    );
+  }
+  static TextStyle regularlBoldGrayText(){
+    return TextStyle(
+        color: Colors.grey,
+        fontSize: 16.sp,
         fontWeight: FontWeight.bold,
         fontFamily: 'Satoshi'
     );

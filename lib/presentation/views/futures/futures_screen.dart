@@ -1,7 +1,7 @@
 import 'package:binance_clone/presentation/views/futures/usd_m_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:binance_clone/presentation/views/wallets/overview_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/overview_screen.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +26,9 @@ class _FuturesScreenState extends State<FuturesScreen> with SingleTickerProvider
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
+        decoration: BoxDecoration(
+          color: Colors.white
+        ),
         padding: EdgeInsets.symmetric(vertical: 30.h),
         child: Column(
           children: [

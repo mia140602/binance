@@ -1,4 +1,6 @@
+import 'package:binance_clone/presentation/views/markets/markets.dart';
 import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
+import 'package:binance_clone/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:binance_clone/presentation/views/futures/futures_screen.dart';
 import 'package:binance_clone/presentation/views/home/home_screen.dart';
@@ -18,7 +20,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const MarketView(),
+    const Markets(),
     Center(child: const Text('Trades')),
     FuturesScreen(),
     WalletScreen()
@@ -51,7 +53,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   },
                 ),
                 Text(
-                  "Home",
+                  AppStrings.home,
                   style: TextStyle(
                       fontSize: 11.sp,
                       height: -0.5,
@@ -73,7 +75,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                     _navigateToScreen(1);
                   },
                 ),
-                Text("Markets",
+                Text(AppStrings.markets,
                     style: TextStyle(
                         fontSize: 11.sp,
                         height: -0.5,
@@ -93,7 +95,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                     _navigateToScreen(2);
                   },
                 ),
-                Text("Trades",
+                Text(AppStrings.trades,
                     style: TextStyle(
                         fontSize: 11.sp,
                         height: -0.5,
@@ -135,7 +137,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                     _navigateToScreen(4);
                   },
                 ),
-                Text("Wallets",
+                Text(AppStrings.wallets,
                     style: TextStyle(
                         fontSize: 11.sp,
                         height: -0.5,

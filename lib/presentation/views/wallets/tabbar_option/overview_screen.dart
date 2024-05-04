@@ -108,7 +108,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 height: MediaQuery.of(context).size.height*0.05,
                 width: MediaQuery.of(context).size.width*0.45,
 
-                  child: TextButton(onPressed: (){}, child: Text("Buy",style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),))),
+                  child: TextButton(onPressed: (){}, child: Text("Mua",style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500),))),
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
@@ -117,10 +117,11 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   height: MediaQuery.of(context).size.height*0.05,
                   width: MediaQuery.of(context).size.width*0.45,
 
-                  child: TextButton(onPressed: (){}, child: Text("Deposite",style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500)))),
+                  child: TextButton(onPressed: (){}, child: Text("Bán",style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w500)))),
             ],
           ),
           Divider(color: Colors.grey[300],),
+          SizedBox(height: 10.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -140,7 +141,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               )
             ],
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(height: 15.h,),
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
           //   children: [
@@ -197,11 +198,11 @@ class _OverviewScreenState extends State<OverviewScreen> {
           //     )
           //   ],
           // )
-          Row(
-            children: [
-              Text(AppStrings.account, style: AppStyle.bolddText(),),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Text(AppStrings.account, style: AppStyle.bolddText(),),
+          //   ],
+          // ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,9 +210,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Image.asset(WalletAssets.deposit, height: 17.h,),
+                  Image.asset(WalletAssets.deposit, height: 17.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text(AppStrings.spot, style: AppStyle.bolddText(),),
+                  Text(AppStrings.spot, style: AppStyle.regularGrayText(),),
                 ],
               ),
               Column(
@@ -222,7 +223,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               )
             ],
           ),
-          SizedBox(height: 13.h,),
+          SizedBox(height:5.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -230,11 +231,11 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.monetization_on_rounded,size: 16.h),
+                  Icon(Icons.monetization_on_rounded,size: 16.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text('USD', style: AppStyle.bolddText(),),
-                  Icon(Icons.monetization_on_outlined,size: 14.h),
-                  Text("-M Futures",style: AppStyle.bolddText(), )
+                  Text('USD', style: AppStyle.regularBoldText(),),
+                  Icon(Icons.monetization_on_outlined,size: 14.h,color: Colors.grey[500],),
+                  Text("-M Futures",style: AppStyle.regularBoldText(), )
                 ],
               ),
               Column(
@@ -245,7 +246,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               )
             ],
           ),
-          SizedBox(height: 17.h,),
+          SizedBox(height: 10.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -253,9 +254,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.currency_bitcoin_outlined,size: 16.h,),
+                  Icon(Icons.currency_bitcoin_outlined,size: 16.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text('Funding', style: AppStyle.bolddText(),),
+                  Text('Funding', style: AppStyle.regularBoldText(),),
 
                 ],
               ),
@@ -274,9 +275,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(WalletAssets.salary,height: 15.h,),
+                  Image.asset(WalletAssets.salary,height: 15.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text('Earn', style: AppStyle.bolddText(),),
+                  Text('Earn', style: AppStyle.regularBoldText(),),
 
                 ],
               ),
@@ -295,9 +296,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(WalletAssets.book,height: 15.h,),
+                  Image.asset(WalletAssets.book,height: 15.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text('COIN-M Futures', style: AppStyle.bolddText(),),
+                  Text('COIN-M Futures', style: AppStyle.regularBoldText(),),
 
                 ],
               ),
@@ -316,9 +317,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.tire_repair_rounded,size: 16.h),
+                  Icon(Icons.tire_repair_rounded,size: 16.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text('Cross Margin', style: AppStyle.bolddText(),),
+                  Text('Cross Margin', style: AppStyle.regularBoldText(),),
 
                 ],
               ),
@@ -337,9 +338,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.tire_repair_outlined,size: 16.h,),
+                  Icon(Icons.tire_repair_outlined,size: 16.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text('Isolated Margin', style: AppStyle.bolddText(),),
+                  Text('Isolated Margin', style: AppStyle.regularBoldText(),),
 
                 ],
               ),
@@ -358,9 +359,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.copy_all_rounded,size: 16.h,),
+                  Icon(Icons.copy_all_rounded,size: 16.h,color: Colors.grey[500]),
                   SizedBox(width: 5.w,),
-                  Text('Copy Trading', style: AppStyle.bolddText(),),
+                  Text('Copy Trading', style: AppStyle.regularBoldText(),),
 
                 ],
               ),

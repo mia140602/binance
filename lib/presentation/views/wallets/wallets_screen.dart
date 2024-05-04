@@ -1,4 +1,9 @@
-import 'package:binance_clone/presentation/views/wallets/overview_screen.dart';
+
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/earn_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/funding_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/marin/margin_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/overview_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/spot_screen.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +26,7 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 40.h),
         child: Column(
@@ -75,16 +81,17 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
               ],
               labelPadding: EdgeInsets.only(right: 20.w),
             ),
+            Divider(color: Colors.grey[200],),
             Expanded(
               child: TabBarView(
                 controller: _tabController,
                 children: const [
                   Center(child: OverviewScreen()),
-                  Center(child: Text('Content for Option 2')),
-                  Center(child: Text('Content for Option 3')),
-                  Center(child: Text('Content for Option 4')),
+                  Center(child: SpotScreen()),
+                  Center(child: FundingScreen()),
+                  Center(child: EarnScreen()),
                   Center(child: Text('Content for Option 5')),
-                  Center(child: Text('Content for Option 6')),
+                  Center(child: MarginScreen()),
                 ],
               ),
             ),

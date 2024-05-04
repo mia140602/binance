@@ -3,25 +3,25 @@ class AppStrings {
   static const String socketUrl = "https://stream.binance.com/stream";
   static const String symbol = "BTC/USDT";
   static const String pair = "btcusdt";
-  static const String home = "Home";
-  static const String markets = "Markets";
-  static const String trades = "Trades";
+  static const String home = "Trang chủ";
+  static const String markets = "Thị trường";
+  static const String trades = "Giao dịch";
   static const String fututes = "Futures";
-  static const String wallets = "Wallets";
-  static const String overview = "Overview";
-  static const String spot = "Spot";
+  static const String wallets = "Ví";
+  static const String overview = "Tổng quan về tài khoản";
+  static const String spot = "Giao ngay";
   static const String funding = "Funding";
   static const String earn = "Earn";
   static const String margin = "Margin";
   static const String megadrop = "Megadrop";
-  static const String total_balance = "Total Balance";
+  static const String total_balance = "Tổng số dư";
   static const String noassets = "Your account has no assets.";
   static const String hot = "Hot";
   static const String p2p_trading = "P2P Trading";
   static const String deposit = "Deposit Crypto";
   static const String depositVnd = "Deposit VND";
   static const String buyWith = "Buy with VND";
-  static const String account = "Account";
+  static const String account = "Tài khoản";
   static const String crossMarign = "Cross Margin";
   static const String isolatedMargin = "Isolated Margin";
   static const String copyTrading = "Copy Trading";
@@ -31,10 +31,10 @@ class AppStrings {
   static const String options = "Options";
   static const String thirdAccount = "Thrid-party Account";
   static const String active = "Active";
-  static const String Cryptocurrency = "Cryptocurrency";
+  static const String Cryptocurrency = "Ví điện tử";
   static const String fdusd = "FDUSE";
   static const String meme = "MEME";
   static const String fisrtDigital = "First Digital USD";
   static const String avergeCost = "Average costs";
-
+  static const String total_earn = "Tổng giá trị ước tính";
 }
