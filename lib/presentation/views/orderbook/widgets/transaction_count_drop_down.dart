@@ -59,6 +59,7 @@ class _TransactionCountDropDownState<T>
                 text: "$item",
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
+                color: Theme.of(context).extension<Palette>()!.appBarTitleColor,
               ),
             )
         ],

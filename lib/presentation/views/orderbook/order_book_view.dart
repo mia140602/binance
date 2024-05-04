@@ -33,15 +33,6 @@ class _OrderBookViewState extends State<OrderBookView> {
             const Gap(24),
             Row(
               children: [
-                FilterRow(
-                  onChanged: (value) {
-                    setState(() {
-                      _showSells = value == 0 || value == 2;
-                      _showBuys = value == 0 || value == 1;
-                    });
-                  },
-                ),
-                const Spacer(),
                 TransactionCountDropDown(
                   counts: _counts,
                   onChanged: (value) {
@@ -52,44 +43,53 @@ class _OrderBookViewState extends State<OrderBookView> {
                     }
                   },
                 ),
+                const Spacer(),
+                FilterRow(
+                  onChanged: (value) {
+                    setState(() {
+                      _showSells = value == 0 || value == 2;
+                      _showBuys = value == 0 || value == 1;
+                    });
+                  },
+                ),
               ],
             ),
             const Gap(24),
             const ColumnHeader(),
             const Gap(12),
-            // if (_showSells)
-            //   ReactiveBuilder(
-            //     value: ref.read(orderBookViewModelProvider).sellOrders,
-            //     builder: (orders) {
-            //       return OrderTable(
-            //         orders: orders.take(_limit),
-            //       );
-            //     },
-            //   ),
+            if (_showSells)
+              ReactiveBuilder(
+                value: ref.read(orderBookViewModelProvider).sellOrders,
+                builder: (orders) {
+                  return OrderTable(
+                    orders: orders.take(_limit),
+                  );
+                },
+              ),
             const Gap(16),
-            // if (_showSells && _showBuys) ...{
-            //   ReactiveBuilder(
-            //     value: ref.read(orderBookViewModelProvider).prices,
-            //     builder: (prices) {
-            //       return Pricebar(
-            //         oldPrice: prices.last,
-            //         newPrice: prices.first,
-            //       );
-            //     },
-            //   ),
-            //   const Gap(28),
-            // },
-            // if (_showBuys) ...{
-            //   ReactiveBuilder(
-            //     value: ref.read(orderBookViewModelProvider).buyOrders,
-            //     builder: (orders) {
-            //       return OrderTable(
-            //         orders: orders.take(_limit),
-            //       );
-            //     },
-            //   ),
-            //   const Gap(16),
-            // },
+            if (_showSells && _showBuys) ...{
+              ReactiveBuilder(
+                value: ref.read(orderBookViewModelProvider).prices,
+                builder: (prices) {
+                  return Pricebar(
+                    oldPrice: prices.last,
+                    newPrice: prices.first,
+                  );
+                },
+              ),
+              const Gap(28),
+            },
+            if (_showBuys) ...{
+              ReactiveBuilder(
+                value: ref.read(orderBookViewModelProvider).buyOrders,
+                builder: (orders) {
+                  return OrderTable(
+                    orders: orders.take(_limit),
+                  );
+                },
+              ),
+              const Gap(16),
+            },
           ],
         );
       }),

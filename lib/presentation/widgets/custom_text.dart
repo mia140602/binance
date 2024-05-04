@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -9,22 +10,24 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final double? height;
   final Color? color;
+  final String? fontFamily;
 
-  const CustomText({
-    Key? key,
-    required this.text,
-    this.fontSize,
-    this.fontWeight,
-    this.textAlign,
-    this.overflow,
-    this.maxLines,
-    this.height,
-    this.color,
-  }) : super(key: key);
+  const CustomText(
+      {Key? key,
+      required this.text,
+      this.fontSize,
+      this.fontWeight,
+      this.textAlign,
+      this.overflow,
+      this.maxLines,
+      this.height,
+      this.color,
+      this.fontFamily})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(
+    final style = GoogleFonts.roboto(
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color,

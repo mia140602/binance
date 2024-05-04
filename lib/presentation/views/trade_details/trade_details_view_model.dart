@@ -26,6 +26,14 @@ class TradeDetailsViewModel {
     print("check:$_pair@miniTicker ");
   }
 
+  void updateData(String symbol) {
+    if (_pair != symbol.toLowerCase()) {
+      _pair = symbol.toLowerCase();
+      _socketService.dispose(); // Hủy kết nối WebSocket hiện tại
+      _init(); // Khởi tạo lại kết nối WebSocket với symbol mới
+    }
+  }
+
   final ValueNotifier<TradeData> _tradeData =
       ValueNotifier(TradeData.initial(_symbol));
   ValueNotifier<TradeData> get tradeData => _tradeData;

@@ -10,21 +10,21 @@ class ColumnHeader extends StatelessWidget {
       children: [
         Expanded(
           child: _ColumnItem(
-            title: "Price",
+            title: "Giá",
             subtitle: "USDT",
           ),
         ),
         Spacer(),
         Expanded(
           child: _ColumnItem(
-            title: "Amounts",
+            title: "Số lượng",
             subtitle: "BTC",
           ),
         ),
         Spacer(),
         Expanded(
           child: _ColumnItem(
-            title: "Total",
+            title: "Tổng",
           ),
         ),
       ],

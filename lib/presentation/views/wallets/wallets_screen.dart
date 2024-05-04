@@ -9,8 +9,17 @@ class WalletScreen extends StatefulWidget {
   _WalletScreenState createState() => _WalletScreenState();
 }
 
-class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderStateMixin {
+class _WalletScreenState extends State<WalletScreen>
+    with SingleTickerProviderStateMixin {
+  int _tabIndex = 0;
   late TabController _tabController;
+  void _setTabIndex(int value) {
+    if (_tabIndex != value) {
+      setState(() {
+        _tabIndex = value;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -29,32 +38,36 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8),
-                      bottomLeft: Radius.circular(8),
-                    ),
-                    border: Border.all(
-                      color: Colors.grey.shade300
-                    )
-                  ),
-                  width: MediaQuery.of(context).size.width*0.3,
-                    height: MediaQuery.of(context).size.height*0.04,
-                child: TextButton(onPressed: (){}, child: Text("Exchange",style: TextStyle(fontSize: 10.sp),))),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          bottomLeft: Radius.circular(8),
+                        ),
+                        border: Border.all(color: Colors.grey.shade300)),
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.04,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Exchange",
+                          style: TextStyle(fontSize: 10.sp),
+                        ))),
                 Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                        color: Colors.grey[300],
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(8),
                           bottomRight: Radius.circular(8),
                         ),
-                        border: Border.all(
-                            color: Colors.grey.shade300
-                        )
-                    ),
-                    width: MediaQuery.of(context).size.width*0.3,
-                    height: MediaQuery.of(context).size.height*0.04,
-                    child: TextButton(onPressed: (){}, child: Text("Web3",style: TextStyle(fontSize: 10.sp),))),
+                        border: Border.all(color: Colors.grey.shade300)),
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.04,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Web3",
+                          style: TextStyle(fontSize: 10.sp),
+                        ))),
               ],
             ),
             TabBar(
@@ -78,8 +91,12 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: const [
-                  Center(child: OverviewScreen()),
+                children: [
+                  Center(
+                      child: OverviewScreen(
+                    index: _tabIndex,
+                    onTabChanged: _setTabIndex,
+                  )),
                   Center(child: Text('Content for Option 2')),
                   Center(child: Text('Content for Option 3')),
                   Center(child: Text('Content for Option 4')),

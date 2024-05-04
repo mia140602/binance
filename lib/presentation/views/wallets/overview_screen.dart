@@ -6,14 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../widgets/custom_tab_bar.dart';
+
 class OverviewScreen extends StatefulWidget {
-  const OverviewScreen({super.key});
+  final int index;
+  const OverviewScreen({super.key, this.index = 0, required this.onTabChanged});
+  final Function(int) onTabChanged;
 
   @override
   State<OverviewScreen> createState() => _OverviewScreenState();
 }
 
 class _OverviewScreenState extends State<OverviewScreen> {
+  late int _index = widget.index;
+  void _setIndex(int value) {
+    if (_index != value) {
+      setState(() {
+        _index = value;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,8 +56,13 @@ class _OverviewScreenState extends State<OverviewScreen> {
               ),
               Row(
                 children: [
-                  Image.asset(WalletAssets.lineChart, height: 15.h,),
-                  SizedBox(width: 10.w,),
+                  Image.asset(
+                    WalletAssets.lineChart,
+                    height: 15.h,
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
                   Icon(
                     Icons.question_mark,
                     size: 14.h,
@@ -62,82 +80,130 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 "0,00033 \tETH",
                 style: AppStyle.bigboldText(),
               ),
-              Icon(Icons.arrow_drop_down,size: 16.h,)
+              Icon(
+                Icons.arrow_drop_down,
+                size: 16.h,
+              )
             ],
           ),
-          Row(children: [
-            Text("≈ 1,02", style: AppStyle.smallGrayText(),)
-          ],),
+          Row(
+            children: [
+              Text(
+                "≈ 1,02",
+                style: AppStyle.smallGrayText(),
+              )
+            ],
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
                 "PNL today",
-                style: AppStyle.regularText().copyWith(decoration: TextDecoration.underline,decorationColor: Colors.grey),
+                style: AppStyle.regularText().copyWith(
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.grey),
               ),
-              SizedBox(width: 2.w,),
-              Text("+0,000241 \$", style: AppStyle.smallGreenText(),),
-              Text("+0.02%",style: AppStyle.smallGreenText(),),
-              Icon(Icons.arrow_right_outlined,size: 17.h,color: Colors.grey,)
+              SizedBox(
+                width: 2.w,
+              ),
+              Text(
+                "+0,000241 \$",
+                style: AppStyle.smallGreenText(),
+              ),
+              Text(
+                "+0.02%",
+                style: AppStyle.smallGreenText(),
+              ),
+              Icon(
+                Icons.arrow_right_outlined,
+                size: 17.h,
+                color: Colors.grey,
+              )
             ],
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  color: Colors.yellow[600],
-                ),
-                height: MediaQuery.of(context).size.height*0.05,
-                width: MediaQuery.of(context).size.width*0.45,
-
-                  child: TextButton(onPressed: (){}, child: Text("Recharge"))),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    color: Colors.yellow[600],
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: TextButton(onPressed: () {}, child: Text("Recharge"))),
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
                     color: Colors.grey[200],
                   ),
-                  height: MediaQuery.of(context).size.height*0.05,
-                  width: MediaQuery.of(context).size.width*0.45,
-
-                  child: TextButton(onPressed: (){}, child: Text("Purchase"))),
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: TextButton(onPressed: () {}, child: Text("Purchase"))),
             ],
           ),
-          Divider(color: Colors.grey[300],),
+          Divider(
+            color: Colors.grey[300],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Text(AppStrings.Cryptocurrency, style: AppStyle.boldText(),),
-                  SizedBox(width: 10.w,),
-                  Text(AppStrings.account, style: AppStyle.boldText(),)
-                ],
+              CustomTabBar(
+                index: _index,
+                tabs: const ["Giá", "Thông tin", "Dữ liệu giao dịch", "Square"],
+                onChanged: (value) {
+                  _setIndex(value);
+                  widget.onTabChanged.call(value);
+                },
               ),
               Row(
                 children: [
-                  Image.asset(WalletAssets.edit, height: 14.h,color: Colors.grey,),
-                  SizedBox(width: 10.w,),
-                  Image.asset(WalletAssets.setting, height: 14.h,color: Colors.grey,),
+                  Image.asset(
+                    WalletAssets.edit,
+                    height: 14.h,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Image.asset(
+                    WalletAssets.setting,
+                    height: 14.h,
+                    color: Colors.grey,
+                  ),
                 ],
               )
             ],
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Image.asset(WalletAssets.fdusd, height: 16.h,),
-                  SizedBox(width: 10.w,),
+                  Image.asset(
+                    WalletAssets.fdusd,
+                    height: 16.h,
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("FDUSE", style: AppStyle.boldText(),),
-                      Text(AppStrings.fisrtDigital, style: AppStyle.smallGrayText(),)
+                      Text(
+                        "FDUSE",
+                        style: AppStyle.boldText(),
+                      ),
+                      Text(
+                        AppStrings.fisrtDigital,
+                        style: AppStyle.smallGrayText(),
+                      )
                     ],
                   )
                 ],
@@ -145,27 +211,52 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text("1.00",style: AppStyle.boldText(),),
-                  Text("0.00033 ETH", style: AppStyle.smallGrayText(),)
+                  Text(
+                    "1.00",
+                    style: AppStyle.boldText(),
+                  ),
+                  Text(
+                    "0.00033 ETH",
+                    style: AppStyle.smallGrayText(),
+                  )
                 ],
               )
             ],
           ),
-          SizedBox(height: 20.h,),
+          SizedBox(
+            height: 20.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Image.asset(WalletAssets.memecoin, height: 16.h,),
-                  SizedBox(width: 10.w,),
+                  Image.asset(
+                    WalletAssets.memecoin,
+                    height: 16.h,
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("MEME", style: AppStyle.boldText(),),
-                      Text("Memecoin", style: AppStyle.smallGrayText(),),
-                      Text("PNL today", style: AppStyle.smallGrayText(),),
-                      Text(AppStrings.avergeCost, style: AppStyle.smallGrayText(),),
+                      Text(
+                        "MEME",
+                        style: AppStyle.boldText(),
+                      ),
+                      Text(
+                        "Memecoin",
+                        style: AppStyle.smallGrayText(),
+                      ),
+                      Text(
+                        "PNL today",
+                        style: AppStyle.smallGrayText(),
+                      ),
+                      Text(
+                        AppStrings.avergeCost,
+                        style: AppStyle.smallGrayText(),
+                      ),
                     ],
                   )
                 ],
@@ -173,11 +264,22 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  SizedBox(height: 15.h,),
-                  Text("0.928",style: AppStyle.boldText(),),
-                  Text("0 \$(-1,70%)", style: AppStyle.smallRedyText(),),
-                  SizedBox(height:1.h),
-                  Text("0.046719\$", style: AppStyle.smallGrayText(),)
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  Text(
+                    "0.928",
+                    style: AppStyle.boldText(),
+                  ),
+                  Text(
+                    "0 \$(-1,70%)",
+                    style: AppStyle.smallRedyText(),
+                  ),
+                  SizedBox(height: 1.h),
+                  Text(
+                    "0.046719\$",
+                    style: AppStyle.smallGrayText(),
+                  )
                 ],
               )
             ],

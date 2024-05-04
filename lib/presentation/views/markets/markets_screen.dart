@@ -44,8 +44,9 @@ class MarketView extends ConsumerWidget {
                   color: palette.cardColor),
               child: TextFormField(
                 decoration: InputDecoration(
-                    icon: Icon(Icons.search_sharp),
-                    hintText: "Tìm kiếm Coin/Cặp giao dịch/Phái sinh"),
+                  icon: Icon(Icons.search_sharp),
+                  hintText: "Tìm kiếm Coin/Cặp giao dịch/Phái sinh",
+                ),
               )),
         ),
         actions: [Icon(Icons.more_horiz)],
@@ -95,6 +96,7 @@ class MarketView extends ConsumerWidget {
                                 text: '${tradeData.baseAsset}',
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
+                                color: palette.appBarTitleColor,
                               ),
                               CustomText(
                                 text: '/${tradeData.quoteAsset}',
@@ -145,7 +147,7 @@ class MarketView extends ConsumerWidget {
                               '$addminus${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: palette.cardColor,
+                          color: palette.appBarTitleColor,
                           textAlign: TextAlign.center,
                         ),
                       )
