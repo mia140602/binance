@@ -1,4 +1,8 @@
-import 'package:binance_clone/presentation/views/wallets/overview_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/earn_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/funding_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/marin/margin_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/overview_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/spot_screen.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +15,7 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
-  int _tabIndex = 0;
   late TabController _tabController;
-  void _setTabIndex(int value) {
-    if (_tabIndex != value) {
-      setState(() {
-        _tabIndex = value;
-      });
-    }
-  }
 
   @override
   void initState() {
@@ -30,6 +26,7 @@ class _WalletScreenState extends State<WalletScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 40.h),
         child: Column(
@@ -45,12 +42,13 @@ class _WalletScreenState extends State<WalletScreen>
                         ),
                         border: Border.all(color: Colors.grey.shade300)),
                     width: MediaQuery.of(context).size.width * 0.3,
-                    height: MediaQuery.of(context).size.height * 0.04,
+                    height: MediaQuery.of(context).size.height * 0.05,
                     child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Exchange",
-                          style: TextStyle(fontSize: 10.sp),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 14.sp),
                         ))),
                 Container(
                     decoration: BoxDecoration(
@@ -61,12 +59,15 @@ class _WalletScreenState extends State<WalletScreen>
                         ),
                         border: Border.all(color: Colors.grey.shade300)),
                     width: MediaQuery.of(context).size.width * 0.3,
-                    height: MediaQuery.of(context).size.height * 0.04,
+                    height: MediaQuery.of(context).size.height * 0.05,
                     child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Web3",
-                          style: TextStyle(fontSize: 10.sp),
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
                         ))),
               ],
             ),
@@ -88,20 +89,19 @@ class _WalletScreenState extends State<WalletScreen>
               ],
               labelPadding: EdgeInsets.only(right: 20.w),
             ),
+            Divider(
+              color: Colors.grey[200],
+            ),
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [
-                  Center(
-                      child: OverviewScreen(
-                    index: _tabIndex,
-                    onTabChanged: _setTabIndex,
-                  )),
-                  Center(child: Text('Content for Option 2')),
-                  Center(child: Text('Content for Option 3')),
-                  Center(child: Text('Content for Option 4')),
+                children: const [
+                  Center(child: OverviewScreen()),
+                  Center(child: SpotScreen()),
+                  Center(child: FundingScreen()),
+                  Center(child: EarnScreen()),
                   Center(child: Text('Content for Option 5')),
-                  Center(child: Text('Content for Option 6')),
+                  Center(child: MarginScreen()),
                 ],
               ),
             ),

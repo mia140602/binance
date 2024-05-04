@@ -52,6 +52,7 @@ flutter:
     - assets/icons/bottom_nav_icon/
     - assets/icons/wallet_icon/
     - assets/icons/futures_icon/
+    - assets/icons/coin_icon/
 
   fonts:
     - family: Satoshi

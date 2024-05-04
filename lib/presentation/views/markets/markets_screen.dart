@@ -29,35 +29,34 @@ class MarketView extends ConsumerWidget {
     final palette = Theme.of(context).extension<Palette>()!;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: palette.cardColor,
-        elevation: 0,
-        titleSpacing: 0,
-        title: PreferredSize(
-          preferredSize: Size.fromHeight(40),
-          child: Container(
-              margin: EdgeInsets.only(left: 30, right: 10),
-              padding:
-                  EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: palette.cardColor),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.search_sharp),
-                  hintText: "Tìm kiếm Coin/Cặp giao dịch/Phái sinh",
-                ),
-              )),
-        ),
-        actions: [Icon(Icons.more_horiz)],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(20),
-          child: MarketActivityHeader(
-            index: _tabIndex,
-            //  onTabChanged: _setTabIndex
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: palette.cardColor,
+      //   elevation: 0,
+      //   titleSpacing: 0,
+      //   title: PreferredSize(
+      //     preferredSize: Size.fromHeight(40),
+      //     child: Container(
+      //         margin: EdgeInsets.only(left: 30, right: 10),
+      //         padding:
+      //             EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+      //         decoration: BoxDecoration(
+      //             borderRadius: BorderRadius.circular(20),
+      //             color: palette.cardColor),
+      //         child: TextFormField(
+      //           decoration: InputDecoration(
+      //               icon: Icon(Icons.search_sharp),
+      //               hintText: "Tìm kiếm Coin/Cặp giao dịch/Phái sinh"),
+      //         )),
+      //   ),
+      //   actions: [Icon(Icons.more_horiz)],
+      //   bottom: PreferredSize(
+      //     preferredSize: Size.fromHeight(20),
+      //     child: MarketActivityHeader(
+      //       index: _tabIndex,
+      //       //  onTabChanged: _setTabIndex
+      //     ),
+      //   ),
+      // ),
       backgroundColor: palette.cardColor,
       body: ValueListenableBuilder<List<TradeData>>(
         valueListenable: marketData,

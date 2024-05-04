@@ -48,6 +48,18 @@ class WalletAssets {
   static String edit =  _getAssetPath("edit");
   static String memecoin =  _getAssetPath("shiba");
   static String fdusd =  _getAssetPath("dollar");
+  static String salary =  _getAssetPath("salary");
+  static String book =  _getAssetPath("book");
+  static String bnb =  _getAssetPath("bnb");
+  static String search =  _getAssetPath("searchh");
+  static String gif =  _getAssetPath("giftbox");
+  static String pool =  _getAssetPath("pool");
+  static String loan =  _getAssetPath("loan");
+  static String workflow =  _getAssetPath("workflow");
+  static String swap =  _getAssetPath("swap");
+  static String snow =  _getAssetPath("snow");
+  static String no =  _getAssetPath("no");
+  static String bigsearch =  _getAssetPath("bigsearch");
 }
 
 class FuturesAssets {
@@ -59,4 +71,18 @@ class FuturesAssets {
   static String rhombus =  _getAssetPath("rhombus");
   static String grid =  _getAssetPath("grid");
   static String graphic =  _getAssetPath("graphic");
+
+}
+
+class CoinAssets {
+  static String _getAssetPath(String asset) {
+    return "assets/icons/coin_icon/$asset.png";
+  }
+  static String bitcoin = _getAssetPath("bitcoin");
+  static String bnb =  _getAssetPath("bnb");
+  static String dogecoin =  _getAssetPath("dogecoin");
+  static String eth =  _getAssetPath("ethereum");
+  static String w =  _getAssetPath("letter-w");
+  static String shib =  _getAssetPath("shiba-inu");
+  static String solana =  _getAssetPath("solana");
 }

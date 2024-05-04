@@ -49,7 +49,7 @@ class CustomTabBar extends StatelessWidget {
                     Text(
                       tabs[i],
                       style: TextStyle(
-                        fontSize: fontSize ?? 15,
+                        fontSize: fontSize ?? 14,
                         fontWeight: fontWeight ?? FontWeight.w700,
                         color: isSelected
                             ? palette.appBarTitleColor
