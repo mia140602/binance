@@ -1,6 +1,11 @@
 class AppStrings {
   static const String baseUrl = "https://api.binance.com/api/v3/";
   static const String socketUrl = "https://stream.binance.com/stream";
+  static const String testBaseUrl = 'https://testnet.binancefuture.com';
+  static const String testApiKey =
+      '0b5b8cadab9f5fa69f741c31f53ac86c81bd108120e98f75c6969d743f4adaa6';
+  static const String testSecretKey =
+      'ad32b55e0573727de49c9f489bdb8ea69985a973c08b09cb8370d3c1df793dc6';
   static const String symbol = "BTC/USDT";
   static const String pair = "btcusdt";
   static const String home = "Trang chủ";
