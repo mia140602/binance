@@ -40,7 +40,7 @@ class AppStyle {
 
   static TextStyle boldText() {
     return GoogleFonts.roboto(
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.w500,
       fontSize: 15.sp,
     );
@@ -48,7 +48,7 @@ class AppStyle {
 
   static TextStyle smallboldText() {
     return TextStyle(
-        color: Colors.black,
+        color: Colors.white,
         fontWeight: FontWeight.w500,
         fontSize: 13.sp,
         fontFamily: 'Satoshi');
@@ -64,7 +64,7 @@ class AppStyle {
 
   static TextStyle bigboldText() {
     return TextStyle(
-        color: Colors.black,
+        color: Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 18.sp,
         fontFamily: 'Satoshi');
@@ -72,7 +72,7 @@ class AppStyle {
 
   static TextStyle bigText() {
     return TextStyle(
-        color: Colors.black,
+        color: Colors.white,
         fontWeight: FontWeight.w500,
         fontSize: 16.sp,
         fontFamily: 'Satoshi');
@@ -80,7 +80,7 @@ class AppStyle {
 
   static TextStyle regularText() {
     return TextStyle(
-        color: Colors.black,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
         fontSize: 14.sp,
         fontFamily: 'Satoshi');
@@ -88,12 +88,12 @@ class AppStyle {
 
   static TextStyle regularGrayText() {
     return TextStyle(
-        color: Colors.grey, fontSize: 15.sp, fontFamily: 'Satoshi');
+        color: Colors.white, fontSize: 15.sp, fontFamily: 'Satoshi');
   }
 
   static TextStyle regularBoldText() {
     return TextStyle(
-        color: Colors.grey[500],
+        color: Colors.white,
         fontWeight: FontWeight.w500,
         fontSize: 15.sp,
         fontFamily: 'Satoshi');
@@ -165,7 +165,7 @@ class AppStyle {
 
   static TextStyle smallText() {
     return TextStyle(
-        color: Colors.black,
+        color: Colors.white,
         fontSize: 13.sp,
         fontWeight: FontWeight.w500,
         fontFamily: 'Satoshi');

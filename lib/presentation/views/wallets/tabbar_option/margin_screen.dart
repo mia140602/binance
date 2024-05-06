@@ -3,7 +3,8 @@ import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../utils/app_strings.dart';
+import '../../../../utils/app_strings.dart';
+import '../../../theme/palette.dart';
 
 class MarginScreen extends StatefulWidget {
   const MarginScreen({super.key});
@@ -17,6 +18,7 @@ class _MarginScreenState extends State<MarginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.03, vertical: 10.h),
@@ -41,8 +43,8 @@ class _MarginScreenState extends State<MarginScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
                           color: isSelectedCross
-                              ? Colors.grey.shade200
-                              : Colors.white,
+                              ? palette.cardColor
+                              : palette.cardColor,
                         ),
                         child: Text("Cross",
                             style: isSelectedCross
@@ -65,8 +67,8 @@ class _MarginScreenState extends State<MarginScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
                           color: isSelectedCross
-                              ? Colors.white
-                              : Colors.grey.shade200,
+                              ? palette.cardColor
+                              : palette.cardColor,
                         ),
                         child: Text(
                           "Isolated",
@@ -93,11 +95,13 @@ class _MarginScreenState extends State<MarginScreen> {
                     isSelectedCross ? Image.asset(
                       WalletAssets.swap,
                       height: 13.h,
-                    ): SizedBox(),
+                            color: Colors.white,
+                          ): SizedBox(),
                     SizedBox(
                       width: 15.w,
                     ),
                     Image.asset(
+                      color: Colors.white,
                       WalletAssets.snow,
                       height: 13.h,
                     ),
@@ -139,7 +143,7 @@ class _MarginScreenState extends State<MarginScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 5.w),
                   decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
+                      color: palette.cardColor,
                       borderRadius: BorderRadius.circular(3.r)),
                   child: Row(
                     children: [
@@ -225,9 +229,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         onPressed: () {},
                         child: Text(
                           "Vay",
-                          style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        ),
+                          style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
                       ),
                     ),
                     SizedBox(
@@ -243,9 +249,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         onPressed: () {},
                         child: Text(
                           "Trả nợ",
-                          style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        ),
+                          style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
                       ),
                     ),
                     SizedBox(
@@ -261,9 +269,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         onPressed: () {},
                         child: Text(
                           "Chuyển",
-                          style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        ),
+                          style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
                       ),
                     ),
 

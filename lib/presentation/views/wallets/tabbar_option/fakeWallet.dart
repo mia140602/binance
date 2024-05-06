@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../data/local_data/sharepref.dart';
+import '../../../theme/palette.dart';
 
 class FakeWallet extends StatefulWidget {
   const FakeWallet();
@@ -75,18 +76,42 @@ class _FakeWalletState extends State<FakeWallet> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Thêm ví mới'),
+          title: Text(
+            'Thêm ví mới',
+            style: TextStyle(color: Colors.black),
+          ),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 TextField(
-                  decoration: InputDecoration(labelText: 'Tên ví'),
+                  decoration: InputDecoration(
+                    labelText: 'Tên ví',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.black),
                   onChanged: (value) {
                     walletName = value;
                   },
                 ),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Số tiền'),
+                  decoration: InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    labelText: 'Số tiền',
+                    labelStyle:
+                        TextStyle(color: Colors.black), // Màu chữ cho nhãn
+                  ),
+                  style: TextStyle(color: Colors.black),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     setState(() {
@@ -245,11 +270,12 @@ class _FakeWalletState extends State<FakeWallet> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: palette.cardColor,
       body: _buildWalletList(),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 20.0.h),
+        padding: EdgeInsets.only(bottom: 70.0.h),
         child: FloatingActionButton(
           onPressed: _addWallet,
           child: Icon(Icons.add),

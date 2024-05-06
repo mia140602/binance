@@ -348,7 +348,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                       ),
                                       Container(
                                         height: 20.h,
-                                        width: 80.w,
+                                        width: 70.w,
                                         child: TextField(
                                           controller: _priceController,
                                           textAlign: TextAlign.center,
@@ -383,7 +383,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: 9.h, horizontal: 16.w),
+                                  vertical: 9.h, horizontal: 14.w),
                               child: CustomText(
                                 text: "BBO",
                                 color: palette.appBarTitleColor,
@@ -460,7 +460,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               height: 13.h,
                             ),
                             Container(
-                              width: 27.w,
+                              width: 25.w,
                               height: 1.h,
                               color: Colors.grey,
                             ),
@@ -470,7 +470,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               color: Colors.grey,
                             ),
                             Container(
-                              width: 27.w,
+                              width: 25.w,
                               height: 1.h,
                               color: Colors.grey,
                             ),
@@ -480,7 +480,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               color: Colors.grey,
                             ),
                             Container(
-                              width: 27.w,
+                              width: 25.w,
                               height: 1.h,
                               color: Colors.grey,
                             ),
@@ -490,7 +490,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               color: Colors.grey,
                             ),
                             Container(
-                              width: 27.w,
+                              width: 25.w,
                               height: 1.h,
                               color: Colors.grey,
                             ),
@@ -500,7 +500,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               color: Colors.grey,
                             ),
                             Container(
-                              width: 27.w,
+                              width: 25.w,
                               height: 1.h,
                               color: Colors.grey,
                             ),
@@ -707,7 +707,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                 ],
               ),
               SizedBox(
-                height: 50,
+                height: 60,
               ),
             ],
           ),

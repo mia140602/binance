@@ -69,7 +69,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 2.w),
                     decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: palette.cardColor,
                         borderRadius: BorderRadius.circular(3.r)),
                     child: Row(
                       children: [
@@ -158,7 +158,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
                       child: Text(
                         "Mua",
                         style: TextStyle(
-                            fontSize: 15.sp, fontWeight: FontWeight.w500),
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
                       ))),
               Container(
                   decoration: BoxDecoration(
@@ -259,7 +261,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Image.asset(WalletAssets.deposit,
-                      height: 17.h, color: Colors.grey[500]),
+                      height: 17.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -288,7 +290,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.monetization_on_rounded,
-                      size: 16.h, color: Colors.grey[500]),
+                      size: 16.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -326,7 +328,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.currency_bitcoin_outlined,
-                      size: 16.h, color: Colors.grey[500]),
+                      size: 16.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -354,7 +356,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(WalletAssets.salary,
-                      height: 15.h, color: Colors.grey[500]),
+                      height: 15.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -382,7 +384,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(WalletAssets.book,
-                      height: 15.h, color: Colors.grey[500]),
+                      height: 15.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -410,7 +412,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.tire_repair_rounded,
-                      size: 16.h, color: Colors.grey[500]),
+                      size: 16.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -438,7 +440,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.tire_repair_outlined,
-                      size: 16.h, color: Colors.grey[500]),
+                      size: 16.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -465,8 +467,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.copy_all_rounded,
-                      size: 16.h, color: Colors.grey[500]),
+                  Icon(Icons.copy_all_rounded, size: 16.h, color: Colors.white),
                   SizedBox(
                     width: 5.w,
                   ),
