@@ -33,7 +33,7 @@ class AppStyle {
   static TextStyle boldgreyText() {
     return TextStyle(
         fontSize: 15.sp,
-        color: Colors.grey,
+        color: Colors.white12,
         fontWeight: FontWeight.w600,
         fontFamily: 'Satoshi');
   }

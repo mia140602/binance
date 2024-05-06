@@ -23,11 +23,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         Container(
-          height: 30.h,
+          height: 29.h,
           width: MediaQuery.of(context).size.width * 0.5,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: Colors.grey[100]),
+              color: Colors.grey.shade800),
           child: Row(
             children: [
               SizedBox(
