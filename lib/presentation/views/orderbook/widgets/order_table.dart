@@ -5,18 +5,26 @@ import 'package:binance_clone/presentation/widgets/custom_text.dart';
 
 class OrderTable extends StatelessWidget {
   final Iterable<Order> orders;
+  final bool isFuture; // Thêm biến isFuture
+  final int itemCount;
 
-  const OrderTable({
-    super.key,
-    this.orders = const [],
-  });
+  const OrderTable(
+      {super.key,
+      this.orders = const [],
+      required this.isFuture, // Thêm tham số isFuture vào constructor
+      required this.itemCount});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (var order in orders) _OrderRow(order: order),
+        for (var order in orders)
+          _OrderRow(
+            order: order,
+            isFuture: isFuture,
+            itemCount: itemCount,
+          ),
       ],
     );
   }
@@ -24,12 +32,18 @@ class OrderTable extends StatelessWidget {
 
 class _OrderRow extends StatelessWidget {
   final Order order;
-  const _OrderRow({
-    super.key,
-    required this.order,
-  });
+  final bool isFuture; // Thêm biến isFuture
+  final int itemCount;
 
-  List<String> get _items => [order.price, order.amount, order.total];
+  const _OrderRow(
+      {super.key,
+      required this.order,
+      required this.isFuture,
+      required this.itemCount});
+
+  List<String> get _items => isFuture
+      ? [order.price, order.total]
+      : [order.price, order.amount]; // Điều chỉnh các cột dựa trên isFuture
 
   @override
   Widget build(BuildContext context) {
@@ -44,22 +58,21 @@ class _OrderRow extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 5),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           for (int i = 0; i < _items.length; i++)
             SizedBox(
-              width: width / 3.3,
+              // width: width / 2 - 40, // Chia đều cho 2 cột
               child: CustomText(
                 text: _items[i],
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
+                fontSize: 11,
+                fontWeight: FontWeight.w400,
                 color: color(i),
-                textAlign: i == 1
-                    ? TextAlign.center
-                    : i == 2
-                        ? TextAlign.end
-                        : TextAlign.left,
+                textAlign: i == 0
+                    ? TextAlign.left
+                    : TextAlign.right, // Căn chỉnh giá và tổng hoặc số lượng
               ),
             ),
         ],

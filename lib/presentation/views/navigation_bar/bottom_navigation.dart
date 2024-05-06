@@ -8,6 +8,9 @@ import 'package:binance_clone/presentation/views/markets/markets_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/wallets_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../theme/palette.dart';
+import '../orderbook/order_book_view.dart';
+
 class BottomNavigationBarr extends StatefulWidget {
   const BottomNavigationBarr({Key? key}) : super(key: key);
 
@@ -20,20 +23,22 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const Markets(),
-    Center(child: const Text('Trades')),
+    const MarketView(),
+    OrderBookView(),
     FuturesScreen(),
     WalletScreen()
   ];
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: palette.cardColor,
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
+        color: palette.cardColor,
         padding: EdgeInsets.all(0),
-        surfaceTintColor: Colors.white,
+        surfaceTintColor: palette.cardColor,
         elevation: 4,
         shape: const CircularNotchedRectangle(),
         child: Row(
@@ -45,8 +50,9 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                 IconButton(
                   constraints: BoxConstraints(),
                   icon: Icon(Icons.home_filled,
-                      color:
-                          _currentIndex == 0 ? Colors.black : Color(0XFF929ba5),
+                      color: _currentIndex == 0
+                          ? palette.appBarTitleColor
+                          : palette.selectedTimeChipColor,
                       size: 19.h),
                   onPressed: () {
                     _navigateToScreen(0);
@@ -69,7 +75,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       'assets/icons/bottom_nav_icon/bar-chart.png',
                       height: 17.h,
                       color: _currentIndex == 1
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(1);
@@ -89,7 +95,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   icon: Image.asset('assets/icons/bottom_nav_icon/exchange.png',
                       height: 17.h,
                       color: _currentIndex == 2
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(2);
@@ -106,11 +112,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset(
-                      'assets/icons/bottom_nav_icon/future.png',
+                  icon: Image.asset('assets/icons/bottom_nav_icon/future.png',
                       height: 19.h,
                       color: _currentIndex == 3
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(3);
@@ -131,7 +136,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       'assets/icons/bottom_nav_icon/money-bag.png',
                       height: 18.h,
                       color: _currentIndex == 4
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(4);

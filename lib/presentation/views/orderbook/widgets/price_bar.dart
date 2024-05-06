@@ -5,6 +5,8 @@ import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:binance_clone/presentation/widgets/custom_icon.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 
+import '../../../../utils/parser_util.dart';
+
 class Pricebar extends StatelessWidget {
   final double newPrice;
   final double oldPrice;
@@ -25,28 +27,21 @@ class Pricebar extends StatelessWidget {
             ? palette.sellPriceColor
             : Theme.of(context).colorScheme.primary;
 
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomText(
-          text: newPrice.toString(),
+          text: ParserUtil.formatPrice(newPrice.toString()),
           fontSize: 16,
           fontWeight: FontWeight.w500,
           color: color,
         ),
-        const Gap(8),
-        CustomIcon(
-          iconPath: AppAssets.arrowUp,
-          color: color,
-          width: 18,
-          height: 18,
-        ),
-        const Gap(8),
         CustomText(
-          text: oldPrice.toString(),
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: Theme.of(context).colorScheme.primary,
+          // text: oldPrice.toString(),
+          text: ParserUtil.formatPrice(oldPrice.toString()),
+          fontSize: 12,
+          // fontWeight: FontWeight.w500,
+          color: palette.selectedTimeChipColor,
         ),
       ],
     );

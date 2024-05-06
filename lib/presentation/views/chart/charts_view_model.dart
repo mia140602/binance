@@ -46,6 +46,7 @@ class ChartsViewModel {
     _socketService.attachListener(_onData);
     _socketService.subscribe([_subscriptionParam]);
     _endTime = DateTime.now();
+    _fetchOlderCandles();
   }
 
   Future<void> _fetchOlderCandles() async {
@@ -56,6 +57,8 @@ class ChartsViewModel {
         interval: _currentInterval,
         endTime: _endTime,
       );
+
+      _olderCandles = List.from(_olderCandles.reversed);
       _hasFetchedOlderCandles = true;
     } catch (e) {
       _logger.log(e);
@@ -77,7 +80,18 @@ class ChartsViewModel {
 
   void _appendOlderCandles() {
     if (_olderCandles.isNotEmpty) {
-      _candles.value = [..._candles.value, ..._olderCandles.reversed];
+      if (_candles.value.isEmpty) {
+        _candles.value = _olderCandles;
+      } else {
+        final lastValue = _candles.value.first;
+
+        if (lastValue.date == _olderCandles.first.date) {
+          _olderCandles.removeAt(0);
+        }
+
+        _candles.value = [..._candles.value, ..._olderCandles];
+      }
+
       _olderCandles = [];
     }
   }
@@ -86,7 +100,6 @@ class ChartsViewModel {
     final eventType = (data["e"] as String?) ?? "";
 
     if (eventType == "kline" && data["k"]["i"] == _currentInterval) {
-      _fetchOlderCandles();
       final newCandleData = KlineCandle.fromJson(data);
 
       if (_candles.value.isNotEmpty) {
@@ -98,10 +111,12 @@ class ChartsViewModel {
         if (lastCandle.date == newCandleData.date && !lastCandle.closed) {
           updatedCandle = lastCandle.update(newCandleData);
           candles.removeAt(0);
-          _candles.value = [updatedCandle, ...candles];
         } else {
-          _candles.value = [newCandleData, ...candles];
+          updatedCandle = newCandleData;
         }
+
+        candles.insert(0, updatedCandle);
+        _candles.value = List.from(candles);
       } else {
         _candles.value = [newCandleData];
       }

@@ -52,6 +52,8 @@ class LightPalette implements Palette {
   @override
   Color get textFieldBorderColor => const Color(0xffF1F1F1);
   @override
+  Color get mainYellowColor => const Color(0xfff0b90b);
+  @override
   String get logo => AppAssets.lightLogo;
 
   @override

@@ -1,28 +1,75 @@
 import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/presentation/views/futures/bottom_tabbar.dart';
+import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
+import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:binance_clone/models/trade_data.dart';
+import 'package:binance_clone/presentation/views/markets/market_view_model.dart';
 
-class USDScreen extends StatefulWidget {
-  const USDScreen({super.key});
+import '../../theme/palette.dart';
+import '../../widgets/custom_tab_bar.dart';
+import '../trade_details/trade_details_view_model.dart';
+
+class USDScreen extends ConsumerStatefulWidget {
+  final Function(int)? onTabChanged; // Optional callback
+
+  const USDScreen({super.key, this.onTabChanged});
 
   @override
-  State<USDScreen> createState() => _USDScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _USDScreenState();
 }
 
-class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMixin{
+class _USDScreenState extends ConsumerState<USDScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  String currentSymbol = "BTCUSDT";
+  TextEditingController _priceController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
   }
+
   @override
   Widget build(BuildContext context) {
+    final marketData = ref.watch(marketViewModelProvider).marketData;
+    final tradeDetailsViewModel =
+        ref.watch(tradeDetailsViewModelProvider(currentSymbol));
+    final palette = Theme.of(context).extension<Palette>()!;
+
+    int _index = 0;
+    // @override
+    // void initState() {
+    //   super.initState();
+    //   _tabController = TabController(
+    //       length: 4,
+    //       vsync:
+    //           this); // Số lượng tabs phải khớp với số lượng trong CustomTabBar
+    //   // _tabController.addListener(_handleTabSelection);
+    // }
+
+    void _setIndex(int newIndex) {
+      setState(() {
+        _index = newIndex;
+      });
+    }
+
+    @override
+    void initState() {
+      super.initState();
+      // _tabController = TabController(length: 3, vsync: this);
+
+      // Thiết lập giá trị ban đầu cho _priceController
+      _priceController = TextEditingController(text: '1234');
+      print("Giá trị ban đầu: ${_priceController.text}");
+    }
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: palette.cardColor,
       body: Container(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.03),
@@ -35,21 +82,25 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "BTCUSDC",
-                        style: AppStyle.bigboldText(),
+                      CustomText(
+                        text: "BTCUSDC",
+                        color: palette.appBarTitleColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                       SizedBox(
                         width: 5.w,
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            color: Colors.grey[100],
+                            color: palette.selectedTabChipColor,
                             borderRadius: BorderRadius.circular(4.r)),
                         padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Text(
-                          "Prep",
-                          style: AppStyle.minimumlGrayText(),
+                        child: CustomText(
+                          text: "Hợp đồng tương lai vĩnh cửu",
+                          fontSize: 8,
+                          color: palette.appBarTitleColor,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       SizedBox(
@@ -58,20 +109,26 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                       Icon(
                         Icons.arrow_drop_down,
                         size: 18.h,
+                        color: palette.appBarTitleColor,
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    width: 5.w,
                   ),
                   Row(
                     children: [
                       Icon(
                         Icons.settings_input_composite_sharp,
                         size: 16.h,
+                        color: palette.appBarTitleColor,
                       ),
                       SizedBox(
                         width: 20.w,
                       ),
                       Image.asset(
                         FuturesAssets.caculate,
+                        color: palette.appBarTitleColor,
                         height: 16.h,
                       ),
                       SizedBox(
@@ -87,6 +144,7 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                           ),
                           Icon(
                             Icons.more_horiz,
+                            color: palette.appBarTitleColor,
                             size: 21.h,
                           ),
                         ],
@@ -95,9 +153,24 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                   ),
                 ],
               ),
-              Text(
-                "+2.92%",
-                style: AppStyle.smallGreenText(),
+              ValueListenableBuilder<TradeData>(
+                valueListenable: tradeDetailsViewModel.tradeData,
+                builder: (context, value, child) {
+                  Color textK = palette.mainGreenColor;
+                  String prePercent = '';
+                  if (value.isPriceChangeIn24HNeg == true) {
+                    textK = Colors.red;
+                  } else {
+                    prePercent = '+';
+                  }
+                  return CustomText(
+                    text:
+                        "$prePercent${value.percentageChangeIn24H.toStringAsFixed(2)}%",
+                    color: textK,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                  );
+                },
               ),
               SizedBox(
                 height: 10.h,
@@ -108,42 +181,49 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                   Row(
                     children: [
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15.w, vertical: 4.h),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
-                            border: Border.all(color: Colors.grey.shade300)),
-                        child: Text(
-                          "Cross",
-                          style: AppStyle.smallText(),
+                            border: Border.all(
+                                color: palette.selectedTimeChipColor)),
+                        child: CustomText(
+                          text: "Cross",
+                          color: palette.appBarTitleColor,
+                          fontSize: 10.sp,
+                          // fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(
                         width: 5.w,
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 4.h),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
-                            border: Border.all(color: Colors.grey.shade300)),
-                        child: Text(
-                          "20x",
-                          style: AppStyle.smallText(),
+                            border: Border.all(
+                                color: palette.selectedTimeChipColor)),
+                        child: CustomText(
+                          text: "20x",
+                          color: palette.appBarTitleColor,
+                          fontSize: 10.sp,
                         ),
                       ),
                       SizedBox(
                         width: 5.w,
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 15.w, vertical: 4.h),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.r),
-                            border: Border.all(color: Colors.grey.shade300)),
-                        child: Text(
-                          "S",
-                          style: AppStyle.smallText(),
+                            border: Border.all(
+                                color: palette.selectedTimeChipColor)),
+                        child: CustomText(
+                          text: "S",
+                          color: palette.appBarTitleColor,
+                          fontSize: 10.sp,
                         ),
                       ),
                     ],
@@ -155,162 +235,28 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                         "Funding / Countdown",
                         style: AppStyle.minimumlGrayText(),
                       ),
-                      Text(
-                        "-0.0060%/00:53:12",
-                        style: AppStyle.minimumText(),
+                      CustomText(
+                        text: "-0.0060%/00:53:12",
+                        color: palette.appBarTitleColor,
+                        fontSize: 10.sp,
                       )
                     ],
                   )
                 ],
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              // OrderBookView(),
+
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 2.w),
-                    width: MediaQuery.of(context).size.width * 0.38,
-                    height: 520,
-                    //color: Colors.red,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Price", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 2.h,),
-                                Text("(USDC)", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 10.h,),
-                                Text("59122.0", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59121.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59821.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Price", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 2.h,),
-                                Text("(USDC)", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 10.h,),
-                                Text("59122.0", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59121.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59821.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10.h,),
-                        Text("59208.3",style: AppStyle.bigGreenText(),),
-                        Text("59208.3",style: AppStyle.smallGrayText(),),
-                        SizedBox(height: 10.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Price", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 2.h,),
-                                Text("(USDC)", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 10.h,),
-                                Text("59122.0", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59121.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59821.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Price", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 2.h,),
-                                Text("(USDC)", style: AppStyle.minimumlGrayText(),),
-                                SizedBox(height: 10.h,),
-                                Text("59122.0", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59121.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59120.9", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59821.5", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                                Text("59125.4", style: AppStyle.smallRedyText(),),
-                                SizedBox(height: 2.h,),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(5.r),
-                              ),
-                              width: MediaQuery.of(context).size.width*0.3,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("0.1",style: AppStyle.smallGrayText(),),
-                                  Icon(Icons.arrow_drop_down,size: 16.h,color: Colors.grey,)
-                                ],
-                              ),
-                            ),
-                            Image.asset(FuturesAssets.grid,height: 12.h,)
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.02,
-                  ),
+                      // padding: EdgeInsets.symmetric(horizontal: 2.w),
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      // height: 520,
+                      //color: Colors.red,
+                      child: OrderBookView()),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.54,
+                    width: MediaQuery.of(context).size.width * 0.52,
                     height: 520,
                     //color: Colors.blue,
                     child: Column(
@@ -347,7 +293,7 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.w, vertical: 1.h),
                           decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
+                              color: palette.selectedTabChipColor,
                               borderRadius: BorderRadius.circular(5.r)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -357,9 +303,9 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                                 size: 12.h,
                                 color: Colors.grey,
                               ),
-                              Text(
-                                "Limit",
-                                style: AppStyle.regularText(),
+                              CustomText(
+                                text: "Limit",
+                                color: palette.appBarTitleColor,
                               ),
                               Icon(
                                 Icons.arrow_drop_down,
@@ -376,11 +322,11 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
+                                color: palette.selectedTabChipColor,
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: 5.h, horizontal: 7.w),
+                                  horizontal: 2, vertical: 2),
                               child: Row(
                                 children: [
                                   Text(
@@ -392,15 +338,29 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                                     width: 10.w,
                                   ),
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Price (USDC)",
-                                        style: AppStyle.minimumlGrayText(),
+                                      CustomText(
+                                        text: "Giá (USDC)",
+                                        color: palette.appBarTitleColor
+                                            .withOpacity(0.5),
+                                        fontSize: 10.sp,
                                       ),
-                                      Text(
-                                        "59330.1",
-                                        style: AppStyle.boldText(),
-                                      ),
+                                      Container(
+                                        height: 20.h,
+                                        width: 80.w,
+                                        child: TextField(
+                                          controller: _priceController,
+                                          textAlign: TextAlign.center,
+                                          keyboardType: TextInputType.number,
+                                          cursorColor: palette.mainYellowColor,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: palette.appBarTitleColor,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                   SizedBox(
@@ -419,16 +379,18 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(5.r),
+                                color: palette.selectedTabChipColor,
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: 13.h, horizontal: 18.w),
-                              child: Text(
-                                "BBO",
-                                style: AppStyle.boldText(),
+                                  vertical: 9.h, horizontal: 16.w),
+                              child: CustomText(
+                                text: "BBO",
+                                color: palette.appBarTitleColor,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13.sp,
                               ),
-                            ),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -436,7 +398,7 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
+                            color: palette.selectedTabChipColor,
                             borderRadius: BorderRadius.circular(5.r),
                           ),
                           padding: EdgeInsets.symmetric(
@@ -478,8 +440,8 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                                 color: Colors.grey.shade400,
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
                                 child: Text(
                                   "BTC",
                                   style: AppStyle.boldText(),
@@ -637,16 +599,24 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                             ),
                           ],
                         ),
-                        SizedBox(height: 10.h,),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Container(
-                          width: double.infinity,
+                            width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(6.r)
-                            ),
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(6.r)),
                             child: TextButton(
-                                onPressed: () {}, child: Text("Buy/Long",style: TextStyle(color: Colors.white, fontSize: 15.sp),))),
-                        SizedBox(height: 10.h,),
+                                onPressed: () {},
+                                child: Text(
+                                  "Buy/Long",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15.sp),
+                                ))),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -673,24 +643,28 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                             ),
                           ],
                         ),
-                        SizedBox(height: 10.h,),
+                        SizedBox(
+                          height: 10.h,
+                        ),
                         Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 color: Colors.red,
-                                borderRadius: BorderRadius.circular(6.r)
-                            ),
+                                borderRadius: BorderRadius.circular(6.r)),
                             child: TextButton(
-                                onPressed: () {}, child: Text("Sell/Short",style: TextStyle(color: Colors.white, fontSize: 15.sp),))),
+                                onPressed: () {},
+                                child: Text(
+                                  "Sell/Short",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15.sp),
+                                ))),
                       ],
                     ),
                   ),
-
-
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10.h,horizontal: 15.w),
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
@@ -702,22 +676,39 @@ class _USDScreenState extends State<USDScreen> with SingleTickerProviderStateMix
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Open your Futures Account", style: AppStyle.smallText(),),
-                        Text("Embark on your Trading ", style: AppStyle.smallGrayText()),
-                        Text("journey with us", style: AppStyle.smallGrayText()),
+                        Text(
+                          "Open your Futures Account",
+                          style: AppStyle.smallText(),
+                        ),
+                        Text("Embark on your Trading ",
+                            style: AppStyle.smallGrayText()),
+                        Text("journey with us",
+                            style: AppStyle.smallGrayText()),
                       ],
                     ),
                     Column(
                       children: [
-                        Image.asset(FuturesAssets.graphic,height: 50.h,),
+                        Image.asset(
+                          FuturesAssets.graphic,
+                          height: 50.h,
+                        ),
                       ],
                     )
-                    
                   ],
                 ),
               ),
 
-              SizedBox(height: 50,),
+              CustomTabBar(
+                index: _index,
+                tabs: const [
+                  "Lệnh mở",
+                  "Vị thế",
+                  "Lưới hợp đồng tương lai",
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
             ],
           ),
         ),

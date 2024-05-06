@@ -14,42 +14,50 @@ class FilterRow extends StatefulWidget {
 class FilterRowState extends State<FilterRow> {
   int _index = 0;
 
-  void _setIndex(int value) {
-    if (_index != value) {
-      widget.onChanged(value);
-      setState(() {
-        _index = value;
-      });
-    }
+  void _setIndex() {
+    setState(() {
+      _index = (_index + 1) % 3; // Chuyển đổi giữa 0, 1, 2
+    });
+    widget.onChanged(_index);
   }
 
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
-    return Row(
-      children: [
-        _Filter(
-          key: const ValueKey("BuysAndSells"),
-          topColor: palette.sellButtonColor,
-          bottomColor: palette.buyButtonColor,
-          onPressed: () => _setIndex(0),
-          selected: _index == 0,
-        ),
-        const Gap(4),
-        _Filter(
-          key: const ValueKey("BuysOnly"),
-          bottomColor: palette.buyButtonColor,
-          onPressed: () => _setIndex(1),
-          selected: _index == 1,
-        ),
-        const Gap(4),
-        _Filter(
-          key: const ValueKey("SellsOnly"),
-          topColor: palette.sellButtonColor,
-          onPressed: () => _setIndex(2),
-          selected: _index == 2,
-        ),
-      ],
+    List<Widget> filters = [
+      _Filter(
+        key: const ValueKey("BuysAndSells"),
+        topColor: palette.sellButtonColor,
+        bottomColor: palette.buyButtonColor,
+        onPressed: _setIndex,
+        selected: _index == 0,
+        rightColumn: [
+          _LineRight(color: palette.sellButtonColor),
+          _LineRight(color: palette.buyButtonColor),
+        ],
+      ),
+      _Filter(
+        key: const ValueKey("BuysOnly"),
+        bottomColor: palette.buyButtonColor,
+        onPressed: _setIndex,
+        selected: _index == 1,
+        rightColumn: [_Right(color: palette.buyButtonColor)],
+      ),
+      _Filter(
+        key: const ValueKey("SellsOnly"),
+        topColor: palette.sellButtonColor,
+        onPressed: _setIndex,
+        selected: _index == 2,
+        rightColumn: [_Right(color: palette.sellButtonColor)],
+      ),
+    ];
+
+    return GestureDetector(
+      onTap: _setIndex,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: filters[_index], // Chỉ hiển thị _Filter hiện tại
+      ),
     );
   }
 }
@@ -59,13 +67,15 @@ class _Filter extends StatelessWidget {
   final Color? topColor;
   final Color? bottomColor;
   final bool selected;
+  final List<Widget>? rightColumn;
 
-  const _Filter({
+  _Filter({
     super.key,
     required this.onPressed,
     this.selected = false,
     this.topColor,
     this.bottomColor,
+    this.rightColumn,
   });
 
   @override
@@ -73,29 +83,33 @@ class _Filter extends StatelessWidget {
     final palette = Theme.of(context).extension<Palette>()!;
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
-        height: 32,
-        width: 32,
-        decoration: BoxDecoration(
-          color: selected ? palette.dropDownBackgroundColor : null,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _Line(color: topColor ?? palette.filterLineColor),
-            _Line(color: palette.filterLineColor),
-            _Line(color: bottomColor ?? palette.filterLineColor),
-          ],
-        ),
+      child: Row(
+        children: [
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _LineLeft(color: palette.filterLineColor),
+                _LineLeft(color: palette.filterLineColor),
+                _LineLeft(color: palette.filterLineColor),
+              ],
+            ),
+          ),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: rightColumn ?? [],
+            ),
+          )
+        ],
       ),
     );
   }
 }
 
-class _Line extends StatelessWidget {
+class _LineLeft extends StatelessWidget {
   final Color color;
-  const _Line({
+  const _LineLeft({
     super.key,
     required this.color,
   });
@@ -103,12 +117,54 @@ class _Line extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 2),
-      height: 2,
-      width: 12,
+      margin: const EdgeInsets.only(bottom: 1.5, right: 1),
+      height: 3,
+      width: 6,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(2),
+        // borderRadius: BorderRadius.circular(2),
+      ),
+    );
+  }
+}
+
+class _Right extends StatelessWidget {
+  final Color color;
+  const _Right({
+    super.key,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // margin: const EdgeInsets.only(bottom: 2),
+      height: 13,
+      width: 6,
+      decoration: BoxDecoration(
+        color: color,
+        // borderRadius: BorderRadius.circular(2),
+      ),
+    );
+  }
+}
+
+class _LineRight extends StatelessWidget {
+  final Color color;
+  const _LineRight({
+    super.key,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 1.5),
+      height: 5,
+      width: 6,
+      decoration: BoxDecoration(
+        color: color,
+        // borderRadius: BorderRadius.circular(2),
       ),
     );
   }

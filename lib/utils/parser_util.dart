@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class ParserUtil {
   static String clampDigits(String value, [int limit = 7]) {
     try {
@@ -19,5 +21,23 @@ class ParserUtil {
     } catch (e) {
       return value;
     }
+  }
+
+  static String formatPrice(String value) {
+    double? numValue = double.tryParse(value.replaceAll(',', '.'));
+    if (numValue == null) return value;
+
+    // Định dạng cho giá theo kiểu Đức
+    NumberFormat priceFormat = NumberFormat("#,##0.00", "de_DE");
+    return priceFormat.format(numValue);
+  }
+
+  static String formatTotal(String value) {
+    double? numValue = double.tryParse(value);
+    if (numValue == null) return value;
+
+    // Định dạng cho tổng với viết tắt
+    NumberFormat totalFormat = NumberFormat.compact(locale: "en_US");
+    return totalFormat.format(numValue);
   }
 }

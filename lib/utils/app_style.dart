@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppStyle {
   //Color
@@ -20,169 +21,153 @@ class AppStyle {
   static const yellow = Color(0xFFEEE9D6);
 
   //Text style
-  static TextStyle navText(){
+  static TextStyle navText() {
     return TextStyle(
-      height: -0.5,
+        height: -0.5,
         color: black,
         fontSize: 11.0.sp,
         fontWeight: FontWeight.w500,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle boldgreyText(){
+
+  static TextStyle boldgreyText() {
     return TextStyle(
-      fontSize: 15.sp,
-        color:Colors.grey,
-        fontWeight: FontWeight.w600,
-        fontFamily: 'Satoshi'
-    );
-  }
-  static TextStyle boldText(){
-    return TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.w500,
         fontSize: 15.sp,
-        fontFamily: 'Satoshi'
+        color: Colors.grey,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Satoshi');
+  }
+
+  static TextStyle boldText() {
+    return GoogleFonts.roboto(
+      color: Colors.black,
+      fontWeight: FontWeight.w500,
+      fontSize: 15.sp,
     );
   }
-  static TextStyle smallboldText(){
+
+  static TextStyle smallboldText() {
     return TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.w500,
         fontSize: 13.sp,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle bolddText(){
+
+  static TextStyle bolddText() {
     return TextStyle(
         color: black,
         fontWeight: FontWeight.w500,
         fontSize: 16.sp,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle bigboldText(){
+
+  static TextStyle bigboldText() {
     return TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: 18.sp,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle bigText(){
+
+  static TextStyle bigText() {
     return TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.w500,
         fontSize: 16.sp,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle regularText(){
+
+  static TextStyle regularText() {
     return TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.w400,
         fontSize: 14.sp,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
 
-  static TextStyle regularGrayText(){
+  static TextStyle regularGrayText() {
     return TextStyle(
-        color: Colors.grey,
-        fontSize: 15.sp,
-        fontFamily: 'Satoshi'
-    );
+        color: Colors.grey, fontSize: 15.sp, fontFamily: 'Satoshi');
   }
-  static TextStyle regularBoldText(){
+
+  static TextStyle regularBoldText() {
     return TextStyle(
         color: Colors.grey[500],
         fontWeight: FontWeight.w500,
         fontSize: 15.sp,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle orangeSmallText(){
+
+  static TextStyle orangeSmallText() {
     return TextStyle(
         color: Colors.orange,
         fontWeight: FontWeight.w600,
         fontSize: 10.sp,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle smallGrayText(){
+
+  static TextStyle smallGrayText() {
     return TextStyle(
-        color: Colors.grey,
-        fontSize: 13.sp,
-        fontFamily: 'Satoshi'
-    );
+        color: Colors.grey, fontSize: 13.sp, fontFamily: 'Satoshi');
   }
-  static TextStyle minimumlGrayText(){
+
+  static TextStyle minimumlGrayText() {
     return TextStyle(
-        color: Colors.grey,
-        fontSize: 10.sp,
-        fontFamily: 'Satoshi'
-    );
+        color: Colors.grey, fontSize: 10.sp, fontFamily: 'Satoshi');
   }
-  static TextStyle minimumlBoldGrayText(){
+
+  static TextStyle minimumlBoldGrayText() {
     return TextStyle(
         color: Colors.grey,
         fontSize: 10.sp,
         fontWeight: FontWeight.bold,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle regularlBoldGrayText(){
+
+  static TextStyle regularlBoldGrayText() {
     return TextStyle(
         color: Colors.grey,
         fontSize: 16.sp,
         fontWeight: FontWeight.bold,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle minimumText(){
+
+  static TextStyle minimumText() {
     return TextStyle(
-        color: Colors.black,
-        fontSize: 10.sp,
-        fontFamily: 'Satoshi'
-    );
+        color: Colors.black, fontSize: 10.sp, fontFamily: 'Satoshi');
   }
-  static TextStyle smallRedyText(){
+
+  static TextStyle smallRedyText() {
+    return TextStyle(color: Colors.red, fontSize: 12.sp, fontFamily: 'Satoshi');
+  }
+
+  static TextStyle smallblackText() {
     return TextStyle(
-        color: Colors.red,
-        fontSize: 12.sp,
-        fontFamily: 'Satoshi'
-    );
+        color: Colors.black, fontSize: 12.sp, fontFamily: 'Satoshi');
   }
-  static TextStyle smallblackText(){
-    return TextStyle(
-        color: Colors.black,
-        fontSize: 12.sp,
-        fontFamily: 'Satoshi'
-    );
-  }
-  static TextStyle smallGreenText(){
+
+  static TextStyle smallGreenText() {
     return TextStyle(
         color: Colors.green,
         fontSize: 13.sp,
         fontWeight: FontWeight.w500,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle bigGreenText(){
+
+  static TextStyle bigGreenText() {
     return TextStyle(
         color: Colors.green,
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
-  static TextStyle smallText(){
+
+  static TextStyle smallText() {
     return TextStyle(
         color: Colors.black,
         fontSize: 13.sp,
         fontWeight: FontWeight.w500,
-        fontFamily: 'Satoshi'
-    );
+        fontFamily: 'Satoshi');
   }
 }
-

@@ -1,20 +1,23 @@
-
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/earn_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/funding_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/marin/margin_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/overview_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/spot_screen.dart';
+import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../theme/palette.dart';
 
 class WalletScreen extends StatefulWidget {
   @override
   _WalletScreenState createState() => _WalletScreenState();
 }
 
-class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderStateMixin {
+class _WalletScreenState extends State<WalletScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -25,52 +28,75 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: palette.cardColor,
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 40.h),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8),
-                      bottomLeft: Radius.circular(8),
-                    ),
-                    border: Border.all(
-                      color: Colors.grey.shade300
-                    )
-                  ),
-                  width: MediaQuery.of(context).size.width*0.3,
-                    height: MediaQuery.of(context).size.height*0.05,
-                child: TextButton(onPressed: (){}, child: Text("Exchange",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 14.sp),))),
-                Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
+            Container(
+              width: MediaQuery.of(context).size.width * 0.6,
+              height: MediaQuery.of(context).size.height * 0.045,
+              decoration: BoxDecoration(
+                  color: palette.selectedTimeChipColor,
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                        color: palette.selectedTabChipColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          bottomLeft: Radius.circular(8),
+                        ),
+                        // border: Border.all(color: Colors.grey.shade300)),),
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.045,
+                      child: Container(
+                        margin: EdgeInsets.all(3),
+                        // padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(color: palette.cardColor),
+                        child: TextButton(
+                            onPressed: () {},
+                            child: CustomText(
+                                text: "Sàn giao dịch",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.sp)),
+                      )),
+                  Container(
+                      decoration: BoxDecoration(
+                        color: palette.selectedTabChipColor,
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(8),
                           bottomRight: Radius.circular(8),
                         ),
-                        border: Border.all(
-                            color: Colors.grey.shade300
-                        )
-                    ),
-                    width: MediaQuery.of(context).size.width*0.3,
-                    height: MediaQuery.of(context).size.height*0.05,
-                    child: TextButton(onPressed: (){}, child: Text("Web3",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold,color: Colors.grey),))),
-              ],
+                        // border: Border.all(color: Colors.grey.shade300)
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: CustomText(
+                              text: "Web3",
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey))),
+                ],
+              ),
             ),
             TabBar(
               isScrollable: true,
               padding: EdgeInsets.zero,
               labelStyle: AppStyle.boldText(),
               unselectedLabelColor: Colors.grey[500],
-              labelColor: Colors.black,
+              labelColor: palette.appBarTitleColor,
               indicator: const BoxDecoration(),
               controller: _tabController,
+              dividerColor: palette.selectedTimeChipColor,
               tabs: const [
                 Tab(text: AppStrings.overview),
                 Tab(text: AppStrings.spot),
@@ -81,7 +107,6 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
               ],
               labelPadding: EdgeInsets.only(right: 20.w),
             ),
-            Divider(color: Colors.grey[200],),
             Expanded(
               child: TabBarView(
                 controller: _tabController,

@@ -16,13 +16,13 @@ class DarkPalette implements Palette {
   @override
   Color get unselectedTabTextColor => const Color(0xffFFFFFF);
   @override
-  Color get appBarTitleColor => const Color(0xffFFFFFF);
+  Color get appBarTitleColor => const Color(0xffFFFFFF).withOpacity(0.8);
   @override
   Color get buyButtonColor => const Color(0xff25C26E);
   @override
-  Color get sellButtonColor => const Color(0xffFF554A);
+  Color get sellButtonColor => const Color(0xfff1455a);
   @override
-  Color get sellPriceColor => const Color(0xffFF6838);
+  Color get sellPriceColor => const Color(0xfff1455a);
   @override
   Color get selectedMenuItemBackgroundColor => const Color(0xff252A30);
   @override
@@ -34,7 +34,7 @@ class DarkPalette implements Palette {
   @override
   Color get candleStickLossColor => const Color(0xffFF6838);
   @override
-  Color get cardColor => const Color(0xff17181B);
+  Color get cardColor => const Color(0xff242534);
   @override
   Color get filterLineColor => const Color(0xffB1B5C3);
   @override
@@ -48,9 +48,12 @@ class DarkPalette implements Palette {
   @override
   Color get modalBorderColor => const Color(0xff262932);
   @override
-  Color get mainGreenColor => const Color(0xff30B883);
+  Color get mainGreenColor => const Color(0xff2cbb83);
   @override
   Color get textFieldBorderColor => const Color(0xff373B3F);
+
+  @override
+  Color get mainYellowColor => const Color(0xfff0b90b);
   @override
   String get logo => AppAssets.darkLogo;
 

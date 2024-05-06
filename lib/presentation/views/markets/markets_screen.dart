@@ -95,6 +95,7 @@ class MarketView extends ConsumerWidget {
                                 text: '${tradeData.baseAsset}',
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
+                                color: palette.appBarTitleColor,
                               ),
                               CustomText(
                                 text: '/${tradeData.quoteAsset}',
@@ -145,7 +146,7 @@ class MarketView extends ConsumerWidget {
                               '$addminus${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: palette.cardColor,
+                          color: palette.appBarTitleColor,
                           textAlign: TextAlign.center,
                         ),
                       )
