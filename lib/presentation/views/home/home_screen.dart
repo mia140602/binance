@@ -1,3 +1,4 @@
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/fakeWallet.dart';
 import 'package:binance_clone/presentation/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return  Scaffold(
       backgroundColor: Colors.white,
       appBar: MyAppBar(),
-      body: Text("Home"),
+      body: FakeWallet(),
     );
   }
 }
