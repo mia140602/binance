@@ -34,10 +34,10 @@ class _FakeWalletState extends State<FakeWallet> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Không có ví"),
+            const Text("Không có ví"),
             ElevatedButton(
               onPressed: _addWallet,
-              child: Text("Thêm ví"),
+              child: const Text("Thêm ví"),
             ),
           ],
         ),
@@ -54,12 +54,12 @@ class _FakeWalletState extends State<FakeWallet> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                    icon: Icon(Icons.edit),
+                    icon: const Icon(Icons.edit),
                     onPressed: () {
                       _editWallet(wallet);
                     }),
                 IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () {
                       _deleteWallet(wallet);
                     }),
@@ -76,7 +76,7 @@ class _FakeWalletState extends State<FakeWallet> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
+          title: const Text(
             'Thêm ví mới',
             style: TextStyle(color: Colors.black),
           ),
@@ -84,7 +84,7 @@ class _FakeWalletState extends State<FakeWallet> {
             child: Column(
               children: <Widget>[
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Tên ví',
                     labelStyle: TextStyle(color: Colors.black),
                     focusedBorder: UnderlineInputBorder(
@@ -94,13 +94,13 @@ class _FakeWalletState extends State<FakeWallet> {
                       borderSide: BorderSide(color: Colors.black),
                     ),
                   ),
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   onChanged: (value) {
                     walletName = value;
                   },
                 ),
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
@@ -108,10 +108,9 @@ class _FakeWalletState extends State<FakeWallet> {
                       borderSide: BorderSide(color: Colors.black),
                     ),
                     labelText: 'Số tiền',
-                    labelStyle:
-                        TextStyle(color: Colors.black), // Màu chữ cho nhãn
+                    labelStyle: TextStyle(color: Colors.black),
                   ),
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     setState(() {
@@ -128,23 +127,23 @@ class _FakeWalletState extends State<FakeWallet> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Hủy'),
+              child: const Text('Hủy'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
-              child: Text('Thêm'),
+              child: const Text('Thêm'),
               onPressed: () async {
                 if (walletName.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('name trong'),
                     ),
                   );
                 } else if (amount.toString().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('tien trong'),
                     ),
                   );
@@ -156,7 +155,7 @@ class _FakeWalletState extends State<FakeWallet> {
                   Navigator.of(context).pop();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Vui lòng nhập tên và số tiền hợp lệ.'),
                     ),
                   );
@@ -186,19 +185,19 @@ class _FakeWalletState extends State<FakeWallet> {
             TextEditingController(text: editedAmount.toString());
 
         return AlertDialog(
-          title: Text('Sửa ví'),
+          title: const Text('Sửa ví'),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 TextField(
-                  decoration: InputDecoration(labelText: 'Tên ví'),
+                  decoration: const InputDecoration(labelText: 'Tên ví'),
                   controller: nameController,
                   onChanged: (value) {
                     editedWalletName = value;
                   },
                 ),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Số tiền'),
+                  decoration: const InputDecoration(labelText: 'Số tiền'),
                   keyboardType: TextInputType.number,
                   controller: amountController,
                   onChanged: (value) {
@@ -210,19 +209,19 @@ class _FakeWalletState extends State<FakeWallet> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Hủy'),
+              child: const Text('Hủy'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
-              child: Text('Lưu'),
+              child: const Text('Lưu'),
               onPressed: () async {
                 if (editedWalletName.isEmpty || editedAmount <= 0) {
                   print(editedWalletName);
                   print(editedAmount);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Vui lòng nhập tên và số tiền hợp lệ.'),
                     ),
                   );
@@ -244,18 +243,18 @@ class _FakeWalletState extends State<FakeWallet> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Xóa ví'),
+          title: const Text('Xóa ví'),
           content:
               Text('Bạn có chắc chắn muốn xóa ví ${wallet["name"]} không?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Không'),
+              child: const Text('Không'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
-              child: Text('Có'),
+              child: const Text('Có'),
               onPressed: () async {
                 await SharePref.deleteWallet(wallet["name"]);
                 _loadWallets();
@@ -278,7 +277,7 @@ class _FakeWalletState extends State<FakeWallet> {
         padding: EdgeInsets.only(bottom: 70.0.h),
         child: FloatingActionButton(
           onPressed: _addWallet,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       ),
     );

@@ -49,11 +49,12 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               children: [
                 IconButton(
                   constraints: BoxConstraints(),
-                  icon: Icon(Icons.home_filled,
-                      color: _currentIndex == 0
-                          ? palette.appBarTitleColor
-                          : palette.selectedTimeChipColor,
-                      size: 19.h),
+                  icon: _currentIndex == 0
+                      ? Image.asset(
+                          'assets/icons/bottom_nav_icon/home_clicked.png',
+                          height: 20.h)
+                      : Image.asset('assets/icons/bottom_nav_icon/home.png',
+                          height: 20.h),
                   onPressed: () {
                     _navigateToScreen(0);
                   },
@@ -71,12 +72,15 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset(
-                      'assets/icons/bottom_nav_icon/bar-chart.png',
-                      height: 17.h,
-                      color: _currentIndex == 1
-                          ? palette.appBarTitleColor
-                          : Color(0XFFa2A8AF)),
+                  icon: _currentIndex == 1
+                      ? Image.asset(
+                          'assets/icons/bottom_nav_icon/bar_chart_clicked.png',
+                          height: 23.h,
+                        )
+                      : Image.asset(
+                          'assets/icons/bottom_nav_icon/bar_chart.png',
+                          height: 14.h,
+                        ),
                   onPressed: () {
                     _navigateToScreen(1);
                   },
@@ -92,11 +96,15 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset('assets/icons/bottom_nav_icon/exchange.png',
-                      height: 17.h,
-                      color: _currentIndex == 2
-                          ? palette.appBarTitleColor
-                          : Color(0XFFa2A8AF)),
+                  icon: _currentIndex == 2
+                      ? Image.asset(
+                          'assets/icons/bottom_nav_icon/exchange_clicked.png',
+                          height: 17.h,
+                        )
+                      : Image.asset(
+                          'assets/icons/bottom_nav_icon/exchange.png',
+                          height: 17.h,
+                        ),
                   onPressed: () {
                     _navigateToScreen(2);
                   },
@@ -112,11 +120,15 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset('assets/icons/bottom_nav_icon/future.png',
-                      height: 19.h,
-                      color: _currentIndex == 3
-                          ? palette.appBarTitleColor
-                          : Color(0XFFa2A8AF)),
+                  icon: _currentIndex == 3
+                      ? Image.asset(
+                          'assets/icons/bottom_nav_icon/future_clicked.png',
+                          height: 16.h,
+                        )
+                      : Image.asset(
+                          'assets/icons/bottom_nav_icon/future.png',
+                          height: 16.h,
+                        ),
                   onPressed: () {
                     _navigateToScreen(3);
                   },
@@ -132,12 +144,12 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Image.asset(
-                      'assets/icons/bottom_nav_icon/money-bag.png',
-                      height: 18.h,
-                      color: _currentIndex == 4
-                          ? palette.appBarTitleColor
-                          : Color(0XFFa2A8AF)),
+                  icon: _currentIndex == 4
+                      ? Image.asset(
+                          'assets/icons/bottom_nav_icon/wallet_clicked.png',
+                          height: 16.h)
+                      : Image.asset('assets/icons/bottom_nav_icon/wallets.png',
+                          height: 16.h),
                   onPressed: () {
                     _navigateToScreen(4);
                   },
