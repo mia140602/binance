@@ -39,11 +39,11 @@ class AppStyle {
   }
 
   static TextStyle boldText() {
-    return TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.w500,
-        fontSize: 15.sp,
-        fontFamily: 'Satoshi');
+    return GoogleFonts.roboto(
+      color: Colors.black,
+      fontWeight: FontWeight.w500,
+      fontSize: 15.sp,
+    );
   }
 
   static TextStyle smallboldText() {

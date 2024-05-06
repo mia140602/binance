@@ -36,6 +36,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
       backgroundColor: palette.cardColor,
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
+        color: palette.cardColor,
         padding: EdgeInsets.all(0),
         surfaceTintColor: palette.cardColor,
         elevation: 4,
@@ -74,7 +75,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       'assets/icons/bottom_nav_icon/bar-chart.png',
                       height: 17.h,
                       color: _currentIndex == 1
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(1);
@@ -94,7 +95,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   icon: Image.asset('assets/icons/bottom_nav_icon/exchange.png',
                       height: 17.h,
                       color: _currentIndex == 2
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(2);
@@ -114,7 +115,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   icon: Image.asset('assets/icons/bottom_nav_icon/future.png',
                       height: 19.h,
                       color: _currentIndex == 3
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(3);
@@ -135,7 +136,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       'assets/icons/bottom_nav_icon/money-bag.png',
                       height: 18.h,
                       color: _currentIndex == 4
-                          ? Colors.black
+                          ? palette.appBarTitleColor
                           : Color(0XFFa2A8AF)),
                   onPressed: () {
                     _navigateToScreen(4);
