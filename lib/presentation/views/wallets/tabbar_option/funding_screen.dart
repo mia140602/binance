@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
+import '../../../theme/palette.dart';
 
 class FundingScreen extends StatefulWidget {
   const FundingScreen({super.key});
@@ -17,6 +18,7 @@ class _FundingScreenState extends State<FundingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -55,7 +57,7 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          color: palette.cardColor,
                           borderRadius: BorderRadius.circular(3.r)),
                       child: Row(
                         children: [
@@ -117,8 +119,10 @@ class _FundingScreenState extends State<FundingScreen> {
                     onPressed: () {},
                     child: Text(
                       "Nạp",
-                      style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -135,8 +139,10 @@ class _FundingScreenState extends State<FundingScreen> {
                     onPressed: () {},
                     child: Text(
                       "Rút",
-                      style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -153,8 +159,10 @@ class _FundingScreenState extends State<FundingScreen> {
                     onPressed: () {},
                     child: Text(
                       "Chuyển",
-                      style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -243,6 +251,7 @@ class _FundingScreenState extends State<FundingScreen> {
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.pool,
+                        color: Colors.white,
                         height: 28.h,
                       ),
                     ),

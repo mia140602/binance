@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
 import '../../../app_assets.dart';
+import '../../../theme/palette.dart';
 
 class SpotScreen extends StatefulWidget {
   const SpotScreen({super.key});
@@ -15,6 +16,7 @@ class SpotScreen extends StatefulWidget {
 class _SpotScreenState extends State<SpotScreen> {
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.03, vertical: 10.h),
@@ -41,7 +43,7 @@ class _SpotScreenState extends State<SpotScreen> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          color: palette.cardColor,
                           borderRadius: BorderRadius.circular(3.r)),
                       child: Row(
                         children: [
@@ -100,8 +102,10 @@ class _SpotScreenState extends State<SpotScreen> {
                     onPressed: () {},
                     child: Text(
                       "Nạp",
-                      style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -118,8 +122,10 @@ class _SpotScreenState extends State<SpotScreen> {
                     onPressed: () {},
                     child: Text(
                       "Rút",
-                      style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -136,8 +142,10 @@ class _SpotScreenState extends State<SpotScreen> {
                     onPressed: () {},
                     child: Text(
                       "Chuyển",
-                      style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                   ),
                 ),

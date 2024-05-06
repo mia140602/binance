@@ -3,6 +3,8 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../data/local_data/sharepref.dart';
+
 class BinanceTestnetAPI {
   String apiKey = AppStrings.testApiKey;
   String apiSecret = AppStrings.testSecretKey;
@@ -29,14 +31,16 @@ class BinanceTestnetAPI {
     };
   }
 
-  Future<void> placeOrder(String symbol, double quantity, String side) async {
+  Future<String> placeOrder(String symbol, double quantity, String side) async {
     final String endpoint = '/fapi/v1/order';
     final String url = '$baseUrl$endpoint';
     final int timestamp = DateTime.now().millisecondsSinceEpoch;
+    final int recvWindow =
+        10000; // Tăng recvWindow lên 10000 milliseconds (10 giây)
 
     // Tạo signature
     final String query =
-        'symbol=$symbol&side=$side&type=MARKET&quantity=$quantity&timestamp=$timestamp';
+        'symbol=$symbol&side=$side&type=MARKET&quantity=$quantity&timeInForce=GTC&price=9000&timestamp=$timestamp&recvWindow=$recvWindow';
     final String signature = generateSignature(query);
 
     final response = await http.post(
@@ -48,27 +52,30 @@ class BinanceTestnetAPI {
         'symbol': symbol,
         'side': side,
         'type': 'MARKET',
+        'timeInForce': 'GTC',
         'quantity': quantity.toString(),
+        'price': '9000', // Giá được thêm vào body yêu cầu
         'timestamp': timestamp.toString(),
+        'recvWindow': recvWindow.toString(),
         'signature': signature,
       },
     );
 
     if (response.statusCode == 200) {
-      print('Order placed: ${response.body}');
+      return 'Order placed: ${response.body}';
     } else {
-      print('Failed to place order: ${response.body}');
+      return 'Failed to place order: ${response.body}';
     }
   }
 
   String generateSignature(String query) {
-    var key = utf8.encode(apiSecret); // `apiSecret` là secret key của bạn
+    var key = utf8.encode(apiSecret);
     var bytes = utf8.encode(query);
 
-    var hmacSha256 = Hmac(sha256, key); // Tạo một HMAC SHA256 với secret key
-    var digest = hmacSha256.convert(bytes); // Tạo chữ ký
+    var hmacSha256 = Hmac(sha256, key);
+    var digest = hmacSha256.convert(bytes);
 
-    return digest.toString(); // Trả về chữ ký dưới dạng chuỗi hex
+    return digest.toString();
   }
 
   Future<List<dynamic>> getPositionInformation() async {
@@ -91,5 +98,30 @@ class BinanceTestnetAPI {
     } else {
       throw Exception('Failed to load position information: ${response.body}');
     }
+  }
+
+  Future<double> getWalletBalance(String walletName) async {
+    List<Map<String, dynamic>> wallets = await SharePref.getAllWallets();
+    for (var wallet in wallets) {
+      if (wallet['name'] == walletName) {
+        return wallet['amount'];
+      }
+    }
+    return 0.0; // Trả về 0 nếu không tìm thấy ví
+  }
+
+  Future<String> placeOrderWithWalletBalance(String walletName, String symbol,
+      String side, double quantity, double currentPrice) async {
+    double walletBalance = await getWalletBalance(walletName);
+    return await this.placeOrder(symbol, quantity, side);
+    // if (walletBalance >= quantity * currentPrice) {
+    //
+    // } else {
+    //   return "Số dư không đủ.";
+    // }
+  }
+
+  void updateWalletBalance(String walletName, double newBalance) async {
+    await SharePref.updateWallet(walletName, newBalance);
   }
 }

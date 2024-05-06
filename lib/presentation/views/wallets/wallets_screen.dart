@@ -1,6 +1,6 @@
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/earn_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/funding_screen.dart';
-import 'package:binance_clone/presentation/views/wallets/tabbar_option/marin/margin_screen.dart';
+import 'package:binance_clone/presentation/views/wallets/tabbar_option/margin_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/overview_screen.dart';
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/spot_screen.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';

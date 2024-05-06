@@ -1,5 +1,6 @@
 import 'package:binance_clone/presentation/views/markets/markets.dart';
 import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
+import 'package:binance_clone/presentation/views/transaction_screen/transaction_screen.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:binance_clone/presentation/views/futures/futures_screen.dart';
@@ -24,7 +25,8 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const MarketView(),
-    OrderBookView(),
+    TransactionScreen(),
+    // OrderBookView(),
     FuturesScreen(),
     WalletScreen()
   ];

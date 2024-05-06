@@ -56,7 +56,7 @@ class CustomTabBar extends StatelessWidget {
                             : palette.filterLineColor,
                       ),
                     ),
-                    SizedBox(height: 6),
+                    SizedBox(height: 3),
                     isSelected
                         ? Container(
                             width: 12,

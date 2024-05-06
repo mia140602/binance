@@ -87,7 +87,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                     color: palette.selectedTabChipColor,
                     borderRadius: BorderRadius.circular(5.r),
                   ),
-                  width: MediaQuery.of(context).size.width * 0.27,
+                  width: MediaQuery.of(context).size.width * 0.25,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

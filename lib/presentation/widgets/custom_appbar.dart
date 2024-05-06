@@ -4,13 +4,16 @@ import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../theme/palette.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return AppBar(
+      backgroundColor: palette.cardColor,
       actions: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0.w),
@@ -52,6 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Image.asset(
               AppAssets.scanIcon,
               height: 15.h,
+              color: palette.appBarTitleColor,
             ),
           ),
         ),
@@ -62,6 +66,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Image.asset(
               AppAssets.headphoneIcon,
               height: 15.h,
+              color: palette.appBarTitleColor,
             ),
           ),
         ),
@@ -72,6 +77,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Image.asset(
               AppAssets.bellringIcon,
               height: 15.h,
+              color: palette.appBarTitleColor,
             ),
           ),
         ),
@@ -81,6 +87,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: EdgeInsets.only(right: 15.0.w,left: 8.0.w),
             child: Image.asset(
               AppAssets.coinIcon,
+              color: palette.appBarTitleColor,
               height: 15.h,
             ),
           ),

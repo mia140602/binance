@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
 import '../../../app_assets.dart';
+import '../../../theme/palette.dart';
 
 class EarnScreen extends StatefulWidget {
   const EarnScreen({super.key});
@@ -17,6 +18,7 @@ class _EarnScreenState extends State<EarnScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery
@@ -260,8 +262,13 @@ class _EarnScreenState extends State<EarnScreen> {
                   color: Colors.yellow.shade700,
                   borderRadius: BorderRadius.circular(5.r),
                 ),
-                  child: TextButton(onPressed: (){}, child: Text("Đăng kí ngay")))
-            ],
+                        child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Đăng kí ngay",
+                              style: TextStyle(color: Colors.black),
+                            )))
+                  ],
           ): Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
