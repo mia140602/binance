@@ -61,9 +61,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
         body: TabBarView(
           children: [
             buildPositionCreation(),
-            Center(
-              child: CustomText(text: "Create Order"),
-            )
+            buildOrderCreation(),
           ],
         ),
       ),
@@ -71,6 +69,108 @@ class _TransactionScreenState extends State<TransactionScreen> {
   }
 
   Widget buildPositionCreation() {
+    final palette = Theme.of(context).extension<Palette>()!;
+    BinanceTestnetAPI binanceAPI = BinanceTestnetAPI();
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          WalletTabBar(
+            tabs: wallets,
+            index: selectedWalletIndex,
+            onChanged: (int newIndex) {
+              setState(() {
+                selectedWalletIndex = newIndex;
+              });
+            },
+            selectedTabBorderColor: palette.mainYellowColor,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+          DropdownButton<String>(
+            value: selectedPosition,
+            dropdownColor: palette.selectedTabChipColor,
+            items: positions.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                selectedPosition = newValue!;
+              });
+            },
+          ),
+          DropdownButton<String>(
+            value: selectedSymbol,
+            dropdownColor: palette.selectedTabChipColor,
+            items: <String>['BTCUSDT']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                selectedSymbol = newValue!;
+              });
+            },
+          ),
+          // inputForm(
+          //   controller: entryPriceController,
+          //   label: "Entry Price",
+          // ),
+          inputForm(
+            controller: leverageController,
+            label: "Leverage",
+          ),
+          inputForm(
+            controller: marginController,
+            label: "Margin",
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              double leverage = double.tryParse(leverageController.text) ?? 0;
+              double margin = double.tryParse(marginController.text) ?? 0;
+              String walletName = wallets[selectedWalletIndex];
+              String side = selectedPosition == "Long" ? "BUY" : "SELL";
+
+              try {
+                // Điều chỉnh đòn bẩy trước khi đặt lệnh
+                await binanceAPI.adjustLeverage(
+                    selectedSymbol, leverage.toInt());
+
+                // Đặt lệnh sau khi điều chỉnh đòn bẩy
+                String response =
+                    await binanceAPI.placeMarketOrderWithWalletBalance(
+                        walletName, selectedSymbol, side, margin);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(response),
+                ));
+                print(response);
+              } catch (error) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Error when creating position: $error"),
+                ));
+                print("Error when creating position: $error");
+              }
+            },
+            child: Container(
+                margin: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: const Color(0xfff0b90b),
+                    borderRadius: BorderRadius.circular(10)),
+                child: CustomText(text: "Create Position")),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildOrderCreation() {
     final palette = Theme.of(context).extension<Palette>()!;
     BinanceTestnetAPI binanceAPI = BinanceTestnetAPI();
 
@@ -133,29 +233,27 @@ class _TransactionScreenState extends State<TransactionScreen> {
             label: "User Margin",
           ),
           ElevatedButton(
-            onPressed: () {
-              // Thêm logic để tạo vị thế tại đây
-              print(
-                  "Creating position with: Wallet ${wallets[selectedWalletIndex]}, Position $selectedPosition, Symbol $selectedSymbol");
-              double quantity = double.tryParse(entryPriceController.text) ?? 0;
-              double currentPrice = double.tryParse(marginController.text) ?? 0;
+            onPressed: () async {
+              double entryPrice =
+                  double.tryParse(entryPriceController.text) ?? 0;
+              double leverage = double.tryParse(leverageController.text) ?? 0;
+              double userMargin = double.tryParse(marginController.text) ?? 0;
               String walletName = wallets[selectedWalletIndex];
               String side = selectedPosition == "Long" ? "BUY" : "SELL";
 
-              binanceAPI
-                  .placeOrderWithWalletBalance(
-                      walletName, selectedSymbol, side, quantity, currentPrice)
-                  .then((response) {
-                print(response); // In phản hồi ra console
+              try {
+                String response = await binanceAPI.placeOrderWithWalletBalance(
+                    walletName, selectedSymbol, side, entryPrice, userMargin);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content:
-                            Text(response)) // Hiển thị phản hồi trong SnackBar
-                    );
-              }).catchError((error) {
+                  content: Text(response),
+                ));
+                print(response);
+              } catch (error) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Error when placing order: $error"),
+                ));
                 print("Error when placing order: $error");
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("Error when placing order: $error")));
-              });
+              }
             },
             child: Container(
                 margin: EdgeInsets.only(top: 10),
@@ -163,7 +261,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 decoration: BoxDecoration(
                     color: const Color(0xfff0b90b),
                     borderRadius: BorderRadius.circular(10)),
-                child: CustomText(text: "Create Position")),
+                child: CustomText(text: "Create Order")),
           ),
         ],
       ),
