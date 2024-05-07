@@ -76,23 +76,22 @@ class _OrderBookViewState extends State<OrderBookView> {
                   );
                 },
               ),
-              const Gap(16),
             },
-            const Gap(24),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 1.h),
+                  padding: EdgeInsets.symmetric(vertical: 1.h),
                   decoration: BoxDecoration(
-                    color: palette.selectedTabChipColor,
+                    color: Color(0xFF29313C),
                     borderRadius: BorderRadius.circular(5.r),
                   ),
-                  width: MediaQuery.of(context).size.width * 0.25,
+                  width: MediaQuery.of(context).size.width * 0.3,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 10),
+                        padding: EdgeInsets.only(left: 9.w),
                         child: CustomText(
                           text: "0.1",
                           color: Colors.grey,

@@ -2,6 +2,7 @@ import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/app_strings.dart';
 import '../../../theme/palette.dart';
@@ -229,8 +230,8 @@ class _MarginScreenState extends State<MarginScreen> {
                         onPressed: () {},
                         child: Text(
                           "Vay",
-                          style: TextStyle(
-                                    fontSize: 15.sp,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black),
                               ),
@@ -244,15 +245,15 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                          color: Colors.grey[300]),
-                      child: TextButton(
+                                color: Color(0xFF333B46)),
+                            child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Trả nợ",
-                          style: TextStyle(
-                                    fontSize: 15.sp,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color: Colors.white),
                               ),
                       ),
                     ),
@@ -264,20 +265,19 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                          color: Colors.grey[300]),
-                      child: TextButton(
+                                color: Color(0xFF333B46)),
+                            child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Chuyển",
-                          style: TextStyle(
-                                    fontSize: 15.sp,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color: Colors.white),
                               ),
-                      ),
                     ),
-
-                  ],
+                          )
+                        ],
                 ),
                 SizedBox(height: 20.h,),
                 Container(
@@ -552,9 +552,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         onPressed: () {},
                         child: Text(
                           "Vay",
-                          style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        ),
+                          style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
                       ),
                     ),
                     SizedBox(
@@ -570,9 +572,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         onPressed: () {},
                         child: Text(
                           "Trả nợ",
-                          style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        ),
+                          style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
                       ),
                     ),
                     SizedBox(
@@ -588,9 +592,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         onPressed: () {},
                         child: Text(
                           "Chuyển",
-                          style:
-                          TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        ),
+                          style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
                       ),
                     ),
 

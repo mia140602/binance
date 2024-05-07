@@ -1,3 +1,4 @@
+import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../data/local_data/sharepref.dart';
@@ -34,10 +35,16 @@ class _FakeWalletState extends State<FakeWallet> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Không có ví"),
+            const Text(
+              "Không có ví",
+              style: TextStyle(color: Colors.white),
+            ),
             ElevatedButton(
               onPressed: _addWallet,
-              child: const Text("Thêm ví"),
+              child: const Text(
+                "Thêm ví",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -48,8 +55,14 @@ class _FakeWalletState extends State<FakeWallet> {
         itemBuilder: (context, index) {
           final wallet = wallets[index];
           return ListTile(
-            title: Text(wallet["name"]),
-            subtitle: Text("Số tiền: ${wallet["amount"]}"),
+            title: Text(
+              wallet["name"],
+              style: AppStyle.regularText(),
+            ),
+            subtitle: Text(
+              "Số tiền: ${wallet["amount"]}",
+              style: AppStyle.regularText(),
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -185,19 +198,42 @@ class _FakeWalletState extends State<FakeWallet> {
             TextEditingController(text: editedAmount.toString());
 
         return AlertDialog(
-          title: const Text('Sửa ví'),
+          title: const Text(
+            'Sửa ví',
+            style: TextStyle(color: Colors.black),
+          ),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 TextField(
-                  decoration: const InputDecoration(labelText: 'Tên ví'),
+                  style: TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelText: 'Tên ví',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                  ),
                   controller: nameController,
                   onChanged: (value) {
                     editedWalletName = value;
                   },
                 ),
                 TextField(
-                  decoration: const InputDecoration(labelText: 'Số tiền'),
+                  style: TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelText: 'Số tiền',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                  ),
                   keyboardType: TextInputType.number,
                   controller: amountController,
                   onChanged: (value) {
@@ -243,18 +279,20 @@ class _FakeWalletState extends State<FakeWallet> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Xóa ví'),
-          content:
-              Text('Bạn có chắc chắn muốn xóa ví ${wallet["name"]} không?'),
+          title: const Text('Xóa ví', style: TextStyle(color: Colors.black)),
+          content: Text(
+            'Bạn có chắc chắn muốn xóa ví ${wallet["name"]} không?',
+            style: TextStyle(color: Colors.black),
+          ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Không'),
+              child: const Text('Không', style: TextStyle(color: Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
-              child: const Text('Có'),
+              child: const Text('Có', style: TextStyle(color: Colors.white)),
               onPressed: () async {
                 await SharePref.deleteWallet(wallet["name"]);
                 _loadWallets();
@@ -271,7 +309,7 @@ class _FakeWalletState extends State<FakeWallet> {
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: palette.cardColor,
+      backgroundColor: Color(0xFF1F2630),
       body: _buildWalletList(),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 70.0.h),

@@ -32,7 +32,7 @@ class AppStyle {
 
   static TextStyle boldgreyText() {
     return TextStyle(
-        fontSize: 15.sp,
+        fontSize: 13.sp,
         color: Colors.white12,
         fontWeight: FontWeight.w600,
         fontFamily: 'Satoshi');
@@ -41,8 +41,8 @@ class AppStyle {
   static TextStyle boldText() {
     return GoogleFonts.roboto(
       color: Colors.white,
-      fontWeight: FontWeight.w500,
-      fontSize: 15.sp,
+      fontWeight: FontWeight.w300,
+      fontSize: 13.sp,
     );
   }
 
@@ -62,29 +62,8 @@ class AppStyle {
         fontFamily: 'Satoshi');
   }
 
-  static TextStyle bigboldText() {
-    return TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-        fontSize: 18.sp,
-        fontFamily: 'Satoshi');
-  }
 
-  static TextStyle bigText() {
-    return TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w500,
-        fontSize: 16.sp,
-        fontFamily: 'Satoshi');
-  }
 
-  static TextStyle regularText() {
-    return TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w400,
-        fontSize: 14.sp,
-        fontFamily: 'Satoshi');
-  }
 
   static TextStyle regularGrayText() {
     return TextStyle(
@@ -105,11 +84,6 @@ class AppStyle {
         fontWeight: FontWeight.w600,
         fontSize: 10.sp,
         fontFamily: 'Satoshi');
-  }
-
-  static TextStyle smallGrayText() {
-    return TextStyle(
-        color: Colors.grey, fontSize: 13.sp, fontFamily: 'Satoshi');
   }
 
   static TextStyle minimumlGrayText() {
@@ -135,7 +109,7 @@ class AppStyle {
 
   static TextStyle minimumText() {
     return TextStyle(
-        color: Colors.black, fontSize: 10.sp, fontFamily: 'Satoshi');
+        color: Colors.grey, fontSize: 10.sp, fontFamily: 'Satoshi');
   }
 
   static TextStyle smallRedyText() {
@@ -164,10 +138,51 @@ class AppStyle {
   }
 
   static TextStyle smallText() {
-    return TextStyle(
+    return GoogleFonts.roboto(
+      textStyle: TextStyle(
         color: Colors.white,
-        fontSize: 13.sp,
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
+      ),
+    );
+  }
+
+  static TextStyle smallGrayText() {
+    return GoogleFonts.roboto(
+      textStyle: TextStyle(
+        color: Color(0xFF757b87),
+        fontSize: 13,
+      ),
+    );
+  }
+
+  static TextStyle bigText() {
+    return GoogleFonts.roboto(
+      textStyle: TextStyle(
+        color: Colors.white,
         fontWeight: FontWeight.w500,
-        fontFamily: 'Satoshi');
+        fontSize: 16.sp,
+      ),
+    );
+  }
+
+  static TextStyle bigboldText() {
+    return GoogleFonts.roboto(
+      textStyle: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 19.sp,
+      ),
+    );
+  }
+
+  static TextStyle regularText() {
+    return GoogleFonts.roboto(
+      textStyle: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w400,
+        fontSize: 14.sp,
+      ),
+    );
   }
 }

@@ -67,7 +67,7 @@ class _OrderRow extends StatelessWidget {
               // width: width / 2 - 40, // Chia đều cho 2 cột
               child: CustomText(
                 text: _items[i],
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: FontWeight.w400,
                 color: color(i),
                 textAlign: i == 0

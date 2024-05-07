@@ -33,6 +33,7 @@ class _WalletScreenState extends State<WalletScreen>
     return Scaffold(
       backgroundColor: palette.cardColor,
       body: Container(
+        color: Color(0xFF1F2630),
         padding: EdgeInsets.symmetric(vertical: 40.h),
         child: Column(
           children: [
@@ -92,7 +93,7 @@ class _WalletScreenState extends State<WalletScreen>
               isScrollable: true,
               padding: EdgeInsets.zero,
               labelStyle: AppStyle.boldText(),
-              unselectedLabelColor: Colors.grey[500],
+              unselectedLabelColor: Colors.grey[600],
               labelColor: palette.appBarTitleColor,
               indicator: const BoxDecoration(),
               controller: _tabController,
