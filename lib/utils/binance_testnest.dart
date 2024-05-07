@@ -40,7 +40,7 @@ class BinanceTestnetAPI {
 
     // Tạo signature
     final String query =
-        'symbol=$symbol&side=$side&type=MARKET&quantity=$quantity&timeInForce=GTC&price=9000&timestamp=$timestamp&recvWindow=$recvWindow';
+        'symbol=$symbol&side=$side&type=LIMIT&quantity=$quantity&price=9000&timestamp=$timestamp&recvWindow=$recvWindow';
     final String signature = generateSignature(query);
 
     final response = await http.post(
@@ -50,11 +50,11 @@ class BinanceTestnetAPI {
       },
       body: {
         'symbol': symbol,
-        'side': side,
-        'type': 'MARKET',
-        'timeInForce': 'GTC',
+        'side': side.toUpperCase(),
+        'type': 'LIMIT',
+        // 'timeInForce': 'GTC',
         'quantity': quantity.toString(),
-        'price': '9000', // Giá được thêm vào body yêu cầu
+        'price': '9000',
         'timestamp': timestamp.toString(),
         'recvWindow': recvWindow.toString(),
         'signature': signature,
