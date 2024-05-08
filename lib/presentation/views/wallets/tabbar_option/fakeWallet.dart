@@ -258,12 +258,15 @@ class _FakeWalletState extends State<FakeWallet> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Xóa ví'),
-          content:
-              Text('Bạn có chắc chắn muốn xóa ví ${wallet["name"]} không?'),
+          title: const Text(
+            'Xóa ví',
+            style: TextStyle(color: Colors.black),
+          ),
+          content: Text('Bạn có chắc chắn muốn xóa ví ${wallet["name"]} không?',
+              style: TextStyle(color: Colors.black)),
           actions: <Widget>[
             TextButton(
-              child: const Text('Không'),
+              child: const Text('Không', style: TextStyle(color: Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
