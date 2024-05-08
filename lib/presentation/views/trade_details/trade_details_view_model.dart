@@ -40,15 +40,17 @@ class TradeDetailsViewModel {
       ValueNotifier(TradeData.initial(_symbol));
   ValueNotifier<TradeData> get tradeData => _tradeData;
 
-   void _onData(Map<String, dynamic> data) {
+  void _onData(Map<String, dynamic> data) {
     final eventType = (data["e"] as String?) ?? "";
     if (eventType == "24hrMiniTicker") {
       data["symbol"] = _symbol;
       final newTradeData = TradeData.fromJson(data);
       _tradeData.value = newTradeData;
-      updateTotalBalance();  // Ensure total balance is updated with new trade data
+      updateTotalBalance();
     }
   }
+
+  // ValueNotifier<double> totalBalance = ValueNotifier(0.0);
 
   Future<void> updateTotalBalance() async {
     double totalWalletBalance = await calculateTotalWalletBalance();
@@ -56,12 +58,13 @@ class TradeDetailsViewModel {
     await SharePref.updateTotalBalance(totalWalletBalance + totalPNL);
   }
 
-Future<double> calculateTotalWalletBalance() async {
-  List<Map<String, dynamic>> wallets = await SharePref.getAllWallets();
-  return wallets.fold<double>(0.0, (double sum, Map<String, dynamic> wallet) {
-    return sum + (wallet['amount'] as double);
-  });
-}
+  Future<double> calculateTotalWalletBalance() async {
+    List<Map<String, dynamic>> wallets = await SharePref.getAllWallets();
+    return wallets.fold<double>(0.0, (double sum, Map<String, dynamic> wallet) {
+      return sum + (wallet['amount'] as double);
+    });
+  }
+
   Future<double> calculateTotalPNL() async {
     List<Map<String, dynamic>> positions = await SharePref.getAllPositions();
     double totalPNL = 0.0;
@@ -72,7 +75,8 @@ Future<double> calculateTotalWalletBalance() async {
     return totalPNL;
   }
 
-  double calculatePNLForPosition(Map<String, dynamic> position, double currentPrice) {
+  double calculatePNLForPosition(
+      Map<String, dynamic> position, double currentPrice) {
     double entryPrice = position['entryPrice'];
     String type = position['type'];
     double pnlValue;

@@ -1,4 +1,4 @@
-import 'package:binance_clone/presentation/app_assets.dart';
+
 import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_strings.dart';
