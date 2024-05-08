@@ -69,7 +69,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
     }
 
     return Scaffold(
-      backgroundColor: Color(0xFF1F2630),
+      backgroundColor: palette.cardColor,
       body: Container(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.03),
@@ -140,7 +140,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           Icon(
                             Icons.circle,
                             size: 8.h,
-                            color: Colors.yellow[700],
+                            color: palette.mainYellowColor,
                           ),
                           Icon(
                             Icons.more_horiz,
@@ -287,7 +287,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 Icon(
                                   Icons.swap_horiz,
                                   size: 13.h,
-                                  color: Colors.yellow[700],
+                                  color: palette.mainYellowColor,
                                 )
                               ],
                             )
@@ -300,7 +300,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.w, vertical: 5.h),
                           decoration: BoxDecoration(
-                              color: Color(0xFF29313C),
+                              color: palette.bgColor,
                               borderRadius: BorderRadius.circular(5.r)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -308,7 +308,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               Icon(
                                 Icons.info_sharp,
                                 size: 12.h,
-                                color: Colors.grey.shade700,
+                                color: palette.grayColor,
                               ),
                               CustomText(
                                 text: "Limit",
@@ -317,7 +317,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               Icon(
                                 Icons.arrow_drop_down,
                                 size: 16.h,
-                                color: Colors.grey.shade700,
+                                color: palette.grayColor,
                               )
                             ],
                           ),
@@ -329,7 +329,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: Color(0xFF29313C),
+                                color: palette.bgGray,
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
                               padding: EdgeInsets.symmetric(
@@ -339,7 +339,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   Text(
                                     "−",
                                     style: TextStyle(
-                                        color: Colors.grey.shade700,
+                                        color: palette.grayColor,
                                         fontSize: 25.sp),
                                   ),
                                   SizedBox(
@@ -377,7 +377,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   Text(
                                     "+",
                                     style: TextStyle(
-                                        color: Colors.grey.shade700,
+                                        color: palette.grayColor,
                                         fontSize: 23.sp),
                                   ),
                                 ],
@@ -388,7 +388,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                color: Color(0xFF29313C),
+                                color: palette.bgGray,
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                               padding: EdgeInsets.symmetric(
@@ -407,7 +407,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFF29313C),
+                            color: palette.bgGray,
                             borderRadius: BorderRadius.circular(5.r),
                           ),
                           padding: EdgeInsets.symmetric(
@@ -418,7 +418,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               Text(
                                 "−",
                                 style: TextStyle(
-                                    color: Colors.grey, fontSize: 25.sp),
+                                    color: palette.grayColor, fontSize: 25.sp),
                               ),
                               SizedBox(
                                 width: 10.w,
@@ -441,12 +441,12 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               Text(
                                 "+",
                                 style: TextStyle(
-                                    color: Colors.grey, fontSize: 23.sp),
+                                    color: palette.grayColor, fontSize: 23.sp),
                               ),
                               Container(
                                 height: 18.h,
                                 width: 1.w,
-                                color: Colors.grey.shade700,
+                                color: palette.grayColor,
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -467,57 +467,57 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             Image.asset(
                               FuturesAssets.rhombus,
                               height: 11.h,
-                              color: Colors.grey,
+                              color: palette.grayColor,
                             ),
                             Container(
                               width: 25.w,
                               height: 1.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Image.asset(
                               FuturesAssets.rhombus,
                               height: 8.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Container(
                               width: 25.w,
                               height: 1.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Image.asset(
                               FuturesAssets.rhombus,
                               height: 8.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Container(
                               width: 25.w,
                               height: 1.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Image.asset(
                               FuturesAssets.rhombus,
                               height: 8.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Container(
                               width: 25.w,
                               height: 1.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Image.asset(
                               FuturesAssets.rhombus,
                               height: 8.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Container(
                               width: 25.w,
                               height: 1.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                             Image.asset(
                               FuturesAssets.rhombus,
                               height: 8.h,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                             ),
                           ],
                         ),
@@ -528,7 +528,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           children: [
                             Icon(
                               Icons.circle_outlined,
-                              color: Colors.grey.shade700,
+                              color: palette.grayColor,
                               size: 14.h,
                             ),
                             SizedBox(
@@ -550,7 +550,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               children: [
                                 Icon(
                                   Icons.circle_outlined,
-                                  color: Colors.grey.shade700,
+                                  color: palette.grayColor,
                                   size: 14.h,
                                 ),
                                 SizedBox(
@@ -573,7 +573,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 ),
                                 Icon(
                                   Icons.arrow_drop_down,
-                                  color: Colors.grey.shade700,
+                                  color: palette.grayColor,
                                   size: 18.h,
                                 )
                               ],
@@ -616,14 +616,15 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             height: 35.h,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                color: Color(0xFF2EBD85),
+                                color: palette.greenButton,
                                 borderRadius: BorderRadius.circular(8.r)),
                             child: TextButton(
                                 onPressed: () {},
                                 child: Text(
                                   "Mua / Long",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 15.sp),
+                                      color: palette.textColor,
+                                      fontSize: 15.sp),
                                 ))),
                         SizedBox(
                           height: 5.h,
@@ -661,14 +662,15 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             height: 35.h,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                color: Color(0xFFF6465d),
+                                color: palette.redButton,
                                 borderRadius: BorderRadius.circular(6.r)),
                             child: TextButton(
                                 onPressed: () {},
                                 child: Text(
                                   "Bán / Short",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 15.sp),
+                                      color: palette.textColor,
+                                      fontSize: 15.sp),
                                 ))),
                       ],
                     ),
@@ -680,7 +682,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
-                  border: Border.all(color: Colors.grey.shade800),
+                  border: Border.all(color: palette.grayColor),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

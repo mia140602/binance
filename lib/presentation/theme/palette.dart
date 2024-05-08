@@ -26,4 +26,18 @@ abstract class Palette extends ThemeExtension<Palette> {
   Color get textFieldBorderColor;
   Color get mainGreenColor;
   Color get mainYellowColor;
+
+  Color get bgColor;
+
+  Color get grayColor;
+
+  Color get bgGray;
+
+  Color get greenButton;
+
+  Color get textColor;
+
+  Color get redButton;
+
+  Color get grayButton;
 }

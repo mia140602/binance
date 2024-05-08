@@ -52,7 +52,7 @@ class _FundingScreenState extends State<FundingScreen> {
                     ),
                     Icon(
                       Icons.remove_red_eye,
-                      color: Colors.grey,
+                      color: palette.grayColor,
                       size: 15.h,
                     ),
                     Container(
@@ -69,7 +69,7 @@ class _FundingScreenState extends State<FundingScreen> {
                           Icon(
                             Icons.arrow_drop_down,
                             size: 14.h,
-                            color: Colors.grey,
+                            color: palette.grayColor,
                           )
                         ],
                       ),
@@ -115,7 +115,7 @@ class _FundingScreenState extends State<FundingScreen> {
                   height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Color(0xFFfcd434)),
+                      color: palette.mainYellowColor),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
@@ -135,7 +135,7 @@ class _FundingScreenState extends State<FundingScreen> {
                   height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Color(0xFF333B46)),
+                      color: palette.grayButton),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
@@ -143,7 +143,7 @@ class _FundingScreenState extends State<FundingScreen> {
                       style: GoogleFonts.roboto(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                          color: palette.textColor),
                     ),
                   ),
                 ),
@@ -155,7 +155,7 @@ class _FundingScreenState extends State<FundingScreen> {
                   height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Color(0xFF333B46)),
+                      color: palette.grayButton),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
@@ -163,7 +163,7 @@ class _FundingScreenState extends State<FundingScreen> {
                       style: GoogleFonts.roboto(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                          color: palette.textColor),
                     ),
                   ),
                 ),
@@ -203,12 +203,12 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(color: Colors.grey.shade700)),
+                          border: Border.all(color: palette.grayColor)),
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.buywith,
                         height: 22.h,
-                        color: Colors.orange.shade400,
+                        color: palette.mainYellowColor,
                       ),
                     ),
                     SizedBox(
@@ -226,7 +226,7 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(color: Colors.grey.shade700)),
+                          border: Border.all(color: palette.grayColor)),
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.gif,
@@ -248,11 +248,11 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(color: Colors.grey.shade700)),
+                          border: Border.all(color: palette.grayColor)),
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.pool,
-                        color: Colors.white,
+                        color: palette.textColor,
                         height: 22.h,
                       ),
                     ),
@@ -289,7 +289,7 @@ class _FundingScreenState extends State<FundingScreen> {
                 Image.asset(
                   WalletAssets.search,
                   height: 15.h,
-                  color: Colors.grey,
+                  color: palette.grayColor,
                 ),
         
               ],
@@ -298,7 +298,7 @@ class _FundingScreenState extends State<FundingScreen> {
               children: [
                 Checkbox(
                   checkColor: Colors.white,
-                  side: BorderSide(color: Colors.grey),
+                  side: BorderSide(color: palette.grayColor),
                   fillColor: MaterialStateProperty.resolveWith(getColor),
                   value: isChecked,
                   onChanged: (bool? value) {

@@ -38,7 +38,7 @@ class _SpotScreenState extends State<SpotScreen> {
                     ),
                     Icon(
                       Icons.remove_red_eye,
-                      color: Colors.grey,
+                      color: palette.grayColor,
                       size: 15.h,
                     ),
                     Container(
@@ -55,7 +55,7 @@ class _SpotScreenState extends State<SpotScreen> {
                           Icon(
                             Icons.arrow_drop_down,
                             size: 14.h,
-                            color: Colors.grey,
+                            color: palette.grayColor,
                           )
                         ],
                       ),
@@ -98,7 +98,7 @@ class _SpotScreenState extends State<SpotScreen> {
                   height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7.r),
-                      color: Color(0xFFfcd434)),
+                      color: palette.mainYellowColor),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
@@ -118,7 +118,7 @@ class _SpotScreenState extends State<SpotScreen> {
                   height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7.r),
-                      color: Color(0xFF333B46)),
+                      color: palette.grayButton),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
@@ -126,7 +126,7 @@ class _SpotScreenState extends State<SpotScreen> {
                       style: GoogleFonts.roboto(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                          color: palette.textColor),
                     ),
                   ),
                 ),
@@ -138,7 +138,7 @@ class _SpotScreenState extends State<SpotScreen> {
                   height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7.r),
-                      color: Color(0xFF333B46)),
+                      color: palette.grayButton),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
@@ -146,7 +146,7 @@ class _SpotScreenState extends State<SpotScreen> {
                       style: GoogleFonts.roboto(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                          color: palette.textColor),
                     ),
                   ),
                 ),
@@ -156,7 +156,7 @@ class _SpotScreenState extends State<SpotScreen> {
               width: double.infinity,
               height: 45.h,
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade800),
+                  border: Border.all(color: palette.grayColor),
                   borderRadius: BorderRadius.circular(7.r)
               ),
               child: Row(
@@ -184,7 +184,7 @@ class _SpotScreenState extends State<SpotScreen> {
                     Image.asset(
                       WalletAssets.search,
                       height: 15.h,
-                      color: Color(0xFF333B46),
+                      color: palette.grayColor,
                     ),
                     SizedBox(
                       width: 15.w,
@@ -192,7 +192,7 @@ class _SpotScreenState extends State<SpotScreen> {
                     Image.asset(
                       WalletAssets.setting,
                       height: 15.h,
-                      color: Color(0xFF333B46),
+                      color: palette.grayColor,
                     ),
                   ],)
               ],

@@ -42,6 +42,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+      color: palette.cardColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -52,7 +53,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 children: [
                   Icon(
                     Icons.remove_red_eye,
-                    color: Colors.grey,
+                    color: palette.grayColor,
                     size: 15.h,
                   ),
                   SizedBox(
@@ -75,14 +76,14 @@ class _OverviewScreenState extends State<OverviewScreen> {
                       children: [
                         CustomText(
                           text: "BTC",
-                          color: Colors.grey,
+                          color: palette.grayColor,
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                         ),
                         Icon(
                           Icons.arrow_drop_down,
                           size: 14.h,
-                          color: Colors.grey,
+                          color: palette.grayColor,
                         )
                       ],
                     ),
@@ -149,7 +150,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
-                    color: Color(0xFFfcd434),
+                    color: palette.mainYellowColor,
                   ),
                   height: MediaQuery.of(context).size.height * 0.05,
                   width: MediaQuery.of(context).size.width * 0.45,
@@ -165,7 +166,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
-                    color: Color(0xFF333B46),
+                    color: palette.grayButton,
                   ),
                   height: MediaQuery.of(context).size.height * 0.05,
                   width: MediaQuery.of(context).size.width * 0.45,
@@ -175,7 +176,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                         style: GoogleFonts.roboto(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w500,
-                            color: Colors.white),
+                            color: palette.textColor),
                       ))),
             ],
           ),
@@ -271,7 +272,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Image.asset(WalletAssets.deposit,
-                      height: 17.h, color: Colors.white),
+                      height: 17.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -300,7 +301,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.monetization_on_rounded,
-                      size: 16.h, color: Colors.white),
+                      size: 16.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -338,7 +339,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.currency_bitcoin_outlined,
-                      size: 16.h, color: Colors.white),
+                      size: 16.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -366,7 +367,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(WalletAssets.salary,
-                      height: 15.h, color: Colors.white),
+                      height: 15.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -394,7 +395,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(WalletAssets.book,
-                      height: 15.h, color: Colors.white),
+                      height: 15.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -422,7 +423,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.tire_repair_rounded,
-                      size: 16.h, color: Colors.white),
+                      size: 16.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -450,7 +451,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(Icons.tire_repair_outlined,
-                      size: 16.h, color: Colors.white),
+                      size: 16.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),
@@ -477,7 +478,8 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.copy_all_rounded, size: 16.h, color: Colors.white),
+                  Icon(Icons.copy_all_rounded,
+                      size: 16.h, color: palette.textColor),
                   SizedBox(
                     width: 5.w,
                   ),

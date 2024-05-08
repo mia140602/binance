@@ -38,14 +38,14 @@ class _EarnScreenState extends State<EarnScreen> {
                     style: GoogleFonts.roboto(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
-                        color: Colors.white),
+                        color: palette.textColor),
                   ),
                   SizedBox(
                     width: 5.w,
                   ),
                   Icon(
                     Icons.remove_red_eye,
-                    color: Colors.grey,
+                    color: palette.grayColor,
                     size: 15.h,
                   ),
                 ],
@@ -84,7 +84,7 @@ class _EarnScreenState extends State<EarnScreen> {
                     Icon(
                       Icons.arrow_drop_down,
                       size: 14.h,
-                      color: Colors.grey,
+                      color: palette.grayColor,
                     )
                   ],
                 ),
@@ -104,7 +104,7 @@ class _EarnScreenState extends State<EarnScreen> {
                       text: 'PNL hôm qua(USD)',
                       style: AppStyle.smallText().copyWith(
                         decoration: TextDecoration.underline,
-                        decorationColor: Colors.grey.shade500,
+                        decorationColor: palette.grayColor,
                         decorationStyle: TextDecorationStyle.dashed,
                       ),
                     ),
@@ -114,7 +114,7 @@ class _EarnScreenState extends State<EarnScreen> {
                     style: GoogleFonts.roboto(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white),
+                        color: palette.textColor),
                   )
                 ],
               ),
@@ -133,7 +133,7 @@ class _EarnScreenState extends State<EarnScreen> {
                     style: GoogleFonts.roboto(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white),
+                        color: palette.textColor),
                   )
                 ],
               )
@@ -149,11 +149,11 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade700)),
+                        border: Border.all(color: palette.grayColor)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.salary,
-                      color: Colors.orange,
+                      color: palette.mainYellowColor,
                       height: 24.h,
                     ),
                   ),
@@ -172,7 +172,7 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade700)),
+                        border: Border.all(color: palette.grayColor)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.workflow,
@@ -194,7 +194,7 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade700)),
+                        border: Border.all(color: palette.grayColor)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.loan,
@@ -216,11 +216,11 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade700)),
+                        border: Border.all(color: palette.grayColor)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.salary,
-                      color: Colors.orange,
+                      color: palette.mainYellowColor,
                       height: 24.h,
                     ),
                   ),
@@ -239,7 +239,7 @@ class _EarnScreenState extends State<EarnScreen> {
           Container(
             width: double.infinity,
             height: 1.h,
-            color: Colors.grey.shade700,
+            color: palette.grayColor,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -262,9 +262,17 @@ class _EarnScreenState extends State<EarnScreen> {
               ),
               Row(
                 children: [
-                  Image.asset(WalletAssets.search,height: 15.h,color: Colors.grey,),
+                  Image.asset(
+                    WalletAssets.search,
+                    height: 15.h,
+                    color: palette.grayColor,
+                  ),
                   SizedBox(width: 10.w,),
-                  Icon(Icons.format_align_justify,size: 15.h,color: Colors.grey,)
+                  Icon(
+                    Icons.format_align_justify,
+                    size: 15.h,
+                    color: palette.grayColor,
+                  )
                 ],
               )
             ],
@@ -281,8 +289,8 @@ class _EarnScreenState extends State<EarnScreen> {
                 height: 32.h,
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 decoration: BoxDecoration(
-                  color: Colors.yellow.shade700,
-                  borderRadius: BorderRadius.circular(5.r),
+                          color: palette.mainYellowColor,
+                          borderRadius: BorderRadius.circular(5.r),
                 ),
                         child: TextButton(
                             onPressed: () {},
@@ -306,8 +314,8 @@ class _EarnScreenState extends State<EarnScreen> {
                   height: 32.h,
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
                   decoration: BoxDecoration(
-                    color: Colors.yellow.shade700,
-                    borderRadius: BorderRadius.circular(5.r),
+                          color: palette.mainYellowColor,
+                          borderRadius: BorderRadius.circular(5.r),
                   ),
                         child: TextButton(
                             onPressed: () {},

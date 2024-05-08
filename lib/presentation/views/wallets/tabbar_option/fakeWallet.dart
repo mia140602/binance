@@ -309,7 +309,7 @@ class _FakeWalletState extends State<FakeWallet> {
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: Color(0xFF1F2630),
+      backgroundColor: palette.cardColor,
       body: _buildWalletList(),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 70.0.h),
