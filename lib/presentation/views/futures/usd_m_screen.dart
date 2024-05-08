@@ -1,5 +1,5 @@
 import 'package:binance_clone/presentation/app_assets.dart';
-import 'package:binance_clone/presentation/views/futures/bottom_tabbar.dart';
+import 'package:binance_clone/presentation/views/markets/markets_screen.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/presentation/widgets/drawer/lever_drawer.dart';
@@ -10,10 +10,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/models/trade_data.dart';
 import 'package:binance_clone/presentation/views/markets/market_view_model.dart';
+import 'package:gap/gap.dart';
 
+import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
 import '../../widgets/custom_tab_bar.dart';
 import '../trade_details/trade_details_view_model.dart';
+import 'future_position.dart';
 
 class USDScreen extends ConsumerStatefulWidget {
   final Function(int)? onTabChanged; // Optional callback
@@ -26,14 +29,32 @@ class USDScreen extends ConsumerStatefulWidget {
 
 class _USDScreenState extends ConsumerState<USDScreen>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  List<Map<String, dynamic>> positionsList = [];
+  void loadPositions() async {
+    var positions = await SharePref.getAllPositions();
+    setState(() {
+      positionsList = positions;
+    });
+  }
+
+  // late TabController _tabController;
   String currentSymbol = "BTCUSDT";
   TextEditingController _priceController = TextEditingController();
+  int _index = 0;
+
+  void _setIndex(int value) {
+    if (_index != value) {
+      setState(() {
+        _index = value;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    // _tabController = TabController(length: 3, vsync: this);
+    loadPositions();
   }
 
   @override
@@ -43,16 +64,6 @@ class _USDScreenState extends ConsumerState<USDScreen>
         ref.watch(tradeDetailsViewModelProvider(currentSymbol));
     final palette = Theme.of(context).extension<Palette>()!;
 
-    int _index = 0;
-    // @override
-    // void initState() {
-    //   super.initState();
-    //   _tabController = TabController(
-    //       length: 4,
-    //       vsync:
-    //           this); // Số lượng tabs phải khớp với số lượng trong CustomTabBar
-    //   // _tabController.addListener(_handleTabSelection);
-    // }
     bool _isOpen = false; // Flag to track drawer visibility
 
     void _toggleDrawer() {
@@ -61,20 +72,14 @@ class _USDScreenState extends ConsumerState<USDScreen>
       });
     }
 
-    void _setIndex(int newIndex) {
-      setState(() {
-        _index = newIndex;
-      });
-    }
+    Widget selectedWidget = Container();
 
-    @override
-    void initState() {
-      super.initState();
-      // _tabController = TabController(length: 3, vsync: this);
-
-      // Thiết lập giá trị ban đầu cho _priceController
-      _priceController = TextEditingController(text: '1234');
-      print("Giá trị ban đầu: ${_priceController.text}");
+    if (_index == 0) {
+      selectedWidget = Text("lệnh mở");
+    } else if (_index == 1) {
+      selectedWidget = FuturePosition();
+    } else if (_index == 2) {
+      selectedWidget = Text("Lưới hợp đồng tương lai");
     }
 
     return Scaffold(
@@ -128,21 +133,21 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     ),
                     Row(
                       children: [
-                        Icon(
-                          Icons.settings_input_composite_sharp,
-                          size: 16.h,
+                        Image.asset(
+                          FuturesAssets.stock,
                           color: palette.appBarTitleColor,
+                          height: 10.h,
                         ),
                         SizedBox(
-                          width: 20.w,
+                          width: 15.w,
                         ),
                         Image.asset(
                           FuturesAssets.caculate,
                           color: palette.appBarTitleColor,
-                          height: 16.h,
+                          height: 10.h,
                         ),
                         SizedBox(
-                          width: 20.w,
+                          width: 15.w,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -272,7 +277,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         child: OrderBookView()),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.52,
-                      height: 520,
+                      // height: 520,
                       //color: Colors.blue,
                       child: Column(
                         children: [
@@ -621,16 +626,16 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           ),
                           Container(
                               width: double.infinity,
+                              height: 30.h,
                               decoration: BoxDecoration(
-                                  color: Colors.green,
+                                  color: palette.mainGreenColor,
                                   borderRadius: BorderRadius.circular(6.r)),
                               child: TextButton(
                                   onPressed: () {},
-                                  child: Text(
-                                    "Buy/Long",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15.sp),
-                                  ))),
+                                  child: CustomText(
+                                      text: "Mở lệnh long",
+                                      color: Colors.white,
+                                      fontSize: 12.sp))),
                           SizedBox(
                             height: 10.h,
                           ),
@@ -665,80 +670,41 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           ),
                           Container(
                               width: double.infinity,
+                              height: 30.h,
                               decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: palette.sellButtonColor,
                                   borderRadius: BorderRadius.circular(6.r)),
                               child: TextButton(
                                   onPressed: () {},
-                                  child: Text(
-                                    "Sell/Short",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15.sp),
-                                  ))),
+                                  child: CustomText(
+                                      text: "Mở lệnh short",
+                                      color: Colors.white,
+                                      fontSize: 12.sp))),
                         ],
                       ),
                     ),
                   ],
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.r),
-                    border: Border.all(color: Colors.grey.shade300),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Open your Futures Account",
-                            style: AppStyle.smallText(),
-                          ),
-                          Text("Embark on your Trading ",
-                              style: AppStyle.smallGrayText()),
-                          Text("journey with us",
-                              style: AppStyle.smallGrayText()),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            FuturesAssets.graphic,
-                            height: 50.h,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
+                Gap(10.h),
                 CustomTabBar(
                   index: _index,
-                  tabs: const [
-                    "Lệnh mở",
-                    "Vị thế",
+                  tabs: [
+                    "Lệnh mở (0)",
+                    "Vị thế (${positionsList.length})",
                     "Lưới hợp đồng tương lai",
                   ],
+                  onChanged: (value) {
+                    setState(() {
+                      _index = value; // Update the index value when tab changes
+                    });
+                  },
                 ),
-                SizedBox(
-                  height: 50,
-                ),
+                Container(height: 400.h, child: selectedWidget),
+                // SizedBox(
+                //   height: 50,
+                // ),
               ],
             ),
-          ),
-        ),
-        Positioned(
-          bottom: 0.0,
-          left: 0.0,
-          right: 0.0,
-          child: AnimatedOpacity(
-            duration: Duration(milliseconds: 200),
-            opacity: _isOpen ? 1.0 : 0.0,
-            child: LeverDrawerContent(), // Your drawer content widget
           ),
         ),
       ]),

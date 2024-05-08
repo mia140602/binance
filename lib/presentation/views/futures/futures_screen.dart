@@ -26,9 +26,9 @@ class _FuturesScreenState extends State<FuturesScreen>
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: palette.cardColor,
+      backgroundColor: Color(0xFF1F2630),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 30.h),
+        padding: EdgeInsets.symmetric(vertical: 22.h),
         child: Column(
           children: [
             TabBar(
@@ -101,7 +101,7 @@ class _FuturesScreenState extends State<FuturesScreen>
               labelPadding: EdgeInsets.only(right: 20.w),
             ),
             Divider(
-              color: Colors.grey[400],
+              color: Colors.grey[700],
             ),
             Expanded(
               child: TabBarView(

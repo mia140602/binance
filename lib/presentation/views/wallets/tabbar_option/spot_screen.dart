@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
@@ -94,16 +95,16 @@ class _SpotScreenState extends State<SpotScreen> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.29,
-                  height: MediaQuery.of(context).size.width * 0.1,
+                  height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.yellow[600]),
+                      borderRadius: BorderRadius.circular(7.r),
+                      color: Color(0xFFfcd434)),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "Nạp",
-                      style: TextStyle(
-                          fontSize: 15.sp,
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.black),
                     ),
@@ -114,18 +115,18 @@ class _SpotScreenState extends State<SpotScreen> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.29,
-                  height: MediaQuery.of(context).size.width * 0.1,
+                  height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.grey[300]),
+                      borderRadius: BorderRadius.circular(7.r),
+                      color: Color(0xFF333B46)),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "Rút",
-                      style: TextStyle(
-                          fontSize: 15.sp,
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -134,18 +135,18 @@ class _SpotScreenState extends State<SpotScreen> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.29,
-                  height: MediaQuery.of(context).size.width * 0.1,
+                  height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.grey[300]),
+                      borderRadius: BorderRadius.circular(7.r),
+                      color: Color(0xFF333B46)),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "Chuyển",
-                      style: TextStyle(
-                          fontSize: 15.sp,
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -155,14 +156,18 @@ class _SpotScreenState extends State<SpotScreen> {
               width: double.infinity,
               height: 45.h,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(7.r)
+                  border: Border.all(color: Colors.grey.shade800),
+                  borderRadius: BorderRadius.circular(7.r)
               ),
               child: Row(
                 children: [
-                  SizedBox(width: 10.w,),
+                  SizedBox(
+                    width: 15.w,
+                  ),
                   Image.asset(WalletAssets.bnb, height: 16.h,),
-                  SizedBox(width: 5.w,),
+                  SizedBox(
+                    width: 8.w,
+                  ),
                   Text(
                     "Chuyển đổi tài sản có giá trị nhỏ sang BNB",
                     style: AppStyle.smallText(),
@@ -176,10 +181,20 @@ class _SpotScreenState extends State<SpotScreen> {
               children: [
                 Text("Số dư", style: AppStyle.bigboldText(),),
                 Row(children: [
-                  Image.asset(WalletAssets.search, height: 15.h,color: Colors.grey,),
-                  SizedBox(width: 10.w,),
-                  Image.asset(WalletAssets.setting, height: 15.h,color: Colors.grey,),
-                ],)
+                    Image.asset(
+                      WalletAssets.search,
+                      height: 15.h,
+                      color: Color(0xFF333B46),
+                    ),
+                    SizedBox(
+                      width: 15.w,
+                    ),
+                    Image.asset(
+                      WalletAssets.setting,
+                      height: 15.h,
+                      color: Color(0xFF333B46),
+                    ),
+                  ],)
               ],
             ),
             SizedBox(height: 15.h,),

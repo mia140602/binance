@@ -20,12 +20,14 @@ class Order {
   factory Order.fromJson(Map<String, dynamic> json) {
     final priceValue = double.tryParse(json["p"]) ?? 0;
     final amountValue = double.tryParse(json["q"]) ?? 0;
+    final totalValue = priceValue * amountValue * 100;
     return Order(
       price: ParserUtil.formatPrice(json["p"]),
       amount: ParserUtil.formatPrice(json["q"]),
-      total:
-          ParserUtil.formatTotal(((priceValue * amountValue) * 100).toString()),
-      isBuy: json["m"] ?? false,
+      // total: ParserUtil.formatPrice(totalValue.toString()),
+      total: ParserUtil.formatTotal(totalValue.toString()),
+      // isBuy: json["m"] ?? false,
+      isBuy: !(json["m"] as bool? ?? false),
     );
   }
 }

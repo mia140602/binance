@@ -173,6 +173,14 @@ class _TransactionScreenState extends State<TransactionScreen>
           ),
           ElevatedButton(
             onPressed: () async {
+              if (entryPriceController.text.isEmpty ||
+                  leverageController.text.isEmpty ||
+                  marginController.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: CustomText(text: "Bạn chưa điền đủ thông tin"),
+                ));
+                return;
+              }
               createPosition();
             },
             child: Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:binance_clone/models/order.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderTable extends StatelessWidget {
   final Iterable<Order> orders;
@@ -41,10 +42,8 @@ class _OrderRow extends StatelessWidget {
       required this.isFuture,
       required this.itemCount});
 
-  List<String> get _items => isFuture
-      ? [order.price, order.total]
-      : [order.price, order.amount]; // Điều chỉnh các cột dựa trên isFuture
-
+  List<String> get _items =>
+      isFuture ? [order.price, order.total] : [order.price, order.total];
   @override
   Widget build(BuildContext context) {
     Color color(int index) {
@@ -67,7 +66,7 @@ class _OrderRow extends StatelessWidget {
               // width: width / 2 - 40, // Chia đều cho 2 cột
               child: CustomText(
                 text: _items[i],
-                fontSize: 11,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w400,
                 color: color(i),
                 textAlign: i == 0

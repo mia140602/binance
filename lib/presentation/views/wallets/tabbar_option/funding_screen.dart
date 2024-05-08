@@ -1,6 +1,7 @@
 import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
@@ -26,9 +27,9 @@ class _FundingScreenState extends State<FundingScreen> {
         MaterialState.focused,
       };
       if (states.any(interactiveStates.contains)) {
-        return Colors.black;
+        return Colors.white;
       }
-      return Colors.white70;
+      return Color(0xFF333B46);
     }
 
     return Container(
@@ -111,16 +112,16 @@ class _FundingScreenState extends State<FundingScreen> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.29,
-                  height: MediaQuery.of(context).size.width * 0.1,
+                  height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.yellow[600]),
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: Color(0xFFfcd434)),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "Nạp",
-                      style: TextStyle(
-                          fontSize: 15.sp,
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.black),
                     ),
@@ -131,18 +132,18 @@ class _FundingScreenState extends State<FundingScreen> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.29,
-                  height: MediaQuery.of(context).size.width * 0.1,
+                  height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.grey[300]),
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: Color(0xFF333B46)),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "Rút",
-                      style: TextStyle(
-                          fontSize: 15.sp,
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -151,18 +152,18 @@ class _FundingScreenState extends State<FundingScreen> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.29,
-                  height: MediaQuery.of(context).size.width * 0.1,
+                  height: MediaQuery.of(context).size.width * 0.096,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.grey[300]),
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: Color(0xFF333B46)),
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "Chuyển",
-                      style: TextStyle(
-                          fontSize: 15.sp,
+                      style: GoogleFonts.roboto(
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -180,11 +181,11 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(color: Colors.grey.shade300)),
+                          border: Border.all(color: Colors.grey.shade700)),
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.p2p,
-                        height: 28.h,
+                        height: 22.h,
                       ),
                     ),
                     SizedBox(
@@ -202,11 +203,11 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(color: Colors.grey.shade300)),
+                          border: Border.all(color: Colors.grey.shade700)),
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.buywith,
-                        height: 27.h,
+                        height: 22.h,
                         color: Colors.orange.shade400,
                       ),
                     ),
@@ -225,11 +226,11 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(color: Colors.grey.shade300)),
+                          border: Border.all(color: Colors.grey.shade700)),
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.gif,
-                        height: 28.h,
+                        height: 22.h,
                       ),
                     ),
                     SizedBox(
@@ -247,12 +248,12 @@ class _FundingScreenState extends State<FundingScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(color: Colors.grey.shade300)),
+                          border: Border.all(color: Colors.grey.shade700)),
                       padding: EdgeInsets.all(10.h),
                       child: Image.asset(
                         WalletAssets.pool,
                         color: Colors.white,
-                        height: 28.h,
+                        height: 22.h,
                       ),
                     ),
                     SizedBox(
@@ -296,7 +297,7 @@ class _FundingScreenState extends State<FundingScreen> {
             Row(
               children: [
                 Checkbox(
-                  checkColor: Colors.black,
+                  checkColor: Colors.white,
                   side: BorderSide(color: Colors.grey),
                   fillColor: MaterialStateProperty.resolveWith(getColor),
                   value: isChecked,

@@ -15,6 +15,17 @@ class SharePref {
     await prefs.setStringList(keyPositions, positions);
   }
 
+  static Future<void> deletePosition(String symbol, String type,
+      double entryPrice, double leverage, double margin) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> positions = prefs.getStringList(keyPositions) ?? [];
+    String targetPosition = "$symbol:$type:$entryPrice:$leverage:$margin";
+
+    positions.removeWhere((position) => position == targetPosition);
+
+    await prefs.setStringList(keyPositions, positions);
+  }
+
   static Future<List<Map<String, dynamic>>> getAllPositions() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<Map<String, dynamic>> positions = [];

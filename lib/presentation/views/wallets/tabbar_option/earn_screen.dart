@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
@@ -34,7 +35,10 @@ class _EarnScreenState extends State<EarnScreen> {
                 children: [
                   Text(
                     AppStrings.total_earn,
-                    style: TextStyle(fontSize: 14.sp),
+                    style: GoogleFonts.roboto(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
                   ),
                   SizedBox(
                     width: 5.w,
@@ -66,19 +70,24 @@ class _EarnScreenState extends State<EarnScreen> {
                 "\$ 0",
                 style: AppStyle.bigboldText(),
               ),
-              SizedBox(width: 10.w,),
-              Row(
-                children: [
-                  Text(
-                    "USD",
-                    style: AppStyle.smallText(),
-                  ),
-                  Icon(
-                    Icons.arrow_drop_down,
-                    size: 14.h,
-                    color: Colors.grey,
-                  )
-                ],
+              SizedBox(
+                width: 8.w,
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 2.0.w),
+                child: Row(
+                  children: [
+                    Text(
+                      "USD",
+                      style: AppStyle.smallText(),
+                    ),
+                    Icon(
+                      Icons.arrow_drop_down,
+                      size: 14.h,
+                      color: Colors.grey,
+                    )
+                  ],
+                ),
               ),
             ],
           ),
@@ -100,8 +109,13 @@ class _EarnScreenState extends State<EarnScreen> {
                       ),
                     ),
                   ),
-                  Text("\$0", style: TextStyle(
-                      fontSize: 14.sp, fontWeight: FontWeight.w600),)
+                  Text(
+                    "\$0",
+                    style: GoogleFonts.roboto(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
+                  )
                 ],
               ),
               Column(
@@ -114,8 +128,13 @@ class _EarnScreenState extends State<EarnScreen> {
                     ),
                   ),
                   Text("(USD)", style: AppStyle.smallText(),),
-                  Text("\$0", style: TextStyle(
-                      fontSize: 14.sp, fontWeight: FontWeight.w600),)
+                  Text(
+                    "\$0",
+                    style: GoogleFonts.roboto(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
+                  )
                 ],
               )
             ],
@@ -130,12 +149,12 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade300)),
+                        border: Border.all(color: Colors.grey.shade700)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.salary,
                       color: Colors.orange,
-                      height: 28.h,
+                      height: 24.h,
                     ),
                   ),
                   SizedBox(
@@ -153,11 +172,11 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade300)),
+                        border: Border.all(color: Colors.grey.shade700)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.workflow,
-                      height: 27.h,
+                      height: 24.h,
                     ),
                   ),
                   SizedBox(
@@ -175,11 +194,11 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade300)),
+                        border: Border.all(color: Colors.grey.shade700)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.loan,
-                      height: 28.h,
+                      height: 24.h,
                     ),
                   ),
                   SizedBox(
@@ -197,12 +216,12 @@ class _EarnScreenState extends State<EarnScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        border: Border.all(color: Colors.grey.shade300)),
+                        border: Border.all(color: Colors.grey.shade700)),
                     padding: EdgeInsets.all(10.h),
                     child: Image.asset(
                       WalletAssets.salary,
                       color: Colors.orange,
-                      height: 28.h,
+                      height: 24.h,
                     ),
                   ),
                   SizedBox(
@@ -218,7 +237,10 @@ class _EarnScreenState extends State<EarnScreen> {
           ),
           SizedBox(height: 20.h,),
           Container(
-            width: double.infinity, height: 1.h, color: Colors.grey.shade300,),
+            width: double.infinity,
+            height: 1.h,
+            color: Colors.grey.shade700,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -266,7 +288,10 @@ class _EarnScreenState extends State<EarnScreen> {
                             onPressed: () {},
                             child: Text(
                               "Đăng kí ngay",
-                              style: TextStyle(color: Colors.black),
+                              style: GoogleFonts.roboto(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
                             )))
                   ],
           ): Column(
@@ -284,8 +309,16 @@ class _EarnScreenState extends State<EarnScreen> {
                     color: Colors.yellow.shade700,
                     borderRadius: BorderRadius.circular(5.r),
                   ),
-                  child: TextButton(onPressed: (){}, child: Text("Đăng kí ngay")))
-            ],
+                        child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Đăng kí ngay",
+                              style: GoogleFonts.roboto(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            )))
+                  ],
           )
         ],
       ),

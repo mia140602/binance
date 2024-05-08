@@ -1,5 +1,3 @@
-import 'package:binance_clone/presentation/views/markets/markets.dart';
-import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
 import 'package:binance_clone/presentation/views/transaction_screen/transaction_screen.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:binance_clone/presentation/views/wallets/wallets_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../theme/palette.dart';
-import '../orderbook/order_book_view.dart';
 
 class BottomNavigationBarr extends StatefulWidget {
   const BottomNavigationBarr({Key? key}) : super(key: key);
@@ -35,21 +32,16 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: palette.cardColor,
+      backgroundColor: Color(0xFF1F2630),
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
-        color: palette.cardColor,
+        color: Color(0xFF1F2630),
         padding: EdgeInsets.all(0),
         surfaceTintColor: palette.cardColor,
         elevation: 4,
         shape: const CircularNotchedRectangle(),
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 1.h,
-              color: Colors.white12,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -61,9 +53,9 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       icon: _currentIndex == 0
                           ? Image.asset(
                               'assets/icons/bottom_nav_icon/home_clicked.png',
-                              height: 20.h)
+                              height: 16.h)
                           : Image.asset('assets/icons/bottom_nav_icon/home.png',
-                              height: 20.h),
+                              height: 16.h),
                       onPressed: () {
                         _navigateToScreen(0);
                       },
@@ -73,7 +65,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       style: TextStyle(
                           fontSize: 11.sp,
                           height: -0.5,
-                          fontWeight: FontWeight.w500),
+                          fontWeight: FontWeight.w500,
+                          color: _currentIndex == 0
+                              ? palette.appBarTitleColor
+                              : palette.selectedTimeChipColor),
                     )
                   ],
                 ),
@@ -84,7 +79,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       icon: _currentIndex == 1
                           ? Image.asset(
                               'assets/icons/bottom_nav_icon/bar_chart_clicked.png',
-                              height: 23.h,
+                              height: 20.h,
                             )
                           : Image.asset(
                               'assets/icons/bottom_nav_icon/bar_chart.png',
@@ -98,7 +93,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                         style: TextStyle(
                             fontSize: 11.sp,
                             height: -0.5,
-                            fontWeight: FontWeight.w500))
+                            fontWeight: FontWeight.w500,
+                            color: _currentIndex == 1
+                                ? palette.appBarTitleColor
+                                : palette.selectedTimeChipColor))
                   ],
                 ),
                 Column(
@@ -108,11 +106,11 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       icon: _currentIndex == 2
                           ? Image.asset(
                               'assets/icons/bottom_nav_icon/exchange_clicked.png',
-                              height: 17.h,
+                              height: 14.h,
                             )
                           : Image.asset(
                               'assets/icons/bottom_nav_icon/exchange.png',
-                              height: 17.h,
+                              height: 14.h,
                             ),
                       onPressed: () {
                         _navigateToScreen(2);
@@ -122,7 +120,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                         style: TextStyle(
                             fontSize: 11.sp,
                             height: -0.5,
-                            fontWeight: FontWeight.w500))
+                            fontWeight: FontWeight.w500,
+                            color: _currentIndex == 2
+                                ? palette.appBarTitleColor
+                                : palette.selectedTimeChipColor))
                   ],
                 ),
                 Column(
@@ -132,11 +133,11 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       icon: _currentIndex == 3
                           ? Image.asset(
                               'assets/icons/bottom_nav_icon/future_clicked.png',
-                              height: 16.h,
+                              height: 14.h,
                             )
                           : Image.asset(
                               'assets/icons/bottom_nav_icon/future.png',
-                              height: 16.h,
+                              height: 14.h,
                             ),
                       onPressed: () {
                         _navigateToScreen(3);
@@ -146,7 +147,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                         style: TextStyle(
                             fontSize: 11.sp,
                             height: -0.5,
-                            fontWeight: FontWeight.w500))
+                            fontWeight: FontWeight.w500,
+                            color: _currentIndex == 3
+                                ? palette.appBarTitleColor
+                                : palette.selectedTimeChipColor))
                   ],
                 ),
                 Column(
@@ -156,10 +160,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                       icon: _currentIndex == 4
                           ? Image.asset(
                               'assets/icons/bottom_nav_icon/wallet_clicked.png',
-                              height: 16.h)
+                              height: 14.h)
                           : Image.asset(
                               'assets/icons/bottom_nav_icon/wallets.png',
-                              height: 16.h),
+                              height: 14.h),
                       onPressed: () {
                         _navigateToScreen(4);
                       },
@@ -168,7 +172,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                         style: TextStyle(
                             fontSize: 11.sp,
                             height: -0.5,
-                            fontWeight: FontWeight.w500))
+                            fontWeight: FontWeight.w500,
+                            color: _currentIndex == 4
+                                ? palette.appBarTitleColor
+                                : palette.selectedTimeChipColor))
                   ],
                 ),
               ],

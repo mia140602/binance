@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../theme/palette.dart';
 
@@ -40,7 +41,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
     final palette = Theme.of(context).extension<Palette>()!;
 
     return Container(
-      color: palette.cardColor,
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -149,7 +149,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
-                    color: palette.mainYellowColor,
+                    color: Color(0xFFfcd434),
                   ),
                   height: MediaQuery.of(context).size.height * 0.05,
                   width: MediaQuery.of(context).size.width * 0.45,
@@ -157,7 +157,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                       onPressed: () {},
                       child: Text(
                         "Mua",
-                        style: TextStyle(
+                        style: GoogleFonts.roboto(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w500,
                             color: Colors.black),
@@ -165,15 +165,18 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
-                    color: palette.selectedTimeChipColor,
+                    color: Color(0xFF333B46),
                   ),
                   height: MediaQuery.of(context).size.height * 0.05,
                   width: MediaQuery.of(context).size.width * 0.45,
                   child: TextButton(
                       onPressed: () {},
                       child: Text("Bán",
-                          style: TextStyle(
-                              fontSize: 15.sp, fontWeight: FontWeight.w500)))),
+                        style: GoogleFonts.roboto(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ))),
             ],
           ),
           Divider(
@@ -182,13 +185,20 @@ class _OverviewScreenState extends State<OverviewScreen> {
           SizedBox(
             height: 10.h,
           ),
+          // Row(
+          //   children: [
+          //     CustomTabBar(
+          //         tabs: const ["Tài khoản", "Ví điện tử"], index: _index),
+          //   ],
+          // ),
           Row(
             children: [
-              CustomTabBar(
-                  tabs: const ["Tài khoản", "Ví điện tử"], index: _index),
+              Text(
+                "Account",
+                style: AppStyle.bigText(),
+              ),
             ],
           ),
-
           SizedBox(
             height: 15.h,
           ),

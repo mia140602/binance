@@ -1,4 +1,6 @@
+import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/palette.dart';
 
@@ -25,7 +27,7 @@ class CustomTabBar extends StatelessWidget {
     final palette = Theme.of(context).extension<Palette>()!;
 
     return Container(
-      height: 50,
+      // height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: palette.cardColor,
@@ -41,20 +43,18 @@ class CustomTabBar extends StatelessWidget {
             return GestureDetector(
               onTap: () => onChanged?.call(i),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 alignment: Alignment.center,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      tabs[i],
-                      style: TextStyle(
-                        fontSize: fontSize ?? 14,
-                        fontWeight: fontWeight ?? FontWeight.w700,
-                        color: isSelected
-                            ? palette.appBarTitleColor
-                            : palette.filterLineColor,
-                      ),
+                    CustomText(
+                      text: tabs[i],
+                      fontSize: fontSize ?? 14.sp,
+                      fontWeight: fontWeight ?? FontWeight.w600,
+                      color: isSelected
+                          ? palette.appBarTitleColor
+                          : palette.filterLineColor,
                     ),
                     SizedBox(height: 3),
                     isSelected
