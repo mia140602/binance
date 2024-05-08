@@ -91,7 +91,7 @@ class _WalletScreenState extends State<WalletScreen>
             TabBar(
               isScrollable: true,
               padding: EdgeInsets.zero,
-              labelStyle: AppStyle.boldText(),
+              labelStyle: AppStyle.appBarText(),
               unselectedLabelColor: palette.selectedTimeChipColor,
               labelColor: palette.appBarTitleColor,
               indicator: const BoxDecoration(),

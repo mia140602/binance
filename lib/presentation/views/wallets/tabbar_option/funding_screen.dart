@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
 import '../../../theme/palette.dart';
+import '../../../widgets/custom_text.dart';
 
 class FundingScreen extends StatefulWidget {
   const FundingScreen({super.key});
@@ -91,9 +92,11 @@ class _FundingScreenState extends State<FundingScreen> {
             ),
             Row(
               children: [
-                Text(
-                  "\$ 625,7274922",
-                  style: AppStyle.bigboldText(),
+                CustomText(
+                  text: "0.00",
+                  color: palette.appBarTitleColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 32.sp,
                 ),
               ],
             ),

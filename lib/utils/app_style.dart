@@ -41,8 +41,16 @@ class AppStyle {
   static TextStyle boldText() {
     return GoogleFonts.roboto(
       color: Colors.white,
-      fontWeight: FontWeight.w300,
-      fontSize: 12.sp,
+      fontWeight: FontWeight.w500,
+      fontSize: 14.sp,
+    );
+  }
+
+  static TextStyle appBarText() {
+    return GoogleFonts.roboto(
+      color: Colors.white,
+      fontWeight: FontWeight.w700,
+      fontSize: 16.sp,
     );
   }
 
@@ -71,11 +79,13 @@ class AppStyle {
   }
 
   static TextStyle regularBoldText() {
-    return TextStyle(
+    return GoogleFonts.roboto(
+      textStyle: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w500,
-        fontSize: 15.sp,
-        fontFamily: 'Satoshi');
+        fontSize: 16.sp,
+      ),
+    );
   }
 
   static TextStyle orangeSmallText() {
@@ -150,8 +160,9 @@ class AppStyle {
   static TextStyle smallGrayText() {
     return GoogleFonts.roboto(
       textStyle: TextStyle(
+        fontWeight: FontWeight.w500,
         color: Color(0xFF757b87),
-        fontSize: 13,
+        fontSize: 14,
       ),
     );
   }

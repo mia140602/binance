@@ -51,14 +51,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
             children: [
               Row(
                 children: [
-                  Icon(
-                    Icons.remove_red_eye,
-                    color: palette.grayColor,
-                    size: 15.h,
-                  ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   CustomText(
                     text: AppStrings.total_balance,
                     fontSize: 14.sp,
@@ -67,38 +59,18 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   SizedBox(
                     width: 5.w,
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 2.w),
-                    decoration: BoxDecoration(
-                        color: palette.cardColor,
-                        borderRadius: BorderRadius.circular(3.r)),
-                    child: Row(
-                      children: [
-                        CustomText(
-                          text: "BTC",
-                          color: palette.grayColor,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          size: 14.h,
-                          color: palette.grayColor,
-                        )
-                      ],
-                    ),
-                  )
+                  Icon(
+                    Icons.remove_red_eye,
+                    color: palette.grayColor,
+                    size: 13.h,
+                  ),
+                  SizedBox(
+                    width: 5.w,
+                  ),
                 ],
               ),
               Row(
                 children: [
-                  Image.asset(
-                    WalletAssets.lineChart,
-                    height: 15.h,
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
                   Icon(
                     Icons.question_mark,
                     size: 14.h,
@@ -111,12 +83,37 @@ class _OverviewScreenState extends State<OverviewScreen> {
             height: 5.h,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               CustomText(
-                text: "625,7274922",
+                text: "0.00",
                 color: palette.appBarTitleColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                fontSize: 32.sp,
+              ),
+              SizedBox(
+                width: 10.w,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 2.w, bottom: 6.h),
+                decoration: BoxDecoration(
+                    color: palette.cardColor,
+                    borderRadius: BorderRadius.circular(3.r)),
+                child: Row(
+                  children: [
+                    CustomText(
+                      text: "BTC",
+                      color: palette.textColor,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    Icon(
+                      Icons.arrow_drop_down,
+                      size: 14.h,
+                      color: palette.grayColor,
+                    )
+                  ],
+                ),
               ),
             ],
           ),
@@ -124,7 +121,8 @@ class _OverviewScreenState extends State<OverviewScreen> {
             children: [
               Text(
                 "≈ 695,7274922",
-                style: AppStyle.smallGrayText(),
+                style: GoogleFonts.roboto(
+                    fontSize: 13.sp, color: Colors.grey.shade500),
               )
             ],
           ),
@@ -186,20 +184,20 @@ class _OverviewScreenState extends State<OverviewScreen> {
           SizedBox(
             height: 10.h,
           ),
-          // Row(
-          //   children: [
-          //     CustomTabBar(
-          //         tabs: const ["Tài khoản", "Ví điện tử"], index: _index),
-          //   ],
-          // ),
           Row(
             children: [
-              Text(
-                "Account",
-                style: AppStyle.bigText(),
-              ),
+              CustomTabBar(
+                  tabs: const ["Tài khoản", "Ví điện tử"], index: _index),
             ],
           ),
+          // Row(
+          //   children: [
+          //     Text(
+          //       "Account",
+          //       style: AppStyle.bigText(),
+          //     ),
+          //   ],
+          // ),
           SizedBox(
             height: 15.h,
           ),
@@ -271,14 +269,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Image.asset(WalletAssets.deposit,
-                      height: 17.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     AppStrings.spot,
-                    style: AppStyle.regularGrayText(),
+                    style: AppStyle.regularBoldText(),
                   ),
                 ],
               ),
@@ -300,11 +293,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.monetization_on_rounded,
-                      size: 16.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     'USD',
                     style: AppStyle.regularBoldText(),
@@ -338,11 +326,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.currency_bitcoin_outlined,
-                      size: 16.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     'Funding',
                     style: AppStyle.regularBoldText(),
@@ -366,11 +349,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(WalletAssets.salary,
-                      height: 15.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     'Earn',
                     style: AppStyle.regularBoldText(),
@@ -394,11 +372,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(WalletAssets.book,
-                      height: 15.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     'COIN-M Futures',
                     style: AppStyle.regularBoldText(),
@@ -422,11 +395,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.tire_repair_rounded,
-                      size: 16.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     'Cross Margin',
                     style: AppStyle.regularBoldText(),
@@ -450,11 +418,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.tire_repair_outlined,
-                      size: 16.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     'Isolated Margin',
                     style: AppStyle.regularBoldText(),
@@ -478,11 +441,6 @@ class _OverviewScreenState extends State<OverviewScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.copy_all_rounded,
-                      size: 16.h, color: palette.textColor),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   Text(
                     'Copy Trading',
                     style: AppStyle.regularBoldText(),

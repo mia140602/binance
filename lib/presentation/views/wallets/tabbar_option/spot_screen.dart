@@ -6,6 +6,7 @@ import '../../../../utils/app_strings.dart';
 import '../../../../utils/app_style.dart';
 import '../../../app_assets.dart';
 import '../../../theme/palette.dart';
+import '../../../widgets/custom_text.dart';
 
 class SpotScreen extends StatefulWidget {
   const SpotScreen({super.key});
@@ -74,9 +75,11 @@ class _SpotScreenState extends State<SpotScreen> {
             ),
             Row(
               children: [
-                Text(
-                  "\$ 625,7274922",
-                  style: AppStyle.bigboldText(),
+                CustomText(
+                  text: "0.00",
+                  color: palette.appBarTitleColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 32.sp,
                 ),
               ],
             ),
