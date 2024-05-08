@@ -8,7 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:binance_clone/presentation/views/trade_details/trade_details_view_model.dart';
 import 'package:intl/intl.dart';
 import '../../data/local_data/sharepref.dart';
-import '../../models/trade_data.dart';
+
 import '../theme/palette.dart';
 
 class PositionCard extends StatelessWidget {
@@ -20,11 +20,12 @@ class PositionCard extends StatelessWidget {
     void _deletePosition(BuildContext context) {
       // Gọi hàm xóa position từ SharePref
       SharePref.deletePosition(
+        position['walletName'],
         position['symbol'],
         position['type'],
         position['entryPrice'],
         position['leverage'],
-        position['margin'],
+        position['margin']
       ).then((_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Position deleted successfully')),

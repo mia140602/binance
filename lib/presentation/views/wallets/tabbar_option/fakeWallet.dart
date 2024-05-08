@@ -29,6 +29,10 @@ class _FakeWalletState extends State<FakeWallet> {
     });
   }
 
+  void _loadTotalBalance() async {
+    await SharePref.getTotalBalance();
+  }
+
   Widget _buildWalletList() {
     final palette = Theme.of(context).extension<Palette>()!;
 

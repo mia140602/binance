@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/app_strings.dart';
 import '../../../theme/palette.dart';
+import '../../../widgets/custom_text.dart';
 
 class MarginScreen extends StatefulWidget {
   const MarginScreen({super.key});
@@ -168,16 +169,21 @@ class _MarginScreenState extends State<MarginScreen> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "\$ 625,7274922",
-                  style: AppStyle.bigboldText(),
+                CustomText(
+                  text: "0.00",
+                  color: palette.appBarTitleColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 32.sp,
                 ),
                 SizedBox(
                   width: 8.h,
                 ),
-                Text(
-                  "USD",
-                  style: AppStyle.smallText(),
+                Padding(
+                  padding: EdgeInsets.only(top: 4.0.h),
+                  child: Text(
+                    "USD",
+                    style: AppStyle.smallText(),
+                  ),
                 ),
                 Icon(
                   Icons.arrow_drop_down,

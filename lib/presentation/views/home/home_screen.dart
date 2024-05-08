@@ -1,5 +1,4 @@
 import 'package:binance_clone/presentation/views/wallets/tabbar_option/fakeWallet.dart';
-import 'package:binance_clone/presentation/widgets/custom_appbar.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // backgroundColor: Colors.white,
       // appBar: MyAppBar(),
       appBar: AppBar(
-        title: CustomText(text: "Danh sách ví"),
+        title: CustomText(text: "Danh sách ví: "),
       ),
       body: FakeWallet(),
     );

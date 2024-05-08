@@ -75,8 +75,9 @@ class _TransactionScreenState extends State<TransactionScreen>
     double margin = double.tryParse(marginController.text) ?? 0;
     String symbol = selectedSymbol;
     String type = selectedPosition;
+     String walletName = wallets[selectedWalletIndex]; 
 
-    await SharePref.addPosition(symbol, type, entryPrice, leverage, margin);
+    await SharePref.addPosition(walletName,symbol, type, entryPrice, leverage, margin);
     // await SharePref.addPosition(symbol, entryPrice, leverage, margin);
     loadPositions();
 
