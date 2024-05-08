@@ -2,10 +2,11 @@ import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:binance_clone/utils/binance_testnest.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
+import '../../widgets/position_card.dart';
 import '../../widgets/wallet_tabbar.dart';
 
 class TransactionScreen extends StatefulWidget {
@@ -15,7 +16,10 @@ class TransactionScreen extends StatefulWidget {
   State<TransactionScreen> createState() => _TransactionScreenState();
 }
 
-class _TransactionScreenState extends State<TransactionScreen> {
+class _TransactionScreenState extends State<TransactionScreen>
+    with TickerProviderStateMixin {
+  TabController? _tabController;
+  List<Map<String, dynamic>> positionsList = [];
   List<String> wallets = [];
   int selectedWalletIndex = 0;
   String selectedPosition = "Long";
@@ -29,6 +33,23 @@ class _TransactionScreenState extends State<TransactionScreen> {
   void initState() {
     super.initState();
     loadWallets();
+    loadPositions();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController!.addListener(_handleTabSelection);
+  }
+
+  @override
+  void dispose() {
+    _tabController!.dispose();
+    super.dispose();
+  }
+
+  void _handleTabSelection() {
+    if (_tabController!.indexIsChanging) {
+      entryPriceController.clear();
+      leverageController.clear();
+      marginController.clear();
+    }
   }
 
   void loadWallets() async {
@@ -41,36 +62,56 @@ class _TransactionScreenState extends State<TransactionScreen> {
     });
   }
 
+  void loadPositions() async {
+    var positions = await SharePref.getAllPositions();
+    setState(() {
+      positionsList = positions;
+    });
+  }
+
+  void createPosition() async {
+    double entryPrice = double.tryParse(entryPriceController.text) ?? 0;
+    double leverage = double.tryParse(leverageController.text) ?? 0;
+    double margin = double.tryParse(marginController.text) ?? 0;
+    String symbol = selectedSymbol;
+    String type = selectedPosition;
+
+    await SharePref.addPosition(symbol, type, entryPrice, leverage, margin);
+    // await SharePref.addPosition(symbol, entryPrice, leverage, margin);
+    loadPositions();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Position created successfully!")));
+  }
+
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
 
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: palette.cardColor,
-        appBar: AppBar(
-          title: CustomText(text: "Create Position"),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: "Create Position"),
-              Tab(text: "Create Order"),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            buildPositionCreation(),
-            buildOrderCreation(),
+    return Scaffold(
+      backgroundColor: palette.cardColor,
+      appBar: AppBar(
+        title: CustomText(text: "Create Position"),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(text: "Create Position"),
+            Tab(text: "Create Order"),
           ],
         ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          buildPositionCreation(),
+          buildOrderCreation(),
+        ],
       ),
     );
   }
 
   Widget buildPositionCreation() {
     final palette = Theme.of(context).extension<Palette>()!;
-    BinanceTestnetAPI binanceAPI = BinanceTestnetAPI();
 
     return SingleChildScrollView(
       child: Column(
@@ -118,10 +159,10 @@ class _TransactionScreenState extends State<TransactionScreen> {
               });
             },
           ),
-          // inputForm(
-          //   controller: entryPriceController,
-          //   label: "Entry Price",
-          // ),
+          inputForm(
+            controller: entryPriceController,
+            label: "Entry Price",
+          ),
           inputForm(
             controller: leverageController,
             label: "Leverage",
@@ -132,30 +173,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
           ),
           ElevatedButton(
             onPressed: () async {
-              double leverage = double.tryParse(leverageController.text) ?? 0;
-              double margin = double.tryParse(marginController.text) ?? 0;
-              String walletName = wallets[selectedWalletIndex];
-              String side = selectedPosition == "Long" ? "BUY" : "SELL";
-
-              try {
-                // Điều chỉnh đòn bẩy trước khi đặt lệnh
-                await binanceAPI.adjustLeverage(
-                    selectedSymbol, leverage.toInt());
-
-                // Đặt lệnh sau khi điều chỉnh đòn bẩy
-                String response =
-                    await binanceAPI.placeMarketOrderWithWalletBalance(
-                        walletName, selectedSymbol, side, margin);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(response),
-                ));
-                print(response);
-              } catch (error) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("Error when creating position: $error"),
-                ));
-                print("Error when creating position: $error");
-              }
+              createPosition();
             },
             child: Container(
                 margin: EdgeInsets.only(top: 10),
@@ -165,6 +183,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                     borderRadius: BorderRadius.circular(10)),
                 child: CustomText(text: "Create Position")),
           ),
+          buildPositionList(),
+          Gap(50),
         ],
       ),
     );
@@ -265,6 +285,17 @@ class _TransactionScreenState extends State<TransactionScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildPositionList() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: positionsList.length,
+      itemBuilder: (context, index) {
+        var position = positionsList[index];
+        return PositionCard(position: position);
+      },
     );
   }
 }

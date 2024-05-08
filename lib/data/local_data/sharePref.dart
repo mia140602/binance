@@ -2,6 +2,36 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharePref {
   static String keyWallets = "key_wallets";
+  static String keyPositions = "key_positions";
+
+  static Future<void> addPosition(String symbol, String type, double entryPrice,
+      double leverage, double margin) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> positions = prefs.getStringList(keyPositions) ?? [];
+
+    String newPosition = "$symbol:$type:$entryPrice:$leverage:$margin";
+    positions.insert(0, newPosition); // Thêm vào đầu danh sách
+
+    await prefs.setStringList(keyPositions, positions);
+  }
+
+  static Future<List<Map<String, dynamic>>> getAllPositions() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<Map<String, dynamic>> positions = [];
+    List<String> positionsString = prefs.getStringList(keyPositions) ?? [];
+
+    for (String position in positionsString) {
+      List<String> parts = position.split(":");
+      positions.add({
+        "symbol": parts[0],
+        "type": parts[1],
+        "entryPrice": double.parse(parts[2]),
+        "leverage": double.parse(parts[3]),
+        "margin": double.parse(parts[4])
+      });
+    }
+    return positions;
+  }
 
   static Future<void> addWallet(String walletName, double amount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
