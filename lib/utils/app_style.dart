@@ -42,7 +42,7 @@ class AppStyle {
     return GoogleFonts.roboto(
       color: Colors.white,
       fontWeight: FontWeight.w300,
-      fontSize: 13.sp,
+      fontSize: 12.sp,
     );
   }
 
