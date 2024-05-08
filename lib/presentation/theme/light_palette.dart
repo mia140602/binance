@@ -57,6 +57,27 @@ class LightPalette implements Palette {
   String get logo => AppAssets.lightLogo;
 
   @override
+  Color get textColor => const Color(0xff000000);
+
+  @override
+  Color get bgColor => const Color(0xFF29313C);
+
+  @override
+  Color get grayColor => const Color(0xFF616161);
+
+  @override
+  Color get bgGray => const Color(0xFF29313C);
+
+  @override
+  Color get greenButton => const Color(0xFF2EBD85);
+
+  @override
+  Color get redButton => const Color(0xFFF6465d);
+
+  @override
+  Color get grayButton => const Color(0xFF333B46);
+
+  @override
   ThemeExtension<Palette> copyWith() {
     return this;
   }

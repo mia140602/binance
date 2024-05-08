@@ -138,7 +138,7 @@ class _MarginScreenState extends State<MarginScreen> {
                 ),
                 Icon(
                   Icons.remove_red_eye,
-                  color: Colors.grey,
+                  color: palette.grayColor,
                   size: 15.h,
                 ),
                 Container(
@@ -155,7 +155,7 @@ class _MarginScreenState extends State<MarginScreen> {
                       Icon(
                         Icons.arrow_drop_down,
                         size: 14.h,
-                        color: Colors.grey,
+                        color: palette.grayColor,
                       )
                     ],
                   ),
@@ -182,7 +182,7 @@ class _MarginScreenState extends State<MarginScreen> {
                 Icon(
                   Icons.arrow_drop_down,
                   size: 14.h,
-                  color: Colors.grey,
+                  color: palette.grayColor,
                 )
               ],
             ),
@@ -192,7 +192,11 @@ class _MarginScreenState extends State<MarginScreen> {
             Row(
               children: [
                 Text("PNL của hôm nay +\$0.00(0.00%)", style: AppStyle.regularText(),),
-                Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey.shade500,)
+                Icon(
+                  Icons.arrow_right_outlined,
+                  size: 15.h,
+                  color: palette.grayColor,
+                )
               ],
             ),
             SizedBox(height: 20.h,),
@@ -225,8 +229,8 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                          color: Colors.yellow[600]),
-                      child: TextButton(
+                                color: palette.mainYellowColor),
+                            child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Vay",
@@ -245,7 +249,7 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                                color: Color(0xFF333B46)),
+                                color: palette.grayButton),
                             child: TextButton(
                         onPressed: () {},
                         child: Text(
@@ -253,7 +257,7 @@ class _MarginScreenState extends State<MarginScreen> {
                                 style: GoogleFonts.roboto(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white),
+                                    color: palette.textColor),
                               ),
                       ),
                     ),
@@ -265,7 +269,7 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                                color: Color(0xFF333B46)),
+                                color: palette.grayButton),
                             child: TextButton(
                         onPressed: () {},
                         child: Text(
@@ -273,7 +277,7 @@ class _MarginScreenState extends State<MarginScreen> {
                                 style: GoogleFonts.roboto(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white),
+                                    color: palette.textColor),
                               ),
                     ),
                           )
@@ -285,8 +289,8 @@ class _MarginScreenState extends State<MarginScreen> {
                   width: double.infinity,
                   height: 45.h,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(7.r)
+                            border: Border.all(color: palette.grayColor),
+                            borderRadius: BorderRadius.circular(7.r)
                   ),
                   child: Row(
                     children: [
@@ -307,8 +311,12 @@ class _MarginScreenState extends State<MarginScreen> {
                         ],
                       ),
                       SizedBox(width: 20.w,),
-                      Container(width: 1.w,height: 15.h,color: Colors.grey,),
-                      SizedBox(width: 20.w,),
+                            Container(
+                              width: 1.w,
+                              height: 15.h,
+                              color: palette.grayColor,
+                            ),
+                            SizedBox(width: 20.w,),
                       Image.asset(WalletAssets.no, height: 17.h,),
                       SizedBox(width: 10.w,),
                       Column(
@@ -330,13 +338,17 @@ class _MarginScreenState extends State<MarginScreen> {
                       children: [
                         Text("Cross", style: AppStyle.boldText(),),
                         SizedBox(width: 10.w,),
-                        Container(width: 1.w,height: 14.h,color: Colors.grey,),
-                        SizedBox(width: 10.w,),
+                              Container(
+                                width: 1.w,
+                                height: 14.h,
+                                color: palette.grayColor,
+                              ),
+                              SizedBox(width: 10.w,),
                         Icon(
                           Icons.lock_clock,
                           size: 14.h,
-                          color: Colors.green,
-                        ),
+                                color: palette.mainGreenColor,
+                              ),
                         SizedBox(width: 10.w,),
                         Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
                       ],
@@ -356,8 +368,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         Image.asset(CoinAssets.bitcoin, height: 14.h,),
                         SizedBox(width: 10.w,),
                         Text("1000SATS", style: AppStyle.boldText(),),
-                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
-                      ],
+                              Icon(
+                                Icons.arrow_right_outlined,
+                                color: palette.grayColor,
+                              ),
+                            ],
                     ),
                     Text("0.00",style: AppStyle.boldText(),)
                   ],
@@ -393,8 +408,12 @@ class _MarginScreenState extends State<MarginScreen> {
                   ],
                 ),
                 SizedBox(height: 20.h,),
-                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
-                SizedBox(height: 20.h,),
+                      Container(
+                        width: double.infinity,
+                        height: 1.h,
+                        color: palette.grayColor,
+                      ),
+                      SizedBox(height: 20.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -403,8 +422,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         Image.asset(CoinAssets.bitcoin, height: 14.h,),
                         SizedBox(width: 10.w,),
                         Text("1INCH", style: AppStyle.boldText(),),
-                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
-                      ],
+                              Icon(
+                                Icons.arrow_right_outlined,
+                                color: palette.grayColor,
+                              ),
+                            ],
                     ),
                     Text("0.00",style: AppStyle.boldText(),)
                   ],
@@ -440,8 +462,12 @@ class _MarginScreenState extends State<MarginScreen> {
                   ],
                 ),
                 SizedBox(height: 20.h,),
-                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
-                SizedBox(height: 15.h,),
+                      Container(
+                        width: double.infinity,
+                        height: 1.h,
+                        color: palette.grayColor,
+                      ),
+                      SizedBox(height: 15.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -450,8 +476,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         Image.asset(CoinAssets.bitcoin, height: 14.h,),
                         SizedBox(width: 10.w,),
                         Text("1000SATS", style: AppStyle.boldText(),),
-                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
-                      ],
+                              Icon(
+                                Icons.arrow_right_outlined,
+                                color: palette.grayColor,
+                              ),
+                            ],
                     ),
                     Text("0.00",style: AppStyle.boldText(),)
                   ],
@@ -487,8 +516,12 @@ class _MarginScreenState extends State<MarginScreen> {
                   ],
                 ),
                 SizedBox(height: 20.h,),
-                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
-                SizedBox(height: 15.h,),
+                      Container(
+                        width: double.infinity,
+                        height: 1.h,
+                        color: palette.grayColor,
+                      ),
+                      SizedBox(height: 15.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -497,8 +530,11 @@ class _MarginScreenState extends State<MarginScreen> {
                         Image.asset(CoinAssets.bitcoin, height: 14.h,),
                         SizedBox(width: 10.w,),
                         Text("1000SATS", style: AppStyle.boldText(),),
-                        Icon(Icons.arrow_right_outlined,color: Colors.grey,),
-                      ],
+                              Icon(
+                                Icons.arrow_right_outlined,
+                                color: palette.grayColor,
+                              ),
+                            ],
                     ),
                     Text("0.00",style: AppStyle.boldText(),)
                   ],
@@ -534,8 +570,12 @@ class _MarginScreenState extends State<MarginScreen> {
                   ],
                 ),
                 SizedBox(height: 20.h,),
-                Container(width: double.infinity,height: 1.h,color: Colors.grey.shade300,),
-                SizedBox(height: 15.h,),
+                      Container(
+                        width: double.infinity,
+                        height: 1.h,
+                        color: palette.grayColor,
+                      ),
+                      SizedBox(height: 15.h,),
               ],
             ): Column(
               children: [
@@ -547,8 +587,8 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                          color: Colors.yellow[600]),
-                      child: TextButton(
+                                color: palette.mainYellowColor),
+                            child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Vay",
@@ -567,15 +607,15 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                          color: Colors.grey[300]),
-                      child: TextButton(
+                                color: palette.grayButton),
+                            child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Trả nợ",
                           style: TextStyle(
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color: palette.textColor),
                               ),
                       ),
                     ),
@@ -587,15 +627,15 @@ class _MarginScreenState extends State<MarginScreen> {
                       height: MediaQuery.of(context).size.width * 0.1,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.r),
-                          color: Colors.grey[300]),
-                      child: TextButton(
+                                color: palette.grayButton),
+                            child: TextButton(
                         onPressed: () {},
                         child: Text(
                           "Chuyển",
                           style: TextStyle(
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color: palette.textColor),
                               ),
                       ),
                     ),
@@ -621,8 +661,12 @@ class _MarginScreenState extends State<MarginScreen> {
                         SizedBox(width: 8.w,),
                         Text("5x", style: AppStyle.smallGrayText(),),
                         SizedBox(width: 1.w,),
-                        Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey,),
-                      ],
+                              Icon(
+                                Icons.arrow_right_outlined,
+                                size: 15.h,
+                                color: palette.grayColor,
+                              ),
+                            ],
                     ),
                     Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
                   ],
@@ -685,8 +729,8 @@ class _MarginScreenState extends State<MarginScreen> {
                 Container(
                   width: double.infinity,
                   height: 1.h,
-                  color: Colors.grey.shade300,
-                ),
+                        color: palette.grayColor,
+                      ),
                 SizedBox(height: 20.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -706,8 +750,12 @@ class _MarginScreenState extends State<MarginScreen> {
                         SizedBox(width: 8.w,),
                         Text("5x", style: AppStyle.smallGrayText(),),
                         SizedBox(width: 1.w,),
-                        Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey,),
-                      ],
+                              Icon(
+                                Icons.arrow_right_outlined,
+                                size: 15.h,
+                                color: palette.grayColor,
+                              ),
+                            ],
                     ),
                     Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
                   ],
@@ -770,8 +818,8 @@ class _MarginScreenState extends State<MarginScreen> {
                 Container(
                   width: double.infinity,
                   height: 1.h,
-                  color: Colors.grey.shade300,
-                ),
+                        color: palette.grayColor,
+                      ),
                 SizedBox(height: 20.h,),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -783,8 +831,12 @@ class _MarginScreenState extends State<MarginScreen> {
                         SizedBox(width: 8.w,),
                         Text("5x", style: AppStyle.smallGrayText(),),
                         SizedBox(width: 1.w,),
-                        Icon(Icons.arrow_right_outlined,size: 15.h,color: Colors.grey,),
-                      ],
+                              Icon(
+                                Icons.arrow_right_outlined,
+                                size: 15.h,
+                                color: palette.grayColor,
+                              ),
+                            ],
                     ),
                     Text("Rủi ro thấp 999.00",style: AppStyle.smallGreenText(),),
                   ],

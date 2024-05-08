@@ -32,10 +32,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: Color(0xFF1F2630),
+      backgroundColor: palette.cardColor,
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF1F2630),
+        color: palette.cardColor,
         padding: EdgeInsets.all(0),
         surfaceTintColor: palette.cardColor,
         elevation: 4,

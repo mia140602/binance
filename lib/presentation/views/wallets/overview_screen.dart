@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../theme/palette.dart';
 import '../../widgets/custom_tab_bar.dart';
 
 class OverviewScreen extends StatefulWidget {
@@ -29,8 +30,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return Container(
-      color: Colors.white,
+      color: palette.cardColor,
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

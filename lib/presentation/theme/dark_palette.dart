@@ -34,7 +34,7 @@ class DarkPalette implements Palette {
   @override
   Color get candleStickLossColor => const Color(0xffFF6838);
   @override
-  Color get cardColor => const Color(0xff232533);
+  Color get cardColor => const Color(0xFF1F2630);
   @override
   Color get filterLineColor => const Color(0xffB1B5C3);
   @override
@@ -53,9 +53,31 @@ class DarkPalette implements Palette {
   Color get textFieldBorderColor => const Color(0xff373B3F);
 
   @override
+  Color get textColor => const Color(0xffffffff);
+
+  @override
+  Color get grayColor => const Color(0xFF616161);
+
+  @override
   Color get mainYellowColor => const Color(0xfff0b90b);
+
+  @override
+  Color get bgColor => const Color(0xFF29313C);
+
   @override
   String get logo => AppAssets.darkLogo;
+
+  @override
+  Color get bgGray => const Color(0xFF29313C);
+
+  @override
+  Color get greenButton => const Color(0xFF2EBD85);
+
+  @override
+  Color get redButton => const Color(0xFFF6465d);
+
+  @override
+  Color get grayButton => const Color(0xFF333B46);
 
   @override
   ThemeExtension<Palette> copyWith() {
