@@ -13,7 +13,8 @@ class Order {
     required this.isBuy,
   }) {
     this.price = ParserUtil.formatPrice(price);
-    this.amount = ParserUtil.formatPrice(amount); // Sử dụng formatPrice nếu cần
+    this.amount =
+        ParserUtil.formatAmount(amount); // Sử dụng formatPrice nếu cần
     this.total = ParserUtil.formatTotal(total);
   }
 

@@ -28,6 +28,7 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = GoogleFonts.roboto(
+      letterSpacing: 0.05,
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color,

@@ -1,7 +1,10 @@
+import 'package:binance_clone/models/trade_data.dart';
+import 'package:binance_clone/presentation/views/markets/market_view_model.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:binance_clone/utils/binance_testnest.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
 import '../../../data/local_data/sharepref.dart';
@@ -9,18 +12,21 @@ import '../../theme/palette.dart';
 import '../../widgets/position_card.dart';
 import '../../widgets/wallet_tabbar.dart';
 
-class TransactionScreen extends StatefulWidget {
+class TransactionScreen extends ConsumerStatefulWidget {
   const TransactionScreen({super.key});
 
   @override
-  State<TransactionScreen> createState() => _TransactionScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _TransactionScreenState();
 }
 
-class _TransactionScreenState extends State<TransactionScreen>
+class _TransactionScreenState extends ConsumerState<TransactionScreen>
     with TickerProviderStateMixin {
   TabController? _tabController;
+
   List<Map<String, dynamic>> positionsList = [];
   List<String> wallets = [];
+  List<TradeData> initialMarketData = [];
   int selectedWalletIndex = 0;
   String selectedPosition = "Long";
   final List<String> positions = ["Long", "Short"];
@@ -36,6 +42,7 @@ class _TransactionScreenState extends State<TransactionScreen>
     loadPositions();
     _tabController = TabController(length: 2, vsync: this);
     _tabController!.addListener(_handleTabSelection);
+    initialMarketData = ref.read(marketViewModelProvider).marketData.value;
   }
 
   @override
@@ -75,9 +82,10 @@ class _TransactionScreenState extends State<TransactionScreen>
     double margin = double.tryParse(marginController.text) ?? 0;
     String symbol = selectedSymbol;
     String type = selectedPosition;
-     String walletName = wallets[selectedWalletIndex]; 
+    String walletName = wallets[selectedWalletIndex];
 
-    await SharePref.addPosition(walletName,symbol, type, entryPrice, leverage, margin);
+    await SharePref.addPosition(
+        walletName, symbol, type, entryPrice, leverage, margin);
     // await SharePref.addPosition(symbol, entryPrice, leverage, margin);
     loadPositions();
 
@@ -113,6 +121,7 @@ class _TransactionScreenState extends State<TransactionScreen>
 
   Widget buildPositionCreation() {
     final palette = Theme.of(context).extension<Palette>()!;
+    final marketData = ref.read(marketViewModelProvider).marketData;
 
     return SingleChildScrollView(
       child: Column(
@@ -145,13 +154,12 @@ class _TransactionScreenState extends State<TransactionScreen>
             },
           ),
           DropdownButton<String>(
-            value: selectedSymbol,
             dropdownColor: palette.selectedTabChipColor,
-            items: <String>['BTCUSDT']
-                .map<DropdownMenuItem<String>>((String value) {
+            value: selectedSymbol,
+            items: initialMarketData.map((TradeData data) {
               return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
+                value: data.symbol,
+                child: Text(data.symbol),
               );
             }).toList(),
             onChanged: (newValue) {

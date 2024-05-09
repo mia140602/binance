@@ -43,7 +43,7 @@ class _OrderRow extends StatelessWidget {
       required this.itemCount});
 
   List<String> get _items =>
-      isFuture ? [order.price, order.total] : [order.price, order.total];
+      isFuture ? [order.price, order.amount] : [order.price, order.amount];
   @override
   Widget build(BuildContext context) {
     Color color(int index) {
@@ -66,7 +66,7 @@ class _OrderRow extends StatelessWidget {
               // width: width / 2 - 40, // Chia đều cho 2 cột
               child: CustomText(
                 text: _items[i],
-                fontSize: 10.sp,
+                fontSize: 9.sp,
                 fontWeight: FontWeight.w400,
                 color: color(i),
                 textAlign: i == 0

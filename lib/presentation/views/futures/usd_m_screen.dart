@@ -1,8 +1,6 @@
 import 'package:binance_clone/presentation/app_assets.dart';
-import 'package:binance_clone/presentation/views/markets/markets_screen.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
-import 'package:binance_clone/presentation/widgets/drawer/lever_drawer.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +28,7 @@ class USDScreen extends ConsumerStatefulWidget {
 class _USDScreenState extends ConsumerState<USDScreen>
     with SingleTickerProviderStateMixin {
   List<Map<String, dynamic>> positionsList = [];
+  double _sliderValue = 0.0;
   void loadPositions() async {
     var positions = await SharePref.getAllPositions();
     setState(() {
@@ -100,8 +99,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         CustomText(
                           text: "BTCUSDC",
                           color: palette.appBarTitleColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16.sp,
                         ),
                         SizedBox(
                           width: 5.w,
@@ -174,7 +173,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     Color textK = palette.mainGreenColor;
                     String prePercent = '';
                     if (value.isPriceChangeIn24HNeg == true) {
-                      textK = Colors.red;
+                      textK = palette.sellButtonColor;
                     } else {
                       prePercent = '+';
                     }
@@ -183,7 +182,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           "$prePercent${value.percentageChangeIn24H.toStringAsFixed(2)}%",
                       color: textK,
                       fontWeight: FontWeight.w500,
-                      fontSize: 12,
+                      fontSize: 10.sp,
                     );
                   },
                 ),
@@ -205,7 +204,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           child: CustomText(
                             text: "Cross",
                             color: palette.appBarTitleColor,
-                            fontSize: 10.sp,
+                            fontSize: 9.sp,
                             // fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -226,7 +225,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             child: CustomText(
                               text: "20x",
                               color: palette.appBarTitleColor,
-                              fontSize: 10.sp,
+                              fontSize: 9.sp,
                             ),
                           ),
                         ),
@@ -243,7 +242,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           child: CustomText(
                             text: "S",
                             color: palette.appBarTitleColor,
-                            fontSize: 10.sp,
+                            fontSize: 9.sp,
                           ),
                         ),
                       ],
@@ -258,7 +257,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         CustomText(
                           text: "-0.0060%/00:53:12",
                           color: palette.appBarTitleColor,
-                          fontSize: 10.sp,
+                          fontSize: 9.sp,
                         )
                       ],
                     )
@@ -284,9 +283,10 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Avbl",
-                                style: AppStyle.minimumlGrayText(),
+                              CustomText(
+                                text: "Khả dụng",
+                                color: Colors.grey,
+                                fontSize: 10.sp,
                               ),
                               Row(
                                 children: [
@@ -311,7 +311,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 8.w, vertical: 7.h),
+                                horizontal: 8.w, vertical: 3.h),
                             decoration: BoxDecoration(
                                 color: palette.bgGray,
                                 borderRadius: BorderRadius.circular(5.r)),
@@ -336,7 +336,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             ),
                           ),
                           SizedBox(
-                            height: 10.h,
+                            height: 5.h,
                           ),
                           Row(
                             children: [
@@ -411,7 +411,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 child: CustomText(
                                   text: "BBO",
                                   color: palette.appBarTitleColor,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
                                   fontSize: 12.sp,
                                 ),
                               )
@@ -426,7 +426,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               borderRadius: BorderRadius.circular(5.r),
                             ),
                             padding: EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 7.w),
+                                vertical: 2.h, horizontal: 7.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -441,10 +441,10 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 ),
                                 Column(
                                   children: [
-                                    Text(
-                                      "Amount",
-                                      style: AppStyle.minimumlGrayText(),
-                                    ),
+                                    CustomText(
+                                        text: "Số tiền",
+                                        color: Colors.grey,
+                                        fontSize: 10.sp),
                                     Text(
                                       "0%",
                                       style: AppStyle.boldText(),
@@ -467,10 +467,20 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 15.0),
-                                  child: Text(
-                                    "BTC",
-                                    style: AppStyle.boldText(),
+                                      horizontal: 5.0),
+                                  child: Row(
+                                    children: [
+                                      CustomText(
+                                        text: "BTC",
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12.sp,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_drop_down_rounded,
+                                        color: palette.selectedTimeChipColor,
+                                      )
+                                    ],
                                   ),
                                 ),
                               ],
@@ -541,6 +551,34 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           SizedBox(
                             height: 15.h,
                           ),
+                          // Padding(
+                          //   padding: EdgeInsets.symmetric(vertical: 20.h),
+                          //   child: SliderTheme(
+                          //     data: SliderTheme.of(context).copyWith(
+                          //       thumbShape: SliderThumbImage(Image.asset(
+                          //         FuturesAssets.rhombus,
+                          //         height: 20.h,
+                          //         color: palette.grayColor,
+                          //       )),
+                          //       activeTrackColor: Colors.white,
+                          //       inactiveTrackColor: palette.grayColor,
+                          //       overlayColor:
+                          //           Colors.transparent, // Bỏ overlay mặc định
+                          //     ),
+                          //     child: Slider(
+                          //       value: _sliderValue,
+                          //       min: 0.0,
+                          //       max: 100.0,
+                          //       divisions: 4, // Chia thành 5 mốc
+                          //       label: "${_sliderValue.round()}%",
+                          //       onChanged: (double value) {
+                          //         setState(() {
+                          //           _sliderValue = value;
+                          //         });
+                          //       },
+                          //     ),
+                          //   ),
+                          // ),
                           Row(
                             children: [
                               Icon(
@@ -551,9 +589,11 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               SizedBox(
                                 width: 10.w,
                               ),
-                              Text(
-                                "TP/SL",
-                                style: AppStyle.smallText(),
+                              CustomText(
+                                text: "TP/SL",
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w300,
                               ),
                             ],
                           ),
@@ -563,22 +603,6 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.circle_outlined,
-                                    color: palette.grayColor,
-                                    size: 14.h,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Text(
-                                    "Reduce Only",
-                                    style: AppStyle.smallText(),
-                                  )
-                                ],
-                              ),
                               Row(
                                 children: [
                                   Text(
@@ -598,14 +622,16 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             ],
                           ),
                           SizedBox(
-                            height: 10.h,
+                            height: 5.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Max",
-                                style: AppStyle.smallGrayText(),
+                              CustomText(
+                                text: "Mở tối đa",
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF757b87),
+                                fontSize: 11.sp,
                               ),
                               Text(
                                 "0.000 BTC",
@@ -616,9 +642,11 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Cost",
-                                style: AppStyle.smallGrayText(),
+                              CustomText(
+                                text: "Chi phí",
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF757b87),
+                                fontSize: 11.sp,
                               ),
                               Text(
                                 "0.00 USDC",
@@ -647,9 +675,11 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Max",
-                                style: AppStyle.smallGrayText(),
+                              CustomText(
+                                text: "Mở tối đa",
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF757b87),
+                                fontSize: 11.sp,
                               ),
                               Text(
                                 "0.000 BTC",
@@ -660,9 +690,11 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Cost",
-                                style: AppStyle.smallGrayText(),
+                              CustomText(
+                                text: "Chi phí",
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF757b87),
+                                fontSize: 11.sp,
                               ),
                               Text(
                                 "0.00 USDC",
@@ -714,6 +746,53 @@ class _USDScreenState extends ConsumerState<USDScreen>
           ),
         ),
       ]),
+    );
+  }
+}
+
+class SliderThumbImage extends SliderComponentShape {
+  final Widget image;
+
+  SliderThumbImage(this.image);
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return Size(8.h, 8.h); // Kích thước của thumb
+  }
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    final Canvas canvas = context.canvas;
+    final imageWidget = image as Image;
+    final imageProvider = imageWidget.image as AssetImage;
+
+    final paint = Paint()..filterQuality = FilterQuality.high;
+    final imageSize = Size(8.h, 8.h); // Kích thước của hình ảnh
+    final imageRect = Rect.fromCenter(
+        center: center, width: imageSize.width, height: imageSize.height);
+    imageProvider.resolve(ImageConfiguration()).addListener(
+      ImageStreamListener((ImageInfo info, bool _) {
+        // Chuyển đổi info.image.width và info.image.height sang double
+        canvas.drawImageRect(
+            info.image,
+            Offset.zero &
+                Size(info.image.width.toDouble(), info.image.height.toDouble()),
+            imageRect,
+            paint);
+      }),
     );
   }
 }

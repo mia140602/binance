@@ -20,13 +20,13 @@ class PositionCard extends StatelessWidget {
     void _deletePosition(BuildContext context) {
       // Gọi hàm xóa position từ SharePref
       SharePref.deletePosition(
-        position['walletName'],
-        position['symbol'],
-        position['type'],
-        position['entryPrice'],
-        position['leverage'],
-        position['margin']
-      ).then((_) {
+              position['walletName'],
+              position['symbol'],
+              position['type'],
+              position['entryPrice'],
+              position['leverage'],
+              position['margin'])
+          .then((_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Position deleted successfully')),
         );
@@ -74,9 +74,9 @@ class PositionCard extends StatelessWidget {
                         children: [
                           Image.asset(
                             "assets/icons/futures_icon/icon_position.png",
-                            width: 18,
+                            width: 15.w,
                           ),
-                          Gap(10),
+                          Gap(5.w),
                           CustomText(
                             text: "${position['symbol']} Perpetual",
                             fontSize: 15.sp,
@@ -106,7 +106,7 @@ class PositionCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  Gap(10),
+                  Gap(5.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -129,16 +129,17 @@ class PositionCard extends StatelessWidget {
                     children: [
                       _smallContent(
                           context: context,
-                          title: "Size (${tradeData.baseAsset})",
+                          title: "Kích thước (${tradeData.baseAsset})",
                           content: "75.000"),
                       _smallContent(
                           context: context,
                           title: "Margin (${tradeData.quoteAsset})",
                           content: "${userMarginFormat}"),
+                      Gap(20.w),
                       _smallContent(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           context: context,
-                          title: "Margin Ratio",
+                          title: "Tỉ lệ ký quỹ",
                           content: "${marginRatio}",
                           color: pnlColor),
                     ],
@@ -149,16 +150,16 @@ class PositionCard extends StatelessWidget {
                     children: [
                       _smallContent(
                           context: context,
-                          title: "Entry Price (${tradeData.quoteAsset})",
+                          title: "Giá vào lệnh (${tradeData.quoteAsset})",
                           content: "${entryPriceFormat}"),
                       _smallContent(
                           context: context,
-                          title: "Mark Price (${tradeData.quoteAsset})",
+                          title: "Giá đánh dấu (${tradeData.quoteAsset})",
                           content: "${markPriceFormat}"),
                       _smallContent(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           context: context,
-                          title: "Liq.Price (${tradeData.quoteAsset})",
+                          title: "Giá thanh lý (${tradeData.quoteAsset})",
                           content: "--",
                           color: palette.appBarTitleColor),
                     ],
@@ -226,13 +227,13 @@ class PositionCard extends StatelessWidget {
         CustomText(
           text: title,
           color: palette.filterLineColor,
-          fontSize: 11.sp,
+          fontSize: 10.sp,
         ),
         CustomText(
           text: content,
           color: color,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w400,
+          fontSize: 15.sp,
+          fontWeight: FontWeight.w500,
         ),
       ],
     );

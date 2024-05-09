@@ -70,9 +70,6 @@ class AppStyle {
         fontFamily: 'Satoshi');
   }
 
-
-
-
   static TextStyle regularGrayText() {
     return TextStyle(
         color: Colors.white, fontSize: 15.sp, fontFamily: 'Satoshi');
@@ -151,7 +148,7 @@ class AppStyle {
     return GoogleFonts.roboto(
       textStyle: TextStyle(
         color: Colors.white,
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: FontWeight.w300,
       ),
     );

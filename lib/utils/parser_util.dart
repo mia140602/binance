@@ -28,7 +28,16 @@ class ParserUtil {
     if (numValue == null) return value;
 
     // Định dạng cho giá theo kiểu Đức
-    NumberFormat priceFormat = NumberFormat("#,##0.00", "de_DE");
+    NumberFormat priceFormat = NumberFormat("#,##0.0", "de_DE");
+    return priceFormat.format(numValue);
+  }
+
+  static String formatAmount(String value) {
+    double? numValue = double.tryParse(value.replaceAll(',', '.'));
+    if (numValue == null) return value;
+
+    // Định dạng cho giá theo kiểu Đức
+    NumberFormat priceFormat = NumberFormat("#,##0.000", "de_DE");
     return priceFormat.format(numValue);
   }
 

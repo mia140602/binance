@@ -32,6 +32,7 @@ class _FuturesScreenState extends State<FuturesScreen>
         child: Column(
           children: [
             TabBar(
+              dividerColor: palette.selectedTimeChipColor,
               isScrollable: true,
               padding: EdgeInsets.zero,
               labelStyle: AppStyle.boldText(),
@@ -45,9 +46,9 @@ class _FuturesScreenState extends State<FuturesScreen>
                     children: [
                       const CustomText(
                         text: "USD",
-                        fontSize: 16,
+                        fontSize: 15,
                         // color: palette.appBarTitleColor,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                       Icon(
                         Icons.monetization_on_outlined,
@@ -57,7 +58,7 @@ class _FuturesScreenState extends State<FuturesScreen>
                       const CustomText(
                         text: "-M",
                         // color: palette.appBarTitleColor,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),
@@ -66,43 +67,43 @@ class _FuturesScreenState extends State<FuturesScreen>
                   icon: CustomText(
                     text: "COIN-M",
                     // color: palette.appBarTitleColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const Tab(
                   icon: CustomText(
                     text: "Quyền chọn",
                     // color: palette.appBarTitleColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const Tab(
                   icon: CustomText(
                     text: "Bot",
                     // color: palette.appBarTitleColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const Tab(
                   icon: CustomText(
                     text: "Sao chép giao dịch",
                     // color: palette.appBarTitleColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const Tab(
                   icon: CustomText(
                     text: "Bảng xếp hạng",
                     // color: palette.appBarTitleColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
               labelPadding: EdgeInsets.only(right: 20.w),
             ),
-            Divider(
-              color: Colors.grey[700],
-            ),
+            // Divider(
+            //   color: Colors.grey[700],
+            // ),
             Expanded(
               child: TabBarView(
                 controller: _tabController,

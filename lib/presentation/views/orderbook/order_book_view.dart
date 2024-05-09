@@ -36,7 +36,7 @@ class _OrderBookViewState extends State<OrderBookView> {
       child: Consumer(builder: (context, ref, _) {
         return Column(
           children: [
-            const Gap(24),
+            Gap(5.h),
             const ColumnHeader(),
             // const Gap(12),
             if (_showSells)
@@ -50,7 +50,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                   );
                 },
               ),
-            const Gap(10),
+            Gap(5.h),
             if (_showSells && _showBuys) ...{
               ReactiveBuilder(
                 value: ref.read(orderBookViewModelProvider).prices,
@@ -61,7 +61,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                   );
                 },
               ),
-              const Gap(10),
+              Gap(5.h),
             },
             if (_showBuys) ...{
               ReactiveBuilder(

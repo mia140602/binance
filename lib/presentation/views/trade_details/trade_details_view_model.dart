@@ -12,12 +12,13 @@ final tradeDetailsViewModelProvider =
 
 class TradeDetailsViewModel {
   late final _socketService = SocketService();
-
+  final ValueNotifier<double> totalBalanceNotifier = ValueNotifier(0.0);
   static const String _symbol = AppStrings.symbol;
   late final String _pair;
   TradeDetailsViewModel(String pair) {
     _pair = pair.toLowerCase();
     _init();
+    _updateTotalBalance();
   }
 
   void _init() {
@@ -26,6 +27,12 @@ class TradeDetailsViewModel {
       "$_pair@miniTicker",
     ]);
     print("check:$_pair@miniTicker ");
+  }
+
+  void _updateTotalBalance() async {
+    double totalWalletBalance = await calculateTotalWalletBalance();
+    double totalPNL = await calculateTotalPNL();
+    totalBalanceNotifier.value = totalWalletBalance + totalPNL;
   }
 
   void updateData(String symbol) {
@@ -46,10 +53,9 @@ class TradeDetailsViewModel {
       data["symbol"] = _symbol;
       final newTradeData = TradeData.fromJson(data);
       _tradeData.value = newTradeData;
-      updateTotalBalance();
+      _updateTotalBalance();
     }
   }
-
   // ValueNotifier<double> totalBalance = ValueNotifier(0.0);
 
   Future<void> updateTotalBalance() async {
