@@ -292,14 +292,22 @@ class _FakeWalletState extends State<FakeWallet> {
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
-    return Scaffold(
-      backgroundColor: palette.cardColor,
-      body: _buildWalletList(),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 70.0.h),
-        child: FloatingActionButton(
-          onPressed: _addWallet,
-          child: const Icon(Icons.add),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: palette.cardColor,
+        body: _buildWalletList(),
+        floatingActionButton: Padding(
+          padding: EdgeInsets.only(bottom: 70.0.h),
+          child: FloatingActionButton(
+            onPressed: _addWallet,
+            child: const Icon(Icons.add),
+          ),
         ),
       ),
     );

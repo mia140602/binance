@@ -103,24 +103,33 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
 
-    return Scaffold(
-      backgroundColor: palette.cardColor,
-      appBar: AppBar(
-        title: CustomText(text: "Create Position"),
-        bottom: TabBar(
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        
+      }
+      },
+      child: Scaffold(
+        backgroundColor: palette.cardColor,
+        appBar: AppBar(
+          title: CustomText(text: "Create Position"),
+          bottom: TabBar(
+            controller: _tabController,
+            tabs: [
+              Tab(text: "Create Position"),
+              Tab(text: "Create Order"),
+            ],
+          ),
+        ),
+        body: TabBarView(
           controller: _tabController,
-          tabs: [
-            Tab(text: "Create Position"),
-            Tab(text: "Create Order"),
+          children: [
+            buildPositionCreation(selectedSymbol: selectedSymbol),
+            buildOrderCreation(),
           ],
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          buildPositionCreation(selectedSymbol: selectedSymbol),
-          buildOrderCreation(),
-        ],
       ),
     );
   }
