@@ -3,27 +3,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/data/services/socket_service.dart';
 import 'package:binance_clone/models/order.dart';
 import 'package:binance_clone/presentation/views/trade_details/trade_details_view_model.dart';
-import 'package:binance_clone/utils/app_strings.dart';
+// import 'package:binance_clone/utils/app_strings.dart';
 
-final orderBookViewModelProvider = Provider<OrderBookViewModel>(
-  (ref) => OrderBookViewModel(ref),
+final orderBookViewModelProvider = Provider.family<OrderBookViewModel, String>(
+  (ref, _pair) => OrderBookViewModel(ref, _pair),
 );
 
 class OrderBookViewModel {
   final ProviderRef _ref;
+  final String _pair;
 
-  OrderBookViewModel(this._ref) {
+  OrderBookViewModel(this._ref, this._pair) {
     _init();
   }
 
   late final _socketService = SocketService();
-  final String _pair = AppStrings.pair;
 
   void _init() {
     _socketService.attachListener(_onData);
     _socketService.subscribe([
-      "$_pair@aggTrade",
+      "${_pair.toLowerCase()}@aggTrade",
     ]);
+    print("Pair: ${_pair.toLowerCase()}");
     _listenToTradeDetails();
   }
 
@@ -62,6 +63,7 @@ class OrderBookViewModel {
 
     if (eventType == "aggTrade") {
       final order = Order.fromJson(data);
+
       _orders.value = [order, ..._orders.value.take(99)];
       if (order.isBuy == true) {
         _buyOrders.value = [order, ..._buyOrders.value.take(99)];

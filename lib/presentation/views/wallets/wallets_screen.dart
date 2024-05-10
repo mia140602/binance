@@ -65,7 +65,7 @@ class _WalletScreenState extends State<WalletScreen>
                             child: CustomText(
                                 text: "Sàn giao dịch",
                                 fontWeight: FontWeight.bold,
-                                fontSize: 11.sp)),
+                                fontSize: 12.sp)),
                       )),
                   Container(
                       decoration: BoxDecoration(
@@ -82,7 +82,7 @@ class _WalletScreenState extends State<WalletScreen>
                           onPressed: () {},
                           child: CustomText(
                               text: "Web3",
-                              fontSize: 11.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                               color: palette.selectedTimeChipColor))),
                 ],

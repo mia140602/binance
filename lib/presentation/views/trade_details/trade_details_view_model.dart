@@ -71,15 +71,22 @@ class TradeDetailsViewModel {
     });
   }
 
-  Future<double> calculateTotalPNL() async {
-    List<Map<String, dynamic>> positions = await SharePref.getAllPositions();
-    double totalPNL = 0.0;
-    double currentPrice = double.parse(_tradeData.value.currentPrice);
-    for (var position in positions) {
-      totalPNL += calculatePNLForPosition(position, currentPrice);
-    }
-    return totalPNL;
+Future<double> calculateTotalPNL() async {
+  List<Map<String, dynamic>> positions = await SharePref.getAllPositions();
+  double totalPNL = 0.0;
+  // Sử dụng tryParse và xử lý trường hợp null
+  double? currentPrice = double.tryParse(_tradeData.value.currentPrice);
+
+  if (currentPrice == null) {
+    print("Invalid current price data: ${_tradeData.value.currentPrice}");
+    return 0.0;  // Trả về 0 hoặc xử lý phù hợp nếu giá trị không hợp lệ
   }
+
+  for (var position in positions) {
+    totalPNL += calculatePNLForPosition(position, currentPrice);
+  }
+  return totalPNL;
+}
 
   double calculatePNLForPosition(
       Map<String, dynamic> position, double currentPrice) {

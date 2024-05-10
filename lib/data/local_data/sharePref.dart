@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharePref {
+  static String keyLocalSymbol = "key_local_symbol";
   static String keyWallets = "key_wallets";
   static String keyPositions = "key_positions";
   static String keyWalletPositionsCount = "key_wallet_positions_count";
@@ -97,22 +98,22 @@ class SharePref {
     await prefs.setStringList(keyWallets, wallets);
   }
 
- static Future<List<Map<String, dynamic>>> getAllWallets() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<Map<String, dynamic>> wallets = [];
-  var walletsString = prefs.getStringList(keyWallets);
-  if (walletsString != null) {
-    for (var walletString in walletsString) {
-      var parts = walletString.split(":");
-      if (parts.length == 2) {
-        String name = parts[0];
-        double amount = double.tryParse(parts[1]) ?? 0.0;
-        wallets.add({"name": name, "amount": amount});
+  static Future<List<Map<String, dynamic>>> getAllWallets() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<Map<String, dynamic>> wallets = [];
+    var walletsString = prefs.getStringList(keyWallets);
+    if (walletsString != null) {
+      for (var walletString in walletsString) {
+        var parts = walletString.split(":");
+        if (parts.length == 2) {
+          String name = parts[0];
+          double amount = double.tryParse(parts[1]) ?? 0.0;
+          wallets.add({"name": name, "amount": amount});
+        }
       }
     }
+    return wallets;
   }
-  return wallets;
-}
 
   static Future<void> updateWallet(String walletName, double newAmount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -142,5 +143,15 @@ class SharePref {
     wallets.removeWhere((wallet) => wallet.split(":")[0] == walletName);
 
     await prefs.setStringList(keyWallets, wallets);
+  }
+
+  static Future<void> updateLocalSymbol(String symbol) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(keyLocalSymbol, symbol);
+  }
+
+  static Future<String> getLocalSymbol() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(keyLocalSymbol) ?? "btcusdt";
   }
 }

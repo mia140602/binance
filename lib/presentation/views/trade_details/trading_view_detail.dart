@@ -110,7 +110,7 @@ class _ActivityView extends StatelessWidget {
       child = ChartsView(
         symbol: symbol,
       );
-    if (activeIndex == 1) child = const OrderBookView();
+    if (activeIndex == 1) child =  OrderBookView(pair: symbol,);
     if (activeIndex == 2) child = const RecentTradesView();
     if (child == null) return const SizedBox();
     return Container(

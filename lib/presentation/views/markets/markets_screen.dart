@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
+import '../../../data/local_data/sharepref.dart';
 import '../../../models/trade_data.dart';
 import '../../theme/palette.dart';
 
@@ -74,12 +75,16 @@ class MarketView extends ConsumerWidget {
               }
 
               return GestureDetector(
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return TradeViewDetails(
-                    symbol: tradeData.symbol,
-                  );
-                })),
+                onTap: () async {
+                  await SharePref.updateLocalSymbol(tradeData.symbol);
+
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return TradeViewDetails(
+                      symbol: tradeData.symbol,
+                    );
+                  }));
+                },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(

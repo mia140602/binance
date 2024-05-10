@@ -26,7 +26,7 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
 
   List<Map<String, dynamic>> positionsList = [];
   List<String> wallets = [];
-  List<TradeData> initialMarketData = [];
+
   int selectedWalletIndex = 0;
   String selectedPosition = "Long";
   final List<String> positions = ["Long", "Short"];
@@ -42,7 +42,8 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
     loadPositions();
     _tabController = TabController(length: 2, vsync: this);
     _tabController!.addListener(_handleTabSelection);
-    initialMarketData = ref.read(marketViewModelProvider).marketData.value;
+
+    loadLocalSymbol();
   }
 
   @override
@@ -67,6 +68,11 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
         selectedWalletIndex = 0;
       }
     });
+  }
+
+  void loadLocalSymbol() async {
+    selectedSymbol = await SharePref.getLocalSymbol();
+    setState(() {});
   }
 
   void loadPositions() async {
@@ -112,14 +118,14 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          buildPositionCreation(),
+          buildPositionCreation(selectedSymbol: selectedSymbol),
           buildOrderCreation(),
         ],
       ),
     );
   }
 
-  Widget buildPositionCreation() {
+  Widget buildPositionCreation({required String selectedSymbol}) {
     final palette = Theme.of(context).extension<Palette>()!;
     final marketData = ref.read(marketViewModelProvider).marketData;
 
@@ -153,21 +159,28 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
               });
             },
           ),
-          DropdownButton<String>(
-            dropdownColor: palette.selectedTabChipColor,
-            value: selectedSymbol,
-            items: initialMarketData.map((TradeData data) {
-              return DropdownMenuItem<String>(
-                value: data.symbol,
-                child: Text(data.symbol),
-              );
-            }).toList(),
-            onChanged: (newValue) {
-              setState(() {
-                selectedSymbol = newValue!;
-              });
-            },
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey, width: 1),
+            ),
+            child: CustomText(
+              text: selectedSymbol,
+            ),
           ),
+          // DropdownButton<String>(
+          //   value:
+          //       selectedSymbol, // Giá trị này được cập nhật từ SharedPreferences
+          //   dropdownColor: palette.selectedTabChipColor,
+          //   items: [
+          //     DropdownMenuItem<String>(
+          //       value: selectedSymbol,
+          //       child: Text(selectedSymbol),
+          //     )
+          //   ],
+          //   onChanged: null, // Không cho phép thay đổi
+          // ),
           inputForm(
             controller: entryPriceController,
             label: "Entry Price",
@@ -200,7 +213,7 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
                     borderRadius: BorderRadius.circular(10)),
                 child: CustomText(text: "Create Position")),
           ),
-          buildPositionList(),
+          Container(height: 400, child: buildPositionList()),
           Gap(50),
         ],
       ),
@@ -241,21 +254,15 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
               });
             },
           ),
-          DropdownButton<String>(
-            value: selectedSymbol,
-            dropdownColor: palette.selectedTabChipColor,
-            items: <String>['BTCUSDT']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (newValue) {
-              setState(() {
-                selectedSymbol = newValue!;
-              });
-            },
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey, width: 1),
+            ),
+            child: CustomText(
+              text: selectedSymbol,
+            ),
           ),
           inputForm(
             controller: entryPriceController,

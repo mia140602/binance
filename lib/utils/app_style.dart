@@ -49,8 +49,8 @@ class AppStyle {
   static TextStyle appBarText() {
     return GoogleFonts.roboto(
       color: Colors.white,
-      fontWeight: FontWeight.w700,
-      fontSize: 16.sp,
+      fontWeight: FontWeight.w500,
+      fontSize: 15.sp,
     );
   }
 
@@ -80,7 +80,7 @@ class AppStyle {
       textStyle: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w500,
-        fontSize: 16.sp,
+        fontSize: 14.sp,
       ),
     );
   }

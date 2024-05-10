@@ -14,14 +14,15 @@ import 'package:binance_clone/presentation/widgets/reactive_builder.dart';
 import '../../theme/palette.dart';
 
 class OrderBookView extends StatefulWidget {
-  const OrderBookView({super.key});
+  final String pair;
+  const OrderBookView({super.key, required this.pair});
 
   @override
   State<OrderBookView> createState() => _OrderBookViewState();
 }
 
 class _OrderBookViewState extends State<OrderBookView> {
-  final _counts = [1, 2, 3, 4];
+  // final _counts = [1, 2, 3, 4];
   late int _limit = 8;
 
   bool _showSells = true;
@@ -41,7 +42,7 @@ class _OrderBookViewState extends State<OrderBookView> {
             // const Gap(12),
             if (_showSells)
               ReactiveBuilder(
-                value: ref.read(orderBookViewModelProvider).sellOrders,
+                value: ref.read(orderBookViewModelProvider(widget.pair)).sellOrders,
                 builder: (orders) {
                   return OrderTable(
                     orders: orders.take(_limit),
@@ -53,7 +54,7 @@ class _OrderBookViewState extends State<OrderBookView> {
             Gap(5.h),
             if (_showSells && _showBuys) ...{
               ReactiveBuilder(
-                value: ref.read(orderBookViewModelProvider).prices,
+                value: ref.read(orderBookViewModelProvider(widget.pair)).prices,
                 builder: (prices) {
                   return Pricebar(
                     oldPrice: prices.last,
@@ -65,7 +66,7 @@ class _OrderBookViewState extends State<OrderBookView> {
             },
             if (_showBuys) ...{
               ReactiveBuilder(
-                value: ref.read(orderBookViewModelProvider).buyOrders,
+                value: ref.read(orderBookViewModelProvider(widget.pair)).buyOrders,
                 builder: (orders) {
                   return OrderTable(
                     orders: orders.take(_limit),

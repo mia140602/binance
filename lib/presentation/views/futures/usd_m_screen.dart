@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/models/trade_data.dart';
-import 'package:binance_clone/presentation/views/markets/market_view_model.dart';
 import 'package:gap/gap.dart';
 
 import '../../../data/local_data/sharepref.dart';
@@ -29,12 +28,6 @@ class _USDScreenState extends ConsumerState<USDScreen>
     with SingleTickerProviderStateMixin {
   List<Map<String, dynamic>> positionsList = [];
   double _sliderValue = 0.0;
-  void loadPositions() async {
-    var positions = await SharePref.getAllPositions();
-    setState(() {
-      positionsList = positions;
-    });
-  }
 
   // late TabController _tabController;
   String currentSymbol = "BTCUSDT";
@@ -54,11 +47,26 @@ class _USDScreenState extends ConsumerState<USDScreen>
     super.initState();
     // _tabController = TabController(length: 3, vsync: this);
     loadPositions();
+    loadCurrentSymbol();
+  }
+
+  void loadPositions() async {
+    var positions = await SharePref.getAllPositions();
+    setState(() {
+      positionsList = positions;
+    });
+  }
+
+  void loadCurrentSymbol() async {
+    currentSymbol = await SharePref.getLocalSymbol();
+    print("Giá trị symbol hiện tại: $currentSymbol");
+    setState(
+        () {}); // Call setState if you need to update the UI based on the new symbol
   }
 
   @override
   Widget build(BuildContext context) {
-    final marketData = ref.watch(marketViewModelProvider).marketData;
+    // final marketData = ref.watch(marketViewModelProvider).marketData;
     final tradeDetailsViewModel =
         ref.watch(tradeDetailsViewModelProvider(currentSymbol));
     final palette = Theme.of(context).extension<Palette>()!;
@@ -97,7 +105,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     Row(
                       children: [
                         CustomText(
-                          text: "BTCUSDC",
+                          text: tradeDetailsViewModel.tradeData.value.symbol,
                           color: palette.appBarTitleColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16.sp,
@@ -273,7 +281,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         width: MediaQuery.of(context).size.width * 0.4,
                         // height: 520,
                         //color: Colors.red,
-                        child: OrderBookView()),
+                        child: OrderBookView(pair: currentSymbol,)),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.52,
                       // height: 520,

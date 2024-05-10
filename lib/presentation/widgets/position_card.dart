@@ -209,7 +209,7 @@ class PositionCard extends StatelessWidget {
       return NumberFormat("+#,##0.00%", "en_US")
           .format(pnlValue / userMargin * 100);
     }
-    return NumberFormat("-#,##0.00%", "en_US")
+    return NumberFormat("#,##0.00%", "en_US")
         .format(pnlValue / userMargin * 100);
   }
 

@@ -299,7 +299,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ],
               ),
               SizedBox(
-                height: 10.h,
+                height: 20.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -322,7 +322,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ],
               ),
               SizedBox(
-                height: 17.h,
+                height: 27.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -345,7 +345,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ],
               ),
               SizedBox(
-                height: 17.h,
+                height: 27.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -368,7 +368,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ],
               ),
               SizedBox(
-                height: 17.h,
+                height: 27.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -391,7 +391,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ],
               ),
               SizedBox(
-                height: 17.h,
+                height: 27.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -414,7 +414,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ],
               ),
               SizedBox(
-                height: 17.h,
+                height: 27.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
