@@ -4,19 +4,17 @@ import 'package:binance_clone/presentation/views/wallets/wallets.dart';
 import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_strings.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:binance_clone/presentation/views/futures/futures_screen.dart';
 import 'package:binance_clone/presentation/views/home/home_screen.dart';
 import 'package:binance_clone/presentation/views/markets/markets_screen.dart';
-import 'package:flutter/widgets.dart';
 // import 'package:binance_clone/presentation/views/wallets/wallets_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:gap/gap.dart';
 
-import '../../../data/local_data/sharepref.dart';
+import '../../../data/local_data/share_pref.dart';
 import '../../theme/palette.dart';
-import '../futures/chartview/orderBook.dart';
 
 class BottomNavigationBarr extends StatefulWidget {
   const BottomNavigationBarr({Key? key}) : super(key: key);
@@ -40,24 +38,31 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const MarketView(),
-    TransactionScreen(),
+    const TransactionScreen(),
     // TradingOrderBookScreen(
     //   symbol: "BTCUSDT",
     // ),
-    FuturesScreen(),
-    WalletsView()
+    const FuturesScreen(),
+    const WalletsView()
   ];
   void toggleContainer() {
     setState(() {
       _showContainer =
           !_showContainer; // Đảo ngược trạng thái hiển thị của Container
     });
-    print("Giá trị showcontainer: $_showContainer");
+
+    if (kDebugMode) {
+      print("Giá trị showcontainer: $_showContainer");
+    }
   }
 
   void loadCurrentSymbol() async {
     currentSymbol = await SharePref.getLocalSymbol();
-    print("Giá trị symbol hiện tại: $currentSymbol");
+
+    if (kDebugMode) {
+      print("Giá trị symbol hiện tại: $currentSymbol");
+    }
+
     setState(
         () {}); // Call setState if you need to update the UI based on the new symbol
   }
@@ -92,7 +97,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    text: "Biểu đồ ${currentSymbol} Vĩnh cửu",
+                    text: "Biểu đồ $currentSymbol Vĩnh cửu",
                     fontSize: 11.sp,
                   ),
                   Icon(
@@ -111,14 +116,14 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
       );
     } else {
       topNavWidget = Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         height: 200.h,
         color: palette.cardColor,
         child: Column(
           children: [
             Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: CustomTabBar(tabs: [
                     "Thời gian",
                     "1m",
@@ -147,7 +152,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                     ))
               ],
             ),
-            Container(
+            SizedBox(
                 height: 160.h,
                 child: TradingChartScreen(
                   symbol: currentSymbol,
@@ -178,7 +183,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                 // mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    constraints: BoxConstraints(),
+                    constraints: const BoxConstraints(),
                     icon: _currentIndex == 0
                         ? Image.asset(
                             'assets/icons/bottom_nav_icon/home_clicked.png',

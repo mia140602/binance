@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 // #docregion platform_imports
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
@@ -13,7 +14,12 @@ import '../../../theme/palette.dart';
 // #enddocregion platform_imports
 
 class TradingChartScreen extends StatefulWidget {
-  TradingChartScreen({super.key, required this.symbol, this.isSmall = false});
+  const TradingChartScreen({
+    super.key,
+    required this.symbol,
+    this.isSmall = false,
+  });
+
   final String symbol;
   final bool isSmall;
 

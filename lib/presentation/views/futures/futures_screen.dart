@@ -11,10 +11,10 @@ class FuturesScreen extends StatefulWidget {
   const FuturesScreen({super.key});
 
   @override
-  _FuturesScreenState createState() => _FuturesScreenState();
+  FuturesScreenState createState() => FuturesScreenState();
 }
 
-class _FuturesScreenState extends State<FuturesScreen>
+class FuturesScreenState extends State<FuturesScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 

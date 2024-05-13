@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,10 +10,13 @@ import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/presentation/widgets/reactive_builder.dart';
 
 class CoinPairHeader extends StatelessWidget {
-  CoinPairHeader(
-      {super.key, this.showCurrentPrice = false, required this.symbol});
-  bool showCurrentPrice;
-  String symbol;
+  const CoinPairHeader({
+    super.key,
+    this.showCurrentPrice = false,
+    required this.symbol,
+  });
+  final bool showCurrentPrice;
+  final String symbol;
 
   @override
   Widget build(BuildContext context) {
@@ -37,60 +39,56 @@ class CoinPairHeader extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            CustomText(
-                              text: symbol,
+                      Row(
+                        children: [
+                          CustomText(
+                            text: symbol,
+                            color: palette.appBarTitleColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16.sp,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: palette.selectedTabChipColor,
+                                borderRadius: BorderRadius.circular(4.r)),
+                            padding: EdgeInsets.symmetric(horizontal: 3.w),
+                            child: CustomText(
+                              text: "Hợp đồng tương lai vĩnh cửu",
+                              fontSize: 8,
                               color: palette.appBarTitleColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16.sp,
+                              fontWeight: FontWeight.normal,
                             ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: palette.selectedTabChipColor,
-                                  borderRadius: BorderRadius.circular(4.r)),
-                              padding: EdgeInsets.symmetric(horizontal: 3.w),
-                              child: CustomText(
-                                text: "Hợp đồng tương lai vĩnh cửu",
-                                fontSize: 8,
-                                color: palette.appBarTitleColor,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            // SizedBox(
-                            //   width: 2.w,
-                            // ),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              size: 18.h,
-                              color: palette.appBarTitleColor,
-                            ),
-                          ],
-                        ),
+                          ),
+                          // SizedBox(
+                          //   width: 2.w,
+                          // ),
+                          Icon(
+                            Icons.arrow_drop_down,
+                            size: 18.h,
+                            color: palette.appBarTitleColor,
+                          ),
+                        ],
                       ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Icon(Icons.star_rate_rounded,
-                                size: 22, color: palette.appBarTitleColor),
-                            Gap(12),
-                            Icon(
-                              Icons.share,
-                              size: 20,
-                              color: palette.appBarTitleColor,
-                            ),
-                            Gap(12),
-                            Icon(
-                              Icons.window_sharp,
-                              size: 20,
-                              color: palette.appBarTitleColor,
-                            ),
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          Icon(Icons.star_rate_rounded,
+                              size: 22, color: palette.appBarTitleColor),
+                          const Gap(12),
+                          Icon(
+                            Icons.share,
+                            size: 20,
+                            color: palette.appBarTitleColor,
+                          ),
+                          const Gap(12),
+                          Icon(
+                            Icons.window_sharp,
+                            size: 20,
+                            color: palette.appBarTitleColor,
+                          ),
+                        ],
                       )
                     ],
                   ),
@@ -136,7 +134,7 @@ class CoinPairHeader extends StatelessWidget {
 }
 
 class _CoinPairIcons extends StatelessWidget {
-  const _CoinPairIcons({super.key});
+  const _CoinPairIcons();
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +163,7 @@ class _CoinPairIcons extends StatelessWidget {
 }
 
 class _Divider extends StatelessWidget {
-  const _Divider({super.key});
+  const _Divider();
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +187,6 @@ class _ItemColumn extends StatelessWidget {
   final Color? color;
 
   const _ItemColumn({
-    super.key,
     required this.icon,
     required this.label,
     required this.description,

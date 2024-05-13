@@ -2,9 +2,7 @@ import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:binance_clone/utils/app_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -25,15 +23,9 @@ class OverviewScreen extends ConsumerStatefulWidget {
 }
 
 class _OverviewScreenState extends ConsumerState<OverviewScreen> {
-  int _index = 0;
+  final int _index = 0;
   int check = 0;
   String symbol = "USDT";
-
-  void _setIndex(int newIndex) {
-    setState(() {
-      _index = newIndex;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +110,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                         text:
                             '≈ \$ ${numberFormat.format(value).replaceAll('.', '')}',
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF757b87),
+                        color: const Color(0xFF757b87),
                         fontSize: 12.sp,
                       );
                     },
@@ -151,7 +143,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
             height: 27.h,
           ),
           _rowItem(title: "Sao chép giao dịch", symbol: symbol),
-          Container(
+          const SizedBox(
             height: 100,
             width: 100,
           )
@@ -159,13 +151,13 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
       );
     } else {
       selectedWidget =
-          Center(child: CustomText(text: "Chức năng chưa triển khai"));
+          const Center(child: CustomText(text: "Chức năng chưa triển khai"));
     }
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
       color: palette.cardColor,
       child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -183,7 +175,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                       width: 5.w,
                     ),
                     CustomText(
-                      text: AppStrings.total_balance,
+                      text: AppStrings.totalBalance,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w300,
                     ),
@@ -191,7 +183,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                       width: 10.w,
                     ),
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: palette.selectedTabChipColor,
                         borderRadius: BorderRadius.circular(3.r),
@@ -215,20 +207,18 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                     )
                   ],
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        "assets/icons/alas.png",
-                        width: 14.w,
-                      ),
-                      Gap(20.w),
-                      Image.asset(
-                        "assets/icons/time.png",
-                        width: 14.w,
-                      )
-                    ],
-                  ),
+                Row(
+                  children: [
+                    Image.asset(
+                      "assets/icons/alas.png",
+                      width: 14.w,
+                    ),
+                    Gap(20.w),
+                    Image.asset(
+                      "assets/icons/time.png",
+                      width: 14.w,
+                    )
+                  ],
                 )
               ],
             ),
@@ -367,7 +357,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
         ),
         Column(
           children: [
-            Text("0.00 ${symbol}", style: AppStyle.boldText()),
+            Text("0.00 $symbol", style: AppStyle.boldText()),
           ],
         )
       ],

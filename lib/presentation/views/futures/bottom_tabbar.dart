@@ -4,10 +4,10 @@ class MyTabBar extends StatefulWidget {
   const MyTabBar({super.key});
 
   @override
-  _MyTabBarState createState() => _MyTabBarState();
+  MyTabBarState createState() => MyTabBarState();
 }
 
-class _MyTabBarState extends State<MyTabBar>
+class MyTabBarState extends State<MyTabBar>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 

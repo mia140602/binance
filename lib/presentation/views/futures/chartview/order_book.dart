@@ -13,8 +13,11 @@ import '../../../theme/palette.dart';
 // #enddocregion platform_imports
 
 class TradingOrderBookScreen extends StatefulWidget {
-  TradingOrderBookScreen(
-      {super.key, required this.symbol, this.isSmall = false});
+  const TradingOrderBookScreen({
+    super.key,
+    required this.symbol,
+    this.isSmall = false,
+  });
   final String symbol;
   final bool isSmall;
 

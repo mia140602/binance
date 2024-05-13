@@ -1,20 +1,18 @@
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
 import 'package:binance_clone/presentation/views/chart/charts_view.dart';
-import 'package:binance_clone/presentation/views/orderbook/order_book_view_model.dart';
 import 'package:binance_clone/presentation/views/trade_details/recent_trades_view.dart';
 import 'package:binance_clone/presentation/views/trade_details/widgets/coin_pair_header.dart';
 import 'package:binance_clone/presentation/views/trade_details/widgets/trading_activity_header.dart';
 
 class TradeViewDetails extends StatefulWidget {
-  TradeViewDetails({super.key, required this.symbol});
-  String symbol;
+  const TradeViewDetails({super.key, required this.symbol});
+
+  final String symbol;
 
   @override
   State<TradeViewDetails> createState() => _TradeViewDetailsState();
@@ -75,7 +73,7 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
           ],
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(20),
+          preferredSize: const Size.fromHeight(20),
           child: TradingActivityHeader(
               index: _tabIndex, onTabChanged: _setTabIndex),
         ),
@@ -112,7 +110,7 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
+            SizedBox(
               width: (MediaQuery.of(context).size.width - 40.w) / 3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -128,7 +126,7 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
                 ],
               ),
             ),
-            Gap(10),
+            const Gap(10),
             Container(
               width: (MediaQuery.of(context).size.width - 40.w) / 3,
               padding: EdgeInsets.symmetric(
@@ -146,7 +144,7 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
                 textAlign: TextAlign.center,
               ),
             ),
-            Gap(10),
+            const Gap(10),
             Container(
               width: (MediaQuery.of(context).size.width - 40.w) / 3,
               padding: EdgeInsets.symmetric(
@@ -179,7 +177,7 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          "assets/icons/futures_icon/${image}.png",
+          "assets/icons/futures_icon/$image.png",
           width: width ?? 14.w,
         ),
         Gap(2.h),
@@ -196,22 +194,28 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
 class _ActivityView extends StatelessWidget {
   final int activeIndex;
   final String symbol;
-  const _ActivityView(
-      {super.key, required this.activeIndex, required this.symbol});
+
+  const _ActivityView({
+    required this.activeIndex,
+    required this.symbol,
+  });
 
   @override
   Widget build(BuildContext context) {
     Widget? child;
-    if (activeIndex == 0)
+    if (activeIndex == 0) {
       child = ChartsView(
         symbol: symbol,
       );
-    if (activeIndex == 1)
+    } else if (activeIndex == 1) {
       child = OrderBookView(
         pair: symbol,
       );
-    if (activeIndex == 2) child = const RecentTradesView();
-    if (child == null) return const SizedBox();
+    } else if (activeIndex == 2) {
+      child = const RecentTradesView();
+    } else {
+      child = const SizedBox();
+    }
     return Container(
       color: Theme.of(context).extension<Palette>()!.cardColor,
       child: child,

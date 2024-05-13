@@ -156,9 +156,9 @@ class AppStyle {
 
   static TextStyle smallGrayText() {
     return GoogleFonts.roboto(
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontWeight: FontWeight.w500,
-        color: Color(0xFF757b87),
+        color: const Color(0xFF757b87),
         fontSize: 12.sp,
       ),
     );

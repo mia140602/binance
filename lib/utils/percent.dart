@@ -8,11 +8,13 @@ import 'package:gap/gap.dart';
 import '../presentation/theme/palette.dart';
 
 class PercentageBar extends StatefulWidget {
+  const PercentageBar({super.key});
+
   @override
-  _PercentageBarState createState() => _PercentageBarState();
+  PercentageBarState createState() => PercentageBarState();
 }
 
-class _PercentageBarState extends State<PercentageBar> {
+class PercentageBarState extends State<PercentageBar> {
   late double leftPercentage;
   late Timer timer;
 
@@ -21,7 +23,7 @@ class _PercentageBarState extends State<PercentageBar> {
     super.initState();
     leftPercentage = Random().nextDouble() * 100; // Khởi tạo giá trị ban đầu
     timer = Timer.periodic(
-        Duration(seconds: 1), (Timer t) => randomizePercentages());
+        const Duration(seconds: 1), (Timer t) => randomizePercentages());
   }
 
   void randomizePercentages() {

@@ -40,11 +40,10 @@ class TabBarSelect extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: List.generate(tabs.length, (i) {
-            final isSelected = i == index;
             return GestureDetector(
               onTap: () => onChanged?.call(i),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 alignment: Alignment.center,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

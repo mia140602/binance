@@ -1,5 +1,5 @@
 import 'package:binance_clone/presentation/views/futures/chartview/chartview.dart';
-import 'package:binance_clone/presentation/views/futures/chartview/orderBook.dart';
+import 'package:binance_clone/presentation/views/futures/chartview/order_book.dart';
 import 'package:binance_clone/presentation/views/trade_details/widgets/price_top_details.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/presentation/widgets/tabbar.dart';
@@ -19,7 +19,7 @@ class ChartsView extends StatelessWidget {
     super.key,
     required this.symbol,
   });
-  
+
   final String symbol;
 
   @override
@@ -38,8 +38,8 @@ class ChartsView extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: const SizedBox(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: SizedBox(
                 height: 22,
                 child: TradeDurationListView(),
               ),
@@ -64,7 +64,7 @@ class ChartsView extends StatelessWidget {
                               palette.selectedTimeChipColor.withOpacity(0.5)))),
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: TabBarSelect(tabs: [
                       "MA",
                       "EMA",
@@ -139,7 +139,7 @@ class ChartsView extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: palette.selectedTimeChipColor.withOpacity(0.2)),
@@ -158,17 +158,18 @@ class ChartsView extends StatelessWidget {
                 ],
               ),
             ),
-            Gap(10),
+            const Gap(10),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 6),
-                height: 20.h,
-                child: PercentageBar()),
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              height: 20.h,
+              child: const PercentageBar(),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     width: (MediaQuery.of(context).size.width / 2) - 20,
                     child: CustomText(
                       text: "Mua vào",
@@ -176,7 +177,7 @@ class ChartsView extends StatelessWidget {
                       fontSize: 10.sp,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: (MediaQuery.of(context).size.width / 2) - 20,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,7 +188,7 @@ class ChartsView extends StatelessWidget {
                           fontSize: 10.sp,
                         ),
                         Container(
-                          padding: EdgeInsets.all(3),
+                          padding: const EdgeInsets.all(3),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color:
@@ -218,7 +219,7 @@ class ChartsView extends StatelessWidget {
             ),
             Gap(5.h),
             Container(
-              padding: EdgeInsetsDirectional.symmetric(horizontal: 12),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 12),
               height: 500.h,
               width: MediaQuery.of(context).size.width,
               child: TradingOrderBookScreen(

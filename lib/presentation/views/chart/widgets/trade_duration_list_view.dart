@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/presentation/views/chart/charts_view_model.dart';
 import 'package:binance_clone/presentation/widgets/custom_chip.dart';
-import 'package:binance_clone/presentation/widgets/custom_icon.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 
 import '../../../theme/palette.dart';
@@ -78,12 +75,10 @@ class _TradeDurationListViewState extends State<TradeDurationListView> {
                           color: palette.appBarTitleColor,
                           fontWeight: FontWeight.w600),
                     ),
-                    Container(
-                      child: Icon(
-                        Icons.arrow_drop_down_rounded,
-                        color: Theme.of(context).colorScheme.secondary,
-                        size: 24,
-                      ),
+                    Icon(
+                      Icons.arrow_drop_down_rounded,
+                      color: Theme.of(context).colorScheme.secondary,
+                      size: 24,
                     ),
                   ],
                 ),

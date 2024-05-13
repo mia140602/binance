@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -45,15 +44,18 @@ class _WalletsViewState extends State<WalletsView>
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.height * 0.045,
               decoration: BoxDecoration(
-                  color: palette.selectedTimeChipColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                color: palette.selectedTimeChipColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(8),
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                       decoration: BoxDecoration(
                         color: palette.selectedTabChipColor,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8),
                           bottomLeft: Radius.circular(8),
                         ),
@@ -62,7 +64,7 @@ class _WalletsViewState extends State<WalletsView>
                       width: MediaQuery.of(context).size.width * 0.3,
                       height: MediaQuery.of(context).size.height * 0.045,
                       child: Container(
-                        margin: EdgeInsets.all(3),
+                        margin: const EdgeInsets.all(3),
                         // padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(color: palette.cardColor),
                         child: TextButton(
@@ -75,7 +77,7 @@ class _WalletsViewState extends State<WalletsView>
                   Container(
                       decoration: BoxDecoration(
                         color: palette.selectedTabChipColor,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(8),
                           bottomRight: Radius.circular(8),
                         ),
@@ -96,7 +98,7 @@ class _WalletsViewState extends State<WalletsView>
           ],
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(30),
+          preferredSize: const Size.fromHeight(30),
           child: TabBar(
             isScrollable: true,
             padding: EdgeInsets.zero,
@@ -120,7 +122,7 @@ class _WalletsViewState extends State<WalletsView>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
+        children: const [
           OverviewScreen(),
           SpotScreen(),
           FundingScreen(),

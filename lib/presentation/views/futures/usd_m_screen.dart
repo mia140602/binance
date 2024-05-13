@@ -1,18 +1,18 @@
 import 'package:binance_clone/presentation/app_assets.dart';
+import 'package:binance_clone/presentation/views/chart/widgets/edit_future_modal.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
 import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_style.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/models/trade_data.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../data/local_data/sharepref.dart';
+import '../../../data/local_data/share_pref.dart';
 import '../../theme/palette.dart';
 import '../../widgets/custom_tab_bar.dart';
 import '../trade_details/trade_details_view_model.dart';
@@ -30,20 +30,11 @@ class USDScreen extends ConsumerStatefulWidget {
 class _USDScreenState extends ConsumerState<USDScreen>
     with SingleTickerProviderStateMixin {
   List<Map<String, dynamic>> positionsList = [];
-  double _sliderValue = 0.0;
 
   // late TabController _tabController;
   String currentSymbol = "BTCUSDT";
-  TextEditingController _priceController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
   int _index = 1;
-
-  void _setIndex(int value) {
-    if (_index != value) {
-      setState(() {
-        _index = value;
-      });
-    }
-  }
 
   @override
   void initState() {
@@ -62,9 +53,12 @@ class _USDScreenState extends ConsumerState<USDScreen>
 
   void loadCurrentSymbol() async {
     currentSymbol = await SharePref.getLocalSymbol();
-    print("Giá trị symbol hiện tại: $currentSymbol");
-    setState(
-        () {}); // Call setState if you need to update the UI based on the new symbol
+
+    if (kDebugMode) {
+      print("Giá trị symbol hiện tại: $currentSymbol");
+    }
+
+    setState(() {});
   }
 
   @override
@@ -74,22 +68,14 @@ class _USDScreenState extends ConsumerState<USDScreen>
         ref.watch(tradeDetailsViewModelProvider(currentSymbol));
     final palette = Theme.of(context).extension<Palette>()!;
 
-    bool _isOpen = false; // Flag to track drawer visibility
-
-    void _toggleDrawer() {
-      setState(() {
-        _isOpen = !_isOpen;
-      });
-    }
-
     Widget selectedWidget = Container();
 
     if (_index == 0) {
       selectedWidget = vainOrder(palette);
     } else if (_index == 1) {
-      selectedWidget = FuturePosition();
+      selectedWidget = const FuturePosition();
     } else if (_index == 2) {
-      selectedWidget = Text("Lưới hợp đồng tương lai");
+      selectedWidget = const Text("Lưới hợp đồng tương lai");
     }
 
     return GestureDetector(
@@ -227,7 +213,10 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           ),
                           GestureDetector(
                             onTap: () {
-                              _toggleDrawer();
+                              showBottomSheet(
+                                context: context,
+                                builder: (_) => const EditFutureModal(),
+                              );
                             },
                             child:
                                 borderContainer(palette: palette, title: "55x"),
@@ -259,7 +248,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                           // padding: EdgeInsets.symmetric(horizontal: 2.w),
                           width: MediaQuery.of(context).size.width * 0.37,
                           // height: 520,
@@ -267,7 +256,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           child: OrderBookView(
                             pair: currentSymbol,
                           )),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width * 0.52,
                         // height: 520,
                         //color: Colors.blue,
@@ -339,7 +328,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     color: palette.bgGray,
                                     borderRadius: BorderRadius.circular(5.r),
                                   ),
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 2, vertical: 2),
                                   child: Row(
                                     children: [
@@ -362,7 +351,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                                 .withOpacity(0.5),
                                             fontSize: 10.sp,
                                           ),
-                                          Container(
+                                          SizedBox(
                                             height: 20.h,
                                             width: 80.w,
                                             child: TextField(
@@ -557,7 +546,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                CustomText(
+                                const CustomText(
                                   text: "TP/SL",
                                   color: Colors.white,
                                   fontSize: 12,
@@ -598,7 +587,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 CustomText(
                                   text: "Mở tối đa",
                                   fontWeight: FontWeight.w400,
-                                  color: Color(0xFF757b87),
+                                  color: const Color(0xFF757b87),
                                   fontSize: 11.sp,
                                 ),
                                 Text(
@@ -613,7 +602,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 CustomText(
                                   text: "Chi phí",
                                   fontWeight: FontWeight.w400,
-                                  color: Color(0xFF757b87),
+                                  color: const Color(0xFF757b87),
                                   fontSize: 11.sp,
                                 ),
                                 Text(
@@ -646,7 +635,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 CustomText(
                                   text: "Mở tối đa",
                                   fontWeight: FontWeight.w400,
-                                  color: Color(0xFF757b87),
+                                  color: const Color(0xFF757b87),
                                   fontSize: 11.sp,
                                 ),
                                 Text(
@@ -661,7 +650,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 CustomText(
                                   text: "Chi phí",
                                   fontWeight: FontWeight.w400,
-                                  color: Color(0xFF757b87),
+                                  color: const Color(0xFF757b87),
                                   fontSize: 11.sp,
                                 ),
                                 Text(
@@ -706,7 +695,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                       });
                     },
                   ),
-                  Container(height: 400.h, child: selectedWidget),
+                  SizedBox(height: 400.h, child: selectedWidget),
                   // SizedBox(
                   //   height: 50,
                   // ),
@@ -725,7 +714,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            CustomText(text: "Số tiền khả dụng: 20,0000.00 USDC"),
+            const CustomText(text: "Số tiền khả dụng: 20,0000.00 USDC"),
             Text(
               "Chuyển tiền vào ví hợp đồng tương lai của bạn để giao dịch hoặc tham gia giao dịch thử nghiệm an toàn",
               textAlign: TextAlign.center,
