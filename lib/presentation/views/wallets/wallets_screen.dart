@@ -12,6 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../theme/palette.dart';
 
 class WalletScreen extends StatefulWidget {
+  const WalletScreen({super.key});
+
   @override
   _WalletScreenState createState() => _WalletScreenState();
 }
@@ -41,14 +43,14 @@ class _WalletScreenState extends State<WalletScreen>
               height: MediaQuery.of(context).size.height * 0.045,
               decoration: BoxDecoration(
                   color: palette.selectedTimeChipColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                  borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                       decoration: BoxDecoration(
                         color: palette.selectedTabChipColor,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8),
                           bottomLeft: Radius.circular(8),
                         ),
@@ -57,7 +59,7 @@ class _WalletScreenState extends State<WalletScreen>
                       width: MediaQuery.of(context).size.width * 0.3,
                       height: MediaQuery.of(context).size.height * 0.045,
                       child: Container(
-                        margin: EdgeInsets.all(3),
+                        margin: const EdgeInsets.all(3),
                         // padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(color: palette.cardColor),
                         child: TextButton(
@@ -70,7 +72,7 @@ class _WalletScreenState extends State<WalletScreen>
                   Container(
                       decoration: BoxDecoration(
                         color: palette.selectedTabChipColor,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(8),
                           bottomRight: Radius.circular(8),
                         ),

@@ -1,13 +1,11 @@
-import 'package:binance_clone/models/trade_data.dart';
-import 'package:binance_clone/presentation/views/markets/market_view_model.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:binance_clone/utils/binance_testnest.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-import '../../../data/local_data/sharepref.dart';
+import '../../../data/local_data/share_pref.dart';
 import '../../theme/palette.dart';
 import '../../widgets/position_card.dart';
 import '../../widgets/wallet_tabbar.dart';
@@ -100,8 +98,16 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
     // await SharePref.addPosition(symbol, entryPrice, leverage, margin);
     loadPositions();
 
+    if (!context.mounted) {
+      return;
+    }
+
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Position created successfully!")));
+      const SnackBar(
+        content: Text("Position created successfully!"),
+      ),
+    );
   }
 
   @override
@@ -113,16 +119,15 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
-        
-      }
+        }
       },
       child: Scaffold(
         backgroundColor: palette.cardColor,
         appBar: AppBar(
-          title: CustomText(text: "Create Position"),
+          title: const CustomText(text: "Create Position"),
           bottom: TabBar(
             controller: _tabController,
-            tabs: [
+            tabs: const [
               Tab(text: "Create Position"),
               Tab(text: "Create Order"),
             ],
@@ -141,7 +146,6 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
 
   Widget buildPositionCreation({required String selectedSymbol}) {
     final palette = Theme.of(context).extension<Palette>()!;
-    final marketData = ref.read(marketViewModelProvider).marketData;
 
     return SingleChildScrollView(
       child: Column(
@@ -174,7 +178,7 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
             },
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.grey, width: 1),
@@ -195,15 +199,15 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
           //   ],
           //   onChanged: null, // Không cho phép thay đổi
           // ),
-          inputForm(
+          InputForm(
             controller: entryPriceController,
             label: "Entry Price",
           ),
-          inputForm(
+          InputForm(
             controller: leverageController,
             label: "Leverage",
           ),
-          inputForm(
+          InputForm(
             controller: marginController,
             label: "Margin",
           ),
@@ -212,23 +216,29 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
               if (entryPriceController.text.isEmpty ||
                   leverageController.text.isEmpty ||
                   marginController.text.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: CustomText(text: "Bạn chưa điền đủ thông tin"),
-                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: CustomText(text: "Bạn chưa điền đủ thông tin"),
+                  ),
+                );
                 return;
               }
               createPosition();
             },
             child: Container(
-                margin: EdgeInsets.only(top: 10),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: const Color(0xfff0b90b),
-                    borderRadius: BorderRadius.circular(10)),
-                child: CustomText(text: "Create Position")),
+              margin: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: const Color(0xfff0b90b),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const CustomText(text: "Create Position"),
+            ),
           ),
-          Container(height: 400, child: buildPositionList()),
-          Gap(50),
+          SizedBox(
+            height: 400,
+            child: buildPositionList(),
+          ),
+          const Gap(50),
         ],
       ),
     );
@@ -269,7 +279,7 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
             },
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.grey, width: 1),
@@ -278,15 +288,15 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
               text: selectedSymbol,
             ),
           ),
-          inputForm(
+          InputForm(
             controller: entryPriceController,
             label: "Entry Price",
           ),
-          inputForm(
+          InputForm(
             controller: leverageController,
             label: "Leverage",
           ),
-          inputForm(
+          InputForm(
             controller: marginController,
             label: "User Margin",
           ),
@@ -294,7 +304,6 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
             onPressed: () async {
               double entryPrice =
                   double.tryParse(entryPriceController.text) ?? 0;
-              double leverage = double.tryParse(leverageController.text) ?? 0;
               double userMargin = double.tryParse(marginController.text) ?? 0;
               String walletName = wallets[selectedWalletIndex];
               String side = selectedPosition == "Long" ? "BUY" : "SELL";
@@ -302,24 +311,42 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
               try {
                 String response = await binanceAPI.placeOrderWithWalletBalance(
                     walletName, selectedSymbol, side, entryPrice, userMargin);
+
+                if (!context.mounted) {
+                  return;
+                }
+
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(response),
                 ));
-                print(response);
+
+                if (kDebugMode) {
+                  print(response);
+                }
               } catch (error) {
+                if (!context.mounted) {
+                  return;
+                }
+
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text("Error when placing order: $error"),
                 ));
-                print("Error when placing order: $error");
+
+                if (kDebugMode) {
+                  print("Error when placing order: $error");
+                }
               }
             },
             child: Container(
-                margin: EdgeInsets.only(top: 10),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: const Color(0xfff0b90b),
-                    borderRadius: BorderRadius.circular(10)),
-                child: CustomText(text: "Create Order")),
+              margin: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: const Color(0xfff0b90b),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const CustomText(text: "Create Order"),
+            ),
           ),
         ],
       ),
@@ -338,8 +365,8 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen>
   }
 }
 
-class inputForm extends StatelessWidget {
-  const inputForm({super.key, required this.controller, required this.label});
+class InputForm extends StatelessWidget {
+  const InputForm({super.key, required this.controller, required this.label});
 
   final TextEditingController controller;
   final String label;
@@ -349,8 +376,8 @@ class inputForm extends StatelessWidget {
     final palette = Theme.of(context).extension<Palette>()!;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
           color: palette.selectedTimeChipColor,
           borderRadius: BorderRadius.circular(10)),

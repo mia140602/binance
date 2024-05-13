@@ -1,6 +1,5 @@
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -10,8 +9,6 @@ import 'package:binance_clone/presentation/views/orderbook/widgets/filter_row.da
 import 'package:binance_clone/presentation/views/orderbook/widgets/order_table.dart';
 import 'package:binance_clone/presentation/views/orderbook/widgets/price_bar.dart';
 import 'package:binance_clone/presentation/widgets/reactive_builder.dart';
-
-import '../../theme/palette.dart';
 
 class OrderBookView extends StatefulWidget {
   final String pair;
@@ -31,7 +28,6 @@ class _OrderBookViewState extends State<OrderBookView> {
 
   @override
   Widget build(BuildContext context) {
-    final palette = Theme.of(context).extension<Palette>()!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Consumer(builder: (context, ref, _) {
@@ -82,7 +78,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 1.h),
                   decoration: BoxDecoration(
-                    color: Color(0xFF29313C),
+                    color: const Color(0xFF29313C),
                     borderRadius: BorderRadius.circular(5.r),
                   ),
                   width: MediaQuery.of(context).size.width * 0.3,

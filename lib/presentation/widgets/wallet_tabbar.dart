@@ -33,7 +33,7 @@ class WalletTabBar extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Wrap(
         spacing: 8.0, // khoảng cách giữa các button
         children: List.generate(tabs.length, (i) {

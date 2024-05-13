@@ -13,7 +13,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return AppBar(
-      backgroundColor: Color(0xFF1F2630),
+      backgroundColor: const Color(0xFF1F2630),
       actions: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0.w),

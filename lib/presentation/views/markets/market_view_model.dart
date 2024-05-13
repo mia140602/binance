@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/data/services/socket_service.dart';
 import 'package:binance_clone/models/trade_data.dart';
@@ -20,7 +20,10 @@ class MarketViewModel {
     _socketService.subscribe([
       "!miniTicker@arr",
     ]);
-    print("WebSocket subscribed to !miniTicker@arr");
+    
+    if (kDebugMode) {
+      print("WebSocket subscribed to !miniTicker@arr");
+    }
   }
 
   void _onData(dynamic data) {
@@ -39,6 +42,9 @@ class MarketViewModel {
   void dispose() {
     _socketService.dispose();
     _marketData.dispose();
-    print("Disposed MarketViewModel");
+    
+    if (kDebugMode) {
+      print("Disposed MarketViewModel");
+    }
   }
 }

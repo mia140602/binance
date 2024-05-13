@@ -33,14 +33,12 @@ class CustomIcon extends StatelessWidget {
                       color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w500),
                 )
-              : SizedBox(),
-          Container(
-            child: Image.asset(
-              iconPath,
-              height: height,
-              width: width,
-              color: color,
-            ),
+              : const SizedBox(),
+          Image.asset(
+            iconPath,
+            height: height,
+            width: width,
+            color: color,
           ),
         ],
       ),

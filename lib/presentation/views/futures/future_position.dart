@@ -1,8 +1,7 @@
 import 'package:binance_clone/presentation/widgets/position_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/local_data/sharePref.dart';
+import '../../../data/local_data/share_pref.dart';
 import '../../theme/palette.dart';
 
 class FuturePosition extends StatefulWidget {

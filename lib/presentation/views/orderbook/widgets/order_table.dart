@@ -36,11 +36,11 @@ class _OrderRow extends StatelessWidget {
   final bool isFuture; // Thêm biến isFuture
   final int itemCount;
 
-  const _OrderRow(
-      {super.key,
-      required this.order,
-      required this.isFuture,
-      required this.itemCount});
+  const _OrderRow({
+    required this.order,
+    required this.isFuture,
+    required this.itemCount,
+  });
 
   List<String> get _items =>
       isFuture ? [order.price, order.amount] : [order.price, order.amount];
@@ -53,8 +53,6 @@ class _OrderRow extends StatelessWidget {
       if (order.isBuy) return palette.buyButtonColor;
       return palette.sellPriceColor;
     }
-
-    final width = MediaQuery.of(context).size.width;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),

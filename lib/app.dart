@@ -1,7 +1,6 @@
 import 'package:binance_clone/presentation/theme/dark_palette.dart';
 import 'package:binance_clone/presentation/views/navigation_bar/bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:binance_clone/presentation/theme/light_palette.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,13 +28,13 @@ class SissyphusApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: const Color(0xfff8f8f9),
             colorScheme: ColorScheme.dark(
-              primary: Color(0xffFFFFFF).withOpacity(0.8),
-              secondary: Color(0xff737A91),
-              background: Color(0xfff8f8f9),
+              primary: const Color(0xffFFFFFF).withOpacity(0.8),
+              secondary: const Color(0xff737A91),
+              background: const Color(0xfff8f8f9),
             ),
             fontFamily: "Satoshi",
           ),
-          home: BottomNavigationBarr(),
+          home: const BottomNavigationBarr(),
         );
       },
     );

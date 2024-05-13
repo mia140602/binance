@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:binance_clone/presentation/views/trade_details/trade_details_view_model.dart';
 import 'package:intl/intl.dart';
-import '../../data/local_data/sharepref.dart';
+import '../../data/local_data/share_pref.dart';
 
 import '../theme/palette.dart';
 
@@ -17,7 +17,7 @@ class PositionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
-    void _deletePosition(BuildContext context) {
+    void deletePosition(BuildContext context) {
       // Gọi hàm xóa position từ SharePref
       SharePref.deletePosition(
               position['walletName'],
@@ -28,11 +28,11 @@ class PositionCard extends StatelessWidget {
               position['margin'])
           .then((_) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Position deleted successfully')),
+          const SnackBar(content: Text('Position deleted successfully')),
         );
       }).catchError((error) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to delete position')),
+          const SnackBar(content: Text('Failed to delete position')),
         );
       });
     }
@@ -97,7 +97,7 @@ class PositionCard extends StatelessWidget {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () => _deletePosition(context),
+                        onTap: () => deletePosition(context),
                         child: Image.asset(
                           "assets/icons/futures_icon/share.png",
                           width: 14,
@@ -123,7 +123,7 @@ class PositionCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end)
                     ],
                   ),
-                  Gap(10),
+                  const Gap(10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -132,16 +132,18 @@ class PositionCard extends StatelessWidget {
                           title: "Kích thước (${tradeData.baseAsset})",
                           content: "75.000"),
                       _smallContent(
-                          context: context,
-                          title: "Margin (${tradeData.quoteAsset})",
-                          content: "${userMarginFormat}"),
+                        context: context,
+                        title: "Margin (${tradeData.quoteAsset})",
+                        content: userMarginFormat,
+                      ),
                       Gap(20.w),
                       _smallContent(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          context: context,
-                          title: "Tỉ lệ ký quỹ",
-                          content: "${marginRatio}",
-                          color: pnlColor),
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        context: context,
+                        title: "Tỉ lệ ký quỹ",
+                        content: marginRatio,
+                        color: pnlColor,
+                      ),
                     ],
                   ),
                   Gap(10.h),
@@ -149,13 +151,15 @@ class PositionCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _smallContent(
-                          context: context,
-                          title: "Giá vào lệnh (${tradeData.quoteAsset})",
-                          content: "${entryPriceFormat}"),
+                        context: context,
+                        title: "Giá vào lệnh (${tradeData.quoteAsset})",
+                        content: entryPriceFormat,
+                      ),
                       _smallContent(
-                          context: context,
-                          title: "Giá đánh dấu (${tradeData.quoteAsset})",
-                          content: "${markPriceFormat}"),
+                        context: context,
+                        title: "Giá đánh dấu (${tradeData.quoteAsset})",
+                        content: markPriceFormat,
+                      ),
                       _smallContent(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           context: context,
@@ -274,7 +278,7 @@ class PositionCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         width: (MediaQuery.of(context).size.width - 60) / 3,
         decoration: BoxDecoration(
           color: palette.selectedTimeChipColor,

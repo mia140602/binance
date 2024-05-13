@@ -22,10 +22,7 @@ class _EarnScreenState extends State<EarnScreen> {
     final palette = Theme.of(context).extension<Palette>()!;
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery
-              .of(context)
-              .size
-              .width * 0.03, vertical: 10.h),
+          horizontal: MediaQuery.of(context).size.width * 0.03, vertical: 10.h),
       child: Column(
         children: [
           Row(
@@ -34,7 +31,7 @@ class _EarnScreenState extends State<EarnScreen> {
               Row(
                 children: [
                   Text(
-                    AppStrings.total_earn,
+                    AppStrings.totalEarn,
                     style: GoogleFonts.roboto(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
@@ -91,7 +88,9 @@ class _EarnScreenState extends State<EarnScreen> {
               ),
             ],
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,10 +123,12 @@ class _EarnScreenState extends State<EarnScreen> {
                   RichText(
                     text: TextSpan(
                         text: 'Lợi nhuận trong 30 ngày',
-                        style: AppStyle.smallText()
-                    ),
+                        style: AppStyle.smallText()),
                   ),
-                  Text("(USD)", style: AppStyle.smallText(),),
+                  Text(
+                    "(USD)",
+                    style: AppStyle.smallText(),
+                  ),
                   Text(
                     "\$0",
                     style: GoogleFonts.roboto(
@@ -139,7 +140,9 @@ class _EarnScreenState extends State<EarnScreen> {
               )
             ],
           ),
-          SizedBox(height: 20.h,),
+          SizedBox(
+            height: 20.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -235,7 +238,9 @@ class _EarnScreenState extends State<EarnScreen> {
               )
             ],
           ),
-          SizedBox(height: 20.h,),
+          SizedBox(
+            height: 20.h,
+          ),
           Container(
             width: double.infinity,
             height: 1.h,
@@ -246,18 +251,32 @@ class _EarnScreenState extends State<EarnScreen> {
             children: [
               Row(
                 children: [
-                  TextButton(onPressed: () {
-                    setState(() {
-                      isChecked = true;
-                    });
-                  },
-                    child: Text("Theo tài sản", style:isChecked ?  AppStyle.boldText(): AppStyle.boldgreyText(),),),
-                  TextButton(onPressed: () {
-                    setState(() {
-                      isChecked = false;
-                    });
-                  },
-                    child: Text("Theo sản phẩm", style:isChecked ?  AppStyle.boldgreyText(): AppStyle.boldText(),),)
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isChecked = true;
+                      });
+                    },
+                    child: Text(
+                      "Theo tài sản",
+                      style: isChecked
+                          ? AppStyle.boldText()
+                          : AppStyle.boldgreyText(),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isChecked = false;
+                      });
+                    },
+                    child: Text(
+                      "Theo sản phẩm",
+                      style: isChecked
+                          ? AppStyle.boldgreyText()
+                          : AppStyle.boldText(),
+                    ),
+                  )
                 ],
               ),
               Row(
@@ -267,7 +286,9 @@ class _EarnScreenState extends State<EarnScreen> {
                     height: 15.h,
                     color: palette.grayColor,
                   ),
-                  SizedBox(width: 10.w,),
+                  SizedBox(
+                    width: 10.w,
+                  ),
                   Icon(
                     Icons.format_align_justify,
                     size: 15.h,
@@ -277,21 +298,34 @@ class _EarnScreenState extends State<EarnScreen> {
               )
             ],
           ),
-          isChecked?Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 20.h,),
-              Image.asset(WalletAssets.bigsearch,height: 80.h,),
-              SizedBox(height: 20.h,),
-              Text("Không có dữ liệu được ghi nhận", style: AppStyle.regularGrayText(),),
-              SizedBox(height: 20.h,),
-              Container(
-                height: 32.h,
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                decoration: BoxDecoration(
+          isChecked
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Image.asset(
+                      WalletAssets.bigsearch,
+                      height: 80.h,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      "Không có dữ liệu được ghi nhận",
+                      style: AppStyle.regularGrayText(),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Container(
+                        height: 32.h,
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        decoration: BoxDecoration(
                           color: palette.mainYellowColor,
                           borderRadius: BorderRadius.circular(5.r),
-                ),
+                        ),
                         child: TextButton(
                             onPressed: () {},
                             child: Text(
@@ -302,21 +336,34 @@ class _EarnScreenState extends State<EarnScreen> {
                                   color: Colors.black),
                             )))
                   ],
-          ): Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 20.h,),
-              Image.asset(WalletAssets.bigsearch,height: 80.h,),
-              SizedBox(height: 20.h,),
-              Text("Không có dữ liệu được ghi nhận", style: AppStyle.regularGrayText(),),
-              SizedBox(height: 20.h,),
-              Container(
-                  height: 32.h,
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  decoration: BoxDecoration(
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Image.asset(
+                      WalletAssets.bigsearch,
+                      height: 80.h,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      "Không có dữ liệu được ghi nhận",
+                      style: AppStyle.regularGrayText(),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Container(
+                        height: 32.h,
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        decoration: BoxDecoration(
                           color: palette.mainYellowColor,
                           borderRadius: BorderRadius.circular(5.r),
-                  ),
+                        ),
                         child: TextButton(
                             onPressed: () {},
                             child: Text(
@@ -327,10 +374,9 @@ class _EarnScreenState extends State<EarnScreen> {
                                   color: Colors.black),
                             )))
                   ],
-          )
+                )
         ],
       ),
-
     );
   }
 }

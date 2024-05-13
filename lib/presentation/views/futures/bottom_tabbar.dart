@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+
 class MyTabBar extends StatefulWidget {
+  const MyTabBar({super.key});
+
   @override
   _MyTabBarState createState() => _MyTabBarState();
 }
 
-class _MyTabBarState extends State<MyTabBar> with SingleTickerProviderStateMixin {
+class _MyTabBarState extends State<MyTabBar>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -23,10 +27,10 @@ class _MyTabBarState extends State<MyTabBar> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My TabBar'),
+        title: const Text('My TabBar'),
         bottom: TabBar(
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: 'Option 1'),
             Tab(text: 'Option 2'),
             Tab(text: 'Option 3'),
@@ -35,7 +39,7 @@ class _MyTabBarState extends State<MyTabBar> with SingleTickerProviderStateMixin
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
+        children: const [
           Center(child: Text('Content for Option 1')),
           Center(child: Text('Content for Option 2')),
           Center(child: Text('Content for Option 3')),

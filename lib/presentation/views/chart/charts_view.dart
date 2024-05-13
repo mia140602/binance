@@ -15,8 +15,12 @@ import '../../../utils/percent.dart';
 import '../../theme/palette.dart';
 
 class ChartsView extends StatelessWidget {
-  ChartsView({super.key, required this.symbol});
-  String symbol;
+  const ChartsView({
+    super.key,
+    required this.symbol,
+  });
+  
+  final String symbol;
 
   @override
   Widget build(BuildContext context) {

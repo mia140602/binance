@@ -207,7 +207,7 @@ class _TradeModalState extends State<TradeModal> {
 
 class _TextWithInfo extends StatelessWidget {
   final String text;
-  const _TextWithInfo(this.text, {super.key});
+  const _TextWithInfo(this.text);
 
   @override
   Widget build(BuildContext context) {
@@ -236,17 +236,16 @@ class _TextWithInfo extends StatelessWidget {
 }
 
 class _TextField extends StatelessWidget {
-  final String hint;
+  final String? hint;
   final Widget? prefix;
   final Widget? suffix;
   final bool enabled;
 
   const _TextField({
-    super.key,
-    this.hint = "0.00 USD",
     this.enabled = true,
     this.prefix,
     this.suffix,
+    this.hint,
   });
 
   @override
@@ -283,7 +282,7 @@ class _TextField extends StatelessWidget {
 }
 
 class _CheckBox extends StatefulWidget {
-  const _CheckBox({super.key});
+  const _CheckBox();
 
   @override
   State<_CheckBox> createState() => _CheckBoxState();
@@ -323,7 +322,7 @@ class _CheckBoxState extends State<_CheckBox> {
 }
 
 class _TotalAccountValueSection extends StatelessWidget {
-  const _TotalAccountValueSection({super.key});
+  const _TotalAccountValueSection();
 
   @override
   Widget build(BuildContext context) {

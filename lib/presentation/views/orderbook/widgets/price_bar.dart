@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
-import 'package:binance_clone/presentation/widgets/custom_icon.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 
 import '../../../../utils/parser_util.dart';

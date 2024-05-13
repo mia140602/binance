@@ -1,11 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../data/local_data/sharepref.dart';
+import '../../../../data/local_data/share_pref.dart';
 import '../../../theme/palette.dart';
 import '../../../widgets/custom_text.dart';
 
 class FakeWallet extends StatefulWidget {
-  const FakeWallet();
+  const FakeWallet({super.key});
 
   @override
   State<FakeWallet> createState() => _FakeWalletState();
@@ -27,10 +28,6 @@ class _FakeWalletState extends State<FakeWallet> {
     setState(() {
       wallets = loadedWallets;
     });
-  }
-
-  void _loadTotalBalance() async {
-    await SharePref.getTotalBalance();
   }
 
   Widget _buildWalletList() {
@@ -91,12 +88,15 @@ class _FakeWalletState extends State<FakeWallet> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: CustomText(text: 'Thêm ví mới', color: Colors.black),
+          title: const CustomText(
+            text: 'Thêm ví mới',
+            color: Colors.black,
+          ),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     label: CustomText(
                       text: "Tên ví",
                       color: Colors.black,
@@ -168,6 +168,11 @@ class _FakeWalletState extends State<FakeWallet> {
                     amount! > 0) {
                   await SharePref.addWallet(walletName, amount!);
                   _loadWallets();
+
+                  if (!context.mounted) {
+                    return;
+                  }
+
                   Navigator.of(context).pop();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -194,8 +199,11 @@ class _FakeWalletState extends State<FakeWallet> {
       builder: (BuildContext context) {
         String editedWalletName = wallet["name"];
         double editedAmount = wallet["amount"];
-        print(wallet["name"]);
-        print(wallet["amount"]);
+
+        if (kDebugMode) {
+          print(wallet["name"]);
+          print(wallet["amount"]);
+        }
 
         TextEditingController nameController =
             TextEditingController(text: editedWalletName);
@@ -204,7 +212,7 @@ class _FakeWalletState extends State<FakeWallet> {
 
         return AlertDialog(
           backgroundColor: palette.cardColor,
-          title: Text('Sửa ví'),
+          title: const Text('Sửa ví'),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -237,8 +245,11 @@ class _FakeWalletState extends State<FakeWallet> {
               child: const Text('Lưu'),
               onPressed: () async {
                 if (editedWalletName.isEmpty || editedAmount <= 0) {
-                  print(editedWalletName);
-                  print(editedAmount);
+                  if (kDebugMode) {
+                    print(editedWalletName);
+                    print(editedAmount);
+                  }
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Vui lòng nhập tên và số tiền hợp lệ.'),
@@ -247,6 +258,11 @@ class _FakeWalletState extends State<FakeWallet> {
                 } else {
                   await SharePref.updateWallet(wallet["name"], editedAmount);
                   _loadWallets();
+
+                  if (!context.mounted) {
+                    return;
+                  }
+
                   Navigator.of(context).pop();
                 }
               },
@@ -266,8 +282,10 @@ class _FakeWalletState extends State<FakeWallet> {
             'Xóa ví',
             style: TextStyle(color: Colors.black),
           ),
-          content: Text('Bạn có chắc chắn muốn xóa ví ${wallet["name"]} không?',
-              style: TextStyle(color: Colors.black)),
+          content: Text(
+            'Bạn có chắc chắn muốn xóa ví ${wallet["name"]} không?',
+            style: const TextStyle(color: Colors.black),
+          ),
           actions: <Widget>[
             TextButton(
               child: const Text('Không', style: TextStyle(color: Colors.black)),
@@ -280,6 +298,11 @@ class _FakeWalletState extends State<FakeWallet> {
               onPressed: () async {
                 await SharePref.deleteWallet(wallet["name"]);
                 _loadWallets();
+
+                if (!context.mounted) {
+                  return;
+                }
+
                 Navigator.of(context).pop();
               },
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 
 class CustomChip extends StatelessWidget {
@@ -24,7 +23,6 @@ class CustomChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = Theme.of(context).extension<Palette>()!;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
 
 class FilterRow extends StatefulWidget {
@@ -69,7 +68,7 @@ class _Filter extends StatelessWidget {
   final bool selected;
   final List<Widget>? rightColumn;
 
-  _Filter({
+  const _Filter({
     super.key,
     required this.onPressed,
     this.selected = false,
@@ -85,21 +84,17 @@ class _Filter extends StatelessWidget {
       onTap: onPressed,
       child: Row(
         children: [
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _LineLeft(color: palette.filterLineColor),
-                _LineLeft(color: palette.filterLineColor),
-                _LineLeft(color: palette.filterLineColor),
-              ],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _LineLeft(color: palette.filterLineColor),
+              _LineLeft(color: palette.filterLineColor),
+              _LineLeft(color: palette.filterLineColor),
+            ],
           ),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: rightColumn ?? [],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: rightColumn ?? [],
           )
         ],
       ),
@@ -109,8 +104,8 @@ class _Filter extends StatelessWidget {
 
 class _LineLeft extends StatelessWidget {
   final Color color;
+  
   const _LineLeft({
-    super.key,
     required this.color,
   });
 
@@ -131,7 +126,6 @@ class _LineLeft extends StatelessWidget {
 class _Right extends StatelessWidget {
   final Color color;
   const _Right({
-    super.key,
     required this.color,
   });
 
@@ -152,7 +146,6 @@ class _Right extends StatelessWidget {
 class _LineRight extends StatelessWidget {
   final Color color;
   const _LineRight({
-    super.key,
     required this.color,
   });
 

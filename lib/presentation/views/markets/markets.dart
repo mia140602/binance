@@ -20,15 +20,15 @@ class _MarketsState extends State<Markets> {
     Widget selectedWidget = Container();
 
     if (check == 0) {
-      selectedWidget = Text("Danh sách yêu thích");
+      selectedWidget = const Text("Danh sách yêu thích");
     } else if (check == 1) {
-      selectedWidget = MarketView();
+      selectedWidget = const MarketView();
     } else if (check == 2) {
-      selectedWidget = Text("Khám phá");
+      selectedWidget = const Text("Khám phá");
     } else if (check == 3) {
-      selectedWidget = Text("Square");
+      selectedWidget = const Text("Square");
     } else {
-      selectedWidget = Text("Dữ liệu");
+      selectedWidget = const Text("Dữ liệu");
     }
     final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
@@ -44,7 +44,7 @@ class _MarketsState extends State<Markets> {
                   color: palette.cardColor),
               child: TextFormField(
                 decoration: InputDecoration(
-                    icon: Icon(Icons.search_sharp),
+                    icon: const Icon(Icons.search_sharp),
                     hintText: "Tìm kiếm Coin/Cặp giao dịch/Phát sinh",
                     hintStyle: AppStyle.smallText()),
               )),
@@ -53,7 +53,7 @@ class _MarketsState extends State<Markets> {
           children: [
             CustomTabBar(
               index: check,
-              tabs: [
+              tabs: const [
                 "Danh sách yêu thích",
                 "Thị trường",
                 "Khám phá",

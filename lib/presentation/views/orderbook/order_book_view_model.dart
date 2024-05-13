@@ -6,7 +6,7 @@ import 'package:binance_clone/presentation/views/trade_details/trade_details_vie
 // import 'package:binance_clone/utils/app_strings.dart';
 
 final orderBookViewModelProvider = Provider.family<OrderBookViewModel, String>(
-  (ref, _pair) => OrderBookViewModel(ref, _pair),
+  (ref, pair) => OrderBookViewModel(ref, pair),
 );
 
 class OrderBookViewModel {
@@ -24,7 +24,11 @@ class OrderBookViewModel {
     _socketService.subscribe([
       "${_pair.toLowerCase()}@aggTrade",
     ]);
-    print("Pair: ${_pair.toLowerCase()}");
+
+    if (kDebugMode) {
+      print("Pair: ${_pair.toLowerCase()}");
+    }
+
     _listenToTradeDetails();
   }
 
@@ -43,7 +47,6 @@ class OrderBookViewModel {
         .read(tradeDetailsViewModelProvider(_pair))
         .tradeData
         .addListener(_tradeDataListener);
-    ;
   }
 
   final ValueNotifier<List<Order>> _orders = ValueNotifier([]);

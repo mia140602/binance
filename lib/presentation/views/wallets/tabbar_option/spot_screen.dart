@@ -31,7 +31,7 @@ class _SpotScreenState extends State<SpotScreen> {
                 Row(
                   children: [
                     Text(
-                      AppStrings.total_balance,
+                      AppStrings.totalBalance,
                       style: TextStyle(fontSize: 14.sp),
                     ),
                     SizedBox(
@@ -65,7 +65,10 @@ class _SpotScreenState extends State<SpotScreen> {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.history,size: 14.h,)
+                    Icon(
+                      Icons.history,
+                      size: 14.h,
+                    )
                   ],
                 ),
               ],
@@ -154,20 +157,25 @@ class _SpotScreenState extends State<SpotScreen> {
                   ),
                 ),
               ],
-            ),SizedBox(height: 15.h,),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
             Container(
               width: double.infinity,
               height: 45.h,
               decoration: BoxDecoration(
                   border: Border.all(color: palette.grayColor),
-                  borderRadius: BorderRadius.circular(7.r)
-              ),
+                  borderRadius: BorderRadius.circular(7.r)),
               child: Row(
                 children: [
                   SizedBox(
                     width: 15.w,
                   ),
-                  Image.asset(WalletAssets.bnb, height: 16.h,),
+                  Image.asset(
+                    WalletAssets.bnb,
+                    height: 16.h,
+                  ),
                   SizedBox(
                     width: 8.w,
                   ),
@@ -178,12 +186,18 @@ class _SpotScreenState extends State<SpotScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 10.h,),
+            SizedBox(
+              height: 10.h,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Số dư", style: AppStyle.bigboldText(),),
-                Row(children: [
+                Text(
+                  "Số dư",
+                  style: AppStyle.bigboldText(),
+                ),
+                Row(
+                  children: [
                     Image.asset(
                       WalletAssets.search,
                       height: 15.h,
@@ -197,164 +211,272 @@ class _SpotScreenState extends State<SpotScreen> {
                       height: 15.h,
                       color: palette.grayColor,
                     ),
-                  ],)
+                  ],
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(CoinAssets.bnb, height: 22.h,),
-                    SizedBox(width: 10.h,),
+                    Image.asset(
+                      CoinAssets.bnb,
+                      height: 22.h,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("BNB", style: AppStyle.bigText(),),
-                        Text("BNB", style: AppStyle.smallGrayText(),)
+                        Text(
+                          "BNB",
+                          style: AppStyle.bigText(),
+                        ),
+                        Text(
+                          "BNB",
+                          style: AppStyle.smallGrayText(),
+                        )
                       ],
                     ),
-        
                   ],
                 ),
-                Text("0.00", style: AppStyle.bigText(),)
+                Text(
+                  "0.00",
+                  style: AppStyle.bigText(),
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(CoinAssets.bitcoin, height: 22.h,),
-                    SizedBox(width: 10.h,),
+                    Image.asset(
+                      CoinAssets.bitcoin,
+                      height: 22.h,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("BTC", style: AppStyle.bigText(),),
-                        Text("Bitcoin", style: AppStyle.smallGrayText(),)
+                        Text(
+                          "BTC",
+                          style: AppStyle.bigText(),
+                        ),
+                        Text(
+                          "Bitcoin",
+                          style: AppStyle.smallGrayText(),
+                        )
                       ],
                     ),
-        
                   ],
                 ),
-                Text("0.00", style: AppStyle.bigText(),)
+                Text(
+                  "0.00",
+                  style: AppStyle.bigText(),
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(CoinAssets.eth, height: 22.h,),
-                    SizedBox(width: 10.h,),
+                    Image.asset(
+                      CoinAssets.eth,
+                      height: 22.h,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("ETH", style: AppStyle.bigText(),),
-                        Text("Ethereum", style: AppStyle.smallGrayText(),)
+                        Text(
+                          "ETH",
+                          style: AppStyle.bigText(),
+                        ),
+                        Text(
+                          "Ethereum",
+                          style: AppStyle.smallGrayText(),
+                        )
                       ],
                     ),
-        
                   ],
                 ),
-                Text("0.00", style: AppStyle.bigText(),)
+                Text(
+                  "0.00",
+                  style: AppStyle.bigText(),
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(CoinAssets.dogecoin, height: 22.h,),
-                    SizedBox(width: 10.h,),
+                    Image.asset(
+                      CoinAssets.dogecoin,
+                      height: 22.h,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("DOGE", style: AppStyle.bigText(),),
-                        Text("Dogecoin", style: AppStyle.smallGrayText(),)
+                        Text(
+                          "DOGE",
+                          style: AppStyle.bigText(),
+                        ),
+                        Text(
+                          "Dogecoin",
+                          style: AppStyle.smallGrayText(),
+                        )
                       ],
                     ),
-        
                   ],
                 ),
-                Text("0.00", style: AppStyle.bigText(),)
+                Text(
+                  "0.00",
+                  style: AppStyle.bigText(),
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(CoinAssets.solana, height: 22.h,),
-                    SizedBox(width: 10.h,),
+                    Image.asset(
+                      CoinAssets.solana,
+                      height: 22.h,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("SOL", style: AppStyle.bigText(),),
-                        Text("Solana", style: AppStyle.smallGrayText(),)
+                        Text(
+                          "SOL",
+                          style: AppStyle.bigText(),
+                        ),
+                        Text(
+                          "Solana",
+                          style: AppStyle.smallGrayText(),
+                        )
                       ],
                     ),
-        
                   ],
                 ),
-                Text("0.00", style: AppStyle.bigText(),)
+                Text(
+                  "0.00",
+                  style: AppStyle.bigText(),
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(CoinAssets.w, height: 22.h,),
-                    SizedBox(width: 10.h,),
+                    Image.asset(
+                      CoinAssets.w,
+                      height: 22.h,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("W", style: AppStyle.bigText(),),
-                        Text("Wormhole", style: AppStyle.smallGrayText(),)
+                        Text(
+                          "W",
+                          style: AppStyle.bigText(),
+                        ),
+                        Text(
+                          "Wormhole",
+                          style: AppStyle.smallGrayText(),
+                        )
                       ],
                     ),
-        
                   ],
                 ),
-                Text("0.00", style: AppStyle.bigText(),)
+                Text(
+                  "0.00",
+                  style: AppStyle.bigText(),
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(CoinAssets.shib, height: 22.h,),
-                    SizedBox(width: 10.h,),
+                    Image.asset(
+                      CoinAssets.shib,
+                      height: 22.h,
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("SHIB", style: AppStyle.bigText(),),
-                        Text("SHIBA INU", style: AppStyle.smallGrayText(),)
+                        Text(
+                          "SHIB",
+                          style: AppStyle.bigText(),
+                        ),
+                        Text(
+                          "SHIBA INU",
+                          style: AppStyle.smallGrayText(),
+                        )
                       ],
                     ),
-        
                   ],
                 ),
-                Text("0.00", style: AppStyle.bigText(),),
+                Text(
+                  "0.00",
+                  style: AppStyle.bigText(),
+                ),
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
           ],
         ),
       ),

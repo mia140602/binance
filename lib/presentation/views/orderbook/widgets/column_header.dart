@@ -42,7 +42,6 @@ class _ColumnItem extends StatelessWidget {
   final String subtitle;
 
   const _ColumnItem({
-    super.key,
     required this.title,
     this.subtitle = "",
   });
@@ -65,7 +64,7 @@ class _ColumnItem extends StatelessWidget {
           // fontWeight: FontWeight.w600,
           color: palette.selectedTimeChipColor,
         ),
-        Gap(10)
+        const Gap(10),
       ],
     );
   }

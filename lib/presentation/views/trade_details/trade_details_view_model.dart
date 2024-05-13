@@ -1,5 +1,5 @@
-import 'package:binance_clone/data/local_data/sharepref.dart';
-import 'package:flutter/material.dart';
+import 'package:binance_clone/data/local_data/share_pref.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/data/services/socket_service.dart';
 import 'package:binance_clone/models/trade_data.dart';
@@ -26,7 +26,10 @@ class TradeDetailsViewModel {
     _socketService.subscribe([
       "$_pair@miniTicker",
     ]);
-    print("check:$_pair@miniTicker ");
+    
+    if (kDebugMode) {
+      print("check:$_pair@miniTicker ");
+    }
   }
 
   void _updateTotalBalance() async {
@@ -78,7 +81,11 @@ Future<double> calculateTotalPNL() async {
   double? currentPrice = double.tryParse(_tradeData.value.currentPrice);
 
   if (currentPrice == null) {
-    print("Invalid current price data: ${_tradeData.value.currentPrice}");
+
+    if (kDebugMode) {
+      print("Invalid current price data: ${_tradeData.value.currentPrice}");
+    }
+    
     return 0.0;  // Trả về 0 hoặc xử lý phù hợp nếu giá trị không hợp lệ
   }
 

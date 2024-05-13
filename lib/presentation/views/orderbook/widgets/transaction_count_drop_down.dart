@@ -21,12 +21,12 @@ class TransactionCountDropDown<T> extends StatefulWidget {
 
 class TransactionCountDropDownState<T>
     extends State<TransactionCountDropDown<T>> {
-  T? Countselected;
+  T? countSelected;
 
   @override
   void initState() {
     super.initState();
-    if (widget.counts.isNotEmpty) Countselected = widget.counts.first;
+    if (widget.counts.isNotEmpty) countSelected = widget.counts.first;
   }
 
   @override
@@ -47,7 +47,7 @@ class TransactionCountDropDownState<T>
           height: 9,
           color: Theme.of(context).colorScheme.secondary,
         ),
-        value: Countselected,
+        value: countSelected,
         items: [
           for (final item in widget.counts)
             DropdownMenuItem(
@@ -66,7 +66,7 @@ class TransactionCountDropDownState<T>
           }
 
           setState(() {
-            Countselected = value;
+            countSelected = value;
           });
         },
       ),

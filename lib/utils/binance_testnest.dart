@@ -1,9 +1,10 @@
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../data/local_data/sharepref.dart';
+import '../data/local_data/share_pref.dart';
 
 class BinanceTestnetAPI {
   String apiKey = AppStrings.testApiKey;
@@ -33,7 +34,7 @@ class BinanceTestnetAPI {
 
   Future<String> placeOrder(
       String symbol, double quantity, String side, double price) async {
-    final String endpoint = '/fapi/v1/order';
+    const String endpoint = '/fapi/v1/order';
     final String url = '$baseUrl$endpoint';
     final int timestamp = DateTime.now().millisecondsSinceEpoch -
         1000; // Trừ đi 1000 milliseconds
@@ -77,7 +78,7 @@ class BinanceTestnetAPI {
   }
 
   Future<List<dynamic>> getPositionInformation() async {
-    final String endpoint = '/fapi/v2/positionRisk';
+    const String endpoint = '/fapi/v2/positionRisk';
     final String url = '$baseUrl$endpoint';
     final int timestamp = DateTime.now().millisecondsSinceEpoch;
 
@@ -85,7 +86,7 @@ class BinanceTestnetAPI {
     final String signature = generateSignature(query);
 
     final response = await http.get(
-      Uri.parse('$url?${query}&signature=$signature'),
+      Uri.parse('$url?$query&signature=$signature'),
       headers: {
         'X-MBX-APIKEY': apiKey,
       },
@@ -131,7 +132,7 @@ class BinanceTestnetAPI {
 
   Future<String> placeMarketOrder(
       String symbol, double quantity, String side) async {
-    final String endpoint = '/fapi/v1/order';
+    const String endpoint = '/fapi/v1/order';
     final String url = '$baseUrl$endpoint';
     final int timestamp = DateTime.now().millisecondsSinceEpoch - 1000;
 
@@ -189,7 +190,7 @@ class BinanceTestnetAPI {
   }
 
   Future<String> adjustLeverage(String symbol, int leverage) async {
-    final String endpoint = '/fapi/v1/leverage';
+    const String endpoint = '/fapi/v1/leverage';
     final String url = '$baseUrl$endpoint';
     final int timestamp = DateTime.now().millisecondsSinceEpoch;
 
@@ -209,7 +210,11 @@ class BinanceTestnetAPI {
         'signature': signature,
       },
     );
-    print('timestamp' + timestamp.toString());
+
+    if (kDebugMode) {
+      print('timestamp$timestamp');
+    }
+
     if (response.statusCode == 200) {
       return 'Leverage adjusted: ${response.body}';
     } else {
@@ -218,12 +223,12 @@ class BinanceTestnetAPI {
   }
 
   Future<void> checkPositionLimits(String symbol) async {
-    final String endpoint = '/fapi/v1/positionLimit';
+    const String endpoint = '/fapi/v1/positionLimit';
     final String url = '$baseUrl$endpoint';
     final int timestamp = DateTime.now().millisecondsSinceEpoch;
 
     final String query = 'symbol=$symbol&timestamp=$timestamp';
-    final String signature = generateSignature(query);
+    generateSignature(query);
 
     final response = await http.get(
       Uri.parse(url),
@@ -233,14 +238,18 @@ class BinanceTestnetAPI {
     );
 
     if (response.statusCode == 200) {
-      print("Position limits: ${response.body}");
+      if (kDebugMode) {
+        print("Position limits: ${response.body}");
+      }
     } else {
-      print("Failed to fetch position limits: ${response.statusCode}");
+      if (kDebugMode) {
+        print("Failed to fetch position limits: ${response.statusCode}");
+      }
     }
   }
 
   Future<int> getServerTime() async {
-    final String url = '${AppStrings.testBaseUrl}/api/v3/time';
+    const String url = '${AppStrings.testBaseUrl}/api/v3/time';
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var body = json.decode(response.body);

@@ -1,11 +1,10 @@
-import 'package:binance_clone/presentation/views/markets/widgets/market_activity_header.dart';
 import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-import '../../../data/local_data/sharepref.dart';
+import '../../../data/local_data/share_pref.dart';
 import '../../../models/trade_data.dart';
 import '../../theme/palette.dart';
 
@@ -16,16 +15,6 @@ class MarketView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int _tabIndex = 0;
-
-    // void _setTabIndex(int value) {
-    //   if (_tabIndex != value) {
-    //     setState(() {
-    //       _tabIndex = value;
-    //     });
-    //   }
-    // }
-
     final marketData = ref.watch(marketViewModelProvider).marketData;
     final palette = Theme.of(context).extension<Palette>()!;
 
@@ -78,6 +67,10 @@ class MarketView extends ConsumerWidget {
                 onTap: () async {
                   await SharePref.updateLocalSymbol(tradeData.symbol);
 
+                  if (!context.mounted) {
+                    return;
+                  }
+
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return TradeViewDetails(
@@ -86,7 +79,8 @@ class MarketView extends ConsumerWidget {
                   }));
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -97,7 +91,7 @@ class MarketView extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               CustomText(
-                                text: '${tradeData.baseAsset}',
+                                text: tradeData.baseAsset,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: palette.appBarTitleColor,
@@ -110,8 +104,8 @@ class MarketView extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          Gap(5),
-                          CustomText(
+                          const Gap(5),
+                          const CustomText(
                             text: '2.42B',
                             fontSize: 12,
                             fontWeight: FontWeight.normal,
@@ -119,18 +113,16 @@ class MarketView extends ConsumerWidget {
                           )
                         ],
                       ),
-                      SizedBox(
-                        width: 70,
-                      ),
+                      const SizedBox(width: 70),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           CustomText(
-                            text: '${tradeData.currentPrice}',
+                            text: tradeData.currentPrice,
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
-                          Gap(5),
+                          const Gap(5),
                           CustomText(
                             text: '\$${tradeData.currentPrice}',
                             fontSize: 12,
@@ -142,7 +134,7 @@ class MarketView extends ConsumerWidget {
                       Container(
                         width: 90,
                         height: 36,
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             color: buttonK,
                             borderRadius: BorderRadius.circular(8)),

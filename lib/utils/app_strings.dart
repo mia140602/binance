@@ -19,10 +19,10 @@ class AppStrings {
   static const String earn = "Earn";
   static const String margin = "Margin";
   static const String megadrop = "Megadrop";
-  static const String total_balance = "Tổng số dư";
+  static const String totalBalance = "Tổng số dư";
   static const String noassets = "Your account has no assets.";
   static const String hot = "Hot";
-  static const String p2p_trading = "P2P Trading";
+  static const String p2pTrading = "P2P Trading";
   static const String deposit = "Deposit Crypto";
   static const String depositVnd = "Deposit VND";
   static const String buyWith = "Buy with VND";
@@ -36,10 +36,10 @@ class AppStrings {
   static const String options = "Options";
   static const String thirdAccount = "Thrid-party Account";
   static const String active = "Active";
-  static const String Cryptocurrency = "Ví điện tử";
+  static const String cryptocurrency = "Ví điện tử";
   static const String fdusd = "FDUSE";
   static const String meme = "MEME";
   static const String fisrtDigital = "First Digital USD";
   static const String avergeCost = "Average costs";
-  static const String total_earn = "Tổng giá trị ước tính";
+  static const String totalEarn = "Tổng giá trị ước tính";
 }

@@ -30,7 +30,7 @@ class _FundingScreenState extends State<FundingScreen> {
       if (states.any(interactiveStates.contains)) {
         return Colors.white;
       }
-      return Color(0xFF333B46);
+      return const Color(0xFF333B46);
     }
 
     return Container(
@@ -45,7 +45,7 @@ class _FundingScreenState extends State<FundingScreen> {
                 Row(
                   children: [
                     Text(
-                      AppStrings.total_balance,
+                      AppStrings.totalBalance,
                       style: TextStyle(fontSize: 14.sp),
                     ),
                     SizedBox(
@@ -294,7 +294,6 @@ class _FundingScreenState extends State<FundingScreen> {
                   height: 15.h,
                   color: palette.grayColor,
                 ),
-        
               ],
             ),
             Row(
@@ -310,13 +309,18 @@ class _FundingScreenState extends State<FundingScreen> {
                     });
                   },
                 ),
-                Text("Ẩn tài sản <1 USD", style: AppStyle.boldText(),)
+                Text(
+                  "Ẩn tài sản <1 USD",
+                  style: AppStyle.boldText(),
+                )
               ],
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Container(
               padding: EdgeInsets.only(left: 10.w),
-              child:Column(
+              child: Column(
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -327,20 +331,34 @@ class _FundingScreenState extends State<FundingScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset(CoinAssets.bnb, height: 22.h,),
+                              Image.asset(
+                                CoinAssets.bnb,
+                                height: 22.h,
+                              ),
                             ],
                           ),
-                          SizedBox(width: 10.w,),
+                          SizedBox(
+                            width: 10.w,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("BNB", style: AppStyle.bigText(),),
-                              Text("BNB", style: AppStyle.smallGrayText(),)
+                              Text(
+                                "BNB",
+                                style: AppStyle.bigText(),
+                              ),
+                              Text(
+                                "BNB",
+                                style: AppStyle.smallGrayText(),
+                              )
                             ],
                           ),
                         ],
                       ),
-                      Text("0.00", style: AppStyle.bigText(),)
+                      Text(
+                        "0.00",
+                        style: AppStyle.bigText(),
+                      )
                     ],
                   ),
                   Row(
@@ -348,9 +366,15 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Khả dụng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Khả dụng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -358,31 +382,52 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Đóng băng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Đóng băng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          Image.asset(CoinAssets.bitcoin, height: 22.h,),
-                          SizedBox(width: 10.h,),
+                          Image.asset(
+                            CoinAssets.bitcoin,
+                            height: 22.h,
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("BTC", style: AppStyle.bigText(),),
-                              Text("Bitcoin", style: AppStyle.smallGrayText(),)
+                              Text(
+                                "BTC",
+                                style: AppStyle.bigText(),
+                              ),
+                              Text(
+                                "Bitcoin",
+                                style: AppStyle.smallGrayText(),
+                              )
                             ],
                           ),
-
                         ],
                       ),
-                      Text("0.00", style: AppStyle.bigText(),)
+                      Text(
+                        "0.00",
+                        style: AppStyle.bigText(),
+                      )
                     ],
                   ),
                   Row(
@@ -390,9 +435,15 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Khả dụng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Khả dụng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -400,31 +451,52 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Đóng băng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Đóng băng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          Image.asset(CoinAssets.eth, height: 22.h,),
-                          SizedBox(width: 10.h,),
+                          Image.asset(
+                            CoinAssets.eth,
+                            height: 22.h,
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("ETH", style: AppStyle.bigText(),),
-                              Text("Ethereum", style: AppStyle.smallGrayText(),)
+                              Text(
+                                "ETH",
+                                style: AppStyle.bigText(),
+                              ),
+                              Text(
+                                "Ethereum",
+                                style: AppStyle.smallGrayText(),
+                              )
                             ],
                           ),
-
                         ],
                       ),
-                      Text("0.00", style: AppStyle.bigText(),)
+                      Text(
+                        "0.00",
+                        style: AppStyle.bigText(),
+                      )
                     ],
                   ),
                   Row(
@@ -432,9 +504,15 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Khả dụng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Khả dụng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -442,31 +520,52 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Đóng băng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Đóng băng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          Image.asset(CoinAssets.dogecoin, height: 22.h,),
-                          SizedBox(width: 10.h,),
+                          Image.asset(
+                            CoinAssets.dogecoin,
+                            height: 22.h,
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("DOGE", style: AppStyle.bigText(),),
-                              Text("Dogecoin", style: AppStyle.smallGrayText(),)
+                              Text(
+                                "DOGE",
+                                style: AppStyle.bigText(),
+                              ),
+                              Text(
+                                "Dogecoin",
+                                style: AppStyle.smallGrayText(),
+                              )
                             ],
                           ),
-
                         ],
                       ),
-                      Text("0.00", style: AppStyle.bigText(),)
+                      Text(
+                        "0.00",
+                        style: AppStyle.bigText(),
+                      )
                     ],
                   ),
                   Row(
@@ -474,9 +573,15 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Khả dụng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Khả dụng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -484,31 +589,52 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Đóng băng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Đóng băng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          Image.asset(CoinAssets.solana, height: 22.h,),
-                          SizedBox(width: 10.h,),
+                          Image.asset(
+                            CoinAssets.solana,
+                            height: 22.h,
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("SOL", style: AppStyle.bigText(),),
-                              Text("Solana", style: AppStyle.smallGrayText(),)
+                              Text(
+                                "SOL",
+                                style: AppStyle.bigText(),
+                              ),
+                              Text(
+                                "Solana",
+                                style: AppStyle.smallGrayText(),
+                              )
                             ],
                           ),
-
                         ],
                       ),
-                      Text("0.00", style: AppStyle.bigText(),)
+                      Text(
+                        "0.00",
+                        style: AppStyle.bigText(),
+                      )
                     ],
                   ),
                   Row(
@@ -516,9 +642,15 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Khả dụng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Khả dụng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -526,31 +658,52 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Đóng băng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Đóng băng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          Image.asset(CoinAssets.w, height: 22.h,),
-                          SizedBox(width: 10.h,),
+                          Image.asset(
+                            CoinAssets.w,
+                            height: 22.h,
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("W", style: AppStyle.bigText(),),
-                              Text("Wormhole", style: AppStyle.smallGrayText(),)
+                              Text(
+                                "W",
+                                style: AppStyle.bigText(),
+                              ),
+                              Text(
+                                "Wormhole",
+                                style: AppStyle.smallGrayText(),
+                              )
                             ],
                           ),
-
                         ],
                       ),
-                      Text("0.00", style: AppStyle.bigText(),)
+                      Text(
+                        "0.00",
+                        style: AppStyle.bigText(),
+                      )
                     ],
                   ),
                   Row(
@@ -558,9 +711,15 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Khả dụng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Khả dụng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -568,31 +727,52 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Đóng băng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Đóng băng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          Image.asset(CoinAssets.shib, height: 22.h,),
-                          SizedBox(width: 10.h,),
+                          Image.asset(
+                            CoinAssets.shib,
+                            height: 22.h,
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("SHIB", style: AppStyle.bigText(),),
-                              Text("SHIBA INU", style: AppStyle.smallGrayText(),)
+                              Text(
+                                "SHIB",
+                                style: AppStyle.bigText(),
+                              ),
+                              Text(
+                                "SHIBA INU",
+                                style: AppStyle.smallGrayText(),
+                              )
                             ],
                           ),
-
                         ],
                       ),
-                      Text("0.00", style: AppStyle.bigText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.bigText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -600,9 +780,15 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Khả dụng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Khả dụng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
                   Row(
@@ -610,14 +796,22 @@ class _FundingScreenState extends State<FundingScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 35.0.w),
-                        child: Text("Đóng băng", style: AppStyle.smallGrayText(),),
+                        child: Text(
+                          "Đóng băng",
+                          style: AppStyle.smallGrayText(),
+                        ),
                       ),
-                      Text("0.00", style: AppStyle.smallText(),),
+                      Text(
+                        "0.00",
+                        style: AppStyle.smallText(),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                 ],
-              ) ,
+              ),
             )
           ],
         ),
