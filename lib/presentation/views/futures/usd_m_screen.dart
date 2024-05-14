@@ -1,13 +1,16 @@
 import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
+import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/models/trade_data.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
@@ -32,7 +35,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
   // late TabController _tabController;
   String currentSymbol = "BTCUSDT";
   TextEditingController _priceController = TextEditingController();
-  int _index = 0;
+  int _index = 1;
 
   void _setIndex(int value) {
     if (_index != value) {
@@ -82,7 +85,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
     Widget selectedWidget = Container();
 
     if (_index == 0) {
-      selectedWidget = Text("lệnh mở");
+      selectedWidget = vainOrder(palette);
     } else if (_index == 1) {
       selectedWidget = FuturePosition();
     } else if (_index == 2) {
@@ -133,7 +136,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             ),
                           ),
                           SizedBox(
-                            width: 5.w,
+                            width: 2.w,
                           ),
                           Icon(
                             Icons.arrow_drop_down,
@@ -147,10 +150,19 @@ class _USDScreenState extends ConsumerState<USDScreen>
                       ),
                       Row(
                         children: [
-                          Image.asset(
-                            FuturesAssets.stock,
-                            color: palette.appBarTitleColor,
-                            height: 10.h,
+                          GestureDetector(
+                            onTap: () => Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return TradeViewDetails(
+                                symbol: tradeDetailsViewModel
+                                    .tradeData.value.symbol,
+                              );
+                            })),
+                            child: Image.asset(
+                              FuturesAssets.stock,
+                              color: palette.appBarTitleColor,
+                              height: 10.h,
+                            ),
                           ),
                           SizedBox(
                             width: 15.w,
@@ -209,20 +221,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     children: [
                       Row(
                         children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15.w, vertical: 4.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.r),
-                                border: Border.all(
-                                    color: palette.selectedTimeChipColor)),
-                            child: CustomText(
-                              text: "Cross",
-                              color: palette.appBarTitleColor,
-                              fontSize: 9.sp,
-                              // fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          borderContainer(palette: palette, title: "Cross"),
                           SizedBox(
                             width: 5.w,
                           ),
@@ -230,36 +229,13 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             onTap: () {
                               _toggleDrawer();
                             },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.w, vertical: 4.h),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.r),
-                                  border: Border.all(
-                                      color: palette.selectedTimeChipColor)),
-                              child: CustomText(
-                                text: "20x",
-                                color: palette.appBarTitleColor,
-                                fontSize: 9.sp,
-                              ),
-                            ),
+                            child:
+                                borderContainer(palette: palette, title: "55x"),
                           ),
                           SizedBox(
                             width: 5.w,
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15.w, vertical: 4.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.r),
-                                border: Border.all(
-                                    color: palette.selectedTimeChipColor)),
-                            child: CustomText(
-                              text: "S",
-                              color: palette.appBarTitleColor,
-                              fontSize: 9.sp,
-                            ),
-                          ),
+                          borderContainer(palette: palette, title: "S"),
                         ],
                       ),
                       Column(
@@ -278,14 +254,13 @@ class _USDScreenState extends ConsumerState<USDScreen>
                       )
                     ],
                   ),
-                  // OrderBookView(),
 
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                           // padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          width: MediaQuery.of(context).size.width * 0.4,
+                          width: MediaQuery.of(context).size.width * 0.37,
                           // height: 520,
                           //color: Colors.red,
                           child: OrderBookView(
@@ -571,34 +546,6 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             SizedBox(
                               height: 15.h,
                             ),
-                            // Padding(
-                            //   padding: EdgeInsets.symmetric(vertical: 20.h),
-                            //   child: SliderTheme(
-                            //     data: SliderTheme.of(context).copyWith(
-                            //       thumbShape: SliderThumbImage(Image.asset(
-                            //         FuturesAssets.rhombus,
-                            //         height: 20.h,
-                            //         color: palette.grayColor,
-                            //       )),
-                            //       activeTrackColor: Colors.white,
-                            //       inactiveTrackColor: palette.grayColor,
-                            //       overlayColor:
-                            //           Colors.transparent, // Bỏ overlay mặc định
-                            //     ),
-                            //     child: Slider(
-                            //       value: _sliderValue,
-                            //       min: 0.0,
-                            //       max: 100.0,
-                            //       divisions: 4, // Chia thành 5 mốc
-                            //       label: "${_sliderValue.round()}%",
-                            //       onChanged: (double value) {
-                            //         setState(() {
-                            //           _sliderValue = value;
-                            //         });
-                            //       },
-                            //     ),
-                            //   ),
-                            // ),
                             Row(
                               children: [
                                 Icon(
@@ -770,51 +717,47 @@ class _USDScreenState extends ConsumerState<USDScreen>
       ),
     );
   }
-}
 
-class SliderThumbImage extends SliderComponentShape {
-  final Widget image;
-
-  SliderThumbImage(this.image);
-
-  @override
-  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return Size(8.h, 8.h); // Kích thước của thumb
+  Center vainOrder(Palette palette) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            CustomText(text: "Số tiền khả dụng: 20,0000.00 USDC"),
+            Text(
+              "Chuyển tiền vào ví hợp đồng tương lai của bạn để giao dịch hoặc tham gia giao dịch thử nghiệm an toàn",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.roboto(
+                  fontSize: 10.sp, color: palette.selectedTimeChipColor),
+            ),
+            Gap(10.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                borderContainer(palette: palette, title: "Học hỏi"),
+                borderContainer(palette: palette, title: "Chuyển tiền"),
+                borderContainer(palette: palette, title: "Giao dịch thử nghiệm")
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 
-  @override
-  void paint(
-    PaintingContext context,
-    Offset center, {
-    required Animation<double> activationAnimation,
-    required Animation<double> enableAnimation,
-    required bool isDiscrete,
-    required TextPainter labelPainter,
-    required RenderBox parentBox,
-    required SliderThemeData sliderTheme,
-    required TextDirection textDirection,
-    required double value,
-    required double textScaleFactor,
-    required Size sizeWithOverflow,
-  }) {
-    final Canvas canvas = context.canvas;
-    final imageWidget = image as Image;
-    final imageProvider = imageWidget.image as AssetImage;
-
-    final paint = Paint()..filterQuality = FilterQuality.high;
-    final imageSize = Size(8.h, 8.h); // Kích thước của hình ảnh
-    final imageRect = Rect.fromCenter(
-        center: center, width: imageSize.width, height: imageSize.height);
-    imageProvider.resolve(ImageConfiguration()).addListener(
-      ImageStreamListener((ImageInfo info, bool _) {
-        // Chuyển đổi info.image.width và info.image.height sang double
-        canvas.drawImageRect(
-            info.image,
-            Offset.zero &
-                Size(info.image.width.toDouble(), info.image.height.toDouble()),
-            imageRect,
-            paint);
-      }),
+  Container borderContainer({required Palette palette, required String title}) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 4.h),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.r),
+          border: Border.all(color: palette.selectedTimeChipColor)),
+      child: CustomText(
+        text: title,
+        color: palette.appBarTitleColor,
+        fontSize: 9.sp,
+        // fontWeight: FontWeight.w500,
+      ),
     );
   }
 }

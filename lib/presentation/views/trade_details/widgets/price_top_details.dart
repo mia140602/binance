@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
@@ -34,11 +35,11 @@ class PriceTopDetails extends StatelessWidget {
             final highPriceFomat = formatter.format(highPrice);
             final lowPriceFomat = formatter.format(lowPrice);
 
-            Color textColor = Colors.black;
+            Color textColor = palette.appBarTitleColor;
             if (currentPrice > previousPrice) {
-              textColor = Colors.green;
+              textColor = palette.mainGreenColor;
             } else if (currentPrice < previousPrice) {
-              textColor = Colors.red;
+              textColor = palette.sellButtonColor;
             }
             previousPrice = currentPrice;
 
@@ -72,11 +73,12 @@ class PriceTopDetails extends StatelessWidget {
                                   text: '\$${tradeData.currentPrice}',
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: palette.appBarTitleColor,
                                 ),
                                 CustomText(
-                                  text:
-                                      '+${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%',
+                                  text: tradeData.percentageChangeIn24H > 0
+                                      ? '+${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%'
+                                      : '${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%',
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: tradeData.isPriceChangeIn24HNeg
@@ -85,8 +87,9 @@ class PriceTopDetails extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            Gap(5.h),
                             Container(
-                              width: 120,
+                              width: 60.w,
                               padding: EdgeInsets.only(left: 5, right: 5),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(2),
@@ -107,7 +110,7 @@ class PriceTopDetails extends StatelessWidget {
                                     color: Colors.amber.shade500,
                                   ),
                                   CustomText(
-                                    text: "Khối lượng",
+                                    text: "KL",
                                     fontSize: 10,
                                     color: Colors.amber.shade500,
                                   ),
@@ -137,6 +140,7 @@ class PriceTopDetails extends StatelessWidget {
                                   text: "${highPriceFomat}",
                                   fontSize: 10,
                                 ),
+                                Gap(5.h),
                                 CustomText(
                                   text: "Giá thấp nhất 24h",
                                   fontSize: 10,
@@ -163,6 +167,7 @@ class PriceTopDetails extends StatelessWidget {
                                   text: "${tradeData.baseAssetVolume}",
                                   fontSize: 10,
                                 ),
+                                Gap(5.h),
                                 CustomText(
                                   text: "KL 24h(${quoteSymbol})",
                                   fontSize: 10,

@@ -24,7 +24,8 @@ class SharePref {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> positions = prefs.getStringList(keyPositions) ?? [];
 
-    String newPosition = "$symbol:$type:$entryPrice:$leverage:$margin";
+    String newPosition =
+        "$walletName:$symbol:$type:$entryPrice:$leverage:$margin";
     positions.insert(0, newPosition); // Thêm vào đầu danh sách
     await prefs.setStringList(keyPositions, positions);
 
@@ -46,7 +47,8 @@ class SharePref {
       String type, double entryPrice, double leverage, double margin) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> positions = prefs.getStringList(keyPositions) ?? [];
-    String targetPosition = "$symbol:$type:$entryPrice:$leverage:$margin";
+    String targetPosition =
+        "$walletName:$symbol:$type:$entryPrice:$leverage:$margin";
     int initialCount = positions.length;
 
     positions.removeWhere((position) => position == targetPosition);
@@ -74,11 +76,12 @@ class SharePref {
     for (String position in positionsString) {
       List<String> parts = position.split(":");
       positions.add({
-        "symbol": parts[0],
-        "type": parts[1],
-        "entryPrice": double.parse(parts[2]),
-        "leverage": double.parse(parts[3]),
-        "margin": double.parse(parts[4])
+        "walletName": parts[0],
+        "symbol": parts[1],
+        "type": parts[2],
+        "entryPrice": double.parse(parts[3]),
+        "leverage": double.parse(parts[4]),
+        "margin": double.parse(parts[5])
       });
     }
     return positions;
@@ -134,15 +137,27 @@ class SharePref {
 
   static Future<void> deleteWallet(String walletName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> wallets = [];
-    var walletsString = prefs.getStringList(keyWallets);
-    if (walletsString != null) {
-      wallets = walletsString;
-    }
 
+    // Xóa tất cả các vị trí liên quan đến ví
+    List<String> positions = prefs.getStringList(keyPositions) ?? [];
+    positions.removeWhere((position) {
+      List<String> parts = position.split(':');
+      return parts.length > 1 &&
+          parts[1] ==
+              walletName; // Giả sử tên ví là phần tử thứ hai trong chuỗi
+    });
+    await prefs.setStringList(keyPositions, positions);
+
+    // Xóa ví từ danh sách ví
+    List<String> wallets = prefs.getStringList(keyWallets) ?? [];
     wallets.removeWhere((wallet) => wallet.split(":")[0] == walletName);
-
     await prefs.setStringList(keyWallets, wallets);
+
+    // Cập nhật số lượng vị trí trong ví
+    Map<String, int> walletPositionsCount = _getWalletPositionsCount(prefs);
+    walletPositionsCount.remove(walletName);
+    await prefs.setString(
+        keyWalletPositionsCount, json.encode(walletPositionsCount));
   }
 
   static Future<void> updateLocalSymbol(String symbol) async {
@@ -152,6 +167,6 @@ class SharePref {
 
   static Future<String> getLocalSymbol() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(keyLocalSymbol) ?? "btcusdt";
+    return prefs.getString(keyLocalSymbol) ?? "BTCUSDT";
   }
 }

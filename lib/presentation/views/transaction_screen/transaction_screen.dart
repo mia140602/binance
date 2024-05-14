@@ -11,7 +11,12 @@ import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
 import '../../widgets/position_card.dart';
 import '../../widgets/wallet_tabbar.dart';
-
+double parsePrice(String priceStr) {
+  if (priceStr == null || priceStr.isEmpty || priceStr == "-") {
+    return 0.0; // Hoặc xử lý phù hợp khi dữ liệu không hợp lệ
+  }
+  return double.tryParse(priceStr) ?? 0.0;
+}
 class TransactionScreen extends ConsumerStatefulWidget {
   const TransactionScreen({super.key});
 

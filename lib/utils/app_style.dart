@@ -50,7 +50,7 @@ class AppStyle {
     return GoogleFonts.roboto(
       color: Colors.white,
       fontWeight: FontWeight.w500,
-      fontSize: 15.sp,
+      fontSize: 14.sp,
     );
   }
 
@@ -159,7 +159,7 @@ class AppStyle {
       textStyle: TextStyle(
         fontWeight: FontWeight.w500,
         color: Color(0xFF757b87),
-        fontSize: 14,
+        fontSize: 12.sp,
       ),
     );
   }

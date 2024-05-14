@@ -37,7 +37,13 @@ class _TradingActivitySectionState extends State<TradingActivityHeader> {
         children: [
           CustomTabBar(
             index: _index,
-            tabs: const ["Giá", "Thông tin", "Dữ liệu giao dịch", "Square"],
+            tabs: const [
+              "Giá",
+              "Thông tin",
+              "Dữ liệu giao dịch",
+              "Square",
+              "           "
+            ],
             onChanged: (value) {
               _setIndex(value);
               widget.onTabChanged.call(value);

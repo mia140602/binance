@@ -38,6 +38,7 @@ class CustomTabBar extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: List.generate(tabs.length, (i) {
             final isSelected = i == index;
             return GestureDetector(

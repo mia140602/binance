@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/presentation/theme/palette.dart';
@@ -39,27 +40,34 @@ class CoinPairHeader extends StatelessWidget {
                       Container(
                         child: Row(
                           children: [
-                            DropdownButton(
-                              dropdownColor: palette.cardColor,
-                              underline: const SizedBox(),
-                              icon: Icon(
-                                Icons.arrow_drop_down_rounded,
-                                color: Colors.black,
-                                size: 24,
+                            CustomText(
+                              text: symbol,
+                              color: palette.appBarTitleColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.sp,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: palette.selectedTabChipColor,
+                                  borderRadius: BorderRadius.circular(4.r)),
+                              padding: EdgeInsets.symmetric(horizontal: 3.w),
+                              child: CustomText(
+                                text: "Hợp đồng tương lai vĩnh cửu",
+                                fontSize: 8,
+                                color: palette.appBarTitleColor,
+                                fontWeight: FontWeight.normal,
                               ),
-                              items: [
-                                DropdownMenuItem(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 6),
-                                    child: CustomText(
-                                      text: symbol,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                              onChanged: (_) {},
+                            ),
+                            SizedBox(
+                              width: 2.w,
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down,
+                              size: 18.h,
+                              color: palette.appBarTitleColor,
                             ),
                           ],
                         ),
@@ -67,25 +75,19 @@ class CoinPairHeader extends StatelessWidget {
                       Container(
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.star_rate_rounded,
-                              size: 22,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondary
-                                  .withOpacity(0.5),
-                            ),
+                            Icon(Icons.star_rate_rounded,
+                                size: 22, color: palette.appBarTitleColor),
                             Gap(12),
                             Icon(
                               Icons.share,
                               size: 20,
-                              color: Colors.black,
+                              color: palette.appBarTitleColor,
                             ),
                             Gap(12),
                             Icon(
                               Icons.window_sharp,
                               size: 20,
-                              color: Colors.black,
+                              color: palette.appBarTitleColor,
                             ),
                           ],
                         ),

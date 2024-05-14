@@ -40,9 +40,7 @@ class CustomChip extends StatelessWidget {
             text: label.toLowerCase(),
             fontSize: 12,
             fontWeight: fontWeight,
-            color: selected
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
       ),

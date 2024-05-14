@@ -6,7 +6,7 @@ class DarkPalette implements Palette {
   const DarkPalette();
 
   @override
-  Color get selectedTimeChipColor => const Color(0xff555C63);
+  Color get selectedTimeChipColor => const Color(0xff848e9f);
   @override
   Color get selectedTabChipColor => const Color(0xff262B33);
   @override
