@@ -40,10 +40,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const MarketView(),
-    // TransactionScreen(),
-    TradingOrderBookScreen(
-      symbol: "BTCUSDT",
-    ),
+    TransactionScreen(),
+    // TradingOrderBookScreen(
+    //   symbol: "BTCUSDT",
+    // ),
     FuturesScreen(),
     WalletsView()
   ];
