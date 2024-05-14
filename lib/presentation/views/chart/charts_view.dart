@@ -116,6 +116,46 @@ class ChartsView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 6),
                 height: 20.h,
                 child: PercentageBar()),
+            Row(
+              children: [
+                Container(
+                  child: CustomText(
+                    text: "Mua vào",
+                    color: palette.selectedTimeChipColor,
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      CustomText(
+                        text: "Bán ra",
+                        color: palette.selectedTimeChipColor,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: palette.selectedTimeChipColor.withOpacity(0.2),
+                        ),
+                        child: Row(
+                          children: [
+                            CustomText(
+                              text: "0.01",
+                              color: palette.selectedTimeChipColor,
+                            ),
+                            Gap(2.w),
+                            Icon(
+                              Icons.arrow_drop_down_rounded,
+                              color: palette.selectedTimeChipColor,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
             Gap(10.h),
             Container(
               padding: EdgeInsetsDirectional.symmetric(horizontal: 12),
