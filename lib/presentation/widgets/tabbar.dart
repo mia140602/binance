@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/palette.dart';
 
-class CustomTabBar extends StatelessWidget {
+class TabBarSelect extends StatelessWidget {
   final List<String> tabs;
   final int index;
   final Function(int)? onChanged;
@@ -12,7 +12,7 @@ class CustomTabBar extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
 
-  const CustomTabBar({
+  const TabBarSelect({
     Key? key,
     required this.tabs,
     required this.index,
@@ -51,21 +51,10 @@ class CustomTabBar extends StatelessWidget {
                   children: [
                     CustomText(
                       text: tabs[i],
-                      fontSize: fontSize ?? 12.sp,
-                      fontWeight: fontWeight ?? FontWeight.w600,
-                      color: isSelected
-                          ? palette.appBarTitleColor
-                          : palette.filterLineColor,
+                      fontSize: fontSize ?? 10.sp,
+                      fontWeight: fontWeight ?? FontWeight.w400,
+                      color: palette.selectedTimeChipColor,
                     ),
-                    SizedBox(height: 3),
-                    isSelected
-                        ? Container(
-                            width: 12,
-                            height: 3,
-                            color:
-                                selectedTabBorderColor ?? Colors.amber.shade400,
-                          )
-                        : SizedBox.shrink(),
                   ],
                 ),
               ),

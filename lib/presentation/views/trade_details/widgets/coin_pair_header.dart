@@ -27,7 +27,7 @@ class CoinPairHeader extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.only(
                 top: 10,
-                left: 16,
+                left: 0,
                 right: 16,
                 bottom: 0,
               ),

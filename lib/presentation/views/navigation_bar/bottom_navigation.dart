@@ -16,6 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
+import '../futures/chartview/orderBook.dart';
 
 class BottomNavigationBarr extends StatefulWidget {
   const BottomNavigationBarr({Key? key}) : super(key: key);
@@ -40,8 +41,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
     const HomeScreen(),
     const MarketView(),
     // TransactionScreen(),
-
-    TradingChartScreen(
+    TradingOrderBookScreen(
       symbol: "BTCUSDT",
     ),
     FuturesScreen(),

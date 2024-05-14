@@ -64,7 +64,28 @@ class _TradingChartScreenState extends State<TradingChartScreen> {
             if (_controller != null) {
               _controller!.runJavaScript(
                   'document.querySelector("header").style.display="none";');
-              _controller!.runJavaScript("""
+              if (widget.isSmall == true) {
+                _controller!.runJavaScript("""
+                  var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                      var klineContainer = document.querySelector('.kline-container');
+                      if (klineContainer) {
+                      klineContainer.style.transform = 'scale(1)'
+                    klineContainer.style.transformOrigin = 'top left'; // Điều chỉnh gốc transform nếu cần
+                    klineContainer.style.width = '100%'; // Đặt chiều rộng phần tử bằng 100%
+                    klineContainer.style.height = '60%'; 
+                    console.log('Kline container scaled down and adjusted');
+                    observer.disconnect(); 
+                      }
+                    });
+                  });
+
+                  observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                  });
+                """);
+                _controller!.runJavaScript("""
               setTimeout(function() {
                   console.log('Chuẩn bị load Chart');
                   document.querySelectorAll('.chart-title-indicator-container').forEach(function (params) {
@@ -87,6 +108,51 @@ class _TradingChartScreenState extends State<TradingChartScreen> {
                   }
               }, 3000); // Tăng thời gian chờ lên 5000 milliseconds (5 giây)
           """);
+              } else {
+                _controller!.runJavaScript("""
+                  var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                      var klineContainer = document.querySelector('.kline-container');
+                      if (klineContainer) {
+                      klineContainer.style.transform = 'scale(1)'
+                    klineContainer.style.transformOrigin = 'top left'; // Điều chỉnh gốc transform nếu cần
+                    klineContainer.style.width = '100%'; // Đặt chiều rộng phần tử bằng 100%
+                    klineContainer.style.height = '80%'; 
+                    console.log('Kline container scaled down and adjusted');
+                    observer.disconnect(); 
+                      }
+                    });
+                  });
+
+                  observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                  });
+                """);
+                _controller!.runJavaScript("""
+              setTimeout(function() {
+                  console.log('Chuẩn bị load Chart');
+                  document.querySelectorAll('.chart-title-indicator-container').forEach(function (params) {
+                      params.style.display = 'none';
+                  });
+
+                  var chart = document.querySelector('.kline-container');
+                  if (chart) {
+                      document.body.innerHTML = '';
+                      document.body.appendChild(chart);
+                      document.body.style.margin = '0';
+                      document.body.style.overflow = 'hidden';
+                      chart.style.width = '100%';
+                      chart.style.height = 'auto';
+                      console.log('Chart element found');
+                      Toaster.postMessage('done');
+                  } else {
+                      console.error('Chart element not found');
+                      Toaster.postMessage('done');
+                  }
+              }, 3000); // Tăng thời gian chờ lên 5000 milliseconds (5 giây)
+          """);
+              }
             }
           },
           onWebResourceError: (WebResourceError error) {
