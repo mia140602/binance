@@ -86,6 +86,49 @@ class ChartsView extends StatelessWidget {
                 ],
               ),
             ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 0.5.h,
+                          color:
+                              palette.selectedTimeChipColor.withOpacity(0.5)))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _dateNumber(
+                    palette: palette,
+                    text: "Hôm nay",
+                    number: "-2,11%",
+                  ),
+                  _dateNumber(
+                    palette: palette,
+                    text: "7 ngày",
+                    number: "-2.15%",
+                  ),
+                  _dateNumber(
+                    palette: palette,
+                    text: "30 ngày",
+                    number: "-8.23%",
+                  ),
+                  _dateNumber(
+                      palette: palette,
+                      text: "90 ngày",
+                      number: "27.59%",
+                      numK: palette.mainGreenColor),
+                  _dateNumber(
+                      palette: palette,
+                      text: "180 ngày",
+                      number: "69.86%",
+                      numK: palette.mainGreenColor),
+                  _dateNumber(
+                      palette: palette,
+                      text: "1 năm",
+                      number: "129.34%",
+                      numK: palette.mainGreenColor),
+                ],
+              ),
+            ),
             Gap(10.h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -99,7 +142,7 @@ class ChartsView extends StatelessWidget {
                     child: CustomText(
                       text: "Sổ lệnh",
                       fontSize: 10.sp,
-                      color: palette.selectedTimeChipColor,
+                      color: palette.appBarTitleColor,
                     ),
                   ),
                   Gap(10.w),
@@ -116,47 +159,60 @@ class ChartsView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 6),
                 height: 20.h,
                 child: PercentageBar()),
-            Row(
-              children: [
-                Container(
-                  child: CustomText(
-                    text: "Mua vào",
-                    color: palette.selectedTimeChipColor,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: (MediaQuery.of(context).size.width / 2) - 20,
+                    child: CustomText(
+                      text: "Mua vào",
+                      color: palette.selectedTimeChipColor,
+                      fontSize: 10.sp,
+                    ),
                   ),
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      CustomText(
-                        text: "Bán ra",
-                        color: palette.selectedTimeChipColor,
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: palette.selectedTimeChipColor.withOpacity(0.2),
+                  Container(
+                    width: (MediaQuery.of(context).size.width / 2) - 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(
+                          text: "Bán ra",
+                          color: palette.selectedTimeChipColor,
+                          fontSize: 10.sp,
                         ),
-                        child: Row(
-                          children: [
-                            CustomText(
-                              text: "0.01",
-                              color: palette.selectedTimeChipColor,
-                            ),
-                            Gap(2.w),
-                            Icon(
-                              Icons.arrow_drop_down_rounded,
-                              color: palette.selectedTimeChipColor,
-                            )
-                          ],
+                        Container(
+                          padding: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color:
+                                palette.selectedTimeChipColor.withOpacity(0.2),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomText(
+                                text: "0.1",
+                                color: palette.selectedTimeChipColor,
+                                fontSize: 10.sp,
+                              ),
+                              Gap(2.w),
+                              Icon(
+                                Icons.arrow_drop_down_rounded,
+                                color: palette.selectedTimeChipColor,
+                                size: 15.sp,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            Gap(10.h),
+            Gap(5.h),
             Container(
               padding: EdgeInsetsDirectional.symmetric(horizontal: 12),
               height: 500.h,
@@ -167,6 +223,31 @@ class ChartsView extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _dateNumber(
+      {required Palette palette,
+      required String text,
+      required String number,
+      Color? numK}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomText(
+            text: text,
+            color: palette.selectedTimeChipColor,
+            fontSize: 10.sp,
+          ),
+          CustomText(
+            text: number,
+            color: numK ?? palette.sellButtonColor,
+            fontSize: 10.sp,
+          ),
+        ],
       ),
     );
   }

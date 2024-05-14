@@ -61,9 +61,9 @@ class CoinPairHeader extends StatelessWidget {
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
-                            SizedBox(
-                              width: 2.w,
-                            ),
+                            // SizedBox(
+                            //   width: 2.w,
+                            // ),
                             Icon(
                               Icons.arrow_drop_down,
                               size: 18.h,

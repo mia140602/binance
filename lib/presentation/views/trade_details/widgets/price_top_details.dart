@@ -23,9 +23,9 @@ class PriceTopDetails extends StatelessWidget {
       return ReactiveBuilder(
           value: ref.read(tradeDetailsViewModelProvider(symbol)).tradeData,
           builder: (tradeData) {
-            final List<String> symbols = tradeData.symbol.split('/');
-            String assetSymbol = symbols.isNotEmpty ? symbols[0] : '';
-            String quoteSymbol = symbols.length > 1 ? symbols[1] : '';
+            // final List<String> symbols = tradeData.symbol.split('/');
+            String assetSymbol = tradeData.baseAsset;
+            String quoteSymbol = tradeData.quoteAsset;
             final double currentPrice =
                 double.tryParse(tradeData.currentPrice) ?? 0.0;
             final double highPrice =
@@ -47,142 +47,145 @@ class PriceTopDetails extends StatelessWidget {
               padding: const EdgeInsets.only(
                 top: 0,
                 left: 0,
-                right: 16,
+                right: 0,
                 bottom: 5,
               ),
               color: palette.cardColor,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              text: formattedPrice,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: textColor,
-                            ),
-                            const Gap(8),
-                            Row(
-                              children: [
-                                CustomText(
-                                  text: '\$${tradeData.currentPrice}',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: palette.appBarTitleColor,
-                                ),
-                                CustomText(
-                                  text: tradeData.percentageChangeIn24H > 0
-                                      ? '+${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%'
-                                      : '${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: tradeData.isPriceChangeIn24HNeg
-                                      ? Colors.red
-                                      : Colors.green,
-                                ),
-                              ],
-                            ),
-                            Gap(5.h),
-                            Container(
-                              width: 60.w,
-                              padding: EdgeInsets.only(left: 5, right: 5),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color:
-                                      Colors.amber.shade100.withOpacity(0.2)),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                text: formattedPrice,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: textColor,
+                              ),
+                              const Gap(8),
+                              Row(
                                 children: [
                                   CustomText(
-                                    text: "POW",
-                                    fontSize: 10,
-                                    color: Colors.amber.shade500,
-                                  ),
-                                  Container(
-                                    height: 5,
-                                    width: 1,
-                                    color: Colors.amber.shade500,
+                                    text: '\$${tradeData.currentPrice}',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: palette.appBarTitleColor,
                                   ),
                                   CustomText(
-                                    text: "KL",
-                                    fontSize: 10,
-                                    color: Colors.amber.shade500,
+                                    text: tradeData.percentageChangeIn24H > 0
+                                        ? '+${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%'
+                                        : '${tradeData.percentageChangeIn24H.toStringAsFixed(2)}%',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: tradeData.isPriceChangeIn24HNeg
+                                        ? Colors.red
+                                        : Colors.green,
                                   ),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.amber.shade500,
-                                    size: 8,
-                                  )
                                 ],
                               ),
-                            )
-                          ],
+                              Gap(5.h),
+                              Container(
+                                width: 60.w,
+                                padding: EdgeInsets.only(left: 5, right: 5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(2),
+                                    color:
+                                        Colors.amber.shade100.withOpacity(0.2)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: "POW",
+                                      fontSize: 10,
+                                      color: Colors.amber.shade500,
+                                    ),
+                                    Container(
+                                      height: 5,
+                                      width: 1,
+                                      color: Colors.amber.shade500,
+                                    ),
+                                    CustomText(
+                                      text: "KL",
+                                      fontSize: 10,
+                                      color: Colors.amber.shade500,
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: Colors.amber.shade500,
+                                      size: 8,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  text: "Giá cao nhất 24h",
-                                  fontSize: 10,
-                                  color: Colors.grey,
-                                ),
-                                CustomText(
-                                  text: "${highPriceFomat}",
-                                  fontSize: 10,
-                                ),
-                                Gap(5.h),
-                                CustomText(
-                                  text: "Giá thấp nhất 24h",
-                                  fontSize: 10,
-                                  color: Colors.grey,
-                                ),
-                                CustomText(
-                                  text: "${lowPriceFomat}",
-                                  fontSize: 10,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  text: "KL 24h(${assetSymbol})",
-                                  fontSize: 10,
-                                  color: Colors.grey,
-                                ),
-                                CustomText(
-                                  text: "${tradeData.baseAssetVolume}",
-                                  fontSize: 10,
-                                ),
-                                Gap(5.h),
-                                CustomText(
-                                  text: "KL 24h(${quoteSymbol})",
-                                  fontSize: 10,
-                                  color: Colors.grey,
-                                ),
-                                CustomText(
-                                  text: "${tradeData.quoteAssetVolume}",
-                                  fontSize: 10,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: "Giá cao nhất 24h",
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                  CustomText(
+                                    text: "${highPriceFomat}",
+                                    fontSize: 10,
+                                  ),
+                                  Gap(5.h),
+                                  CustomText(
+                                    text: "Giá thấp nhất 24h",
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                  CustomText(
+                                    text: "${lowPriceFomat}",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: "KL 24h(${assetSymbol})",
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                  CustomText(
+                                    text: "${tradeData.baseAssetVolume}",
+                                    fontSize: 10,
+                                  ),
+                                  Gap(5.h),
+                                  CustomText(
+                                    text: "KL 24h(${quoteSymbol})",
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                  CustomText(
+                                    text: "${tradeData.quoteAssetVolume}",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),

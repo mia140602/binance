@@ -257,6 +257,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
 
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                           // padding: EdgeInsets.symmetric(horizontal: 2.w),
