@@ -50,7 +50,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                 );
               },
             ),
-          Gap(5.h),
+          // Gap(5.h),
           if (_showSells && _showBuys) ...{
             ReactiveBuilder(
               value: ref.read(orderBookViewModelProvider(widget.pair)).prices,
@@ -61,7 +61,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                 );
               },
             ),
-            Gap(5.h),
+            // Gap(5.h),
           },
           if (_showBuys) ...{
             ReactiveBuilder(
@@ -72,6 +72,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                   orders: orders.take(_limit),
                   isFuture: false,
                   itemCount: itemCount,
+                  backColor: palette.mainGreenColor.withOpacity(0.05),
                 );
               },
             ),

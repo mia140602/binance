@@ -24,12 +24,7 @@ class ChartsViewModel {
   late String _currentInterval = _intervals.first.toLowerCase();
   String get currentKlineInterval => _currentInterval;
 
-  final List<String> _intervals = const [
-    "15M",
-    "1H",
-    "4H",
-    "1D",
-  ];
+  final List<String> _intervals = const ["15M", "1H", "4H", "1ngày"];
   List<String> get intervals => _intervals;
 
   List<KlineCandle> _olderCandles = [];

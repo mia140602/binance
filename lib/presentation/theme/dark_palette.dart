@@ -16,7 +16,7 @@ class DarkPalette implements Palette {
   @override
   Color get unselectedTabTextColor => const Color(0xffFFFFFF);
   @override
-  Color get appBarTitleColor => const Color(0xffFFFFFF).withOpacity(0.8);
+  Color get appBarTitleColor => const Color(0xffFFFFFF);
   @override
   Color get buyButtonColor => const Color(0xff25C26E);
   @override

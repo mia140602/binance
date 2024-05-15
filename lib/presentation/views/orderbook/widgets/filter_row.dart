@@ -84,6 +84,7 @@ class _Filter extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             child: Column(
@@ -139,7 +140,7 @@ class _Right extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // margin: const EdgeInsets.only(bottom: 2),
-      height: 13,
+      height: 12,
       width: 6,
       decoration: BoxDecoration(
         color: color,

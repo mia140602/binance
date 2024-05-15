@@ -16,20 +16,22 @@ class PriceTopDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
-    final NumberFormat formatter = NumberFormat("#,##0.00", "en_US");
+
     double previousPrice = 0.0; // Khởi tạo giá trị ban đầu cho previousPrice
 
     return Consumer(builder: (context, ref, _) {
       return ReactiveBuilder(
           value: ref.read(tradeDetailsViewModelProvider(symbol)).tradeData,
           builder: (tradeData) {
-            // final List<String> symbols = tradeData.symbol.split('/');
             String assetSymbol = tradeData.baseAsset;
             String quoteSymbol = tradeData.quoteAsset;
             final double currentPrice =
                 double.tryParse(tradeData.currentPrice) ?? 0.0;
             final double highPrice =
                 double.tryParse(tradeData.highPrice) ?? 0.0;
+            final NumberFormat formatter = currentPrice < 0.01
+                ? NumberFormat("#,##0.0000", "en_US")
+                : NumberFormat("#,##0.00", "en_US");
             final double lowPrice = double.tryParse(tradeData.lowPrice) ?? 0.0;
             final formattedPrice = formatter.format(currentPrice);
             final highPriceFomat = formatter.format(highPrice);
@@ -61,19 +63,34 @@ class PriceTopDetails extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Row(
+                                children: [
+                                  CustomText(
+                                    text: "Giá gần nhất",
+                                    fontSize: 10.sp,
+                                    color: palette.selectedTimeChipColor,
+                                  ),
+                                  Gap(5.w),
+                                  Icon(
+                                    Icons.arrow_drop_down_rounded,
+                                    color: palette.selectedTimeChipColor,
+                                    size: 20,
+                                  )
+                                ],
+                              ),
                               CustomText(
                                 text: formattedPrice,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: textColor,
                               ),
-                              const Gap(8),
+                              Gap(2.h),
                               Row(
                                 children: [
                                   CustomText(
-                                    text: '\$${tradeData.currentPrice}',
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
+                                    text: '\$${formattedPrice} ',
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600,
                                     color: palette.appBarTitleColor,
                                   ),
                                   CustomText(
