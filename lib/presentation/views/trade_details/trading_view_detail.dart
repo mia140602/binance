@@ -65,6 +65,13 @@ class _TradeViewDetailsState extends State<TradeViewDetails> {
         backgroundColor: palette.cardColor,
         elevation: 0,
         titleSpacing: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 20.w,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

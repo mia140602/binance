@@ -270,9 +270,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                          height: MediaQuery.of(context).size.height * 0.54,
+                          height: MediaQuery.of(context).size.height * 0.52,
                           // padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          width: MediaQuery.of(context).size.width * 0.39,
+                          width: MediaQuery.of(context).size.width * 0.38,
                           // height: 520,
                           //color: Colors.red,
                           child: OrderBookView(
@@ -280,7 +280,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           )),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.52,
-                        height: MediaQuery.of(context).size.height * 0.54,
+                        height: MediaQuery.of(context).size.height * 0.52,
                         //color: Colors.blue,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -327,16 +327,16 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   Icon(
                                     Icons.info_sharp,
                                     size: 12.h,
-                                    color: palette.grayColor,
+                                    color: palette.selectedTimeChipColor,
                                   ),
                                   CustomText(
                                     text: "Limit",
                                     color: palette.appBarTitleColor,
                                   ),
                                   Icon(
-                                    Icons.arrow_drop_down,
+                                    Icons.arrow_drop_down_rounded,
                                     size: 16.h,
-                                    color: palette.grayColor,
+                                    color: palette.selectedTimeChipColor,
                                   )
                                 ],
                               ),
@@ -386,9 +386,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                               cursorColor:
                                                   palette.mainYellowColor,
                                               style: TextStyle(
-                                                fontSize: 13.sp,
+                                                fontSize: 12.sp,
                                                 color: palette.appBarTitleColor,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.w500,
                                               ),
                                               decoration: InputDecoration(
                                                 border: InputBorder.none,
@@ -575,11 +575,20 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                CustomText(
-                                  text: "TP/SL",
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w300,
+                                Text(
+                                  "TP/SL",
+                                  style: GoogleFonts.roboto(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w300,
+                                    decoration:
+                                        TextDecoration.underline, // Gạch chân
+                                    decorationStyle: TextDecorationStyle
+                                        .dotted, // Kiểu gạch chân là chấm
+                                    decorationColor:
+                                        palette.selectedTimeChipColor,
+                                    decorationThickness: 1.5,
+                                  ),
                                 ),
                               ],
                             ),
@@ -617,7 +626,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   text: "Mở tối đa",
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xFF757b87),
-                                  fontSize: 11.sp,
+                                  fontSize: 10.sp,
                                 ),
                                 Text(
                                   "0.000 ${tradeDetailsViewModel.tradeData.value.baseAsset}",
@@ -632,7 +641,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   text: "Chi phí",
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xFF757b87),
-                                  fontSize: 11.sp,
+                                  fontSize: 10.sp,
                                 ),
                                 Text(
                                   "0.00 ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
@@ -644,7 +653,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               height: 8.h,
                             ),
                             Container(
-                                height: 30.h,
+                                height: 28.h,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                     color: palette.mainGreenColor,
@@ -694,7 +703,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             Container(
                                 // height: 35.h,
                                 width: double.infinity,
-                                height: 30.h,
+                                height: 28.h,
                                 decoration: BoxDecoration(
                                     color: palette.sellButtonColor,
                                     borderRadius: BorderRadius.circular(6.r)),
@@ -710,19 +719,38 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     ],
                   ),
                   Gap(10.h),
-                  CustomTabBar(
-                    index: _index,
-                    tabs: [
-                      "Lệnh mở (0)",
-                      "Vị thế (${positionsList.length})",
-                      "Lưới hợp đồng tương lai",
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        _index =
-                            value; // Update the index value when tab changes
-                      });
-                    },
+                  Container(
+                    decoration: BoxDecoration(
+                        color: palette.cardColor,
+                        border: Border(
+                            bottom: BorderSide(
+                                width: 0.6,
+                                color: palette.selectedTimeChipColor
+                                    .withOpacity(0.5)))),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CustomTabBar(
+                            index: _index,
+                            tabs: [
+                              "Lệnh mở (0)",
+                              "Vị thế (${positionsList.length})",
+                              "Lưới hợp đồng tương lai",
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                _index =
+                                    value; // Update the index value when tab changes
+                              });
+                            },
+                          ),
+                        ),
+                        Image.asset(
+                          "assets/icons/time.png",
+                          width: 15.w,
+                        )
+                      ],
+                    ),
                   ),
                   Container(height: 400.h, child: selectedWidget),
                   // SizedBox(

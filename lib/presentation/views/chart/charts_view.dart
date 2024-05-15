@@ -33,10 +33,10 @@ class ChartsView extends StatelessWidget {
                 symbol: symbol,
               ),
             ),
-            const Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: const SizedBox(
-                height: 22,
+              child: SizedBox(
+                height: 22.h,
                 child: TradeDurationListView(),
               ),
             ),
@@ -47,7 +47,7 @@ class ChartsView extends StatelessWidget {
             ),
             Container(
                 color: palette.cardColor,
-                height: MediaQuery.of(context).size.height / 3,
+                height: MediaQuery.of(context).size.height / 3.2,
                 child: TradingChartScreen(
                   symbol: symbol,
                 )),
