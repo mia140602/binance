@@ -30,7 +30,6 @@ class USDScreen extends ConsumerStatefulWidget {
 class _USDScreenState extends ConsumerState<USDScreen>
     with SingleTickerProviderStateMixin {
   List<Map<String, dynamic>> positionsList = [];
-  double _sliderValue = 0.0;
 
   // late TabController _tabController;
   String currentSymbol = "BTCUSDT";
@@ -51,6 +50,14 @@ class _USDScreenState extends ConsumerState<USDScreen>
     // _tabController = TabController(length: 3, vsync: this);
     loadPositions();
     loadCurrentSymbol();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final tradeDetailsViewModel =
+          ref.read(tradeDetailsViewModelProvider(currentSymbol));
+      String currentPrice = tradeDetailsViewModel.tradeData.value.currentPrice;
+      String integerPart =
+          currentPrice.split('.')[0]; // Lấy phần nguyên của giá
+      _priceController.text = integerPart;
+    });
   }
 
   void loadPositions() async {
@@ -109,6 +116,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Gap(10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -116,9 +124,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         children: [
                           CustomText(
                             text: tradeDetailsViewModel.tradeData.value.symbol,
-                            color: palette.appBarTitleColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16.sp,
+                            color: palette.selectedTabTextColor,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 17.sp,
                           ),
                           SizedBox(
                             width: 5.w,
@@ -130,7 +138,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             padding: EdgeInsets.symmetric(horizontal: 3.w),
                             child: CustomText(
                               text: "Hợp đồng tương lai vĩnh cửu",
-                              fontSize: 8,
+                              fontSize: 9.sp,
                               color: palette.appBarTitleColor,
                               fontWeight: FontWeight.normal,
                             ),
@@ -139,7 +147,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                             width: 2.w,
                           ),
                           Icon(
-                            Icons.arrow_drop_down,
+                            Icons.arrow_drop_down_rounded,
                             size: 18.h,
                             color: palette.appBarTitleColor,
                           ),
@@ -175,13 +183,15 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           SizedBox(
                             width: 15.w,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                          Stack(
                             children: [
-                              Icon(
-                                Icons.circle,
-                                size: 8.h,
-                                color: Colors.yellow[700],
+                              Positioned(
+                                right: 0,
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 6.h,
+                                  color: Colors.yellow[700],
+                                ),
                               ),
                               Icon(
                                 Icons.more_horiz,
@@ -254,14 +264,15 @@ class _USDScreenState extends ConsumerState<USDScreen>
                       )
                     ],
                   ),
-
+                  Gap(5.h),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
+                          height: MediaQuery.of(context).size.height * 0.54,
                           // padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          width: MediaQuery.of(context).size.width * 0.37,
+                          width: MediaQuery.of(context).size.width * 0.39,
                           // height: 520,
                           //color: Colors.red,
                           child: OrderBookView(
@@ -269,9 +280,10 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           )),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.52,
-                        // height: 520,
+                        height: MediaQuery.of(context).size.height * 0.54,
                         //color: Colors.blue,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -357,7 +369,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                             MainAxisAlignment.start,
                                         children: [
                                           CustomText(
-                                            text: "Giá (USDC)",
+                                            text:
+                                                "Giá (${tradeDetailsViewModel.tradeData.value.quoteAsset})",
                                             color: palette.appBarTitleColor
                                                 .withOpacity(0.5),
                                             fontSize: 10.sp,
@@ -373,9 +386,12 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                               cursorColor:
                                                   palette.mainYellowColor,
                                               style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 13.sp,
                                                 color: palette.appBarTitleColor,
-                                                fontWeight: FontWeight.w700,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              decoration: InputDecoration(
+                                                border: InputBorder.none,
                                               ),
                                             ),
                                           )
@@ -436,15 +452,16 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     width: 10.w,
                                   ),
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       CustomText(
                                           text: "Số tiền",
                                           color: Colors.grey,
-                                          fontSize: 10.sp),
-                                      Text(
-                                        "0%",
-                                        style: AppStyle.boldText(),
-                                      ),
+                                          fontSize: 12.sp),
+                                      // Text(
+                                      //   "0%",
+                                      //   style: AppStyle.boldText(),
+                                      // ),
                                     ],
                                   ),
                                   SizedBox(
@@ -467,7 +484,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     child: Row(
                                       children: [
                                         CustomText(
-                                          text: "BTC",
+                                          text:
+                                              "${tradeDetailsViewModel.tradeData.value.baseAsset}",
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 12.sp,
@@ -490,7 +508,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 Image.asset(
                                   FuturesAssets.rhombus,
                                   height: 13.h,
-                                  color: palette.grayColor,
+                                  color: palette.appBarTitleColor,
                                 ),
                                 Container(
                                   width: 25.w,
@@ -545,7 +563,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               ],
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height: 10.h,
                             ),
                             Row(
                               children: [
@@ -602,7 +620,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 11.sp,
                                 ),
                                 Text(
-                                  "0.000 BTC",
+                                  "0.000 ${tradeDetailsViewModel.tradeData.value.baseAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
@@ -617,13 +635,13 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 11.sp,
                                 ),
                                 Text(
-                                  "0.00 USDC",
+                                  "0.00 ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 10.h,
+                              height: 8.h,
                             ),
                             Container(
                                 height: 30.h,
@@ -638,7 +656,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                         color: Colors.white,
                                         fontSize: 12.sp))),
                             SizedBox(
-                              height: 10.h,
+                              height: 8.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -650,7 +668,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 11.sp,
                                 ),
                                 Text(
-                                  "0.000 BTC",
+                                  "0.000 ${tradeDetailsViewModel.tradeData.value.baseAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
@@ -665,7 +683,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 11.sp,
                                 ),
                                 Text(
-                                  "0.00 USDC",
+                                  "0.00 ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
@@ -752,11 +770,12 @@ class _USDScreenState extends ConsumerState<USDScreen>
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 4.h),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.r),
-          border: Border.all(color: palette.selectedTimeChipColor)),
+          border: Border.all(
+              color: palette.selectedTimeChipColor.withOpacity(0.4))),
       child: CustomText(
         text: title,
         color: palette.appBarTitleColor,
-        fontSize: 9.sp,
+        fontSize: 10.sp,
         // fontWeight: FontWeight.w500,
       ),
     );

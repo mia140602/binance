@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../../../theme/palette.dart';
@@ -9,7 +10,7 @@ class ColumnHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
@@ -19,7 +20,7 @@ class ColumnHeader extends StatelessWidget {
           ),
         ),
         // Spacer(),
-        Gap(30),
+        Gap(60.w),
         Expanded(
           child: _ColumnItem(
             title: "Số lượng",

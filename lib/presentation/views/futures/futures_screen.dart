@@ -32,7 +32,7 @@ class _FuturesScreenState extends State<FuturesScreen>
         child: Column(
           children: [
             TabBar(
-              dividerColor: palette.selectedTimeChipColor,
+              dividerColor: palette.selectedTimeChipColor.withOpacity(0.5),
               isScrollable: true,
               padding: EdgeInsets.zero,
               labelStyle: AppStyle.boldText(),

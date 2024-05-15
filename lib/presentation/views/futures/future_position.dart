@@ -35,7 +35,8 @@ class _FuturePositionState extends State<FuturePosition> {
     return Scaffold(
         backgroundColor: palette.cardColor,
         body: ListView.builder(
-          shrinkWrap: true,
+          // shrinkWrap: true,
+          padding: EdgeInsets.only(top: 0, bottom: 50),
           itemCount: positionsList.length,
           itemBuilder: (context, index) {
             var position = positionsList[index];

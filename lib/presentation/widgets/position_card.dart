@@ -66,6 +66,7 @@ class PositionCard extends StatelessWidget {
                 color: palette.cardColor,
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
