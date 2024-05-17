@@ -40,14 +40,14 @@ class _WalletScreenState extends State<WalletScreen>
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.height * 0.045,
               decoration: BoxDecoration(
-                  color: palette.selectedTimeChipColor,
+                  color: palette.bgGray,
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                       decoration: BoxDecoration(
-                        color: palette.selectedTabChipColor,
+                        color: palette.bgGray,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(8),
                           bottomLeft: Radius.circular(8),
@@ -59,7 +59,13 @@ class _WalletScreenState extends State<WalletScreen>
                       child: Container(
                         margin: EdgeInsets.all(3),
                         // padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(color: palette.cardColor),
+                        decoration: BoxDecoration(
+                          color: palette.cardColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8.r),
+                            bottomLeft: Radius.circular(8.r),
+                          ),
+                        ),
                         child: TextButton(
                             onPressed: () {},
                             child: CustomText(
@@ -69,7 +75,7 @@ class _WalletScreenState extends State<WalletScreen>
                       )),
                   Container(
                       decoration: BoxDecoration(
-                        color: palette.selectedTabChipColor,
+                        color: palette.bgGray,
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(8),
                           bottomRight: Radius.circular(8),
@@ -88,24 +94,28 @@ class _WalletScreenState extends State<WalletScreen>
                 ],
               ),
             ),
-            TabBar(
-              isScrollable: true,
+            Container(
+              width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.zero,
-              labelStyle: AppStyle.appBarText(),
-              unselectedLabelColor: palette.selectedTimeChipColor,
-              labelColor: palette.appBarTitleColor,
-              indicator: const BoxDecoration(),
-              controller: _tabController,
-              dividerColor: palette.selectedTimeChipColor,
-              tabs: const [
-                Tab(text: AppStrings.overview),
-                Tab(text: AppStrings.spot),
-                Tab(text: AppStrings.funding),
-                Tab(text: AppStrings.earn),
-                Tab(text: AppStrings.fututes),
-                Tab(text: AppStrings.margin),
-              ],
-              labelPadding: EdgeInsets.only(right: 20.w),
+              child: TabBar(
+                isScrollable: true,
+                padding: EdgeInsets.zero,
+                labelStyle: AppStyle.appBarText(),
+                unselectedLabelColor: palette.selectedTimeChipColor,
+                labelColor: palette.appBarTitleColor,
+                indicator: const BoxDecoration(),
+                controller: _tabController,
+                dividerColor: palette.selectedTabChipColor,
+                tabs: const [
+                  Tab(text: AppStrings.overview),
+                  Tab(text: AppStrings.spot),
+                  Tab(text: AppStrings.funding),
+                  Tab(text: AppStrings.earn),
+                  Tab(text: AppStrings.fututes),
+                  Tab(text: AppStrings.margin),
+                ],
+                labelPadding: EdgeInsets.only(left: 0, right: 20.w),
+              ),
             ),
             Expanded(
               child: TabBarView(

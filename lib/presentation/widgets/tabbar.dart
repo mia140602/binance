@@ -53,7 +53,9 @@ class TabBarSelect extends StatelessWidget {
                       text: tabs[i],
                       fontSize: fontSize ?? 10.sp,
                       fontWeight: fontWeight ?? FontWeight.w400,
-                      color: palette.selectedTimeChipColor,
+                      color: isSelected
+                          ? selectedTabBorderColor
+                          : palette.selectedTimeChipColor,
                     ),
                   ],
                 ),

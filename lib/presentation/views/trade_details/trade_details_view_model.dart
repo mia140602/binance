@@ -54,6 +54,7 @@ class TradeDetailsViewModel {
       final newTradeData = TradeData.fromJson(data);
       _tradeData.value = newTradeData;
       _updateTotalBalance();
+      calculateTotalROI();
     }
   }
   // ValueNotifier<double> totalBalance = ValueNotifier(0.0);
@@ -71,22 +72,47 @@ class TradeDetailsViewModel {
     });
   }
 
-Future<double> calculateTotalPNL() async {
-  List<Map<String, dynamic>> positions = await SharePref.getAllPositions();
-  double totalPNL = 0.0;
-  // Sử dụng tryParse và xử lý trường hợp null
-  double? currentPrice = double.tryParse(_tradeData.value.currentPrice);
+  final ValueNotifier<double> pnlNotifier = ValueNotifier(0.0);
+  Future<double> calculateTotalPNL() async {
+    List<Map<String, dynamic>> positions = await SharePref.getAllPositions();
+    double totalPNL = 0.0;
+    // Sử dụng tryParse và xử lý trường hợp null
+    double? currentPrice = double.tryParse(_tradeData.value.currentPrice);
 
-  if (currentPrice == null) {
-    print("Invalid current price data: ${_tradeData.value.currentPrice}");
-    return 0.0;  // Trả về 0 hoặc xử lý phù hợp nếu giá trị không hợp lệ
+    if (currentPrice == null) {
+      print("Invalid current price data: ${_tradeData.value.currentPrice}");
+      return 0.0; // Trả về 0 hoặc xử lý phù hợp nếu giá trị không hợp lệ
+    }
+
+    for (var position in positions) {
+      totalPNL += calculatePNLForPosition(position, currentPrice);
+    }
+    pnlNotifier.value = totalPNL;
+    return totalPNL;
   }
 
-  for (var position in positions) {
-    totalPNL += calculatePNLForPosition(position, currentPrice);
+  final ValueNotifier<double> roiNotifier = ValueNotifier(0.0);
+
+  Future<double> calculateTotalROI() async {
+    List<Map<String, dynamic>> positions = await SharePref.getAllPositions();
+    double totalROI = 0.0;
+    double? currentPrice = double.tryParse(_tradeData.value.currentPrice);
+
+    if (currentPrice == null) {
+      print("Invalid current price data: ${_tradeData.value.currentPrice}");
+      return 0.0;
+    }
+
+    for (var position in positions) {
+      double pnl = calculatePNLForPosition(position, currentPrice);
+      double userMargin = position['margin']
+          as double; // Giả sử margin được lưu trữ trong position
+      double roi = (pnl / userMargin) * 100;
+      totalROI += roi;
+    }
+    roiNotifier.value = totalROI; // Cập nhật tổng ROI
+    return totalROI;
   }
-  return totalPNL;
-}
 
   double calculatePNLForPosition(
       Map<String, dynamic> position, double currentPrice) {

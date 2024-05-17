@@ -188,8 +188,8 @@ class AppStyle {
     return GoogleFonts.roboto(
       textStyle: TextStyle(
         color: Colors.white,
-        fontWeight: FontWeight.w400,
-        fontSize: 14.sp,
+        fontWeight: FontWeight.w300,
+        fontSize: 12.sp,
       ),
     );
   }

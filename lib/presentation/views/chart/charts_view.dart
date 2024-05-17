@@ -36,11 +36,10 @@ class ChartsView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
-                height: 22.h,
+                // height: 22.h,
                 child: TradeDurationListView(),
               ),
             ),
-            Gap(10.h),
             Container(
               height: 0.5.h,
               color: palette.selectedTimeChipColor.withOpacity(0.5),
@@ -61,27 +60,35 @@ class ChartsView extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: TabBarSelect(tabs: [
-                      "MA",
-                      "EMA",
-                      "BOLL",
-                      "SAR",
-                      "AVL",
-                      "VOL",
-                      "MACD",
-                      "RIS",
-                      "KDJ",
-                      "OBV",
-                      "WR",
-                      "StochRSI",
-                      'L.S Acco'
-                    ], index: 6),
+                    child: TabBarSelect(
+                      tabs: [
+                        "MA",
+                        "EMA",
+                        "BOLL",
+                        "SAR",
+                        "AVL",
+                        "VOL",
+                        "MACD",
+                        "RSI",
+                        "KDJ",
+                        "OBV",
+                        "WR",
+                        "StochRSI",
+                        'L.S Acco'
+                      ],
+                      index: 6,
+                      selectedTabBorderColor: palette.selectedTimeChipColor,
+                    ),
                   ),
                   GestureDetector(
                       onTap: () {},
-                      child: Icon(
-                        Icons.arrow_drop_down_rounded,
-                        color: palette.selectedTimeChipColor,
+                      child: Container(
+                        padding: EdgeInsets.only(right: 10.w, left: 15.w),
+                        child: Image.asset(
+                          "assets/icons/alas.png",
+                          width: 12.w,
+                          color: palette.selectedTimeChipColor,
+                        ),
                       ))
                 ],
               ),

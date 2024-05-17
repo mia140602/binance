@@ -1,6 +1,6 @@
 import 'package:binance_clone/presentation/views/futures/chartview/chartview.dart';
-import 'package:binance_clone/presentation/views/transaction_screen/transaction_screen.dart';
-import 'package:binance_clone/presentation/views/wallets/wallets.dart';
+
+import 'package:binance_clone/presentation/views/wallets/wallets_screen.dart';
 import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_strings.dart';
@@ -16,7 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
-import '../futures/chartview/orderBook.dart';
+import '../transaction_screen/transaction_screen.dart';
 
 class BottomNavigationBarr extends StatefulWidget {
   const BottomNavigationBarr({Key? key}) : super(key: key);
@@ -41,8 +41,11 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
     const HomeScreen(),
     const MarketView(),
     TransactionScreen(),
+    // TradingChartScreen(
+    //   symbol: "BTCUSDT",
+    // ),
     FuturesScreen(),
-    WalletsView()
+    WalletScreen()
   ];
   void toggleContainer() {
     setState(() {
@@ -115,7 +118,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
           children: [
             Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: CustomTabBar(tabs: [
                     "Thời gian",
                     "1m",
@@ -132,7 +135,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                     "3d",
                     "1w",
                     '1M'
-                  ], index: 6),
+                  ], index: 11),
                 ),
                 GestureDetector(
                     onTap: () {

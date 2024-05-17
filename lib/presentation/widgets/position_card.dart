@@ -44,16 +44,20 @@ class PositionCard extends StatelessWidget {
               .tradeData,
           builder: (tradeData) {
             double entryPrice = position['entryPrice'];
+            double leverage = position['leverage'];
             double currentPrice = double.parse(tradeData.currentPrice);
-            String pnl =
-                calculatePNL(position['type'], entryPrice, currentPrice);
-            double userMargin = position['margin'];
-            String roi = calculateROI(userMargin, pnl);
 
+            double userMargin = position['margin'];
+
+            double size = calculateSize(userMargin, leverage);
+            String formattedSize = NumberFormat("#,##0", "en_US").format(size);
+            String pnl =
+                calculatePNL(position['type'], entryPrice, currentPrice, size);
+            String roi = calculateROI(userMargin, pnl);
             Color pnlColor = double.parse(pnl.replaceAll(',', '')) > 0
                 ? palette.mainGreenColor
                 : palette.sellButtonColor;
-            String marginRatio = calculateMarginRatio(userMargin, currentPrice);
+            String marginRatio = calculateMarginRatio(userMargin, size);
             String entryPriceFormat =
                 ParserUtil.formatPrice(entryPrice.toString());
             String userMarginFormat =
@@ -79,7 +83,7 @@ class PositionCard extends StatelessWidget {
                           ),
                           Gap(5.w),
                           CustomText(
-                            text: "${position['symbol']} Perpetual",
+                            text: "${position['symbol']} Vĩnh cửu",
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w500,
                           ),
@@ -128,56 +132,64 @@ class PositionCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _smallContent(
-                          context: context,
-                          title: "Kích thước (${tradeData.baseAsset})",
-                          content: "75.000"),
-                      _smallContent(
-                          context: context,
-                          title: "Margin (${tradeData.quoteAsset})",
-                          content: "${userMarginFormat}"),
-                      Gap(20.w),
-                      _smallContent(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          context: context,
-                          title: "Tỉ lệ ký quỹ",
-                          content: "${marginRatio}",
-                          color: pnlColor),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _smallContent(
+                              context: context,
+                              title: "Kích thước (${tradeData.quoteAsset})",
+                              content: "${formattedSize}"),
+                          _smallContent(
+                              context: context,
+                              title: "Giá vào lệnh (${tradeData.quoteAsset})",
+                              content: "${entryPriceFormat}"),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _smallContent(
+                              context: context,
+                              title: "Margin (${tradeData.quoteAsset})",
+                              content: "${userMarginFormat}"),
+                          _smallContent(
+                              context: context,
+                              title: "Giá đánh dấu (${tradeData.quoteAsset})",
+                              content: "${markPriceFormat}"),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          _smallContent(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              context: context,
+                              title: "Tỉ lệ ký quỹ",
+                              content: "${marginRatio}",
+                              color: pnlColor),
+                          _smallContent(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              context: context,
+                              title: "Giá thanh lý (${tradeData.quoteAsset})",
+                              content: "--",
+                              color: palette.appBarTitleColor),
+                        ],
+                      )
                     ],
                   ),
                   Gap(10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _smallContent(
-                          context: context,
-                          title: "Giá vào lệnh (${tradeData.quoteAsset})",
-                          content: "${entryPriceFormat}"),
-                      _smallContent(
-                          context: context,
-                          title: "Giá đánh dấu (${tradeData.quoteAsset})",
-                          content: "${markPriceFormat}"),
-                      _smallContent(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          context: context,
-                          title: "Giá thanh lý (${tradeData.quoteAsset})",
-                          content: "--",
-                          color: palette.appBarTitleColor),
-                    ],
-                  ),
-                  Gap(10.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _bottomButton(context: context, label: "Chốt lãi & lỗ"),
-                      _bottomButton(context: context, label: "Đóng vị thế"),
-                      _bottomButton(context: context, label: "Đảo ngược"),
+                      _bottomButton(context: context, label: "Đòn bẩy"),
+                      _bottomButton(context: context, label: "TP/SL"),
+                      _bottomButton(context: context, label: "Đóng"),
                     ],
                   ),
                   Gap(20.h),
                   Container(
                     height: 1,
-                    color: palette.selectedTimeChipColor,
+                    color: palette.selectedTabChipColor,
                   ),
                 ],
               ),
@@ -186,18 +198,22 @@ class PositionCard extends StatelessWidget {
     });
   }
 
-  String calculateMarginRatio(double userMargin, double currentPrice) {
-    double marginRatio = (userMargin / (0.075 * currentPrice)) * 100;
-
+  String calculateMarginRatio(
+    double userMargin,
+    double positionSize,
+  ) {
+    double requiredMargin = positionSize;
+    double marginRatio = (userMargin / requiredMargin) * 100;
     return NumberFormat("#,##0.00%", "en_US").format(marginRatio);
   }
 
-  String calculatePNL(String type, double entryPrice, double currentPrice) {
+  String calculatePNL(
+      String type, double entryPrice, double currentPrice, double size) {
     double pnlValue;
     if (type == "Long") {
-      pnlValue = 0.075 * (currentPrice - entryPrice);
+      pnlValue = size * (currentPrice - entryPrice);
     } else if (type == "Short") {
-      pnlValue = -0.075 * (currentPrice - entryPrice);
+      pnlValue = -size * (currentPrice - entryPrice);
     } else {
       pnlValue = 0.0;
     }
@@ -212,6 +228,10 @@ class PositionCard extends StatelessWidget {
     }
     return NumberFormat("#,##0.00%", "en_US")
         .format(pnlValue / userMargin * 100);
+  }
+
+  double calculateSize(double userMargin, double leverage) {
+    return userMargin * leverage;
   }
 
   Widget _largeContent(
@@ -278,8 +298,8 @@ class PositionCard extends StatelessWidget {
         padding: EdgeInsets.all(5),
         width: (MediaQuery.of(context).size.width - 60) / 3,
         decoration: BoxDecoration(
-          color: palette.selectedTimeChipColor,
-          borderRadius: BorderRadius.circular(2),
+          color: palette.bgGray,
+          borderRadius: BorderRadius.circular(5.r),
         ),
         child: CustomText(
           text: label,

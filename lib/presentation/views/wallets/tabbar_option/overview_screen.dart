@@ -44,33 +44,18 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
     // Sau đó truy cập totalBalanceNotifier từ instance đó
     final numberFormat = NumberFormat("#,##0.00000", "en_US");
     final totalBalance = tradeDetailsViewModel.totalBalanceNotifier;
+    final pnlNotifier = tradeDetailsViewModel.pnlNotifier;
+    final roiNotifier = tradeDetailsViewModel.roiNotifier;
+    final Color pnlColor = pnlNotifier.value > 0
+        ? palette.mainGreenColor
+        : palette.sellButtonColor;
     Widget selectedWidget = Container();
     if (check == 0) {
       selectedWidget = Column(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    AppStrings.spot,
-                    style: AppStyle.regularBoldText(),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Text("0 USDT", style: AppStyle.boldText()),
-                  Text("≈ \$0", style: AppStyle.smallGrayText()),
-                ],
-              )
-            ],
-          ),
+          _rowItem(title: "Giao ngay", symbol: symbol),
           SizedBox(
-            height: 5.h,
+            height: 15.h,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,28 +113,17 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
             ],
           ),
           SizedBox(
-            height: 20.h,
+            height: 15.h,
+          ),
+          Container(
+            height: 1,
+            color: palette.selectedTabChipColor,
           ),
           _rowItem(title: "Funding", symbol: symbol),
-          SizedBox(
-            height: 27.h,
-          ),
           _rowItem(title: "Earn", symbol: symbol),
-          SizedBox(
-            height: 27.h,
-          ),
           _rowItem(title: "Hợp đồng tương lai COI...", symbol: symbol),
-          SizedBox(
-            height: 27.h,
-          ),
           _rowItem(title: "Cross Margin", symbol: symbol),
-          SizedBox(
-            height: 27.h,
-          ),
           _rowItem(title: "Isolate Margin", symbol: symbol),
-          SizedBox(
-            height: 27.h,
-          ),
           _rowItem(title: "Sao chép giao dịch", symbol: symbol),
           Container(
             height: 100,
@@ -174,14 +148,6 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.remove_red_eye,
-                      color: palette.grayColor,
-                      size: 13.h,
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
                     CustomText(
                       text: AppStrings.total_balance,
                       fontSize: 12.sp,
@@ -190,29 +156,14 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                     SizedBox(
                       width: 10.w,
                     ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: palette.selectedTabChipColor,
-                        borderRadius: BorderRadius.circular(3.r),
-                      ),
-                      child: Row(
-                        children: [
-                          CustomText(
-                            text: symbol,
-                            fontSize: 10.sp,
-                            color: palette.textColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          Gap(2.w),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            size: 10.h,
-                            color: palette.grayColor,
-                          )
-                        ],
-                      ),
-                    )
+                    Icon(
+                      Icons.remove_red_eye,
+                      color: palette.grayColor,
+                      size: 13.h,
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                   ],
                 ),
                 Container(
@@ -243,84 +194,127 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                   builder: (context, value, child) {
                     return CustomText(
                       // text: '${value.toStringAsFixed(2)}',
-                      text: numberFormat.format(value).replaceAll('.', ''),
+                      text: numberFormat.format(value).replaceAll('.', '') +
+                          ' \$',
                       fontSize: 26,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                     );
                   },
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                ValueListenableBuilder<double>(
-                  valueListenable: totalBalance,
-                  builder: (context, value, child) {
-                    return CustomText(
-                        // text: '${value.toStringAsFixed(2)}',
-                        text:
-                            '≈ ${numberFormat.format(value).replaceAll('.', '')} \$',
-                        fontSize: 13.sp,
-                        color: Colors.grey.shade500);
-                  },
-                ),
+                Gap(15.w),
+                Row(
+                  children: [
+                    CustomText(
+                      text: symbol,
+                      fontSize: 14.sp,
+                      color: palette.textColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    Gap(2.w),
+                    Icon(
+                      Icons.arrow_drop_down_rounded,
+                      size: 14.h,
+                      color: palette.appBarTitleColor,
+                    )
+                  ],
+                )
               ],
             ),
             // Row(
-            //   crossAxisAlignment: CrossAxisAlignment.end,
             //   children: [
-            //     Text(
-            //       "PNL today",
-            //       style: AppStyle.regularText().copyWith(decoration: TextDecoration.underline,decorationColor: Colors.grey),
+            //     ValueListenableBuilder<double>(
+            //       valueListenable: totalBalance,
+            //       builder: (context, value, child) {
+            //         return CustomText(
+            //             // text: '${value.toStringAsFixed(2)}',
+            //             text:
+            //                 '≈ ${numberFormat.format(value).replaceAll('.', '')} \$',
+            //             fontSize: 13.sp,
+            //             color: Colors.grey.shade500);
+            //       },
             //     ),
-            //     SizedBox(width: 2.w,),
-            //     Text("+0,000241 \$", style: AppStyle.smallGreenText(),),
-            //     Text("+0.02%",style: AppStyle.smallGreenText(),),
-            //     Icon(Icons.arrow_right_outlined,size: 17.h,color: Colors.grey,)
             //   ],
             // ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text("PNL của hôm nay",
+                    style: AppStyle.regularText().copyWith(
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.dotted,
+                        decorationColor: Colors.grey)),
+                SizedBox(width: 2.w),
+                ValueListenableBuilder<double>(
+                  valueListenable: pnlNotifier,
+                  builder: (context, value, child) {
+                    return CustomText(
+                      text: value > 0
+                          ? "+${value.toStringAsFixed(2)} \$"
+                          : "${value.toStringAsFixed(2)} \$",
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w500,
+                      color: pnlColor,
+                    );
+                  },
+                ),
+                ValueListenableBuilder<double>(
+                  valueListenable: roiNotifier,
+                  builder: (context, value, child) {
+                    return Text(
+                      value > 0
+                          ? "(+${value.toStringAsFixed(2)}%)"
+                          : "(${value.toStringAsFixed(2)}%)",
+                      style: GoogleFonts.roboto(
+                          color: value > 0
+                              ? palette.mainGreenColor
+                              : palette.sellButtonColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11.sp),
+                    );
+                  },
+                ),
+                Gap(10.w),
+                Icon(
+                  Icons.keyboard_arrow_right_outlined,
+                  size: 13.h,
+                  color: palette.selectedTimeChipColor,
+                )
+              ],
+            ),
             SizedBox(
               height: 10.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2.r),
-                      color: palette.mainYellowColor,
-                    ),
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Mua",
-                          style: GoogleFonts.roboto(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
-                        ))),
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2.r),
-                      color: palette.grayButton,
-                    ),
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Bán",
-                          style: GoogleFonts.roboto(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                              color: palette.textColor),
-                        ))),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "download",
+                      text: "Nạp"),
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "upload",
+                      text: "Rút"),
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "sunrise",
+                      text: "Mua"),
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "change",
+                      width: 16.w,
+                      text: "Chuyển"),
+                ],
+              ),
             ),
             Divider(
-              color: palette.selectedTimeChipColor,
+              color: palette.selectedTabChipColor,
             ),
             SizedBox(
               height: 10.h,
@@ -329,6 +323,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
               children: [
                 CustomTabBar(
                   tabs: const ["Tài khoản", "Tiền mã hóa"],
+                  fontSize: 13.sp,
                   index: _index,
                   onChanged: (value) {
                     setState(() {
@@ -338,7 +333,6 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ),
               ],
             ),
-
             SizedBox(
               height: 15.h,
             ),
@@ -349,28 +343,71 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
     );
   }
 
-  Row _rowItem({required String title, String? symbol}) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget iconbutton(
+      {required Palette palette,
+      required BuildContext context,
+      required String image,
+      required String text,
+      double? width}) {
+    return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomText(
-              text: title,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 14.sp,
+        Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+              color: palette.cardColor,
+              border:
+                  Border.all(color: palette.selectedTimeChipColor, width: 0.5),
             ),
-          ],
-        ),
-        Column(
-          children: [
-            Text("0.00 ${symbol}", style: AppStyle.boldText()),
-          ],
+            // height: MediaQuery.of(context).size.height * 0.05,
+            // width: MediaQuery.of(context).size.width * 0.45,
+            padding: EdgeInsets.all(10),
+            child: Image.asset(
+              "assets/icons/${image}.png",
+              width: width ?? 18.w,
+            )),
+        Gap(5.h),
+        CustomText(
+          text: text,
+          color: palette.selectedTimeChipColor,
         )
       ],
+    );
+  }
+
+  Widget _rowItem({required String title, String? symbol}) {
+    final palette = Theme.of(context).extension<Palette>()!;
+    return Container(
+      decoration: BoxDecoration(
+          // border: Border(
+          //   bottom: BorderSide(
+          //     color: palette.selectedTabChipColor,
+          //     width: 0.5,
+          //   ),
+          // ),
+          ),
+      padding: EdgeInsets.only(bottom: 15.h, top: 15.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomText(
+                text: title,
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.sp,
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Text("0.00 ${symbol}", style: AppStyle.boldText()),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
