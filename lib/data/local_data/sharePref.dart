@@ -152,7 +152,6 @@ class SharePref {
     List<String> wallets = prefs.getStringList(keyWallets) ?? [];
     wallets.removeWhere((wallet) => wallet.split(":")[0] == walletName);
     await prefs.setStringList(keyWallets, wallets);
-
     // Cập nhật số lượng vị trí trong ví
     Map<String, int> walletPositionsCount = _getWalletPositionsCount(prefs);
     walletPositionsCount.remove(walletName);

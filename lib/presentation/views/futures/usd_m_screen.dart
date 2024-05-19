@@ -1,4 +1,5 @@
 import 'package:binance_clone/presentation/app_assets.dart';
+import 'package:binance_clone/presentation/views/futures/widget/margin_futures_modal.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
 import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
@@ -17,6 +18,8 @@ import '../../theme/palette.dart';
 import '../../widgets/custom_tab_bar.dart';
 import '../trade_details/trade_details_view_model.dart';
 import 'future_position.dart';
+import 'provider/future_provider.dart';
+import 'widget/edit_future_modal.dart';
 
 class USDScreen extends ConsumerStatefulWidget {
   final Function(int)? onTabChanged; // Optional callback
@@ -80,14 +83,6 @@ class _USDScreenState extends ConsumerState<USDScreen>
     final tradeDetailsViewModel =
         ref.watch(tradeDetailsViewModelProvider(currentSymbol));
     final palette = Theme.of(context).extension<Palette>()!;
-
-    bool _isOpen = false; // Flag to track drawer visibility
-
-    void _toggleDrawer() {
-      setState(() {
-        _isOpen = !_isOpen;
-      });
-    }
 
     Widget selectedWidget = Container();
 
@@ -231,16 +226,30 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     children: [
                       Row(
                         children: [
-                          borderContainer(palette: palette, title: "Cross"),
+                          GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  backgroundColor: palette.cardColor,
+                                  context: context,
+                                  builder: (_) => MarginFutureModal(),
+                                );
+                              },
+                              child: borderContainer(
+                                  palette: palette, title: '${ref.watch(marginProvider)}')),
                           SizedBox(
                             width: 5.w,
                           ),
                           GestureDetector(
                             onTap: () {
-                              _toggleDrawer();
+                              showModalBottomSheet(
+                                backgroundColor: palette.cardColor,
+                                context: context,
+                                builder: (_) => EditLeverageFutureModal(),
+                              );
                             },
-                            child:
-                                borderContainer(palette: palette, title: "55x"),
+                            child: borderContainer(
+                                palette: palette,
+                                title: "${ref.watch(leverageProvider)}x"),
                           ),
                           SizedBox(
                             width: 5.w,
