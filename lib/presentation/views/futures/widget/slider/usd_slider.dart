@@ -2,25 +2,24 @@ import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../provider/future_provider.dart';
 import 'customslidethumb.dart';
 import 'customvalue.dart';
 
-class CustomSlider extends ConsumerStatefulWidget {
-  CustomSlider({Key? key, this.divisions}) : super(key: key);
+class UsdSlider extends ConsumerStatefulWidget {
+  UsdSlider({Key? key, this.divisions}) : super(key: key);
   final int? divisions;
 
   @override
-  _CustomSliderState createState() => _CustomSliderState();
+  _UsdSliderState createState() => _UsdSliderState();
 }
 
-class _CustomSliderState extends ConsumerState<CustomSlider> {
+class _UsdSliderState extends ConsumerState<UsdSlider> {
   double _value = 0;
 
   @override
   void initState() {
     super.initState();
-    _value = ref.read(leverageProvider).toDouble();
+    // _value = ref.read(leverageProvider).toDouble();
   }
 
   @override
@@ -51,7 +50,7 @@ class _CustomSliderState extends ConsumerState<CustomSlider> {
           setState(() {
             _value = value;
           });
-          ref.read(leverageProvider.notifier).state = value.round();
+          // ref.read(leverageProvider.notifier).state = value.round();
         },
       ),
     );

@@ -49,15 +49,15 @@ class PositionCard extends StatelessWidget {
 
             double userMargin = position['margin'];
 
-            double size = calculateSize(userMargin, leverage);
+            String pnl = calculatePNL(position['type'], entryPrice,
+                currentPrice, position['margin'], leverage);
+            double size = calculateSize(pnl, currentPrice, entryPrice);
             String formattedSize = NumberFormat("#,##0", "en_US").format(size);
-            String pnl =
-                calculatePNL(position['type'], entryPrice, currentPrice, size);
             String roi = calculateROI(userMargin, pnl);
             Color pnlColor = double.parse(pnl.replaceAll(',', '')) > 0
                 ? palette.mainGreenColor
                 : palette.sellButtonColor;
-            String marginRatio = calculateMarginRatio(userMargin, size);
+            String marginRatio = calculateMarginRatio(size, userMargin);
             String entryPriceFormat =
                 ParserUtil.formatPrice(entryPrice.toString());
             String userMarginFormat =
@@ -199,39 +199,39 @@ class PositionCard extends StatelessWidget {
   }
 
   String calculateMarginRatio(
+    double size,
     double userMargin,
-    double positionSize,
   ) {
-    double requiredMargin = positionSize;
-    double marginRatio = (userMargin / requiredMargin) * 100;
+    double marginRatio = (10 * userMargin / size) * 100;
     return NumberFormat("#,##0.00%", "en_US").format(marginRatio);
   }
 
-  String calculatePNL(
-      String type, double entryPrice, double currentPrice, double size) {
+  String calculatePNL(String type, double entryPrice, double currentPrice,
+      double margin, double leverage) {
     double pnlValue;
     if (type == "Long") {
-      pnlValue = size * (currentPrice - entryPrice);
+      pnlValue = (currentPrice - entryPrice) / entryPrice * margin * leverage;
     } else if (type == "Short") {
-      pnlValue = -size * (currentPrice - entryPrice);
+      pnlValue = -(currentPrice - entryPrice) / entryPrice * margin * leverage;
     } else {
       pnlValue = 0.0;
     }
-    return NumberFormat("#,##0.00", "en_US").format(pnlValue);
+    return ParserUtil.formatPrice(pnlValue.toString());
   }
 
   String calculateROI(double userMargin, String pnl) {
     double pnlValue = double.parse(pnl.replaceAll(',', ''));
     if (pnlValue > 0) {
       return NumberFormat("+#,##0.00%", "en_US")
-          .format(pnlValue / userMargin * 100);
+          .format(pnlValue / userMargin / 10);
     }
     return NumberFormat("#,##0.00%", "en_US")
-        .format(pnlValue / userMargin * 100);
+        .format(pnlValue / userMargin / 10);
   }
 
-  double calculateSize(double userMargin, double leverage) {
-    return userMargin * leverage;
+  double calculateSize(String pnl, double currentPrice, double entryPrice) {
+    double pnlValue = double.parse(pnl.replaceAll(',', ''));
+    return pnlValue / (currentPrice - entryPrice);
   }
 
   Widget _largeContent(

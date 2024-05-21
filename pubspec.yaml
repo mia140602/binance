@@ -79,6 +79,8 @@ flutter:
     - assets/icons/wallet_icon/
     - assets/icons/futures_icon/
     - assets/icons/coin_icon/
+    - assets/fonts/
+    - assets/fonts/moon_plex_fonts/
 
   fonts:
     - family: Satoshi
@@ -97,3 +99,9 @@ flutter:
           weight: 400
         - asset: assets/fonts/Satoshi-Light.otf
           weight: 300
+    - family: moon_plex
+      fonts:
+        - asset: assets/fonts/moon_plex_fonts/moon_plex_regular.otf
+    - family: moon_poppins
+      fonts:
+        - asset: assets/fonts/moon_plex_fonts/moon_poppins_regular.ttf

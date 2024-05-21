@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/data/services/socket_service.dart';
 import 'package:binance_clone/models/trade_data.dart';
-import 'package:binance_clone/utils/app_strings.dart';
+// import 'package:binance_clone/utils/app_strings.dart';
 
 final tradeDetailsViewModelProvider =
     Provider.family<TradeDetailsViewModel, String>(
@@ -13,7 +13,7 @@ final tradeDetailsViewModelProvider =
 class TradeDetailsViewModel {
   late final _socketService = SocketService();
   final ValueNotifier<double> totalBalanceNotifier = ValueNotifier(0.0);
-  static const String _symbol = AppStrings.symbol;
+  static const String _symbol = "BTCUSDT";
   late final String _pair;
   TradeDetailsViewModel(String pair) {
     _pair = pair.toLowerCase();

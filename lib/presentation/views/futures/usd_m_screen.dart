@@ -1,5 +1,6 @@
 import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/presentation/views/futures/widget/margin_futures_modal.dart';
+import 'package:binance_clone/presentation/views/futures/widget/slider/usd_slider.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
 import 'package:binance_clone/presentation/views/trade_details/trading_view_detail.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
@@ -20,6 +21,9 @@ import '../trade_details/trade_details_view_model.dart';
 import 'future_position.dart';
 import 'provider/future_provider.dart';
 import 'widget/edit_future_modal.dart';
+import 'widget/slider/customslider.dart';
+import 'widget/slider/customslidethumb.dart';
+import 'widget/slider/customvalue.dart';
 
 class USDScreen extends ConsumerStatefulWidget {
   final Function(int)? onTabChanged; // Optional callback
@@ -37,6 +41,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
   // late TabController _tabController;
   String currentSymbol = "BTCUSDT";
   TextEditingController _priceController = TextEditingController();
+  TextEditingController _marginLeverageController = TextEditingController();
   int _index = 1;
 
   void _setIndex(int value) {
@@ -44,6 +49,35 @@ class _USDScreenState extends ConsumerState<USDScreen>
       setState(() {
         _index = value;
       });
+    }
+  }
+
+  void createPosition(String type) async {
+    try {
+      double entryPrice = double.tryParse(_priceController.text) ?? 0;
+      double marginLeverage =
+          double.tryParse(_marginLeverageController.text) ?? 0;
+      double leverage = ref.read(leverageProvider).toDouble();
+      double margin = marginLeverage / leverage;
+      String symbol = currentSymbol;
+
+      List<Map<String, dynamic>> wallets = await SharePref.getAllWallets();
+      if (wallets.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Không có ví nào được tìm thấy!")));
+        return;
+      }
+      String walletName = wallets.first['name'];
+
+      await SharePref.addPosition(
+          walletName, symbol, type, entryPrice, leverage, margin);
+      loadPositions();
+
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Tạo thành công!")));
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Lỗi khi tạo vị thế: $e")));
     }
   }
 
@@ -80,6 +114,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
   @override
   Widget build(BuildContext context) {
     // final marketData = ref.watch(marketViewModelProvider).marketData;
+    double _value = 0;
     final tradeDetailsViewModel =
         ref.watch(tradeDetailsViewModelProvider(currentSymbol));
     final palette = Theme.of(context).extension<Palette>()!;
@@ -235,7 +270,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 );
                               },
                               child: borderContainer(
-                                  palette: palette, title: '${ref.watch(marginProvider)}')),
+                                  palette: palette,
+                                  title: '${ref.watch(marginProvider)}')),
                           SizedBox(
                             width: 5.w,
                           ),
@@ -445,8 +481,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 color: palette.bgGray,
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 2.h, horizontal: 7.w),
+                              padding: EdgeInsets.symmetric(horizontal: 7.w),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -458,20 +493,33 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                         fontSize: 25.sp),
                                   ),
                                   SizedBox(
-                                    width: 10.w,
+                                    width: 20.w,
                                   ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CustomText(
+                                  Expanded(
+                                    child: TextField(
+                                      controller: _marginLeverageController,
+                                      keyboardType: TextInputType.number,
+                                      cursorColor: palette.mainYellowColor,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: palette.appBarTitleColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      decoration: InputDecoration(
+                                        label: CustomText(
                                           text: "Số tiền",
-                                          color: Colors.grey,
-                                          fontSize: 12.sp),
-                                      // Text(
-                                      //   "0%",
-                                      //   style: AppStyle.boldText(),
-                                      // ),
-                                    ],
+                                          color: palette.selectedTimeChipColor,
+                                          fontSize: 12.sp,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                        errorBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 10.w,
@@ -510,66 +558,10 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               ),
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height: 10.h,
                             ),
-                            Row(
-                              children: [
-                                Image.asset(
-                                  FuturesAssets.rhombus,
-                                  height: 13.h,
-                                  color: palette.appBarTitleColor,
-                                ),
-                                Container(
-                                  width: 25.w,
-                                  height: 1.h,
-                                  color: palette.grayColor,
-                                ),
-                                Image.asset(
-                                  FuturesAssets.rhombus,
-                                  height: 8.h,
-                                  color: palette.grayColor,
-                                ),
-                                Container(
-                                  width: 25.w,
-                                  height: 1.h,
-                                  color: palette.grayColor,
-                                ),
-                                Image.asset(
-                                  FuturesAssets.rhombus,
-                                  height: 8.h,
-                                  color: palette.grayColor,
-                                ),
-                                Container(
-                                  width: 25.w,
-                                  height: 1.h,
-                                  color: palette.grayColor,
-                                ),
-                                Image.asset(
-                                  FuturesAssets.rhombus,
-                                  height: 8.h,
-                                  color: palette.grayColor,
-                                ),
-                                Container(
-                                  width: 25.w,
-                                  height: 1.h,
-                                  color: palette.grayColor,
-                                ),
-                                Image.asset(
-                                  FuturesAssets.rhombus,
-                                  height: 8.h,
-                                  color: palette.grayColor,
-                                ),
-                                Container(
-                                  width: 25.w,
-                                  height: 1.h,
-                                  color: palette.grayColor,
-                                ),
-                                Image.asset(
-                                  FuturesAssets.rhombus,
-                                  height: 8.h,
-                                  color: palette.grayColor,
-                                ),
-                              ],
+                            UsdSlider(
+                              divisions: 4,
                             ),
                             SizedBox(
                               height: 10.h,
@@ -668,7 +660,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     color: palette.mainGreenColor,
                                     borderRadius: BorderRadius.circular(6.r)),
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      createPosition("Long");
+                                    },
                                     child: CustomText(
                                         text: "Mở lệnh long",
                                         color: Colors.white,
@@ -717,7 +711,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     color: palette.sellButtonColor,
                                     borderRadius: BorderRadius.circular(6.r)),
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      createPosition("Short");
+                                    },
                                     child: CustomText(
                                         text: "Mở lệnh short",
                                         color: Colors.white,

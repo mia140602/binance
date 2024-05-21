@@ -27,13 +27,13 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = GoogleFonts.roboto(
-      letterSpacing: 0.05,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-      color: color,
-      height: height,
-    );
+    final style = TextStyle(
+        letterSpacing: 0.05,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+        height: height,
+        fontFamily: 'moon_plex');
     return Text(
       text,
       softWrap: true,

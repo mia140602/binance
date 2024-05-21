@@ -260,17 +260,15 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 ValueListenableBuilder<double>(
                   valueListenable: roiNotifier,
                   builder: (context, value, child) {
-                    return Text(
-                      value > 0
-                          ? "(+${value.toStringAsFixed(2)}%)"
-                          : "(${value.toStringAsFixed(2)}%)",
-                      style: GoogleFonts.roboto(
-                          color: value > 0
-                              ? palette.mainGreenColor
-                              : palette.sellButtonColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 11.sp),
-                    );
+                    return CustomText(
+                        text: value > 0
+                            ? "(+${value.toStringAsFixed(2)}%)"
+                            : "(${value.toStringAsFixed(2)}%)",
+                        color: value > 0
+                            ? palette.mainGreenColor
+                            : palette.sellButtonColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 11.sp);
                   },
                 ),
                 Gap(10.w),
@@ -284,34 +282,62 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
             SizedBox(
               height: 10.h,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  iconbutton(
-                      palette: palette,
-                      context: context,
-                      image: "download",
-                      text: "Nạp"),
-                  iconbutton(
-                      palette: palette,
-                      context: context,
-                      image: "upload",
-                      text: "Rút"),
-                  iconbutton(
-                      palette: palette,
-                      context: context,
-                      image: "sunrise",
-                      text: "Mua"),
-                  iconbutton(
-                      palette: palette,
-                      context: context,
-                      image: "change",
-                      width: 16.w,
-                      text: "Chuyển"),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+                  width: (MediaQuery.of(context).size.width - 40) / 2,
+                  decoration: BoxDecoration(
+                      color: palette.mainYellowColor,
+                      borderRadius: BorderRadius.circular(10.r)),
+                  child: CustomText(
+                    text: "Nạp",
+                    color: palette.cardColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                // Gap(10.w),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+                  width: (MediaQuery.of(context).size.width - 40) / 2,
+                  decoration: BoxDecoration(
+                      color: palette.bgColor,
+                      borderRadius: BorderRadius.circular(10.r)),
+                  child: CustomText(
+                    text: "Mua",
+                    color: palette.appBarTitleColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                // iconbutton(
+                //     palette: palette,
+                //     context: context,
+                //     image: "download",
+                //     text: "Nạp"),
+                // iconbutton(
+                //     palette: palette,
+                //     context: context,
+                //     image: "upload",
+                //     text: "Rút"),
+                // iconbutton(
+                //     palette: palette,
+                //     context: context,
+                //     image: "sunrise",
+                //     text: "Mua"),
+                // iconbutton(
+                //     palette: palette,
+                //     context: context,
+                //     image: "change",
+                //     width: 16.w,
+                //     text: "Chuyển"),
+              ],
             ),
             Divider(
               color: palette.selectedTabChipColor,
