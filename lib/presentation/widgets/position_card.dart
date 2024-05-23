@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:binance_clone/presentation/widgets/reactive_builder.dart';
 import 'package:binance_clone/utils/parser_util.dart';
 import 'package:flutter/material.dart';
@@ -211,7 +213,12 @@ class PositionCard extends StatelessWidget {
         positionValue * 0.005; // giả định tỷ lệ ký quỹ duy trì là 0.5%
     double unrealizedPnL = (currentPrice - entryPrice) * size;
     double marginBalance = userMargin + unrealizedPnL;
-    double marginRatio = (maintenanceMargin / marginBalance) / 100;
+    double marginRatio = (maintenanceMargin / marginBalance);
+    if (marginRatio > 0) {
+      marginRatio = marginRatio * 100;
+    } else {
+      marginRatio = marginRatio / 100;
+    }
     return NumberFormat("#,##0.00%", "en_US").format(marginRatio);
   }
 
@@ -239,7 +246,9 @@ class PositionCard extends StatelessWidget {
   }
 
   double calculateSize(double userMargin, double leverage) {
-    return userMargin * leverage;
+    double size = userMargin * leverage;
+    size = size + size * (0.0001 + 0.0004 * (0.5 - 1));
+    return size;
   }
 
   Widget _largeContent(

@@ -88,8 +88,8 @@ class TradeData {
 
     // Nếu không tìm thấy, giả định quoteAsset là 3 ký tự cuối cùng
     if (quoteAsset.isEmpty) {
-      quoteAsset = symbol.substring(symbol.length - 3);
-      baseAsset = symbol.substring(0, symbol.length - 3);
+      quoteAsset = symbol.substring(symbol.length);
+      baseAsset = symbol.substring(0, symbol.length);
     }
 
     return TradeData(
