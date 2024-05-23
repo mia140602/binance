@@ -16,6 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
+import '../futures/chartview/fundingTime.dart';
 import '../transaction_screen/transaction_screen.dart';
 
 class BottomNavigationBarr extends StatefulWidget {
@@ -40,10 +41,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const MarketView(),
-    TransactionScreen(),
-    // TradingChartScreen(
-    //   symbol: "BTCUSDT",
-    // ),
+    // TransactionScreen(),
+    FundingTime(
+      symbol: "BTCUSDT",
+    ),
     FuturesScreen(),
     WalletScreen()
   ];

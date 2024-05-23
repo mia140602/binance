@@ -51,13 +51,14 @@ class PositionCard extends StatelessWidget {
 
             String pnl = calculatePNL(position['type'], entryPrice,
                 currentPrice, position['margin'], leverage);
-            double size = calculateSize(pnl, currentPrice, entryPrice);
+            double size = calculateSize(userMargin, leverage);
             String formattedSize = NumberFormat("#,##0", "en_US").format(size);
             String roi = calculateROI(userMargin, pnl);
             Color pnlColor = double.parse(pnl.replaceAll(',', '')) > 0
                 ? palette.mainGreenColor
                 : palette.sellButtonColor;
-            String marginRatio = calculateMarginRatio(size, userMargin);
+            String marginRatio = calculateMarginRatio(
+                size, userMargin, entryPrice, currentPrice, leverage);
             String entryPriceFormat =
                 ParserUtil.formatPrice(entryPrice.toString());
             String userMarginFormat =
@@ -201,8 +202,16 @@ class PositionCard extends StatelessWidget {
   String calculateMarginRatio(
     double size,
     double userMargin,
+    double entryPrice,
+    double currentPrice,
+    double leverage,
   ) {
-    double marginRatio = (10 * userMargin / size) * 100;
+    double positionValue = entryPrice * size;
+    double maintenanceMargin =
+        positionValue * 0.005; // giả định tỷ lệ ký quỹ duy trì là 0.5%
+    double unrealizedPnL = (currentPrice - entryPrice) * size;
+    double marginBalance = userMargin + unrealizedPnL;
+    double marginRatio = (maintenanceMargin / marginBalance) / 100;
     return NumberFormat("#,##0.00%", "en_US").format(marginRatio);
   }
 
@@ -229,9 +238,8 @@ class PositionCard extends StatelessWidget {
         .format(pnlValue / userMargin / 10);
   }
 
-  double calculateSize(String pnl, double currentPrice, double entryPrice) {
-    double pnlValue = double.parse(pnl.replaceAll(',', ''));
-    return pnlValue / (currentPrice - entryPrice);
+  double calculateSize(double userMargin, double leverage) {
+    return userMargin * leverage;
   }
 
   Widget _largeContent(

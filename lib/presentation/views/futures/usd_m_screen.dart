@@ -1,4 +1,5 @@
 import 'package:binance_clone/presentation/app_assets.dart';
+import 'package:binance_clone/presentation/views/futures/chartview/fundingTime.dart';
 import 'package:binance_clone/presentation/views/futures/widget/margin_futures_modal.dart';
 import 'package:binance_clone/presentation/views/futures/widget/slider/usd_slider.dart';
 import 'package:binance_clone/presentation/views/orderbook/order_book_view.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:binance_clone/models/trade_data.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../../../data/local_data/sharepref.dart';
 import '../../theme/palette.dart';
@@ -21,9 +23,6 @@ import '../trade_details/trade_details_view_model.dart';
 import 'future_position.dart';
 import 'provider/future_provider.dart';
 import 'widget/edit_future_modal.dart';
-import 'widget/slider/customslider.dart';
-import 'widget/slider/customslidethumb.dart';
-import 'widget/slider/customvalue.dart';
 
 class USDScreen extends ConsumerStatefulWidget {
   final Function(int)? onTabChanged; // Optional callback
@@ -71,7 +70,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
 
       await SharePref.addPosition(
           walletName, symbol, type, entryPrice, leverage, margin);
-      loadPositions();
+      await loadPositions();
 
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Tạo thành công!")));
@@ -97,11 +96,16 @@ class _USDScreenState extends ConsumerState<USDScreen>
     });
   }
 
-  void loadPositions() async {
-    var positions = await SharePref.getAllPositions();
-    setState(() {
-      positionsList = positions;
-    });
+  Future<void> loadPositions() async {
+    try {
+      var positions = await SharePref.getAllPositions();
+      setState(() {
+        positionsList = positions;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Lỗi khi tải vị thế: $e")));
+    }
   }
 
   void loadCurrentSymbol() async {
@@ -114,10 +118,21 @@ class _USDScreenState extends ConsumerState<USDScreen>
   @override
   Widget build(BuildContext context) {
     // final marketData = ref.watch(marketViewModelProvider).marketData;
+
     double _value = 0;
     final tradeDetailsViewModel =
         ref.watch(tradeDetailsViewModelProvider(currentSymbol));
+
+    final numberFormat = NumberFormat("#,##0", "en_US");
+    final totalBalance = tradeDetailsViewModel.totalBalanceNotifier;
     final palette = Theme.of(context).extension<Palette>()!;
+    double entryPrice = double.tryParse(_priceController.text) ?? 0;
+    double marginLeverage =
+        double.tryParse(_marginLeverageController.text) ?? 0;
+    double leverage = ref.read(leverageProvider).toDouble();
+    double maxOpenValue =
+        calculateMaxOpenValue(marginLeverage, leverage, entryPrice);
+    double cost = calculateCost(maxOpenValue, entryPrice, leverage);
 
     Widget selectedWidget = Container();
 
@@ -253,9 +268,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                       );
                     },
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -293,23 +308,16 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           borderContainer(palette: palette, title: "S"),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Funding / Countdown",
-                            style: AppStyle.minimumlGrayText(),
-                          ),
-                          CustomText(
-                            text: "-0.0060%/00:53:12",
-                            color: palette.appBarTitleColor,
-                            fontSize: 9.sp,
-                          )
-                        ],
+                      Container(
+                        height: 45.h,
+                        width: 110.w,
+                        child: FundingTime(
+                          symbol: currentSymbol,
+                        ),
                       )
                     ],
                   ),
-                  Gap(5.h),
+                  // Gap(5.h),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -340,9 +348,18 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                      "--",
-                                      style: AppStyle.minimumText(),
+                                    ValueListenableBuilder<double>(
+                                      valueListenable: totalBalance,
+                                      builder: (context, value, child) {
+                                        return CustomText(
+                                          // text: '${value.toStringAsFixed(2)}',
+                                          text:
+                                              '${numberFormat.format(value)} USDT',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12.sp,
+                                        );
+                                      },
                                     ),
                                     SizedBox(
                                       width: 5.w,
@@ -564,7 +581,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               divisions: 4,
                             ),
                             SizedBox(
-                              height: 10.h,
+                              height: 5.h,
                             ),
                             Row(
                               children: [
@@ -630,7 +647,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 10.sp,
                                 ),
                                 Text(
-                                  "0.000 ${tradeDetailsViewModel.tradeData.value.baseAsset}",
+                                  "${maxOpenValue.toStringAsFixed(2)} ${tradeDetailsViewModel.tradeData.value.baseAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
@@ -645,7 +662,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 10.sp,
                                 ),
                                 Text(
-                                  "0.00 ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
+                                  "${cost.toStringAsFixed(2)} ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
@@ -680,7 +697,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 11.sp,
                                 ),
                                 Text(
-                                  "0.000 ${tradeDetailsViewModel.tradeData.value.baseAsset}",
+                                  "${maxOpenValue.toStringAsFixed(2)} ${tradeDetailsViewModel.tradeData.value.baseAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
@@ -695,7 +712,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   fontSize: 11.sp,
                                 ),
                                 Text(
-                                  "0.00 ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
+                                  "${cost.toStringAsFixed(0)} ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
                                   style: AppStyle.smallText(),
                                 ),
                               ],
@@ -812,5 +829,16 @@ class _USDScreenState extends ConsumerState<USDScreen>
         // fontWeight: FontWeight.w500,
       ),
     );
+  }
+
+  double calculateMaxOpenValue(
+      double marginLeverage, double leverage, double entryPrice) {
+    return marginLeverage * leverage / entryPrice;
+  }
+
+  // Hàm tính chi phí
+  double calculateCost(
+      double maxOpenValue, double entryPrice, double leverage) {
+    return maxOpenValue / leverage * entryPrice;
   }
 }
