@@ -215,7 +215,7 @@ class PositionCard extends StatelessWidget {
     double marginBalance = userMargin + unrealizedPnL;
     double marginRatio = (maintenanceMargin / marginBalance);
     if (marginRatio > 0) {
-      marginRatio = marginRatio * 100;
+      marginRatio = marginRatio / 100;
     } else {
       marginRatio = marginRatio / 100;
     }
@@ -239,7 +239,7 @@ class PositionCard extends StatelessWidget {
     double pnlValue = double.parse(pnl.replaceAll(',', ''));
     if (pnlValue > 0) {
       return NumberFormat("+#,##0.00%", "en_US")
-          .format(pnlValue / userMargin / 10);
+          .format(pnlValue / userMargin * 10);
     }
     return NumberFormat("#,##0.00%", "en_US")
         .format(pnlValue / userMargin / 10);
