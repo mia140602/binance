@@ -39,7 +39,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   }
 
   final List<Widget> _screens = [
-    const HomeScreen(),
+    // const HomeScreen(),
     const MarketView(),
     TransactionScreen(),
     // FundingTime(
@@ -167,7 +167,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
       color: palette.cardColor,
       padding: EdgeInsets.zero,
       surfaceTintColor: palette.cardColor,
-      elevation: 4,
+      elevation: 3,
       // shape: const CircularNotchedRectangle(),
       child: Column(
         children: [
@@ -178,35 +178,35 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               Column(
                 // mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(
-                    constraints: BoxConstraints(),
-                    icon: _currentIndex == 0
-                        ? Image.asset(
-                            'assets/icons/bottom_nav_icon/home_clicked.png',
-                            height: 16.h)
-                        : Image.asset('assets/icons/bottom_nav_icon/home.png',
-                            height: 16.h),
-                    onPressed: () {
-                      _navigateToScreen(0);
-                    },
-                  ),
-                  Text(
-                    AppStrings.home,
-                    style: TextStyle(
-                        fontSize: 11.sp,
-                        height: -0.5,
-                        fontWeight: FontWeight.w500,
-                        color: _currentIndex == 0
-                            ? palette.appBarTitleColor
-                            : palette.selectedTimeChipColor),
-                  )
+                  // IconButton(
+                  //   constraints: BoxConstraints(),
+                  //   icon: _currentIndex == 0
+                  //       ? Image.asset(
+                  //           'assets/icons/bottom_nav_icon/home_clicked.png',
+                  //           height: 16.h)
+                  //       : Image.asset('assets/icons/bottom_nav_icon/home.png',
+                  //           height: 16.h),
+                  //   onPressed: () {
+                  //     _navigateToScreen(0);
+                  //   },
+                  // ),
+                  // Text(
+                  //   AppStrings.home,
+                  //   style: TextStyle(
+                  //       fontSize: 11.sp,
+                  //       height: -0.5,
+                  //       fontWeight: FontWeight.w500,
+                  //       color: _currentIndex == 0
+                  //           ? palette.appBarTitleColor
+                  //           : palette.selectedTimeChipColor),
+                  // )
                 ],
               ),
               Column(
                 // mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: _currentIndex == 1
+                    icon: _currentIndex == 0
                         ? Image.asset(
                             'assets/icons/bottom_nav_icon/bar_chart_clicked.png',
                             height: 20.h,
@@ -216,10 +216,37 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                             height: 14.h,
                           ),
                     onPressed: () {
-                      _navigateToScreen(1);
+                      _navigateToScreen(0);
                     },
                   ),
                   Text(AppStrings.markets,
+                      style: TextStyle(
+                          fontSize: 11.sp,
+                          height: -0.5,
+                          fontWeight: FontWeight.w500,
+                          color: _currentIndex == 0
+                              ? palette.appBarTitleColor
+                              : palette.selectedTimeChipColor))
+                ],
+              ),
+              Column(
+                // mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: _currentIndex == 1
+                        ? Image.asset(
+                            'assets/icons/bottom_nav_icon/exchange_clicked.png',
+                            height: 14.h,
+                          )
+                        : Image.asset(
+                            'assets/icons/bottom_nav_icon/exchange.png',
+                            height: 14.h,
+                          ),
+                    onPressed: () {
+                      _navigateToScreen(1);
+                    },
+                  ),
+                  Text(AppStrings.trades,
                       style: TextStyle(
                           fontSize: 11.sp,
                           height: -0.5,
@@ -235,18 +262,18 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   IconButton(
                     icon: _currentIndex == 2
                         ? Image.asset(
-                            'assets/icons/bottom_nav_icon/exchange_clicked.png',
+                            'assets/icons/bottom_nav_icon/future_clicked.png',
                             height: 14.h,
                           )
                         : Image.asset(
-                            'assets/icons/bottom_nav_icon/exchange.png',
+                            'assets/icons/bottom_nav_icon/future.png',
                             height: 14.h,
                           ),
                     onPressed: () {
                       _navigateToScreen(2);
                     },
                   ),
-                  Text(AppStrings.trades,
+                  Text("Futures",
                       style: TextStyle(
                           fontSize: 11.sp,
                           height: -0.5,
@@ -262,40 +289,13 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   IconButton(
                     icon: _currentIndex == 3
                         ? Image.asset(
-                            'assets/icons/bottom_nav_icon/future_clicked.png',
-                            height: 14.h,
-                          )
-                        : Image.asset(
-                            'assets/icons/bottom_nav_icon/future.png',
-                            height: 14.h,
-                          ),
-                    onPressed: () {
-                      _navigateToScreen(3);
-                    },
-                  ),
-                  Text("Futures",
-                      style: TextStyle(
-                          fontSize: 11.sp,
-                          height: -0.5,
-                          fontWeight: FontWeight.w500,
-                          color: _currentIndex == 3
-                              ? palette.appBarTitleColor
-                              : palette.selectedTimeChipColor))
-                ],
-              ),
-              Column(
-                // mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: _currentIndex == 4
-                        ? Image.asset(
                             'assets/icons/bottom_nav_icon/wallet_clicked.png',
                             height: 14.h)
                         : Image.asset(
                             'assets/icons/bottom_nav_icon/wallets.png',
                             height: 14.h),
                     onPressed: () {
-                      _navigateToScreen(4);
+                      _navigateToScreen(3);
                     },
                   ),
                   Text(AppStrings.wallets,
@@ -303,7 +303,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                           fontSize: 11.sp,
                           height: -0.5,
                           fontWeight: FontWeight.w500,
-                          color: _currentIndex == 4
+                          color: _currentIndex == 3
                               ? palette.appBarTitleColor
                               : palette.selectedTimeChipColor))
                 ],

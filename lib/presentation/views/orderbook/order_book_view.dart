@@ -40,10 +40,12 @@ class _OrderBookViewState extends State<OrderBookView> {
           // const Gap(12),
           if (_showSells)
             ReactiveBuilder(
+              
               value:
                   ref.read(orderBookViewModelProvider(widget.pair)).sellOrders,
               builder: (orders) {
                 return OrderTable(
+
                   orders: orders.take(_limit),
                   isFuture: true,
                   itemCount: itemCount,
@@ -55,10 +57,13 @@ class _OrderBookViewState extends State<OrderBookView> {
             ReactiveBuilder(
               value: ref.read(orderBookViewModelProvider(widget.pair)).prices,
               builder: (prices) {
-                return Pricebar(
+                return 
+                Pricebar(
+
                   oldPrice: prices.last,
                   newPrice: prices.first,
-                );
+                )
+                ;
               },
             ),
             // Gap(5.h),

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:binance_clone/presentation/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +8,7 @@ import 'customslidethumb.dart';
 import 'customvalue.dart';
 
 class UsdSlider extends ConsumerStatefulWidget {
-  UsdSlider({Key? key, this.divisions}) : super(key: key);
+  const UsdSlider({Key? key, this.divisions}) : super(key: key);
   final int? divisions;
 
   @override
@@ -44,11 +46,12 @@ class _UsdSliderState extends ConsumerState<UsdSlider> {
       child: Slider(
         divisions: widget.divisions ?? 5, // Giữ lại các cột mốc
         min: 0,
-        max: 50,
+        max: 100,
         value: _value,
         onChanged: (value) {
           setState(() {
             _value = value;
+            print(value);
           });
           // ref.read(leverageProvider.notifier).state = value.round();
         },

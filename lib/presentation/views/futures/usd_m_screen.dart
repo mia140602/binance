@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, unused_element, use_build_context_synchronously, prefer_const_constructors, avoid_print, unused_local_variable, no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+
 import 'package:binance_clone/presentation/app_assets.dart';
 import 'package:binance_clone/presentation/views/futures/chartview/fundingTime.dart';
 import 'package:binance_clone/presentation/views/futures/widget/margin_futures_modal.dart';
@@ -309,9 +311,11 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         ],
                       ),
                       Container(
+                      
                         height: 45.h,
                         width: 110.w,
-                        child: FundingTime(
+                        child: 
+                        FundingTime(
                           symbol: currentSymbol,
                         ),
                       )
@@ -323,7 +327,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                          height: MediaQuery.of(context).size.height * 0.52,
+                          height: MediaQuery.of(context).size.height * 0.65,
                           // padding: EdgeInsets.symmetric(horizontal: 2.w),
                           width: MediaQuery.of(context).size.width * 0.38,
                           // height: 520,
@@ -333,7 +337,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           )),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.52,
-                        height: MediaQuery.of(context).size.height * 0.52,
+                        height: MediaQuery.of(context).size.height * 0.65,
                         //color: Colors.blue,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -354,7 +358,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                         return CustomText(
                                           // text: '${value.toStringAsFixed(2)}',
                                           text:
-                                              '${numberFormat.format(value)} USDT',
+                                              // '${numberFormat.format(value)} USDT',
+                                              '${numberFormat.format(value)} USDC',
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 12.sp,
@@ -432,13 +437,14 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                         children: [
                                           CustomText(
                                             text:
-                                                "Giá (${tradeDetailsViewModel.tradeData.value.quoteAsset})",
+                                                // "Giá (${tradeDetailsViewModel.tradeData.value.quoteAsset})",
+                                                "Giá (USDC)",
                                             color: palette.appBarTitleColor
                                                 .withOpacity(0.5),
                                             fontSize: 10.sp,
                                           ),
                                           Container(
-                                            height: 20.h,
+                                            height: 13.h,
                                             width: 80.w,
                                             child: TextField(
                                               controller: _priceController,
@@ -480,7 +486,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     borderRadius: BorderRadius.circular(10.r),
                                   ),
                                   padding: EdgeInsets.symmetric(
-                                      vertical: 9.h, horizontal: 16.w),
+                                      vertical: 13.h, horizontal: 16.w),
                                   child: CustomText(
                                     text: "BBO",
                                     color: palette.appBarTitleColor,
@@ -498,10 +504,10 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 color: palette.bgGray,
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
-                              padding: EdgeInsets.symmetric(horizontal: 7.w),
+                               padding: EdgeInsets.symmetric(horizontal:2.w),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.start,
                                 children: [
                                   Text(
                                     "−",
@@ -514,6 +520,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   ),
                                   Expanded(
                                     child: TextField(
+                                    
                                       controller: _marginLeverageController,
                                       keyboardType: TextInputType.number,
                                       cursorColor: palette.mainYellowColor,
@@ -525,7 +532,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                       ),
                                       decoration: InputDecoration(
                                         label: CustomText(
-                                          text: "Số tiền",
+                                          text: "   Số tiền",
                                           color: palette.selectedTimeChipColor,
                                           fontSize: 12.sp,
                                           textAlign: TextAlign.center,
@@ -539,7 +546,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 10.w,
+                                    width: 20.w,
                                   ),
                                   Text(
                                     "+",
@@ -547,14 +554,17 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                         color: palette.grayColor,
                                         fontSize: 23.sp),
                                   ),
+                                    SizedBox(
+                                    width: 5.w,
+                                  ),
                                   Container(
-                                    height: 20.h,
-                                    width: 1.w,
+                                    height: 40.h,
+                                    width: 0.3.w,
                                     color: palette.grayColor,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0),
                                     child: Row(
                                       children: [
                                         CustomText(
@@ -578,7 +588,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               height: 10.h,
                             ),
                             UsdSlider(
-                              divisions: 4,
+                                divisions: 4,
+                              
                             ),
                             SizedBox(
                               height: 5.h,
@@ -595,6 +606,33 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 ),
                                 Text(
                                   "TP/SL",
+                                  style: GoogleFonts.roboto(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w300,
+                                    decoration:
+                                        TextDecoration.underline, // Gạch chân
+                                    decorationStyle: TextDecorationStyle
+                                        .dotted, // Kiểu gạch chân là chấm
+                                    decorationColor:
+                                        palette.selectedTimeChipColor,
+                                    decorationThickness: 1.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                             Row(
+                              children: [
+                                Icon(
+                                  Icons.circle_outlined,
+                                  color: palette.grayColor,
+                                  size: 14.h,
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Text(
+                                  "Lệnh chỉ giảm",
                                   style: GoogleFonts.roboto(
                                     color: Colors.white,
                                     fontSize: 12.sp,
@@ -641,7 +679,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                  text: "Mở tối đa",
+                                  // text: "Mở tối đa",
+                                  text: "Tối đa",
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xFF757b87),
                                   fontSize: 10.sp,
@@ -668,10 +707,10 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               ],
                             ),
                             SizedBox(
-                              height: 8.h,
+                              height: 5.h,
                             ),
                             Container(
-                                height: 28.h,
+                                height: 35.h,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                     color: palette.mainGreenColor,
@@ -681,17 +720,19 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                       createPosition("Long");
                                     },
                                     child: CustomText(
-                                        text: "Mở lệnh long",
+                                        // text: "Mở lệnh long",
+                                        text: "Mua/Long",
                                         color: Colors.white,
                                         fontSize: 12.sp))),
                             SizedBox(
-                              height: 8.h,
+                              height: 5.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                  text: "Mở tối đa",
+                                  // text: "Mở tối đa",
+                                  text: "Tối đa",
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xFF757b87),
                                   fontSize: 11.sp,
@@ -718,12 +759,12 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               ],
                             ),
                             SizedBox(
-                              height: 10.h,
+                              height: 5.h,
                             ),
                             Container(
-                                // height: 35.h,
+                                height: 35.h,
                                 width: double.infinity,
-                                height: 28.h,
+                                // height: 28.h,
                                 decoration: BoxDecoration(
                                     color: palette.sellButtonColor,
                                     borderRadius: BorderRadius.circular(6.r)),
@@ -732,7 +773,8 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                       createPosition("Short");
                                     },
                                     child: CustomText(
-                                        text: "Mở lệnh short",
+                                        // text: "Mở lệnh short",
+                                        text: "Bán/Short",
                                         color: Colors.white,
                                         fontSize: 12.sp))),
                           ],
