@@ -13,18 +13,19 @@ class ColumnHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
+        const Expanded(
           child: _ColumnItem(
             title: "Giá",
-            subtitle: "USDT",
+            subtitle: "USDC",
           ),
         ),
         // Spacer(),
         Gap(60.w),
-        Expanded(
+        const Expanded(
           child: _ColumnItem(
             title: "Số lượng",
-            subtitle: "USDT",
+            subtitle: "BTC",
+            aliT: true,
           ),
         ),
         // Spacer(),
@@ -41,11 +42,12 @@ class ColumnHeader extends StatelessWidget {
 class _ColumnItem extends StatelessWidget {
   final String title;
   final String subtitle;
+  final bool? aliT;
 
   const _ColumnItem({
     super.key,
     required this.title,
-    this.subtitle = "",
+    this.subtitle = "",  this.aliT,
   });
 
   @override
@@ -54,19 +56,25 @@ class _ColumnItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          text: title,
-          fontSize: 10,
-          // fontWeight: FontWeight.w500,
-          color: palette.selectedTimeChipColor,
+        Align(
+          alignment: (aliT == true) ? Alignment.centerRight : Alignment.centerLeft,
+          child: CustomText(
+            text: title,
+            fontSize: 10,
+            // fontWeight: FontWeight.w500,
+            color: palette.selectedTimeChipColor,
+          ),
         ),
-        CustomText(
-          text: subtitle.isNotEmpty ? "($subtitle)" : " ",
-          fontSize: 9,
-          // fontWeight: FontWeight.w600,
-          color: palette.selectedTimeChipColor,
+        Align(
+          alignment: (aliT == true) ? Alignment.centerRight : Alignment.centerLeft,
+          child: CustomText(
+            text: subtitle.isNotEmpty ? "($subtitle)" : " ",
+            fontSize: 9,
+            // fontWeight: FontWeight.w600,
+            color: palette.selectedTimeChipColor,
+          ),
         ),
-        Gap(10)
+        const Gap(10)
       ],
     );
   }
