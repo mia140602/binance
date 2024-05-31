@@ -32,10 +32,11 @@ class Pricebar extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+
       children: [
         CustomText(
           text: ParserUtil.formatPrice(newPrice.toString()),
-          fontSize: 16,
+          fontSize: 17,
           fontWeight: FontWeight.w500,
           color: color,
         ),
@@ -48,7 +49,7 @@ class Pricebar extends StatelessWidget {
         // ),
         
           Padding(
-            padding: const EdgeInsets.only(right: 40),
+            padding: const EdgeInsets.only(right: 30),
             child: DottedUnderlineText(
               text: ParserUtil.formatPrice(oldPrice.toString()),
               style: GoogleFonts.roboto(

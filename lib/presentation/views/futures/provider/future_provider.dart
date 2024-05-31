@@ -7,3 +7,8 @@ final leverageProvider = StateProvider<int>((ref) {
 final marginProvider = StateProvider<String>((ref) {
   return "Cross"; // Giá trị mặc định là "Cross"
 });
+
+final propertyProvider = StateProvider<String>((ref) {
+  return "Single";
+});
+

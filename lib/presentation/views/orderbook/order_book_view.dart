@@ -15,6 +15,7 @@ import '../../theme/palette.dart';
 
 class OrderBookView extends StatefulWidget {
   final String pair;
+
   const OrderBookView({super.key, required this.pair});
 
   @override
@@ -23,11 +24,11 @@ class OrderBookView extends StatefulWidget {
 
 class _OrderBookViewState extends State<OrderBookView> {
   // final _counts = [1, 2, 3, 4];
-  late int _limit = 8;
+  late int _limit = 7;
 
   bool _showSells = true;
   bool _showBuys = true;
-  int itemCount = 8;
+  int itemCount = 7;
 
   @override
   Widget build(BuildContext context) {
@@ -40,33 +41,28 @@ class _OrderBookViewState extends State<OrderBookView> {
           // const Gap(12),
           if (_showSells)
             ReactiveBuilder(
-              
               value:
                   ref.read(orderBookViewModelProvider(widget.pair)).sellOrders,
               builder: (orders) {
                 return OrderTable(
-
                   orders: orders.take(_limit),
                   isFuture: true,
                   itemCount: itemCount,
                 );
               },
             ),
-           Gap(5.h),
+          Gap(5.h),
           if (_showSells && _showBuys) ...{
             ReactiveBuilder(
               value: ref.read(orderBookViewModelProvider(widget.pair)).prices,
               builder: (prices) {
-                return 
-                Pricebar(
-
+                return Pricebar(
                   oldPrice: prices.last,
                   newPrice: prices.first,
-                )
-                ;
+                );
               },
             ),
-             Gap(13.h),
+            Gap(18.h),
           },
           if (_showBuys) ...{
             ReactiveBuilder(
@@ -82,7 +78,7 @@ class _OrderBookViewState extends State<OrderBookView> {
               },
             ),
           },
-          // SizedBox(height: 1,),
+          SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -90,7 +86,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                 padding: EdgeInsets.symmetric(vertical: 1.h),
                 decoration: BoxDecoration(
                   color: Color(0xFF29313C),
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(3.r),
                 ),
                 width: MediaQuery.of(context).size.width * 0.3,
                 child: Row(

@@ -122,7 +122,7 @@ class _OrderRowState extends State<_OrderRow> {
                       textAlign: i == 0 ? TextAlign.left : TextAlign.right,
                     ),
                   ),
-                  SizedBox(height: 2.h,)
+                  // SizedBox(height: 2.h,)
                 ],
               ),
           ],

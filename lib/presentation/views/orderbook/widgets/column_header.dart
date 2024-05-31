@@ -20,7 +20,7 @@ class ColumnHeader extends StatelessWidget {
           ),
         ),
         // Spacer(),
-        Gap(60.w),
+        Gap(20.w),
         const Expanded(
           child: _ColumnItem(
             title: "Số lượng",
