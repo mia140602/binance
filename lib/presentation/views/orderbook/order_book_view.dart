@@ -34,102 +34,105 @@ class _OrderBookViewState extends State<OrderBookView> {
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return Consumer(builder: (context, ref, _) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const ColumnHeader(),
-          // const Gap(12),
-          if (_showSells)
-            ReactiveBuilder(
-              value:
-                  ref.read(orderBookViewModelProvider(widget.pair)).sellOrders,
-              builder: (orders) {
-                return OrderTable(
-                  orders: orders.take(_limit),
-                  isFuture: true,
-                  itemCount: itemCount,
-                );
-              },
-            ),
-          Gap(5.h),
-          if (_showSells && _showBuys) ...{
-            ReactiveBuilder(
-              value: ref.read(orderBookViewModelProvider(widget.pair)).prices,
-              builder: (prices) {
-                return Pricebar(
-                  oldPrice: prices.last,
-                  newPrice: prices.first,
-                );
-              },
-            ),
-            Gap(18.h),
-          },
-          if (_showBuys) ...{
-            ReactiveBuilder(
-              value:
-                  ref.read(orderBookViewModelProvider(widget.pair)).buyOrders,
-              builder: (orders) {
-                return OrderTable(
-                  orders: orders.take(_limit),
-                  isFuture: false,
-                  itemCount: itemCount,
-                  backColor: palette.mainGreenColor.withOpacity(0.05),
-                );
-              },
-            ),
-          },
-          SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 1.h),
-                decoration: BoxDecoration(
-                  color: Color(0xFF29313C),
-                  borderRadius: BorderRadius.circular(3.r),
-                ),
-                width: MediaQuery.of(context).size.width * 0.3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 9.w),
-                      child: CustomText(
-                        text: "0.1",
-                        color: Colors.grey,
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down,
-                      size: 16.h,
-                      color: Colors.grey,
-                    )
-                  ],
-                ),
-              ),
-              // const Spacer(),
-              FilterRow(
-                onChanged: (value) {
-                  setState(() {
-                    _showSells = value == 0 || value == 2;
-                    _showBuys = value == 0 || value == 1;
-
-                    // Cập nhật itemCount dựa trên trạng thái của _showSells và _showBuys
-                    if (_showSells && _showBuys) {
-                      itemCount = 8;
-                    } else if (_showSells || _showBuys) {
-                      itemCount = 16;
-                    } else {
-                      itemCount = 8; // Có thể đặt giá trị này nếu cần
-                    }
-                    _limit = itemCount;
-                  });
+      return Container(
+        // color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const ColumnHeader(),
+            // const Gap(12),
+            if (_showSells)
+              ReactiveBuilder(
+                value:
+                    ref.read(orderBookViewModelProvider(widget.pair)).sellOrders,
+                builder: (orders) {
+                  return OrderTable(
+                    orders: orders.take(_limit),
+                    isFuture: true,
+                    itemCount: itemCount,
+                  );
                 },
               ),
-            ],
-          ),
-        ],
+            Gap(5.h),
+            if (_showSells && _showBuys) ...{
+              ReactiveBuilder(
+                value: ref.read(orderBookViewModelProvider(widget.pair)).prices,
+                builder: (prices) {
+                  return Pricebar(
+                    oldPrice: prices.last,
+                    newPrice: prices.first,
+                  );
+                },
+              ),
+              Gap(18.h),
+            },
+            if (_showBuys) ...{
+              ReactiveBuilder(
+                value:
+                    ref.read(orderBookViewModelProvider(widget.pair)).buyOrders,
+                builder: (orders) {
+                  return OrderTable(
+                    orders: orders.take(_limit),
+                    isFuture: false,
+                    itemCount: itemCount,
+                    backColor: palette.mainGreenColor.withOpacity(0.05),
+                  );
+                },
+              ),
+            },
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 1.h),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF29313C),
+                    borderRadius: BorderRadius.circular(3.r),
+                  ),
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 9.w),
+                        child: CustomText(
+                          text: "0.1",
+                          color: Colors.grey,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        size: 16.h,
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
+                ),
+                // const Spacer(),
+                FilterRow(
+                  onChanged: (value) {
+                    setState(() {
+                      _showSells = value == 0 || value == 2;
+                      _showBuys = value == 0 || value == 1;
+
+                      // Cập nhật itemCount dựa trên trạng thái của _showSells và _showBuys
+                      if (_showSells && _showBuys) {
+                        itemCount = 8;
+                      } else if (_showSells || _showBuys) {
+                        itemCount = 16;
+                      } else {
+                        itemCount = 8; // Có thể đặt giá trị này nếu cần
+                      }
+                      _limit = itemCount;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       );
     });
   }
