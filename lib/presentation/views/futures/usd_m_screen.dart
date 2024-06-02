@@ -20,6 +20,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../../data/local_data/sharepref.dart';
+import '../../../utils/underLineText.dart';
+import '../../../utils/underline_text.dart';
 import '../../theme/palette.dart';
 import '../../widgets/custom_tab_bar.dart';
 import '../trade_details/trade_details_view_model.dart';
@@ -129,6 +131,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
     final numberFormat = NumberFormat("#,##0", "en_US");
     final totalBalance = tradeDetailsViewModel.totalBalanceNotifier;
     final palette = Theme.of(context).extension<Palette>()!;
+
     double entryPrice = double.tryParse(_priceController.text) ?? 0;
     double marginLeverage =
         double.tryParse(_marginLeverageController.text) ?? 0;
@@ -166,18 +169,17 @@ class _USDScreenState extends ConsumerState<USDScreen>
                 children: [
                   SizedBox(
                     height: 5.h,
-
                   ),
                   Container(
                     height: 20.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                       children: [
                         Row(
                           children: [
                             CustomText(
-                              text: tradeDetailsViewModel.tradeData.value.symbol,
+                              text:
+                                  tradeDetailsViewModel.tradeData.value.symbol,
                               color: palette.selectedTabTextColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 17.sp,
@@ -251,7 +253,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   Icons.more_horiz,
                                   size: 18.h,
                                   color: palette.appBarTitleColor,
-                                 ),
+                                ),
                               ],
                             )
                           ],
@@ -339,14 +341,25 @@ class _USDScreenState extends ConsumerState<USDScreen>
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Expanded(
-                                child: CustomText(
-                              text: "Funding/Đếm ngược",
-                              color: Colors.white60.withOpacity(0.5),
-                              // color:  palette.sellButtonColor.withOpacity(0.9),
-                              fontSize: 8.sp,
-                              textAlign: TextAlign.right,
-                            )),
-                            SizedBox(height: 1.0),
+                              child: Container(
+                                // padding: EdgeInsets.only(bottom:1.0),
+                                child: DottedUnderlinedText(
+                                  text: Text(
+                                    "Funding / Đếm ngược",
+                                    style: GoogleFonts.abel(
+                                      color: palette.selectedTimeChipColor,
+                                      fontSize: 8.sp,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  underlineColor: palette.selectedTimeChipColor,
+                                  thickness: 0.3,
+                                  gapSize: 1.0,
+                                  paddingBottom: 2.0,
+                                ),
+                              ),
+                            ),
+                            // SizedBox(height: 1.0),
                             Expanded(
                                 child: CustomText(
                               text: "0,0233% / 03:52:09",
@@ -359,33 +372,25 @@ class _USDScreenState extends ConsumerState<USDScreen>
                       )
                     ],
                   ),
-                  // Gap(5.h),
+                  Gap(3.h),
                   Row(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         flex: 2,
                         child: Container(
-                            // height: MediaQuery.of(context).size.height * 0.65,
-                            // padding: EdgeInsets.symmetric(horizontal: 2.w),
-                            // width: MediaQuery.of(context).size.width * 0.38,
-                            // height: 520,
-                            //color: Colors.red,
-
                             child: OrderBookView(
                           pair: currentSymbol,
                         )),
                       ),
-                      SizedBox(
-                        width: 12.w
-                      ),
+                      SizedBox(width: 12.w),
                       Expanded(
                         flex: 3,
                         child: Container(
                           // width: MediaQuery.of(context).size.width * 0.52,
                           // height: MediaQuery.of(context).size.height * 0.65,
-                          //color: Colors.blue,
+                          // color: Colors.blue,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -395,7 +400,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 children: [
                                   CustomText(
                                     text: "Khả dụng",
-                                    color: Colors.white60.withOpacity(0.5),
+                                    color: palette.selectedTimeChipColor,
                                     fontSize: 10.sp,
                                   ),
                                   Row(
@@ -458,11 +463,11 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 ),
                               ),
                               SizedBox(
-                                height: 5.h,
+                                height: 6.h,
                               ),
                               Container(
                                   decoration: BoxDecoration(
-                                    color: palette.bgGray,
+                                    color: Color.fromRGBO(51, 59, 70, 1.0),
                                     borderRadius: BorderRadius.circular(5.r),
                                   ),
                                   width: double.infinity,
@@ -574,6 +579,36 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 divisions: 4,
                               ),
                               SizedBox(
+                                height: 7.h,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.circle_outlined,
+                                    color: palette.grayColor,
+                                    size: 14.h,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  DottedUnderlinedText(
+                                    text: Text(
+                                      "TP/SL",
+                                      style: GoogleFonts.abel(
+                                        color: Colors.white,
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    underlineColor:
+                                        palette.selectedTimeChipColor,
+                                    thickness: 0.4,
+                                    gapSize: 1.0,
+                                    paddingBottom: 0.5,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
                                 height: 5.h,
                               ),
                               Row(
@@ -586,73 +621,44 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   SizedBox(
                                     width: 10.w,
                                   ),
-                                  Text(
-                                    "TP/SL",
-                                    style: GoogleFonts.roboto(
-                                      color: Colors.white,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w300,
-                                      decoration: TextDecoration.underline,
-                                      // Gạch chân
-                                      decorationStyle:
-                                          TextDecorationStyle.dotted,
-                                      // Kiểu gạch chân là chấm
-                                      decorationColor:
-                                          palette.selectedTimeChipColor,
-                                      decorationThickness: 1.5,
+                                  DottedUnderlinedText(
+                                    text: Text(
+                                      "Lệnh chỉ giảm",
+                                      style: GoogleFonts.abel(
+                                        color: Colors.white,
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.circle_outlined,
-                                    color: palette.grayColor,
-                                    size: 14.h,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Text(
-                                    "Lệnh chỉ giảm",
-                                    style: GoogleFonts.roboto(
-                                      color: Colors.white,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w300,
-                                      decoration: TextDecoration.underline,
-                                      // Gạch chân
-                                      decorationStyle:
-                                          TextDecorationStyle.dotted,
-                                      // Kiểu gạch chân là chấm
-                                      decorationColor:
-                                          palette.selectedTimeChipColor,
-                                      decorationThickness: 1.5,
-                                    ),
+                                    underlineColor:
+                                        palette.selectedTimeChipColor,
+                                    thickness: 0.4,
+                                    gapSize: 1.0,
+                                    paddingBottom: 0.5,
                                   ),
                                   Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "GTC",
-                                            style: AppStyle.smallText(),
-                                          ),
-                                          SizedBox(
-                                            width: 1.w,
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            color: palette.grayColor,
-                                            size: 18.h,
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: [
+                                  //     Row(
+                                  //       children: [
+                                  //         Text(
+                                  //           "GTC",
+                                  //           style: AppStyle.smallText(),
+                                  //         ),
+                                  //         SizedBox(
+                                  //           width: 1.w,
+                                  //         ),
+                                  //         Icon(
+                                  //           Icons.arrow_drop_down,
+                                  //           color: palette.grayColor,
+                                  //           size: 18.h,
+                                  //         )
+                                  //       ],
+                                  //     ),
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                               // SizedBox(
@@ -682,6 +688,9 @@ class _USDScreenState extends ConsumerState<USDScreen>
                               // SizedBox(
                               //   height: 5.h,
                               // ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -709,23 +718,23 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   //   color: Color(0xFF757b87),
                                   //   fontSize: 10.sp,
                                   // ),
-                                  Text(
-                                    "Chi phí",
-                                    style: GoogleFonts.roboto(
-                                      color: Color(0xFF757b87),
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w400,
 
-                                      decoration: TextDecoration.underline,
-                                      // Gạch chân
-                                      decorationStyle:
-                                          TextDecorationStyle.dotted,
-                                      // Kiểu gạch chân là chấm
-                                      decorationColor:
-                                          palette.selectedTimeChipColor,
-                                      decorationThickness: 2.5,
+                                  DottedUnderlinedText(
+                                    text: Text(
+                                      "Chi phí",
+                                      style: GoogleFonts.abel(
+                                        color: Color(0xFF757b87),
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
+                                    underlineColor:
+                                        palette.selectedTimeChipColor,
+                                    thickness: 0.4,
+                                    gapSize: 1.0,
+                                    paddingBottom: 0.5,
                                   ),
+
                                   Text(
                                     "${cost.toStringAsFixed(2)} ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
                                     style: AppStyle.smallText(),
@@ -780,23 +789,23 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                   //   color: Color(0xFF757b87),
                                   //   fontSize: 11.sp,
                                   // ),
-                                  Text(
-                                    "Chi phí",
-                                    style: GoogleFonts.roboto(
-                                      color: Color(0xFF757b87),
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w400,
 
-                                      decoration: TextDecoration.underline,
-                                      // Gạch chân
-                                      decorationStyle:
-                                          TextDecorationStyle.dotted,
-                                      // Kiểu gạch chân là chấm
-                                      decorationColor:
-                                          palette.selectedTimeChipColor,
-                                      decorationThickness: 2.5,
+                                  DottedUnderlinedText(
+                                    text: Text(
+                                      "Chi phí",
+                                      style: GoogleFonts.abel(
+                                        color: Color(0xFF757b87),
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
+                                    underlineColor:
+                                        palette.selectedTimeChipColor,
+                                    thickness: 0.4,
+                                    gapSize: 1.0,
+                                    paddingBottom: 0.5,
                                   ),
+
                                   Text(
                                     "${cost.toStringAsFixed(0)} ${tradeDetailsViewModel.tradeData.value.quoteAsset}",
                                     style: AppStyle.smallText(),
@@ -906,7 +915,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
 
   Container borderContainer({required Palette palette, required String title}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 3.h),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.r),
           border: Border.all(

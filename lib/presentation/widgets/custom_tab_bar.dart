@@ -44,7 +44,7 @@ class CustomTabBar extends StatelessWidget {
             return GestureDetector(
               onTap: () => onChanged?.call(i),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                 alignment: Alignment.center,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -57,11 +57,11 @@ class CustomTabBar extends StatelessWidget {
                           ? palette.appBarTitleColor
                           : palette.filterLineColor,
                     ),
-                    SizedBox(height: 3),
+                    SizedBox(height: 5),
                     isSelected
                         ? Container(
-                            width: 12,
-                            height: 3,
+                            width: 15,
+                            height: 2,
                             color:
                                 selectedTabBorderColor ?? Colors.amber.shade400,
                           )

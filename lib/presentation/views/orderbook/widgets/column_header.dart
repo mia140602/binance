@@ -16,7 +16,7 @@ class ColumnHeader extends StatelessWidget {
         const Expanded(
           child: _ColumnItem(
             title: "Giá",
-            subtitle: "USDC",
+            subtitle: "(USDC)",
           ),
         ),
         // Spacer(),
@@ -24,7 +24,7 @@ class ColumnHeader extends StatelessWidget {
         const Expanded(
           child: _ColumnItem(
             title: "Số lượng",
-            subtitle: "BTC",
+            subtitle: "(BTC)",
             aliT: true,
           ),
         ),
