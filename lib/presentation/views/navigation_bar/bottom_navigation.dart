@@ -163,7 +163,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
 
   BottomAppBar _buildBottomAppBar(Palette palette) {
     return BottomAppBar(
-      height: _showContainer == false ? 70.h : 270.h,
+      height: _showContainer == false ? 70.h : 250.h,
       color: palette.cardColor,
       padding: EdgeInsets.zero,
       surfaceTintColor: palette.cardColor,

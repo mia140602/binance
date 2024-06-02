@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:binance_clone/presentation/views/futures/coin_m_screen.dart';
 import 'package:binance_clone/presentation/views/futures/usd_m_screen.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +114,7 @@ class _FuturesScreenState extends State<FuturesScreen>
                 controller: _tabController,
                 children: const [
                   Center(child: USDScreen()),
-                  Center(child: Text('Content for Option 2')),
+                  Center(child: COINMScreen()),
                   Center(child: Text('Content for Option 3')),
                   Center(child: Text('Content for Option 4')),
                   Center(child: Text('Content for Option 5')),
