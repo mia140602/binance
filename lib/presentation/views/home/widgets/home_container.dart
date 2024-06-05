@@ -1,11 +1,15 @@
 import 'package:binance_clone/models/trade_data.dart';
 import 'package:binance_clone/presentation/views/home/widgets/item/item_home_container.dart';
+import 'package:binance_clone/presentation/views/home/widgets/persistent_header.dart';
 import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
+import 'package:binance_clone/utils/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -27,9 +31,10 @@ class _HomeContainerState extends ConsumerState<HomeContainer>
   var indexNewspaper = 0;
   late HomeViewModel homeViewModel;
   bool hasScroll = false;
-
+  GlobalKey key = GlobalKey();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -51,8 +56,10 @@ class _HomeContainerState extends ConsumerState<HomeContainer>
               ),
             ],
         body: SmartRefresher(
+          scrollController: _scrollController,
           controller: _refreshController,
-          enablePullUp: true,
+          enablePullUp: false,
+          enablePullDown: true,
           onRefresh: () async {
             await Future.delayed(const Duration(seconds: 2));
             if (!mounted) return;
@@ -77,8 +84,8 @@ class _HomeContainerState extends ConsumerState<HomeContainer>
               SliverAppBar(
                 backgroundColor: palette.cardColor,
                 scrolledUnderElevation: 0,
-                pinned: false,
                 primary: false,
+                pinned: false,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.none,
                   titlePadding: EdgeInsets.zero,
@@ -111,6 +118,7 @@ class _HomeContainerState extends ConsumerState<HomeContainer>
                 ),
               ),
               SliverAppBar(
+                key: key,
                 backgroundColor: palette.cardColor,
                 scrolledUnderElevation: 0,
                 pinned: true,
@@ -191,7 +199,24 @@ class _HomeContainerState extends ConsumerState<HomeContainer>
             );
           }
 
-          return ItemHomeContainer(indexMarket: indexMarket, data: data);
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                  child:
+                      ItemHomeContainer(indexMarket: indexMarket, data: data)),
+              Text(
+                "Xem thêm",
+                style: GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                    color: palette.mainYellowColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )
+            ],
+          );
         },
       );
 

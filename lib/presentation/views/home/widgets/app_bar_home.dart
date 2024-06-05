@@ -78,9 +78,16 @@ class AppBarHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: TextFormField(
+            textAlign: TextAlign.justify,
             decoration: const InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 10.0),
                 border: InputBorder.none,
                 hintText: 'NON',
+                hintStyle: TextStyle(
+                  fontSize: 14, // or whatever
+                  height:
+                      1.4, //                                <----- this was the key
+                ),
                 prefixIcon: Icon(Icons.search))),
       ));
 }

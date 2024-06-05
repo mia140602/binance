@@ -10,22 +10,9 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     final palette = Theme.of(context).extension<Palette>()!;
-    double _animationValue = 1.0;
-    final scale = 1 - shrinkOffset / maxExtent;
-    final isReduced = shrinkOffset >= maxExtent * 0.12;
-    return Opacity(
-      opacity: scale,
-      child: Container(
-        color: palette.cardColor,
-        child: Opacity(
-          opacity: _animationValue,
-          child: Transform.scale(
-            alignment: Alignment.centerLeft,
-            scale: _animationValue,
-            child: widget,
-          ),
-        ),
-      ),
+    return Container(
+      color: palette.cardColor,
+      child: widget,
     );
   }
 

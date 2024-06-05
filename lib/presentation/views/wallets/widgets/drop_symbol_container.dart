@@ -41,17 +41,20 @@ class _DropSymbolContainerState extends State<DropSymbolContainer> {
             if (value != null) widget.onChange(value);
           },
           customButton: (_value != null)
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CustomText(
-                      text: _value!.name,
-                      fontSize: 14.sp,
-                      color: palette.textColor,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    const Icon(Icons.arrow_drop_down_sharp),
-                  ],
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomText(
+                        text: _value!.name,
+                        fontSize: 14.sp,
+                        color: palette.textColor,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      const Icon(Icons.arrow_drop_down_sharp),
+                    ],
+                  ),
                 )
               : null,
           items: MoneyEnum.values

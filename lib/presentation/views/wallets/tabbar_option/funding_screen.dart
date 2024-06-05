@@ -49,7 +49,8 @@ class _FundingScreenState extends State<FundingScreen> {
         controller: _refreshController,
         physics: const AlwaysScrollableScrollPhysics(),
         primary: true,
-        enablePullUp: true,
+        enablePullUp: false,
+        enablePullDown: true,
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
           if (!mounted) return;

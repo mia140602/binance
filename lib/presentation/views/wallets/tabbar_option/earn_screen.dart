@@ -35,7 +35,8 @@ class _EarnScreenState extends State<EarnScreen> {
         controller: _refreshController,
         physics: const AlwaysScrollableScrollPhysics(),
         primary: true,
-        enablePullUp: true,
+        enablePullUp: false,
+        enablePullDown: true,
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
           if (!mounted) return;
@@ -46,8 +47,10 @@ class _EarnScreenState extends State<EarnScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       AppStrings.total_earn,
@@ -80,7 +83,8 @@ class _EarnScreenState extends State<EarnScreen> {
               height: 5.h,
             ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.ideographic,
               children: [
                 Countup(
                   begin: 0,
@@ -151,12 +155,8 @@ class _EarnScreenState extends State<EarnScreen> {
                   children: [
                     RichText(
                       text: TextSpan(
-                          text: 'Lợi nhuận trong 30 ngày',
+                          text: 'Lợi nhuận của 30N (${symbol.name})',
                           style: AppStyle.smallText()),
-                    ),
-                    Text(
-                      "(USD)",
-                      style: AppStyle.smallText(),
                     ),
                     Text(
                       "\$0",
@@ -277,6 +277,7 @@ class _EarnScreenState extends State<EarnScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   children: [

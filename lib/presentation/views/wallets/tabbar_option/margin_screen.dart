@@ -218,6 +218,8 @@ class _MarginScreenState extends State<MarginScreen> {
                 height: 10.h,
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     "PNL của hôm nay +\$0.00(0.00%)",

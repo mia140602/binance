@@ -208,7 +208,8 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                 height: 5.h,
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   ValueListenableBuilder<double>(
                     valueListenable: totalBalance,
@@ -222,7 +223,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                         separator:
                             ',', //this is the character you want to add to seperate between every 3 digits
                         style: TextStyle(
-                            letterSpacing: 0.05,
+                            letterSpacing: -0.05,
                             fontSize: 32.sp,
                             fontFamily: 'moon_plex'),
                       );
@@ -255,14 +256,15 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
               //   ],
               // ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text("PNL của hôm nay",
                       style: AppStyle.regularText().copyWith(
                           decoration: TextDecoration.underline,
                           decorationStyle: TextDecorationStyle.dotted,
                           decorationColor: Colors.grey)),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: 4.w),
                   ValueListenableBuilder<double>(
                     valueListenable: pnlNotifier,
                     builder: (context, value, child) {
@@ -290,7 +292,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                           fontSize: 11.sp);
                     },
                   ),
-                  Gap(10.w),
+                  Gap(2.w),
                   Icon(
                     Icons.keyboard_arrow_right_outlined,
                     size: 13.h,
@@ -364,14 +366,15 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                   ),
                 ],
               ),
-              Divider(
-                color: palette.selectedTabChipColor,
-              ),
+              // Divider(
+              //   color: palette.selectedTabChipColor,
+              // ),
               SizedBox(
                 height: 10.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomTabBar(
                     tabs: const ["Tiền mã hóa", "Tài khoản"],
@@ -386,6 +389,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
                         "assets/icons/wallet_icon/edit.png",
