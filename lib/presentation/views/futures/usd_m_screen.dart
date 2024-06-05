@@ -745,7 +745,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 height: 5.h,
                               ),
                               Container(
-                                  height: 35.h,
+                                  height: 32.h,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       color: palette.mainGreenColor,
@@ -816,7 +816,7 @@ class _USDScreenState extends ConsumerState<USDScreen>
                                 height: 5.h,
                               ),
                               Container(
-                                  height: 35.h,
+                                  height: 32.h,
                                   width: double.infinity,
                                   // height: 28.h,
                                   decoration: BoxDecoration(
@@ -844,32 +844,39 @@ class _USDScreenState extends ConsumerState<USDScreen>
                         color: palette.cardColor,
                         border: Border(
                             bottom: BorderSide(
-                                width: 0.6,
+                                width: 0.7,
                                 color: palette.selectedTimeChipColor
                                     .withOpacity(0.5)))),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: CustomTabBar(
-                            index: _index,
-                            tabs: [
-                              "Lệnh mở (0)",
-                              "Vị thế (${positionsList.length})",
-                              "Lưới hợp đồng tương lai",
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                _index =
-                                    value; // Update the index value when tab changes
-                              });
-                            },
+                    child: Container(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: CustomTabBar(
+                              index: _index,
+                              tabs: [
+                                "Lệnh mở (0)",
+                                "Vị thế (${positionsList.length})",
+                                "Lưới hợp đồng tương lai",
+                              ],
+                              onChanged: (value) {
+                                setState(() {
+                                  _index =
+                                      value; // Update the index value when tab changes
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                        Image.asset(
-                          "assets/icons/time.png",
-                          width: 15.w,
-                        )
-                      ],
+                          Transform.translate(
+                            offset: Offset(0, -3), // Di chuyển icon lên trên 10 pixel
+                            child: Image.asset(
+                              "assets/icons/time.png",
+                              width: 15.w,
+                              height: 15.h,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Container(height: 400.h, child: selectedWidget),

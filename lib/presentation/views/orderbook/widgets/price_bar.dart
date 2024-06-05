@@ -9,6 +9,7 @@ import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/parser_util.dart';
+import '../../../../utils/underLineText.dart';
 
 class Pricebar extends StatelessWidget {
   final double newPrice;
@@ -47,21 +48,21 @@ class Pricebar extends StatelessWidget {
         //   // fontWeight: FontWeight.w500,
         //   color: palette.selectedTimeChipColor,
         // ),
-        
-          Padding(
-            padding: const EdgeInsets.only(right: 30),
-            child: DottedUnderlineText(
-              text: ParserUtil.formatPrice(oldPrice.toString()),
-              style: GoogleFonts.roboto(
-                color:  palette.selectedTimeChipColor,
-                fontSize: 12, 
-                // fontWeight: FontWeight.w300,
-              ),
-              underlineColor:  palette.selectedTimeChipColor,
-              underlineThickness: 1,
-              underlineSpacing: 1.0, // Adjust this value to change spacing
+        DottedUnderlinedText(
+          text: Text(
+            ParserUtil.formatPrice(oldPrice.toString()),
+            style: GoogleFonts.abel(
+              color: palette.selectedTimeChipColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w300,
             ),
           ),
+          underlineColor: palette.selectedTimeChipColor,
+          thickness: 0.3,
+          gapSize: 1.0,
+          paddingBottom: 2.0,
+        ),
+
       ],
     );
   }

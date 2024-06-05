@@ -64,7 +64,7 @@ class _OrderBookViewState extends State<OrderBookView> {
                   );
                 },
               ),
-              Gap(18.h),
+              Gap(10.h),
             },
             if (_showBuys) ...{
               ReactiveBuilder(

@@ -31,9 +31,9 @@ class CustomTabBar extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: palette.cardColor,
-        border: palette.tabBorderColor != null
-            ? Border.all(color: palette.tabBorderColor!)
-            : null,
+        // border: palette.tabBorderColor != null
+        //     ? Border.all(color: palette.tabBorderColor!)
+        //     : null,
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -57,7 +57,7 @@ class CustomTabBar extends StatelessWidget {
                           ? palette.appBarTitleColor
                           : palette.filterLineColor,
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 8),
                     isSelected
                         ? Container(
                             width: 15,
