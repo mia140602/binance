@@ -15,6 +15,7 @@ class TradeDetailsViewModel {
   final ValueNotifier<double> totalBalanceNotifier = ValueNotifier(0.0);
   static const String _symbol = "BTCUSDT";
   late final String _pair;
+
   TradeDetailsViewModel(String pair) {
     _pair = pair.toLowerCase();
     _init();

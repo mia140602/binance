@@ -39,7 +39,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
   }
 
   final List<Widget> _screens = [
-    // const HomeScreen(),
+    const HomeScreen(),
     const MarketView(),
     TransactionScreen(),
     // FundingTime(
@@ -163,11 +163,11 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
 
   BottomAppBar _buildBottomAppBar(Palette palette) {
     return BottomAppBar(
-      height: _showContainer == false ? 70.h : 250.h,
+      height: _showContainer == false ? 70.h : 270.h,
       color: palette.cardColor,
       padding: EdgeInsets.zero,
       surfaceTintColor: palette.cardColor,
-      elevation: 3,
+      elevation: 4,
       // shape: const CircularNotchedRectangle(),
       child: Column(
         children: [
@@ -178,35 +178,35 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
               Column(
                 // mainAxisSize: MainAxisSize.min,
                 children: [
-                  // IconButton(
-                  //   constraints: BoxConstraints(),
-                  //   icon: _currentIndex == 0
-                  //       ? Image.asset(
-                  //           'assets/icons/bottom_nav_icon/home_clicked.png',
-                  //           height: 16.h)
-                  //       : Image.asset('assets/icons/bottom_nav_icon/home.png',
-                  //           height: 16.h),
-                  //   onPressed: () {
-                  //     _navigateToScreen(0);
-                  //   },
-                  // ),
-                  // Text(
-                  //   AppStrings.home,
-                  //   style: TextStyle(
-                  //       fontSize: 11.sp,
-                  //       height: -0.5,
-                  //       fontWeight: FontWeight.w500,
-                  //       color: _currentIndex == 0
-                  //           ? palette.appBarTitleColor
-                  //           : palette.selectedTimeChipColor),
-                  // )
+                  IconButton(
+                    constraints: BoxConstraints(),
+                    icon: _currentIndex == 0
+                        ? Image.asset(
+                            'assets/icons/bottom_nav_icon/home_clicked.png',
+                            height: 16.h)
+                        : Image.asset('assets/icons/bottom_nav_icon/home.png',
+                            height: 16.h),
+                    onPressed: () {
+                      _navigateToScreen(0);
+                    },
+                  ),
+                  Text(
+                    AppStrings.home,
+                    style: TextStyle(
+                        fontSize: 11.sp,
+                        height: -0.5,
+                        fontWeight: FontWeight.w500,
+                        color: _currentIndex == 0
+                            ? palette.appBarTitleColor
+                            : palette.selectedTimeChipColor),
+                  )
                 ],
               ),
               Column(
                 // mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: _currentIndex == 0
+                    icon: _currentIndex == 1
                         ? Image.asset(
                             'assets/icons/bottom_nav_icon/bar_chart_clicked.png',
                             height: 20.h,
@@ -216,37 +216,10 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                             height: 14.h,
                           ),
                     onPressed: () {
-                      _navigateToScreen(0);
-                    },
-                  ),
-                  Text(AppStrings.markets,
-                      style: TextStyle(
-                          fontSize: 11.sp,
-                          height: -0.5,
-                          fontWeight: FontWeight.w500,
-                          color: _currentIndex == 0
-                              ? palette.appBarTitleColor
-                              : palette.selectedTimeChipColor))
-                ],
-              ),
-              Column(
-                // mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: _currentIndex == 1
-                        ? Image.asset(
-                            'assets/icons/bottom_nav_icon/exchange_clicked.png',
-                            height: 14.h,
-                          )
-                        : Image.asset(
-                            'assets/icons/bottom_nav_icon/exchange.png',
-                            height: 14.h,
-                          ),
-                    onPressed: () {
                       _navigateToScreen(1);
                     },
                   ),
-                  Text(AppStrings.trades,
+                  Text(AppStrings.markets,
                       style: TextStyle(
                           fontSize: 11.sp,
                           height: -0.5,
@@ -262,18 +235,18 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   IconButton(
                     icon: _currentIndex == 2
                         ? Image.asset(
-                            'assets/icons/bottom_nav_icon/future_clicked.png',
+                            'assets/icons/bottom_nav_icon/exchange_clicked.png',
                             height: 14.h,
                           )
                         : Image.asset(
-                            'assets/icons/bottom_nav_icon/future.png',
+                            'assets/icons/bottom_nav_icon/exchange.png',
                             height: 14.h,
                           ),
                     onPressed: () {
                       _navigateToScreen(2);
                     },
                   ),
-                  Text("Futures",
+                  Text(AppStrings.trades,
                       style: TextStyle(
                           fontSize: 11.sp,
                           height: -0.5,
@@ -289,13 +262,40 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                   IconButton(
                     icon: _currentIndex == 3
                         ? Image.asset(
+                            'assets/icons/bottom_nav_icon/future_clicked.png',
+                            height: 14.h,
+                          )
+                        : Image.asset(
+                            'assets/icons/bottom_nav_icon/future.png',
+                            height: 14.h,
+                          ),
+                    onPressed: () {
+                      _navigateToScreen(3);
+                    },
+                  ),
+                  Text("Futures",
+                      style: TextStyle(
+                          fontSize: 11.sp,
+                          height: -0.5,
+                          fontWeight: FontWeight.w500,
+                          color: _currentIndex == 3
+                              ? palette.appBarTitleColor
+                              : palette.selectedTimeChipColor))
+                ],
+              ),
+              Column(
+                // mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: _currentIndex == 4
+                        ? Image.asset(
                             'assets/icons/bottom_nav_icon/wallet_clicked.png',
                             height: 14.h)
                         : Image.asset(
                             'assets/icons/bottom_nav_icon/wallets.png',
                             height: 14.h),
                     onPressed: () {
-                      _navigateToScreen(3);
+                      _navigateToScreen(4);
                     },
                   ),
                   Text(AppStrings.wallets,
@@ -303,7 +303,7 @@ class _ButtomNavigationBarState extends State<BottomNavigationBarr> {
                           fontSize: 11.sp,
                           height: -0.5,
                           fontWeight: FontWeight.w500,
-                          color: _currentIndex == 3
+                          color: _currentIndex == 4
                               ? palette.appBarTitleColor
                               : palette.selectedTimeChipColor))
                 ],

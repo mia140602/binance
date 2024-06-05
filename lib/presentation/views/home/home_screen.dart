@@ -1,5 +1,5 @@
-import 'package:binance_clone/presentation/views/wallets/tabbar_option/fakeWallet.dart';
-import 'package:binance_clone/presentation/widgets/custom_text.dart';
+import 'package:binance_clone/presentation/theme/palette.dart';
+import 'package:binance_clone/presentation/views/home/widgets/home_container.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,14 +11,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      // backgroundColor: Colors.white,
-      // appBar: MyAppBar(),
-      appBar: AppBar(
-        title: CustomText(text: "Danh sách ví: "),
-      ),
-      body: FakeWallet(),
+      body: const HomeContainer(),
+      backgroundColor: palette.cardColor,
     );
   }
 }

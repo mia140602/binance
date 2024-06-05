@@ -1,19 +1,27 @@
+import 'dart:async';
+import 'dart:math';
+
+import 'package:binance_clone/presentation/views/wallets/model/crypto_model.dart';
+import 'package:binance_clone/presentation/views/wallets/model/money_enum.dart';
+import 'package:binance_clone/presentation/views/wallets/widgets/drop_symbol_container.dart';
 import 'package:binance_clone/presentation/widgets/custom_tab_bar.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:binance_clone/utils/app_strings.dart';
 import 'package:binance_clone/utils/app_style.dart';
+import 'package:countup/countup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../theme/palette.dart';
 
 import '../../trade_details/trade_details_view_model.dart';
+import '../widgets/crypto_widget.dart';
 
 final indexProvider = StateProvider<int>((ref) => 0);
 
@@ -27,7 +35,10 @@ class OverviewScreen extends ConsumerStatefulWidget {
 class _OverviewScreenState extends ConsumerState<OverviewScreen> {
   int _index = 0;
   int check = 0;
-  String symbol = "USDT";
+  MoneyEnum symbol = MoneyEnum.USDT;
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   void _setIndex(int newIndex) {
     setState(() {
@@ -50,10 +61,10 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
         ? palette.mainGreenColor
         : palette.sellButtonColor;
     Widget selectedWidget = Container();
-    if (check == 0) {
+    if (check == 1) {
       selectedWidget = Column(
         children: [
-          _rowItem(title: "Giao ngay", symbol: symbol),
+          _rowItem(title: "Giao ngay", symbol: symbol.name),
           SizedBox(
             height: 15.h,
           ),
@@ -119,12 +130,12 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
             height: 1,
             color: palette.selectedTabChipColor,
           ),
-          _rowItem(title: "Funding", symbol: symbol),
-          _rowItem(title: "Earn", symbol: symbol),
-          _rowItem(title: "Hợp đồng tương lai COI...", symbol: symbol),
-          _rowItem(title: "Cross Margin", symbol: symbol),
-          _rowItem(title: "Isolate Margin", symbol: symbol),
-          _rowItem(title: "Sao chép giao dịch", symbol: symbol),
+          _rowItem(title: "Funding", symbol: symbol.name),
+          _rowItem(title: "Earn", symbol: symbol.name),
+          _rowItem(title: "Hợp đồng tương lai COI...", symbol: symbol.name),
+          _rowItem(title: "Cross Margin", symbol: symbol.name),
+          _rowItem(title: "Isolate Margin", symbol: symbol.name),
+          _rowItem(title: "Sao chép giao dịch", symbol: symbol.name),
           Container(
             height: 100,
             width: 100,
@@ -132,238 +143,271 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
         ],
       );
     } else {
-      selectedWidget =
-          Center(child: CustomText(text: "Chức năng chưa triển khai"));
+      selectedWidget = const CryptoWidget();
     }
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
       color: palette.cardColor,
-      child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    CustomText(
-                      text: AppStrings.total_balance,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w300,
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Icon(
-                      Icons.remove_red_eye,
-                      color: palette.grayColor,
-                      size: 13.h,
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                  ],
-                ),
-                Container(
-                  child: Row(
+      child: SmartRefresher(
+        controller: _refreshController,
+        physics: const AlwaysScrollableScrollPhysics(),
+        primary: true,
+        enablePullUp: true,
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 2));
+          if (!mounted) return;
+          _refreshController.refreshCompleted();
+          setState(() {});
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
                     children: [
-                      Image.asset(
-                        "assets/icons/alas.png",
-                        width: 14.w,
+                      CustomText(
+                        text: AppStrings.total_balance,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w300,
                       ),
-                      Gap(20.w),
-                      Image.asset(
-                        "assets/icons/time.png",
-                        width: 14.w,
-                      )
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Icon(
+                        Icons.remove_red_eye,
+                        color: palette.grayColor,
+                        size: 13.h,
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
                     ],
                   ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ValueListenableBuilder<double>(
-                  valueListenable: totalBalance,
-                  builder: (context, value, child) {
-                    return CustomText(
-                      // text: '${value.toStringAsFixed(2)}',
-                      text: numberFormat.format(value).replaceAll('.', '') +
-                          ' \$',
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                    );
-                  },
-                ),
-                Gap(15.w),
-                Row(
-                  children: [
-                    CustomText(
-                      text: symbol,
-                      fontSize: 14.sp,
-                      color: palette.textColor,
-                      fontWeight: FontWeight.w400,
+                  Container(
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "assets/icons/alas.png",
+                          width: 14.w,
+                        ),
+                        Gap(20.w),
+                        Image.asset(
+                          "assets/icons/time.png",
+                          width: 14.w,
+                        )
+                      ],
                     ),
-                    Gap(2.w),
-                    Icon(
-                      Icons.arrow_drop_down_rounded,
-                      size: 14.h,
-                      color: palette.appBarTitleColor,
-                    )
-                  ],
-                )
-              ],
-            ),
-            // Row(
-            //   children: [
-            //     ValueListenableBuilder<double>(
-            //       valueListenable: totalBalance,
-            //       builder: (context, value, child) {
-            //         return CustomText(
-            //             // text: '${value.toStringAsFixed(2)}',
-            //             text:
-            //                 '≈ ${numberFormat.format(value).replaceAll('.', '')} \$',
-            //             fontSize: 13.sp,
-            //             color: Colors.grey.shade500);
-            //       },
-            //     ),
-            //   ],
-            // ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text("PNL của hôm nay",
-                    style: AppStyle.regularText().copyWith(
-                        decoration: TextDecoration.underline,
-                        decorationStyle: TextDecorationStyle.dotted,
-                        decorationColor: Colors.grey)),
-                SizedBox(width: 2.w),
-                ValueListenableBuilder<double>(
-                  valueListenable: pnlNotifier,
-                  builder: (context, value, child) {
-                    return CustomText(
-                      text: value > 0
-                          ? "+${value.toStringAsFixed(2)} \$"
-                          : "${value.toStringAsFixed(2)} \$",
-                      fontSize: 11.sp,
-                      fontWeight: FontWeight.w500,
-                      color: pnlColor,
-                    );
-                  },
-                ),
-                ValueListenableBuilder<double>(
-                  valueListenable: roiNotifier,
-                  builder: (context, value, child) {
-                    return CustomText(
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ValueListenableBuilder<double>(
+                    valueListenable: totalBalance,
+                    builder: (context, value, child) {
+                      return Countup(
+                        begin: 0,
+                        end: MoneyEnumExt.generateMoney(
+                            symbol), //here you insert the number or its variable
+                        duration: const Duration(milliseconds: 400),
+                        prefix: "\$", precision: 2,
+                        separator:
+                            ',', //this is the character you want to add to seperate between every 3 digits
+                        style: TextStyle(
+                            letterSpacing: 0.05,
+                            fontSize: 32.sp,
+                            fontFamily: 'moon_plex'),
+                      );
+                    },
+                  ),
+                  Gap(8.w),
+                  DropSymbolContainer(
+                    onChange: (MoneyEnum value) {
+                      setState(() {
+                        symbol = value;
+                      });
+                    },
+                    symbol: symbol,
+                  ),
+                ],
+              ),
+              // Row(
+              //   children: [
+              //     ValueListenableBuilder<double>(
+              //       valueListenable: totalBalance,
+              //       builder: (context, value, child) {
+              //         return CustomText(
+              //             // text: '${value.toStringAsFixed(2)}',
+              //             text:
+              //                 '≈ ${numberFormat.format(value).replaceAll('.', '')} \$',
+              //             fontSize: 13.sp,
+              //             color: Colors.grey.shade500);
+              //       },
+              //     ),
+              //   ],
+              // ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text("PNL của hôm nay",
+                      style: AppStyle.regularText().copyWith(
+                          decoration: TextDecoration.underline,
+                          decorationStyle: TextDecorationStyle.dotted,
+                          decorationColor: Colors.grey)),
+                  SizedBox(width: 2.w),
+                  ValueListenableBuilder<double>(
+                    valueListenable: pnlNotifier,
+                    builder: (context, value, child) {
+                      return CustomText(
                         text: value > 0
-                            ? "(+${value.toStringAsFixed(2)}%)"
-                            : "(${value.toStringAsFixed(2)}%)",
-                        color: value > 0
-                            ? palette.mainGreenColor
-                            : palette.sellButtonColor,
+                            ? "+${value.toStringAsFixed(2)} \$"
+                            : "${value.toStringAsFixed(2)} \$",
+                        fontSize: 11.sp,
                         fontWeight: FontWeight.w500,
-                        fontSize: 11.sp);
-                  },
-                ),
-                Gap(10.w),
-                Icon(
-                  Icons.keyboard_arrow_right_outlined,
-                  size: 13.h,
-                  color: palette.selectedTimeChipColor,
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-                  width: (MediaQuery.of(context).size.width - 40) / 2,
-                  decoration: BoxDecoration(
-                      color: palette.mainYellowColor,
-                      borderRadius: BorderRadius.circular(10.r)),
-                  child: CustomText(
-                    text: "Nạp",
-                    color: palette.cardColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    textAlign: TextAlign.center,
+                        color: pnlColor,
+                      );
+                    },
                   ),
-                ),
-                // Gap(10.w),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-                  width: (MediaQuery.of(context).size.width - 40) / 2,
-                  decoration: BoxDecoration(
-                      color: palette.bgColor,
-                      borderRadius: BorderRadius.circular(10.r)),
-                  child: CustomText(
-                    text: "Mua",
-                    color: palette.appBarTitleColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    textAlign: TextAlign.center,
+                  ValueListenableBuilder<double>(
+                    valueListenable: roiNotifier,
+                    builder: (context, value, child) {
+                      return CustomText(
+                          text: value > 0
+                              ? "(+${value.toStringAsFixed(2)}%)"
+                              : "(${value.toStringAsFixed(2)}%)",
+                          color: value > 0
+                              ? palette.mainGreenColor
+                              : palette.sellButtonColor,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 11.sp);
+                    },
                   ),
-                ),
-                // iconbutton(
-                //     palette: palette,
-                //     context: context,
-                //     image: "download",
-                //     text: "Nạp"),
-                // iconbutton(
-                //     palette: palette,
-                //     context: context,
-                //     image: "upload",
-                //     text: "Rút"),
-                // iconbutton(
-                //     palette: palette,
-                //     context: context,
-                //     image: "sunrise",
-                //     text: "Mua"),
-                // iconbutton(
-                //     palette: palette,
-                //     context: context,
-                //     image: "change",
-                //     width: 16.w,
-                //     text: "Chuyển"),
-              ],
-            ),
-            Divider(
-              color: palette.selectedTabChipColor,
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Row(
-              children: [
-                CustomTabBar(
-                  tabs: const ["Tài khoản", "Tiền mã hóa"],
-                  fontSize: 13.sp,
-                  index: _index,
-                  onChanged: (value) {
-                    setState(() {
-                      check = value; // Update the index value when tab changes
-                    });
-                  },
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            selectedWidget
-          ],
+                  Gap(10.w),
+                  Icon(
+                    Icons.keyboard_arrow_right_outlined,
+                    size: 13.h,
+                    color: palette.selectedTimeChipColor,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+                  //   width: (MediaQuery.of(context).size.width - 40) / 2,
+                  //   decoration: BoxDecoration(
+                  //       color: palette.mainYellowColor,
+                  //       borderRadius: BorderRadius.circular(10.r)),
+                  //   child: CustomText(
+                  //     text: "Nạp",
+                  //     color: palette.cardColor,
+                  //     fontSize: 14.sp,
+                  //     fontWeight: FontWeight.w600,
+                  //     textAlign: TextAlign.center,
+                  //   ),
+                  // ),
+                  // // Gap(10.w),
+                  // Container(
+                  //   padding:
+                  //       EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+                  //   width: (MediaQuery.of(context).size.width - 40) / 2,
+                  //   decoration: BoxDecoration(
+                  //       color: palette.bgColor,
+                  //       borderRadius: BorderRadius.circular(10.r)),
+                  //   child: CustomText(
+                  //     text: "Mua",
+                  //     color: palette.appBarTitleColor,
+                  //     fontSize: 14.sp,
+                  //     fontWeight: FontWeight.w600,
+                  //     textAlign: TextAlign.center,
+                  //   ),
+                  // ),
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "download",
+                      text: "Nạp"),
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "upload",
+                      text: "Rút"),
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "sunrise",
+                      text: "Mua"),
+                  iconbutton(
+                      palette: palette,
+                      context: context,
+                      image: "change",
+                      width: 16.w,
+                      text: "Chuyển"),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                ],
+              ),
+              Divider(
+                color: palette.selectedTabChipColor,
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomTabBar(
+                    tabs: const ["Tiền mã hóa", "Tài khoản"],
+                    fontSize: 13.sp,
+                    index: check,
+                    onChanged: (value) {
+                      setState(() {
+                        check =
+                            value; // Update the index value when tab changes
+                      });
+                    },
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        "assets/icons/wallet_icon/edit.png",
+                        width: 16.w,
+                        color: palette.grayColor,
+                      ),
+                      const Gap(16),
+                      Image.asset(
+                        "assets/icons/wallet_icon/setting.png",
+                        color: palette.grayColor,
+                        width: 16.w,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15.h,
+              ),
+              selectedWidget,
+            ],
+          ),
         ),
       ),
     );
@@ -394,7 +438,7 @@ class _OverviewScreenState extends ConsumerState<OverviewScreen> {
         Gap(5.h),
         CustomText(
           text: text,
-          color: palette.selectedTimeChipColor,
+          color: palette.selectedTabTextColor,
         )
       ],
     );

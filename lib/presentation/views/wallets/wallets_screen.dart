@@ -11,6 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../theme/palette.dart';
 
+enum TypeHeader { exchanges, web3 }
+
 class WalletScreen extends StatefulWidget {
   @override
   _WalletScreenState createState() => _WalletScreenState();
@@ -19,6 +21,7 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  TypeHeader menuIndex = TypeHeader.exchanges;
 
   @override
   void initState() {
@@ -67,7 +70,13 @@ class _WalletScreenState extends State<WalletScreen>
                           ),
                         ),
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (!mounted) return;
+
+                              setState(() {
+                                menuIndex = TypeHeader.exchanges;
+                              });
+                            },
                             child: CustomText(
                                 text: "Sàn giao dịch",
                                 fontWeight: FontWeight.bold,
@@ -85,7 +94,12 @@ class _WalletScreenState extends State<WalletScreen>
                       width: MediaQuery.of(context).size.width * 0.3,
                       height: MediaQuery.of(context).size.height * 0.05,
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (!mounted) return;
+                            setState(() {
+                              menuIndex = TypeHeader.web3;
+                            });
+                          },
                           child: CustomText(
                               text: "Web3",
                               fontSize: 12.sp,
@@ -94,45 +108,61 @@ class _WalletScreenState extends State<WalletScreen>
                 ],
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.zero,
-              child: TabBar(
-                isScrollable: true,
-                padding: EdgeInsets.zero,
-                labelStyle: AppStyle.appBarText(),
-                unselectedLabelColor: palette.selectedTimeChipColor,
-                labelColor: palette.appBarTitleColor,
-                indicator: const BoxDecoration(),
-                controller: _tabController,
-                dividerColor: palette.selectedTabChipColor,
-                tabs: const [
-                  Tab(text: AppStrings.overview),
-                  Tab(text: AppStrings.spot),
-                  Tab(text: AppStrings.funding),
-                  Tab(text: AppStrings.earn),
-                  Tab(text: AppStrings.fututes),
-                  Tab(text: AppStrings.margin),
-                ],
-                labelPadding: EdgeInsets.only(left: 0, right: 20.w),
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: const [
-                  Center(child: OverviewScreen()),
-                  Center(child: SpotScreen()),
-                  Center(child: FundingScreen()),
-                  Center(child: EarnScreen()),
-                  Center(child: Text('Content for Option 5')),
-                  Center(child: MarginScreen()),
-                ],
-              ),
-            ),
+            if (menuIndex == TypeHeader.exchanges)
+              Flexible(child: _createWidgetExchange(palette))
+            else
+              const Expanded(
+                child: Center(
+                  child: Text("Chức năng chưa triển khai"),
+                ),
+              )
           ],
         ),
       ),
+    );
+  }
+
+  Widget _createWidgetExchange(Palette palette) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.zero,
+          child: TabBar(
+            isScrollable: true,
+            padding: EdgeInsets.zero,
+            labelStyle: AppStyle.appBarText(),
+            unselectedLabelColor: palette.selectedTimeChipColor,
+            labelColor: palette.appBarTitleColor,
+            indicator: const BoxDecoration(),
+            controller: _tabController,
+            dividerColor: palette.selectedTabChipColor,
+            tabs: const [
+              Tab(text: AppStrings.overview),
+              Tab(text: AppStrings.spot),
+              Tab(text: AppStrings.funding),
+              Tab(text: AppStrings.earn),
+              Tab(text: AppStrings.fututes),
+              Tab(text: AppStrings.margin),
+            ],
+            labelPadding: EdgeInsets.only(left: 0, right: 20.w),
+          ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: const [
+              Center(child: OverviewScreen()),
+              Center(child: SpotScreen()),
+              Center(child: FundingScreen()),
+              Center(child: EarnScreen()),
+              Center(child: Text('Content for Option 5')),
+              Center(child: MarginScreen()),
+            ],
+          ),
+        )
+      ],
     );
   }
 

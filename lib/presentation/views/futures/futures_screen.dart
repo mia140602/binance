@@ -1,6 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
-
-import 'package:binance_clone/presentation/views/futures/coin_m_screen.dart';
 import 'package:binance_clone/presentation/views/futures/usd_m_screen.dart';
 import 'package:binance_clone/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../theme/palette.dart';
 
 class FuturesScreen extends StatefulWidget {
-  const FuturesScreen({super.key});
-
   @override
   _FuturesScreenState createState() => _FuturesScreenState();
 }
@@ -31,7 +26,7 @@ class _FuturesScreenState extends State<FuturesScreen>
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<Palette>()!;
     return Scaffold(
-      backgroundColor: const Color(0xFF1F2630),
+      backgroundColor: Color(0xFF1F2630),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 22.h),
         child: Column(
@@ -114,7 +109,7 @@ class _FuturesScreenState extends State<FuturesScreen>
                 controller: _tabController,
                 children: const [
                   Center(child: USDScreen()),
-                  Center(child: COINMScreen()),
+                  Center(child: Text('Content for Option 2')),
                   Center(child: Text('Content for Option 3')),
                   Center(child: Text('Content for Option 4')),
                   Center(child: Text('Content for Option 5')),

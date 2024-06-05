@@ -11,16 +11,18 @@ class CustomTabBar extends StatelessWidget {
   final Color? selectedTabBorderColor;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final bool enableDecoration;
 
-  const CustomTabBar({
-    Key? key,
-    required this.tabs,
-    required this.index,
-    this.onChanged,
-    this.selectedTabBorderColor,
-    this.fontSize,
-    this.fontWeight,
-  }) : super(key: key);
+  const CustomTabBar(
+      {Key? key,
+      required this.tabs,
+      required this.index,
+      this.onChanged,
+      this.selectedTabBorderColor,
+      this.fontSize,
+      this.fontWeight,
+      this.enableDecoration = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +30,15 @@ class CustomTabBar extends StatelessWidget {
 
     return Container(
       // height: 50,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: palette.cardColor,
-        // border: palette.tabBorderColor != null
-        //     ? Border.all(color: palette.tabBorderColor!)
-        //     : null,
-      ),
+      decoration: enableDecoration
+          ? BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: palette.cardColor,
+              border: palette.tabBorderColor != null
+                  ? Border.all(color: palette.tabBorderColor!)
+                  : null,
+            )
+          : null,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -44,7 +48,7 @@ class CustomTabBar extends StatelessWidget {
             return GestureDetector(
               onTap: () => onChanged?.call(i),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 alignment: Alignment.center,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -57,11 +61,11 @@ class CustomTabBar extends StatelessWidget {
                           ? palette.appBarTitleColor
                           : palette.filterLineColor,
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: 3),
                     isSelected
                         ? Container(
-                            width: 15,
-                            height: 2,
+                            width: 12,
+                            height: 3,
                             color:
                                 selectedTabBorderColor ?? Colors.amber.shade400,
                           )

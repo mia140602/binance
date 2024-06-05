@@ -111,19 +111,14 @@ class _OrderRowState extends State<_OrderRow> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             for (int i = 0; i < _items.length; i++)
-              Column(
-                children: [
-                  SizedBox(
-                    child: CustomText(
-                      text: _items[i],
-                      fontSize: 11.5.sp,
-                      fontWeight: FontWeight.w400,
-                      color: color(i),
-                      textAlign: i == 0 ? TextAlign.left : TextAlign.right,
-                    ),
-                  ),
-                  // SizedBox(height: 2.h,)
-                ],
+              SizedBox(
+                child: CustomText(
+                  text: _items[i],
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w400,
+                  color: color(i),
+                  textAlign: i == 0 ? TextAlign.left : TextAlign.right,
+                ),
               ),
           ],
         ),

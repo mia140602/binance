@@ -13,19 +13,18 @@ class ColumnHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Expanded(
+        Expanded(
           child: _ColumnItem(
             title: "Giá",
-            subtitle: "(USDC)",
+            subtitle: "USDT",
           ),
         ),
         // Spacer(),
-        Gap(20.w),
-        const Expanded(
+        Gap(60.w),
+        Expanded(
           child: _ColumnItem(
             title: "Số lượng",
-            subtitle: "(BTC)",
-            aliT: true,
+            subtitle: "USDT",
           ),
         ),
         // Spacer(),
@@ -42,12 +41,11 @@ class ColumnHeader extends StatelessWidget {
 class _ColumnItem extends StatelessWidget {
   final String title;
   final String subtitle;
-  final bool? aliT;
 
   const _ColumnItem({
     super.key,
     required this.title,
-    this.subtitle = "",  this.aliT,
+    this.subtitle = "",
   });
 
   @override
@@ -56,25 +54,19 @@ class _ColumnItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(
-          alignment: (aliT == true) ? Alignment.centerRight : Alignment.centerLeft,
-          child: CustomText(
-            text: title,
-            fontSize: 10,
-            // fontWeight: FontWeight.w500,
-            color: palette.selectedTimeChipColor,
-          ),
+        CustomText(
+          text: title,
+          fontSize: 10,
+          // fontWeight: FontWeight.w500,
+          color: palette.selectedTimeChipColor,
         ),
-        Align(
-          alignment: (aliT == true) ? Alignment.centerRight : Alignment.centerLeft,
-          child: CustomText(
-            text: subtitle.isNotEmpty ? "($subtitle)" : " ",
-            fontSize: 9,
-            // fontWeight: FontWeight.w600,
-            color: palette.selectedTimeChipColor,
-          ),
+        CustomText(
+          text: subtitle.isNotEmpty ? "($subtitle)" : " ",
+          fontSize: 9,
+          // fontWeight: FontWeight.w600,
+          color: palette.selectedTimeChipColor,
         ),
-        const Gap(10)
+        Gap(10)
       ],
     );
   }

@@ -13,6 +13,7 @@ class TradeData {
   final String quoteAssetVolume;
   final String baseAsset;
   final String quoteAsset;
+  final String type;
 
   TradeData(
       {required this.symbol,
@@ -26,6 +27,7 @@ class TradeData {
       required this.highPercentageChangeIn24H,
       required this.lowPercentageChangeIn24H,
       required this.baseAssetVolume,
+      required this.type,
       required this.quoteAssetVolume});
 
   bool get isPriceChangeIn24HNeg => priceChangeIn24H < 0;
@@ -44,6 +46,7 @@ class TradeData {
       percentageChangeIn24H: 0,
       highPercentageChangeIn24H: 0,
       lowPercentageChangeIn24H: 0,
+      type: '-',
     );
   }
 
@@ -52,6 +55,7 @@ class TradeData {
     final currentPriceValue = double.tryParse(json["c"]) ?? 0;
     final highPriceValue = double.tryParse(json["h"]) ?? 0;
     final lowPriceValue = double.tryParse(json["l"]) ?? 0;
+    final type = json["e"];
 
     final percentageChangeIn24HValue =
         100 * (currentPriceValue - lastPriceValue) / lastPriceValue;
@@ -105,6 +109,43 @@ class TradeData {
       percentageChangeIn24H: percentageChangeIn24HValue,
       highPercentageChangeIn24H: highPercentageChangeIn24HValue,
       lowPercentageChangeIn24H: lowPercentageChangeIn24HValue,
+      type: type,
+    );
+  }
+
+  TradeData copyWith({
+    String? symbol,
+    double? priceChangeIn24H,
+    String? currentPrice,
+    String? highPrice,
+    String? lowPrice,
+    double? percentageChangeIn24H,
+    double? highPercentageChangeIn24H,
+    double? lowPercentageChangeIn24H,
+    String? baseAssetVolume,
+    String? quoteAssetVolume,
+    String? baseAsset,
+    String? quoteAsset,
+    String? type,
+    List<String>? knownQuoteAssets,
+  }) {
+    return TradeData(
+      symbol: symbol ?? this.symbol,
+      priceChangeIn24H: priceChangeIn24H ?? this.priceChangeIn24H,
+      currentPrice: currentPrice ?? this.currentPrice,
+      highPrice: highPrice ?? this.highPrice,
+      lowPrice: lowPrice ?? this.lowPrice,
+      percentageChangeIn24H:
+          percentageChangeIn24H ?? this.percentageChangeIn24H,
+      highPercentageChangeIn24H:
+          highPercentageChangeIn24H ?? this.highPercentageChangeIn24H,
+      lowPercentageChangeIn24H:
+          lowPercentageChangeIn24H ?? this.lowPercentageChangeIn24H,
+      baseAssetVolume: baseAssetVolume ?? this.baseAssetVolume,
+      quoteAssetVolume: quoteAssetVolume ?? this.quoteAssetVolume,
+      baseAsset: baseAsset ?? this.baseAsset,
+      quoteAsset: quoteAsset ?? this.quoteAsset,
+      type: type ?? this.type,
     );
   }
 }
